@@ -16,6 +16,7 @@
 		3256C5EB2AB8501F00AC9470 /* Advanced_iOS_Assessment3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3256C5EA2AB8501F00AC9470 /* Advanced_iOS_Assessment3Tests.swift */; };
 		3256C5F52AB8501F00AC9470 /* Advanced_iOS_Assessment3UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3256C5F42AB8501F00AC9470 /* Advanced_iOS_Assessment3UITests.swift */; };
 		3256C5F72AB8501F00AC9470 /* Advanced_iOS_Assessment3UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3256C5F62AB8501F00AC9470 /* Advanced_iOS_Assessment3UITestsLaunchTests.swift */; };
+		327A587D2AB859EE00DB11E6 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327A587C2AB859EE00DB11E6 /* MainViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		3256C5F02AB8501F00AC9470 /* Advanced_iOS_Assessment3UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Advanced_iOS_Assessment3UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3256C5F42AB8501F00AC9470 /* Advanced_iOS_Assessment3UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advanced_iOS_Assessment3UITests.swift; sourceTree = "<group>"; };
 		3256C5F62AB8501F00AC9470 /* Advanced_iOS_Assessment3UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advanced_iOS_Assessment3UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		327A587C2AB859EE00DB11E6 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,9 @@
 		3256C5D22AB8501E00AC9470 /* Advanced_iOS_Assessment3 */ = {
 			isa = PBXGroup;
 			children = (
+				327A587B2AB851B900DB11E6 /* ViewModels */,
+				327A587A2AB851AB00DB11E6 /* Models */,
+				327A58792AB8519B00DB11E6 /* Views */,
 				3256C5D32AB8501E00AC9470 /* Advanced_iOS_Assessment3App.swift */,
 				3256C5D52AB8501E00AC9470 /* ContentView.swift */,
 				3256C5D72AB8501F00AC9470 /* Assets.xcassets */,
@@ -133,6 +138,28 @@
 				3256C5F62AB8501F00AC9470 /* Advanced_iOS_Assessment3UITestsLaunchTests.swift */,
 			);
 			path = Advanced_iOS_Assessment3UITests;
+			sourceTree = "<group>";
+		};
+		327A58792AB8519B00DB11E6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		327A587A2AB851AB00DB11E6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		327A587B2AB851B900DB11E6 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				327A587C2AB859EE00DB11E6 /* MainViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				327A587D2AB859EE00DB11E6 /* MainViewModel.swift in Sources */,
 				3256C5DD2AB8501F00AC9470 /* Persistence.swift in Sources */,
 				3256C5E02AB8501F00AC9470 /* Advanced_iOS_Assessment3.xcdatamodeld in Sources */,
 				3256C5D62AB8501E00AC9470 /* ContentView.swift in Sources */,

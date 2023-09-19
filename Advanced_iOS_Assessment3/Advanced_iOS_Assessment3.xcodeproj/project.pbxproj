@@ -17,6 +17,7 @@
 		3256C5F52AB8501F00AC9470 /* Advanced_iOS_Assessment3UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3256C5F42AB8501F00AC9470 /* Advanced_iOS_Assessment3UITests.swift */; };
 		3256C5F72AB8501F00AC9470 /* Advanced_iOS_Assessment3UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3256C5F62AB8501F00AC9470 /* Advanced_iOS_Assessment3UITestsLaunchTests.swift */; };
 		327A587D2AB859EE00DB11E6 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327A587C2AB859EE00DB11E6 /* MainViewModel.swift */; };
+		327A587F2AB8FB5200DB11E6 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327A587E2AB8FB5200DB11E6 /* City.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		3256C5F42AB8501F00AC9470 /* Advanced_iOS_Assessment3UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advanced_iOS_Assessment3UITests.swift; sourceTree = "<group>"; };
 		3256C5F62AB8501F00AC9470 /* Advanced_iOS_Assessment3UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advanced_iOS_Assessment3UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		327A587C2AB859EE00DB11E6 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		327A587E2AB8FB5200DB11E6 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 		327A587A2AB851AB00DB11E6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				327A587E2AB8FB5200DB11E6 /* City.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			files = (
 				327A587D2AB859EE00DB11E6 /* MainViewModel.swift in Sources */,
 				3256C5DD2AB8501F00AC9470 /* Persistence.swift in Sources */,
+				327A587F2AB8FB5200DB11E6 /* City.swift in Sources */,
 				3256C5E02AB8501F00AC9470 /* Advanced_iOS_Assessment3.xcdatamodeld in Sources */,
 				3256C5D62AB8501E00AC9470 /* ContentView.swift in Sources */,
 				3256C5D42AB8501E00AC9470 /* Advanced_iOS_Assessment3App.swift in Sources */,

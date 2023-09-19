@@ -7,11 +7,14 @@
 
 import Foundation
 
-class HotelBrowserMainViewModel: ObservableObject, Codable {
+class HotelBrowserMainViewModel: ObservableObject {
     
     //these are the headers to initialise the API request
     let headers = [
         "API_KEY" : "fdc2564bbemshd3b062f571b3b8cp173b6ejsn78fc48e2f6b0",
         "API_HOST" : "hotels4.p.rapidapi.com"
     ]
+    
+    var token: String? //used for auth requests
+    var transactionId: Int = 1
 }

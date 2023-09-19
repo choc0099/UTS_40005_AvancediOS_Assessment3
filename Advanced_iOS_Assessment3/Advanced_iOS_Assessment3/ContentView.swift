@@ -41,7 +41,7 @@ struct ContentView: View {
                 }
                 Text("Select an item")
             }.tabItem {
-                Label("Homt", systemImage: "house.fill")
+                Label("Home", systemImage: "house.fill")
             }
         }
     }

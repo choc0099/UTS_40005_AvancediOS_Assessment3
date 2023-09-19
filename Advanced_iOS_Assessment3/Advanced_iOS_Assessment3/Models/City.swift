@@ -14,13 +14,23 @@ enum LocationTyoe: String, Codable {
     case city = "CITY"
 }
 
+
+
+//this is uesed on the whole body of the JSON Response
+struct SearchResponse: Codable {
+    var query: String
+    var runtimeId: Int
+    let errorStatus: String //the error status is displayed on the top of the JSON file.
+    var searchResults: [SearchResult]
+}
+
 //this is a base struct to find hotels by city and it will have some struct object properties
-struct Location : Identifiable, Hashable, Codable {
+struct SearchResult: Identifiable, Hashable, Codable {
     let id: Int
     var gaiaId: Int // this is an unique identifier from the backend side of the search result
     var regionName: RegionNames
     var coordinates: Coordinates
-    var hotelAddress: HotelAddress?
+    var hotelAddress: HotelAddress? 
 }
 
 struct HierarchyInfo: Hashable, Codable {

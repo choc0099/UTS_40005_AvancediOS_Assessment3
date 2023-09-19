@@ -8,7 +8,7 @@
 import Foundation
 
 class HotelBrowserMainViewModel: ObservableObject {
-    @Published var searchResults = [SearchResult]()
+    @Published var searchResults = [HotelSearchResult]()
     
     //these are the headers to initialise the API request
     let headers = [
@@ -42,10 +42,10 @@ class HotelBrowserMainViewModel: ObservableObject {
             let (data, _) = try await URLSession.shared.data(for: request)
             
             //decodes the JSON response
-            let response = try JSONDecoder().decode(SearchResponse.self, from: data)
+            let response = try JSONDecoder().decode(SearchResponse<HotelSearchResult>.self, from: data)
             
             //adds it to the view model structs so it can be displayed in the UI
-            searchResults = response.searchResults
+            
         }
         catch {
             print("Something went wrong \(error)")

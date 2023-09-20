@@ -10,6 +10,7 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @StateObject var hotelMain: HotelBrowserMainViewModel = HotelBrowserMainViewModel()
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
@@ -18,32 +19,32 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
-            NavigationView {
+            NavigationStack {
                 List {
-                    ForEach(items) { item in
-                        NavigationLink {
-                            Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                        } label: {
-                            Text(item.timestamp!, formatter: itemFormatter)
-                        }
+                    ForEach(hotelMain.hotelSearchResults) { hotel in
+                        Text("\(hotel.regionName.fullName), \(hotel.hotelAddress.street)")
+                        
                     }
-                    .onDelete(perform: deleteItems)
                 }
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        EditButton()
-                    }
-                    ToolbarItem {
-                        Button(action: addItem) {
-                            Label("Add Item", systemImage: "plus")
+                    Button {
+                        Task {
+                            //loads the list of hotels using the api
+                           await hotelMain.loadRegions()
                         }
+                        
+                    } label: {
+                        Text("Load List")
                     }
+                    
                 }
-                Text("Select an item")
+                
             }.tabItem {
                 Label("Home", systemImage: "house.fill")
             }
         }
+        
+        
     }
 
     private func addItem() {

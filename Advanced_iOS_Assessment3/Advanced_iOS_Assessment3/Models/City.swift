@@ -40,7 +40,7 @@ struct HotelSearchResult: SearchResult, Identifiable, Hashable, Codable {
     let type: String = LocationTyoe.hotel.rawValue
     var regionName: RegionNames
     var coordinates: Coordinates
-    var hotelAddress: HotelAddress?
+    var hotelAddress: HotelAddress
     var hotelId: Int
     var cityId: Int
     

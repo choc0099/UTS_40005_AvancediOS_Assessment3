@@ -22,7 +22,7 @@ struct ContentView: View {
             NavigationStack {
                 List {
                     ForEach(hotelMain.hotelSearchResults) { hotel in
-                        Text("\(hotel.regionName.fullName), \(hotel.hotelAddress.street)")
+                        Text("\(hotel.regionNames.fullName), ")
                         
                     }
                 }

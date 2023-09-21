@@ -17,38 +17,44 @@ enum LocationTyoe: String, Codable {
 
 
 //this is uesed on the whole body of the JSON Response
-struct SearchResponse<T : SearchResult>:  Codable {
+struct SearchResponse<T : SearchResult>: Hashable, Codable {
     var query: String
-    var runtimeId: Int
+    var runtimeId: String
     let errorStatus: String //the error status is displayed on the top of the JSON file.
     var searchResults: [T]
     
     //this is used to decode the JSON file
     enum CodingKeys: String, CodingKey {
         case query = "q"
-        case searchResults = "sr"
-        case runtimeId = "ri"
+        case runtimeId = "rid"
         case errorStatus = "rc"
-        
+        case searchResults = "sr"
     }
 }
 
 //this is a base struct to find hotels by city and it will have some struct object properties
 struct HotelSearchResult: SearchResult, Identifiable, Hashable, Codable {
-    let id: Int
-    var gaiaId: Int // this is an unique identifier from the backend side of the search result
-    let type: String = LocationTyoe.hotel.rawValue
-    var regionName: RegionNames
+    static func == (lhs: HotelSearchResult, rhs: HotelSearchResult) -> Bool {
+        lhs.id == rhs.id // Return true if the IDs are equal
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    let id: String
+    var type: String
+    var regionNames: RegionNames
     var coordinates: Coordinates
-    var hotelAddress: HotelAddress
-    var hotelId: Int
-    var cityId: Int
+    var hotelAddress: HotelAddress?
+    var hotelId: String?
+    var cityId: String?
     
     //this is used to for JSON Parsing such as decoding it from JSON.
     enum CodingKeys: String, CodingKey {
         case id = "index"
         //if all the rest is the same in the json response, all still eeds to be entered without declaring a different code.
-        case gaiaId, regionName,coordinates, type, hotelAddress, hotelId, cityId
+        case regionNames,coordinates, type, hotelAddress, cityId, hotelId
     }
 }
 
@@ -57,24 +63,25 @@ struct RegionSearchResult {
 }
 
 struct HierarchyInfo: Hashable, Codable {
-    var country: Country
+    var country: Country?
 }
 
 struct Country: Hashable, Codable {
-    var name: String
-    var isoCode2: String
-    var isoCode3: String
+    var name: String?
+    var isoCode1: String?
+    var isoCode2: String?
+    var isoCode3: String?
 }
 
 //this will be used for the map
 struct Coordinates: Hashable, Codable {
-    var latitude: Double
-    var longitutde: Double
+    var latitude: String
+    var longitude: String
     
     //used for JSON file decoding.
     enum CodingKeys: String, CodingKey {
         case latitude = "lat"
-        case longitutde = "long"
+        case longitude = "long"
     }
 }
 
@@ -96,10 +103,9 @@ struct HotelAddress: Hashable, Codable {
 
 //this is used to define similar types for differnt objects that have similar properties
 
-protocol SearchResult: Identifiable, Codable {
-    var id: Int {get}
-    var gaiaId: Int {get} // this is an unique identifier from the backend side of the search result
+protocol SearchResult: Identifiable, Hashable, Codable {
+    var id: String {get}
     var type: String {get}
-    var regionName: RegionNames {get}
+    var regionNames: RegionNames {get}
     var coordinates: Coordinates {get set}
 }

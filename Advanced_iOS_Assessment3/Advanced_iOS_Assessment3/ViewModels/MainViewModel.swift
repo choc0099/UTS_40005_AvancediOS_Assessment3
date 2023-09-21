@@ -28,6 +28,7 @@ class HotelBrowserMainViewModel: ObservableObject {
         var request = URLRequest(url: url as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         //puts the header into the url request
         request.allHTTPHeaderFields = headers
+        request.httpMethod = "GET"
         return request
     }
     
@@ -35,7 +36,7 @@ class HotelBrowserMainViewModel: ObservableObject {
     func loadRegions() async {
         //gets the request with the location search
         //i have hard coded the query strings for now.
-        var request = hotelApi("/locations/v3/search?sydney&locale-en_AU")
+        var request = hotelApi("/locations/v3/search?q=Sydney&locale=en_AU")
     //https://docs-assets.developer.apple.com/published/bbc1147cb0/22fc548e-7697-4dae-a05a-71803b10082e.png
         do {
             //sends the url request
@@ -50,7 +51,8 @@ class HotelBrowserMainViewModel: ObservableObject {
             }
         }
         catch {
-            print("Something went wrong \(error)")
+            print("Something went wrong \(error.localizedDescription)")
+            print(error)
         }
         
     }

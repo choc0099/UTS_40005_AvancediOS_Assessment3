@@ -22,7 +22,11 @@ struct ContentView: View {
             NavigationStack {
                 List {
                     ForEach(hotelMain.hotelSearchResults) { hotel in
-                        Text("\(hotel.regionNames.fullName), ")
+                        if hotel.type == "HOTEL" {
+                            if let haveAddress = hotel.hotelAddress {
+                                Text(hotel.regionNames.fullName)
+                            }
+                        }
                         
                     }
                 }

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		320A00E92AC169E900B01392 /* PropertySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320A00E82AC169E900B01392 /* PropertySearch.swift */; };
+		320A7CC62AC173B2008B252B /* PropertyPrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320A7CC52AC173B2008B252B /* PropertyPrices.swift */; };
+		320A7CC82AC175D4008B252B /* PropertyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320A7CC72AC175D4008B252B /* PropertyItem.swift */; };
+		320A7CCA2AC176B8008B252B /* PropertyLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320A7CC92AC176B8008B252B /* PropertyLocation.swift */; };
+		320A7CCC2AC1929C008B252B /* CheckInAndOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320A7CCB2AC1929C008B252B /* CheckInAndOut.swift */; };
 		3256C5D42AB8501E00AC9470 /* Advanced_iOS_Assessment3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3256C5D32AB8501E00AC9470 /* Advanced_iOS_Assessment3App.swift */; };
 		3256C5D62AB8501E00AC9470 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3256C5D52AB8501E00AC9470 /* ContentView.swift */; };
 		3256C5D82AB8501F00AC9470 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3256C5D72AB8501F00AC9470 /* Assets.xcassets */; };
@@ -38,6 +43,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		320A00E82AC169E900B01392 /* PropertySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySearch.swift; sourceTree = "<group>"; };
+		320A7CC52AC173B2008B252B /* PropertyPrices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyPrices.swift; sourceTree = "<group>"; };
+		320A7CC72AC175D4008B252B /* PropertyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyItem.swift; sourceTree = "<group>"; };
+		320A7CC92AC176B8008B252B /* PropertyLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyLocation.swift; sourceTree = "<group>"; };
+		320A7CCB2AC1929C008B252B /* CheckInAndOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInAndOut.swift; sourceTree = "<group>"; };
 		3256C5D02AB8501E00AC9470 /* Advanced_iOS_Assessment3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Advanced_iOS_Assessment3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3256C5D32AB8501E00AC9470 /* Advanced_iOS_Assessment3App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advanced_iOS_Assessment3App.swift; sourceTree = "<group>"; };
 		3256C5D52AB8501E00AC9470 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -80,6 +90,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		320A7CC42AC17342008B252B /* PropertyList */ = {
+			isa = PBXGroup;
+			children = (
+				320A00E82AC169E900B01392 /* PropertySearch.swift */,
+				320A7CC52AC173B2008B252B /* PropertyPrices.swift */,
+				320A7CC72AC175D4008B252B /* PropertyItem.swift */,
+				320A7CC92AC176B8008B252B /* PropertyLocation.swift */,
+				320A7CCB2AC1929C008B252B /* CheckInAndOut.swift */,
+			);
+			path = PropertyList;
+			sourceTree = "<group>";
+		};
 		3256C5C72AB8501E00AC9470 = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +174,7 @@
 		327A587A2AB851AB00DB11E6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				320A7CC42AC17342008B252B /* PropertyList */,
 				327A587E2AB8FB5200DB11E6 /* City.swift */,
 			);
 			path = Models;
@@ -295,8 +318,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				320A00E92AC169E900B01392 /* PropertySearch.swift in Sources */,
+				320A7CC82AC175D4008B252B /* PropertyItem.swift in Sources */,
 				327A587D2AB859EE00DB11E6 /* MainViewModel.swift in Sources */,
+				320A7CC62AC173B2008B252B /* PropertyPrices.swift in Sources */,
+				320A7CCC2AC1929C008B252B /* CheckInAndOut.swift in Sources */,
 				3256C5DD2AB8501F00AC9470 /* Persistence.swift in Sources */,
+				320A7CCA2AC176B8008B252B /* PropertyLocation.swift in Sources */,
 				327A587F2AB8FB5200DB11E6 /* City.swift in Sources */,
 				3256C5E02AB8501F00AC9470 /* Advanced_iOS_Assessment3.xcdatamodeld in Sources */,
 				3256C5D62AB8501E00AC9470 /* ContentView.swift in Sources */,

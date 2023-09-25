@@ -36,7 +36,7 @@ class HotelBrowserMainViewModel: ObservableObject {
     func loadRegions() async {
         //gets the request with the location search
         //i have hard coded the query strings for now.
-        var request = hotelApi("/locations/v3/search?q=Sydney&locale=en_AU&langid=3081&siteid=300000035")
+        var request = hotelApi("/locations/v3/search?q=Surry%20Hills&locale=en_AU&langid=3081&siteid=300000035")
         do {
             //sends the url request
             let (data, _) = try await URLSession.shared.data(for: request)

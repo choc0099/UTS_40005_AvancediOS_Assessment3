@@ -70,8 +70,6 @@ struct HotelSearchResult: SearchResult, Hashable, Decodable {
         if let haveHotelId = try container.decodeIfPresent(String.self, forKey: .hotelId) {
             self.hotelId = Int(haveHotelId)
         }
-        
-        
     }
 }
 

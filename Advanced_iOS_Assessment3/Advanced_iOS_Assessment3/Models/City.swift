@@ -8,7 +8,7 @@
 import Foundation
 import MapKit
 
-enum LocationTyoe: String, Codable {
+enum LocationTyoe: String, Decodable {
     case neighbourHood = "NEIGHBOURHOOD"
     case hotel = "HOTEL"
     case city = "CITY"
@@ -17,11 +17,11 @@ enum LocationTyoe: String, Codable {
 
 
 //this is uesed on the whole body of the JSON Response
-struct SearchResponse<T : SearchResult>: Hashable, Codable {
+struct SearchResponse<T : SearchResult>: Hashable, Decodable {
     var query: String
     var runtimeId: String
     let errorStatus: String //the error status is displayed on the top of the JSON file.
-    var searchResults: [T]
+    var searchResults: [T]?
     
     //this is used to decode the JSON file
     enum CodingKeys: String, CodingKey {
@@ -33,7 +33,7 @@ struct SearchResponse<T : SearchResult>: Hashable, Codable {
 }
 
 //this is a base struct to find hotels by city and it will have some struct object properties
-struct HotelSearchResult: SearchResult, Identifiable, Hashable, Codable {
+struct HotelSearchResult: SearchResult, Hashable, Decodable {
     static func == (lhs: HotelSearchResult, rhs: HotelSearchResult) -> Bool {
         lhs.id == rhs.id // Return true if the IDs are equal
     }
@@ -42,13 +42,13 @@ struct HotelSearchResult: SearchResult, Identifiable, Hashable, Codable {
         hasher.combine(id)
     }
     
-    let id: String
+    let id: Int
     var type: String
     var regionNames: RegionNames
     var coordinates: Coordinates
     var hotelAddress: HotelAddress?
-    var hotelId: String?
-    var cityId: String?
+    var hotelId: Int?
+    var cityId: Int?
     
     //this is used to for JSON Parsing such as decoding it from JSON.
     enum CodingKeys: String, CodingKey {
@@ -56,17 +56,34 @@ struct HotelSearchResult: SearchResult, Identifiable, Hashable, Codable {
         //if all the rest is the same in the json response, all still eeds to be entered without declaring a different code.
         case regionNames,coordinates, type, hotelAddress, cityId, hotelId
     }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try Int(container.decode(String.self, forKey: .id))!
+        self.regionNames = try container.decode(RegionNames.self, forKey: .regionNames)
+        self.coordinates = try container.decode(Coordinates.self, forKey: .coordinates)
+        self.type = try container.decode(String.self, forKey: .type)
+        self.hotelAddress = try container.decodeIfPresent(HotelAddress.self, forKey: .hotelAddress)
+        if let haveCityId = try container.decodeIfPresent(String.self, forKey: .cityId) {
+            self.cityId = Int(haveCityId)
+        }
+        if let haveHotelId = try container.decodeIfPresent(String.self, forKey: .hotelId) {
+            self.hotelId = Int(haveHotelId)
+        }
+        
+        
+    }
 }
 
 struct RegionSearchResult {
     
 }
 
-struct HierarchyInfo: Hashable, Codable {
+struct HierarchyInfo: Hashable, Decodable {
     var country: Country?
 }
 
-struct Country: Hashable, Codable {
+struct Country: Hashable, Decodable {
     var name: String?
     var isoCode1: String?
     var isoCode2: String?
@@ -74,9 +91,16 @@ struct Country: Hashable, Codable {
 }
 
 //this will be used for the map
-struct Coordinates: Hashable, Codable {
-    var latitude: String
-    var longitude: String
+struct Coordinates: Hashable, Decodable {
+    var latitude: Double
+    var longitude: Double
+    
+    //nauelly converts from a string to double
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.latitude = try Double(container.decode(String.self, forKey: .latitude))!
+        self.longitude = try Double(container.decode(String.self, forKey: .longitude))!
+    }
     
     //used for JSON file decoding.
     enum CodingKeys: String, CodingKey {
@@ -86,7 +110,7 @@ struct Coordinates: Hashable, Codable {
 }
 
 //this will have multiple forms of region names.
-struct RegionNames: Hashable, Codable {
+struct RegionNames: Hashable, Decodable {
     var fullName: String
     var shortName: String
     var displayName: String
@@ -95,7 +119,7 @@ struct RegionNames: Hashable, Codable {
     var lastSearchName: String
 }
 
-struct HotelAddress: Hashable, Codable {
+struct HotelAddress: Hashable, Decodable {
     var street: String
     var city: String
     var province: String
@@ -103,8 +127,8 @@ struct HotelAddress: Hashable, Codable {
 
 //this is used to define similar types for differnt objects that have similar properties
 
-protocol SearchResult: Identifiable, Hashable, Codable {
-    var id: String {get}
+protocol SearchResult: Identifiable, Hashable, Decodable {
+    var id: Int {get}
     var type: String {get}
     var regionNames: RegionNames {get}
     var coordinates: Coordinates {get set}

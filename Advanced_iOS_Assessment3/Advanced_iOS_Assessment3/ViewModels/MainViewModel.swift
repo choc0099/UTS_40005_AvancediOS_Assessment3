@@ -32,12 +32,11 @@ class HotelBrowserMainViewModel: ObservableObject {
         return request
     }
     
-    
+    @MainActor
     func loadRegions() async {
         //gets the request with the location search
         //i have hard coded the query strings for now.
-        var request = hotelApi("/locations/v3/search?q=Sydney&locale=en_AU")
-    //https://docs-assets.developer.apple.com/published/bbc1147cb0/22fc548e-7697-4dae-a05a-71803b10082e.png
+        var request = hotelApi("/locations/v3/search?q=Sydney&locale=en_AU&langid=3081&siteid=300000035")
         do {
             //sends the url request
             let (data, _) = try await URLSession.shared.data(for: request)
@@ -47,11 +46,18 @@ class HotelBrowserMainViewModel: ObservableObject {
             
             DispatchQueue.main.async {
                 //adds it to the view model structs so it can be displayed in the UI
-                self.hotelSearchResults = response.searchResults
+                if let haveSearchResults = response.searchResults {
+                    self.hotelSearchResults = haveSearchResults
+                    for result in self.hotelSearchResults {
+                        print("\(result.id), \(result.coordinates.latitude)")
+                    }
+                }
+                
+               
             }
         }
         catch {
-            print("Something went wrong \(error.localizedDescription)")
+            print("\(error.localizedDescription)")
             print(error)
         }
         

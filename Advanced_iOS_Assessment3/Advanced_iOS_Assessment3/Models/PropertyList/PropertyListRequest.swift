@@ -4,11 +4,11 @@
 //
 //  Created by Christopher Averkos on 25/9/2023.
 //
-
+//this file containts objects that is used to encode into a JSON file for a POST request to search for hotels.
 import Foundation
 struct PropertyListRequest: Encodable {
-    let currency : String
-    let eapid : Int
+    let currency: String
+    let eapid: Int
     let locale : String
     let siteId : Int
     let destination : Destination
@@ -16,9 +16,9 @@ struct PropertyListRequest: Encodable {
     let checkOutDate : CheckOutDate
     let rooms : [Rooms]
     let resultsStartingIndex : Int?
-    let resultsSize : Int?
-    let sort : String?
-    let filters : Filters?
+    let resultsSize: Int?
+    let sort: String?
+    let filters: Filters?
 }
 
 struct Children: Encodable {
@@ -26,21 +26,13 @@ struct Children: Encodable {
 }
 
 struct Destination: Encodable {
-    let regionId: String?
-
-    enum CodingKeys: String, CodingKey {
-        case regionId = "regionId"
-    }
-
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        regionId = try values.decodeIfPresent(String.self, forKey: .regionId)
-    }
+    let regionId: String
+    let coordinates: Coordinates
 }
 
 struct PriceRequest: Codable {
-    let maximunPrice : Int
-    let minimunPrice : Int
+    let maximunPrice: Int
+    let minimunPrice: Int
 
     enum CodingKeys: String, CodingKey {
         case maximunPrice = "max"
@@ -49,12 +41,14 @@ struct PriceRequest: Codable {
 }
 
 struct Rooms: Encodable {
-    let adults : Int
-    let children : [Children]
+    let adults: Int
+    let children: [Children]
 }
 
+//this is used to filter the hotel results
 struct Filters: Encodable {
-    let price : PriceRequest
+    let price: PriceRequest
+    
 
     enum CodingKeys: String, CodingKey {
         case price = "price"

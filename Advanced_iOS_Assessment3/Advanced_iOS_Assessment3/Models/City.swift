@@ -89,7 +89,7 @@ struct Country: Hashable, Decodable {
 }
 
 //this will be used for the map
-struct Coordinates: Hashable, Decodable {
+struct Coordinates: Hashable, Codable {
     var latitude: Double
     var longitude: Double
     

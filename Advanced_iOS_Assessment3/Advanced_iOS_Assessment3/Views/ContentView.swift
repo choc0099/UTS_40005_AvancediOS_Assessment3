@@ -10,7 +10,7 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @StateObject var hotelMain: HotelBrowserMainViewModel = HotelBrowserMainViewModel()
+    @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
@@ -21,10 +21,20 @@ struct ContentView: View {
         TabView {
             NavigationStack {
                 List {
-                    ForEach(hotelMain.hotelSearchResults) { hotel in
-                        if hotel.type == "HOTEL" {
-                            if let haveAddress = hotel.hotelAddress {
-                                Text(hotel.regionNames.fullName)
+                    Section("Hotel Suggestions") {
+                        ForEach(hotelMain.hotelSearchResults) { hotel in
+                            if hotel.type == "HOTEL" {
+                                if let haveAddress = hotel.hotelAddress {
+                                    Text(hotel.regionNames.fullName)
+                                }
+                            }
+                        }
+                    }
+                    Section("Regions and Neighbourhoods") {
+                        ForEach(hotelMain.regionSearchResults) {
+                            region in
+                            if region.type != "HOTEL" {
+                                Text(region.regionNames.primaryDisplayName)
                             }
                         }
                         
@@ -40,14 +50,15 @@ struct ContentView: View {
                     } label: {
                         Text("Load List")
                     }
-                    
                 }
-                
             }.tabItem {
                 Label("Home", systemImage: "house.fill")
             }
+            
+            RegionsView().tabItem {
+                Label("Regions", systemImage: "globe")
+            }
         }
-        
         
     }
 
@@ -92,6 +103,6 @@ private let itemFormatter: DateFormatter = {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext).environmentObject(HotelBrowserMainViewModel())
     }
 }

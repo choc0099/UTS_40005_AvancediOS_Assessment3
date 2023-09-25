@@ -111,7 +111,6 @@ struct ShoppingContext : Codable {
     let multiItem : String?
 
     enum CodingKeys: String, CodingKey {
-
         case typename = "__typename"
         case multiItem = "multiItem"
     }
@@ -129,11 +128,9 @@ struct Amenities : Codable {
     let id: Int?
 
     enum CodingKeys: String, CodingKey {
-
         case typename = "__typename"
         case id = "id"
     }
-
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         typename = try values.decodeIfPresent(String.self, forKey: .typename)
@@ -143,9 +140,9 @@ struct Amenities : Codable {
 }
 
 
-struct Properties: Codable {
+struct Properties: Identifiable, Codable {
     let typename : String?
-    let id : String?
+    let id: Int
     let featuredMessages : [String]?
     let name: String?
     let availability: Availability?
@@ -200,7 +197,7 @@ struct Properties: Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         typename = try values.decodeIfPresent(String.self, forKey: .typename)
-        id = try values.decodeIfPresent(String.self, forKey: .id)
+        id = try Int(values.decode(String.self, forKey: .id))!
         featuredMessages = try values.decodeIfPresent([String].self, forKey: .featuredMessages)
         name = try values.decodeIfPresent(String.self, forKey: .name)
         availability = try values.decodeIfPresent(Availability.self, forKey: .availability)
@@ -224,7 +221,6 @@ struct Properties: Codable {
         priceMetadata = try values.decodeIfPresent(PriceMetadata.self, forKey: .priceMetadata)
         saveTripItem = try values.decodeIfPresent(String.self, forKey: .saveTripItem)
     }
-
 }
 
 
@@ -322,5 +318,3 @@ struct Map: Codable {
         subtitle = try values.decodeIfPresent(String.self, forKey: .subtitle)
     }
 }
-
-

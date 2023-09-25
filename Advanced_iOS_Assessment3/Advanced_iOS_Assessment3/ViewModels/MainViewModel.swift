@@ -9,7 +9,7 @@ import Foundation
 
 class HotelBrowserMainViewModel: ObservableObject {
     @Published var hotelSearchResults = [HotelSearchResult]()
-    
+    @Published var regionSearchResults = [NeighborhoodSearchResult]()
     //these are the headers to initialise the API request
     let headers = [
         "X-RapidAPI-Key": "fdc2564bbemshd3b062f571b3b8cp173b6ejsn78fc48e2f6b0",
@@ -42,15 +42,20 @@ class HotelBrowserMainViewModel: ObservableObject {
             let (data, _) = try await URLSession.shared.data(for: request)
             
             //decodes the JSON response
-            let response = try JSONDecoder().decode(SearchResponse<HotelSearchResult>.self, from: data)
+            let hotelResponse = try JSONDecoder().decode(SearchResponse<HotelSearchResult>.self, from: data)
+            let regionResponse = try JSONDecoder().decode(SearchResponse<NeighborhoodSearchResult>.self, from: data)
             
             DispatchQueue.main.async {
                 //adds it to the view model structs so it can be displayed in the UI
-                if let haveSearchResults = response.searchResults {
+                if let haveSearchResults = hotelResponse.searchResults {
                     self.hotelSearchResults = haveSearchResults
                     for result in self.hotelSearchResults {
                         print("\(result.id), \(result.coordinates.latitude)")
                     }
+                }
+                
+                if let haveRegionResults = regionResponse.searchResults {
+                    self.regionSearchResults = haveRegionResults
                 }
                 
                

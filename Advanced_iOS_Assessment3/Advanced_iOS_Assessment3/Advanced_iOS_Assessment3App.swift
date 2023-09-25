@@ -10,11 +10,11 @@ import SwiftUI
 @main
 struct Advanced_iOS_Assessment3App: App {
     let persistenceController = PersistenceController.shared
-
+    @StateObject var hotelMain: HotelBrowserMainViewModel = HotelBrowserMainViewModel()
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, persistenceController.container.viewContext).environmentObject(hotelMain)
         }
     }
 }

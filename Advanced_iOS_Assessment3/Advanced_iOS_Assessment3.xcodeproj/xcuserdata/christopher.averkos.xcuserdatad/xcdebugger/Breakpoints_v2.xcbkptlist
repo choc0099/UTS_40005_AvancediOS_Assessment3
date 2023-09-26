@@ -14,8 +14,8 @@
             filePath = "Advanced_iOS_Assessment3/ViewModels/MainViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "hotelApi(urlStuffs:)"
             landmarkType = "7">
             <Locations>
@@ -49,7 +49,211 @@
                   endingLineNumber = "46"
                   offsetFromSymbolStart = "256">
                </Location>
+               <Location
+                  uuid = "F376BDBD-B0B0-4BC8-80C3-1CD749702326 - 14bdf33bd86e2031"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Advanced_iOS_Assessment3.HotelBrowserMainViewModel.hotelApi(urlStuffs: Foundation.URLComponents) throws -&gt; Foundation.URLRequest"
+                  moduleName = "Advanced_iOS_Assessment3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/ViewModels/MainViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "364">
+               </Location>
+               <Location
+                  uuid = "F376BDBD-B0B0-4BC8-80C3-1CD749702326 - 14bdf33bd86e2031"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Advanced_iOS_Assessment3.HotelBrowserMainViewModel.hotelApi(urlStuffs: Foundation.URLComponents) throws -&gt; Foundation.URLRequest"
+                  moduleName = "Advanced_iOS_Assessment3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/ViewModels/MainViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "492">
+               </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AF294CB4-08F2-4D20-B4C1-A4C427B88A46"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Advanced_iOS_Assessment3/ViewModels/MainViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "loadMetaData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "AF294CB4-08F2-4D20-B4C1-A4C427B88A46 - d2753fd297f55b7a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Advanced_iOS_Assessment3.HotelBrowserMainViewModel.loadMetaData() async -&gt; ()"
+                  moduleName = "Advanced_iOS_Assessment3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/ViewModels/MainViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "157"
+                  endingLineNumber = "157"
+                  offsetFromSymbolStart = "396">
+               </Location>
+               <Location
+                  uuid = "AF294CB4-08F2-4D20-B4C1-A4C427B88A46 - 6c9fde73522a4c3d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Advanced_iOS_Assessment3.HotelBrowserMainViewModel.loadMetaData() async -&gt; ()"
+                  moduleName = "Advanced_iOS_Assessment3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/ViewModels/MainViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "157"
+                  endingLineNumber = "157"
+                  offsetFromSymbolStart = "200">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9D4490E3-364D-4760-8C0E-CC6F44905E75"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Advanced_iOS_Assessment3/ViewModels/MainViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
+            landmarkName = "loadMetaData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "20CF6D13-4936-493F-AA30-F9A161F23D8D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Advanced_iOS_Assessment3/ViewModels/MainViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "loadMetaData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "20CF6D13-4936-493F-AA30-F9A161F23D8D - 6c9fde73522a4f14"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Advanced_iOS_Assessment3.HotelBrowserMainViewModel.loadMetaData() async -&gt; ()"
+                  moduleName = "Advanced_iOS_Assessment3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/ViewModels/MainViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "166"
+                  endingLineNumber = "166"
+                  offsetFromSymbolStart = "888">
+               </Location>
+               <Location
+                  uuid = "20CF6D13-4936-493F-AA30-F9A161F23D8D - 7f67a830321f1e0c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for Advanced_iOS_Assessment3.HotelBrowserMainViewModel.loadMetaData() async -&gt; ()"
+                  moduleName = "Advanced_iOS_Assessment3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/ViewModels/MainViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "166"
+                  endingLineNumber = "166"
+                  offsetFromSymbolStart = "56">
+               </Location>
+               <Location
+                  uuid = "20CF6D13-4936-493F-AA30-F9A161F23D8D - 1d39d7677830316"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Advanced_iOS_Assessment3.HotelBrowserMainViewModel.loadMetaData() async -&gt; ()"
+                  moduleName = "Advanced_iOS_Assessment3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/ViewModels/MainViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "166"
+                  endingLineNumber = "166"
+                  offsetFromSymbolStart = "216">
+               </Location>
+               <Location
+                  uuid = "20CF6D13-4936-493F-AA30-F9A161F23D8D - eb8d7cfb1a4c6111"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Advanced_iOS_Assessment3.HotelBrowserMainViewModel.loadMetaData() async -&gt; ()"
+                  moduleName = "Advanced_iOS_Assessment3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/ViewModels/MainViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "166"
+                  endingLineNumber = "166"
+                  offsetFromSymbolStart = "88">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7A982125-911C-4C43-B498-FCD492CAE581"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Advanced_iOS_Assessment3/ViewModels/MainViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "loadMetaData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F434A2FD-76BE-4607-9F65-A840DE26A25E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Advanced_iOS_Assessment3/ViewModels/MainViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "loadMetaData()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -20,21 +20,21 @@ struct MetaDataResponse: Codable {
 }
 
 struct Australia: Codable {
-    let siteId : Int?
-    let tPID : Int?
-    let eAPID : Int?
-    let flightsEnabled : Bool?
-    let carsEnabled : Bool?
-    let lxEnabled : Bool?
-    let packagesEnabled : Bool?
-    let removeAvailabilityMessageEnabled : Bool?
-    let swapEnabledHotels : Bool?
-    let earnMessageEnabledHotels : Bool?
-    let showStrikeThroughPriceDetails : Bool?
-    let carsWebViewEnabled : Bool?
+    let siteId : Int
+    let tpId : Int
+    let eapId : Int
+    let flightsEnabled : Bool
+    let carsEnabled : Bool
+    let lxEnabled : Bool
+    let packagesEnabled : Bool
+    let removeAvailabilityMessageEnabled : Bool
+    let swapEnabledHotels : Bool
+    let earnMessageEnabledHotels : Bool
+    let showStrikeThroughPriceDetails : Bool
+    let carsWebViewEnabled : Bool
     let url : String?
-    let countryCode : String?
-    let supportedLocales : [SupportedLocales]?
+    let countryCode : String
+    let supportedLocales : [SupportedLocales]
     let automaticallyMappedLocales : [String]?
     let branding : String?
     let deepLinkDateFormat : String?
@@ -43,16 +43,16 @@ struct Australia: Codable {
     let shouldShowRewards : Bool?
     let supportsVipAccess : Bool?
     let marketingOptIn : String?
-    let shouldDisplayCirclesForRatings : Bool?
-    let hotMIPSavingsPercentage : String?
-    let cookiePolicyURLString : String?
-    let enrollInLoyalty : Bool?
+    let shouldDisplayCirclesForRatings : Bool
+    let hotMIPSavingsPercentage : String
+    let cookiePolicyURLString : String
+    let enrollInLoyalty : Bool
 
     enum CodingKeys: String, CodingKey {
 
         case siteId = "siteId"
-        case tPID = "TPID"
-        case eAPID = "EAPID"
+        case tpId = "TPID"
+        case eapId = "EAPID"
         case flightsEnabled = "flightsEnabled"
         case carsEnabled = "carsEnabled"
         case lxEnabled = "lxEnabled"
@@ -84,9 +84,9 @@ struct Australia: Codable {
 
 struct SupportedLocales : Codable {
     let appLanguage : AppLanguage?
-    let localeIdentifier : String?
+    let hotelSiteLocaleIdentifier : String
     let languageCode : String?
-    let languageIdentifier : Int?
+    let languageIdentifier : Int
     let localeBasedPointOfSaleName : String?
     let appInfoURL : String?
     let createAccountMarketingText : String?
@@ -106,7 +106,7 @@ struct SupportedLocales : Codable {
     enum CodingKeys: String, CodingKey {
 
         case appLanguage = "appLanguage"
-        case localeIdentifier = "localeIdentifier"
+        case hotelSiteLocaleIdentifier = "localeIdentifier"
         case languageCode = "languageCode"
         case languageIdentifier = "languageIdentifier"
         case localeBasedPointOfSaleName = "localeBasedPointOfSaleName"
@@ -129,9 +129,9 @@ struct SupportedLocales : Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         appLanguage = try values.decodeIfPresent(AppLanguage.self, forKey: .appLanguage)
-        localeIdentifier = try values.decodeIfPresent(String.self, forKey: .localeIdentifier)
+        hotelSiteLocaleIdentifier = try values.decode(String.self, forKey: .hotelSiteLocaleIdentifier)
         languageCode = try values.decodeIfPresent(String.self, forKey: .languageCode)
-        languageIdentifier = try values.decodeIfPresent(Int.self, forKey: .languageIdentifier)
+        languageIdentifier = try values.decode(Int.self, forKey: .languageIdentifier)
         localeBasedPointOfSaleName = try values.decodeIfPresent(String.self, forKey: .localeBasedPointOfSaleName)
         appInfoURL = try values.decodeIfPresent(String.self, forKey: .appInfoURL)
         createAccountMarketingText = try values.decodeIfPresent(String.self, forKey: .createAccountMarketingText)

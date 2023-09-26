@@ -25,6 +25,8 @@ class HotelBrowserMainViewModel: ObservableObject {
     @Published var hotelSearchResults = [HotelSearchResult]()
     @Published var regionSearchResults = [NeighborhoodSearchResult]()
     @Published var searchStatus: HotelStatus = .welcome //this is used to display a welcome message when the app launches.
+    //this is the property to store hotel metadata.
+    @Published var metaData: MetaDataResponse?
     //these are the headers to initialise the API request
     let headers = [
         "X-RapidAPI-Key": "fdc2564bbemshd3b062f571b3b8cp173b6ejsn78fc48e2f6b0",
@@ -33,13 +35,21 @@ class HotelBrowserMainViewModel: ObservableObject {
     //this is a dictonary to store URL path EndPoints.
     let endPoints = [
         "search": "/locations/v3/search",
-        "listProperty": "/properties/v2/list"
-        //?q=Surry%20Hills&locale=en_AU&langid=3081&siteid=300000035"
+        "listProperty": "/properties/v2/list",
+        "metaData": "/v2/get-meta-data"
     ]
+    
+    //loads the metaData when you open the app using an initialiser
+    init() {
+        Task {
+            await loadMetaData()
+        }
+        
+    }
     
     let apiUrl = "https://hotels4.p.rapidapi.com"
 
-
+    
     
     //this is a function the will return an URL Request
     func hotelApi(urlStuffs urlComp: URLComponents) throws -> URLRequest {
@@ -63,12 +73,16 @@ class HotelBrowserMainViewModel: ObservableObject {
         urlComp.host = headers["X-RapidAPI-Host"]!
         urlComp.scheme = "https"
         urlComp.path = endPoints["search"]!
-        urlComp.queryItems = [
-            URLQueryItem(name: "q", value: q),
-            URLQueryItem(name: "locale", value: "en_AU"),
-            URLQueryItem(name: "langid", value: "3081"),
-            URLQueryItem(name: "siteid", value: "300000035")
-        ]
+        
+        if let haveMetaData = metaData {
+            urlComp.queryItems = [
+                URLQueryItem(name: "q", value: q),
+                URLQueryItem(name: "locale", value: haveMetaData.australia.supportedLocales[0].hotelSiteLocaleIdentifier),
+                URLQueryItem(name: "langid", value: "\(haveMetaData.australia.supportedLocales[0].languageIdentifier)"),
+                URLQueryItem(name: "siteid", value: "\(haveMetaData.australia.siteId)")
+            ]
+        }
+   
         
         if let haveUrl = urlComp.url {
             print(haveUrl)
@@ -136,6 +150,47 @@ class HotelBrowserMainViewModel: ObservableObject {
             print(error)
             print("Error: ", type(of: error))
         }
+        
+    }
+    
+    //loads the metadata, this is used as a helpter function to initialise the metadata property.
+    func loadMetaData() async {
+        //generates the URL
+        var urlComp: URLComponents = URLComponents(string: apiUrl)!
+        urlComp.path = endPoints["metaData"]!
+        do {
+            //sends the request via HTTP
+            let request = try hotelApi(urlStuffs: urlComp)
+            
+            //decodes the data and stores it onto the properties.
+           let (data, _) = try await URLSession.shared.data(for: request)
+            
+            //decodes the JSON response
+            let response = try JSONDecoder().decode(MetaDataResponse.self, from: data)
+            DispatchQueue.main.async {
+                //adds it to the view
+                self.metaData = response
+                
+                //this is used to test if meta data is displayed
+                if let haveMetaData = self.metaData {
+                    print("Country Code \(haveMetaData.australia.countryCode)")
+                    print("siteId \(haveMetaData.australia.siteId)")
+                    print("eapId \(haveMetaData.australia.eapId)")
+                }
+            }
+           
+        
+        }
+        catch(URLError.notConnectedToInternet) {
+            //tells the user that they are not connected to the internet.
+            searchStatus = .offline
+        }
+        catch {
+            searchStatus = .unkown
+            print(error)
+            print(error.localizedDescription)
+        }
+      
         
     }
     

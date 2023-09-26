@@ -83,7 +83,7 @@ struct NeighborhoodSearchResult: SearchResult {
         case id = "index"
         case type, regionNames, gaiaId, coordinates, hierarchyInfo
     }
-    
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try Int(container.decode(String.self, forKey: .id))!

@@ -7,10 +7,7 @@
 
 import Foundation
 
-enum APIErrors: Error {
-    case invalidUrl
-    case noSearchResults
-}
+
 //these are the statuses for the search view where it change the UI stuff based on scenarios such as loading and offline
 enum HotelStatus {
     case active
@@ -27,17 +24,6 @@ class HotelBrowserMainViewModel: ObservableObject {
     @Published var searchStatus: HotelStatus = .welcome //this is used to display a welcome message when the app launches.
     //this is the property to store hotel metadata.
     @Published var metaData: MetaDataResponse?
-    //these are the headers to initialise the API request
-    let headers = [
-        "X-RapidAPI-Key": "fdc2564bbemshd3b062f571b3b8cp173b6ejsn78fc48e2f6b0",
-        "X-RapidAPI-Host": "hotels4.p.rapidapi.com"
-    ]
-    //this is a dictonary to store URL path EndPoints.
-    let endPoints = [
-        "search": "/locations/v3/search",
-        "listProperty": "/properties/v2/list",
-        "metaData": "/v2/get-meta-data"
-    ]
     
     //loads the metaData when you open the app using an initialiser
     init() {
@@ -60,32 +46,14 @@ class HotelBrowserMainViewModel: ObservableObject {
         
     }
     
-    let apiUrl = "https://hotels4.p.rapidapi.com"
-
-    
-    
-    //this is a function the will return an URL Request
-    func hotelApi(urlStuffs urlComp: URLComponents) throws -> URLRequest {
-        if let validURL = urlComp.url {
-            var request = URLRequest(url: validURL as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
-            //puts the header into the url request
-            request.allHTTPHeaderFields = headers
-            request.httpMethod = "GET"
-            return request
-        }
-        else {
-            throw APIErrors.invalidUrl
-        }
-    }
-    
     @MainActor
     func loadRegions(query q: String) async {
         //gets the request with the location search
         // this is the URL Componemnets that forms a URL
         var urlComp: URLComponents = URLComponents()
-        urlComp.host = headers["X-RapidAPI-Host"]!
+        urlComp.host = HotelAPIManager.headers["X-RapidAPI-Host"]!
         urlComp.scheme = "https"
-        urlComp.path = endPoints["search"]!
+        urlComp.path = HotelAPIManager.endPoints["search"]!
         
         if let haveMetaData = metaData {
             urlComp.queryItems = [
@@ -102,7 +70,7 @@ class HotelBrowserMainViewModel: ObservableObject {
         }
         
         do {
-            var request = try hotelApi(urlStuffs: urlComp)
+            var request = try HotelAPIManager.hotelApi(urlStuffs: urlComp)
             
             //sends the url request
             let (data, _) = try await URLSession.shared.data(for: request)
@@ -169,11 +137,12 @@ class HotelBrowserMainViewModel: ObservableObject {
     //loads the metadata, this is used as a helpter function to initialise the metadata property.
     func fetchMetaData() async {
         //generates the URL
-        var urlComp: URLComponents = URLComponents(string: apiUrl)!
-        urlComp.path = endPoints["metaData"]!
+        let apiURL = HotelAPIManager.apiUrl
+        var urlComp: URLComponents = URLComponents(string: apiURL)!
+        urlComp.path = HotelAPIManager.endPoints["metaData"]!
         do {
             //sends the request via HTTP
-            let request = try hotelApi(urlStuffs: urlComp)
+            let request = try HotelAPIManager.hotelApi(urlStuffs: urlComp)
             
             //decodes the data and stores it onto the properties.
            let (data, _) = try await URLSession.shared.data(for: request)

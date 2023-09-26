@@ -9,6 +9,7 @@ import Foundation
 
 enum APIErrors: Error {
     case invalidUrl
+    case noSearchResults
 }
 //these are the statuses for the search view where it change the UI stuff based on scenarios such as loading and offline
 enum HotelStatus {
@@ -84,21 +85,39 @@ class HotelBrowserMainViewModel: ObservableObject {
             let regionResponse = try JSONDecoder().decode(SearchResponse<NeighborhoodSearchResult>.self, from: data)
             
             DispatchQueue.main.async {
-                //adds it to the view model structs so it can be displayed in the UI
-                if let haveSearchResults = hotelResponse.searchResults {
-                    self.hotelSearchResults = haveSearchResults
-                    for result in self.hotelSearchResults {
-                        print("\(result.id), \(result.coordinates.latitude)")
+               //a nested do catch block is included on this dispatch queue to throw a custom error if the array is empty.
+                do {
+                    //adds it to the view model structs so it can be displayed in the UI
+                    if let haveSearchResults = hotelResponse.searchResults {
+                        self.hotelSearchResults = haveSearchResults
+                        for result in self.hotelSearchResults {
+                            print("\(result.id), \(result.coordinates.latitude)")
+                        }
                     }
+                    
+                    if let haveRegionResults = regionResponse.searchResults {
+                        self.regionSearchResults = haveRegionResults
+                    }
+                    
+                    //checks if there are search results in both models
+                    if self.regionSearchResults.isEmpty && self.hotelSearchResults.isEmpty{
+                        throw APIErrors.noSearchResults
+                    }
+                    
+                    //tells the view to view the search results
+                    self.searchStatus = .active
+                } //catches a noSearchResult error if it was thrown.
+                catch {
+                    //tells the view to display no search results to the user.
+                    self.searchStatus = .noResults
                 }
-                
-                if let haveRegionResults = regionResponse.searchResults {
-                    self.regionSearchResults = haveRegionResults
-                }
-                
-                //tells the view to view the search results
-                self.searchStatus = .active
             }
+            
+        }
+        catch(APIErrors.noSearchResults)
+        {
+            //tells the view to display no search results to the user.
+            searchStatus = .noResults
         }
         catch(APIErrors.invalidUrl) {
             //displays an sn error message that is explainable to the user

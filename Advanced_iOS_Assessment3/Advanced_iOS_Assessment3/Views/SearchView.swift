@@ -24,6 +24,8 @@ struct SearchView: View {
                         await hotelMain.loadRegions(query: searchText)
                         //clears the search field after submission.
                         searchText = ""
+                        //updates the error text if it was to occur
+                        updateText()
                     }
                     
                 }
@@ -31,13 +33,12 @@ struct SearchView: View {
                 .cornerRadius(10)
                 .padding()
             Group { //the group property is used to add more views based on different conditions.
-                
                 if hotelMain.searchStatus == .active {
                     List {
                         Section("Hotel Suggestions") {
                             ForEach(hotelMain.hotelSearchResults) { hotel in
                                 if hotel.type == "HOTEL" {
-                                    if let haveAddress = hotel.hotelAddress {
+                                    if hotel.hotelAddress != nil {
                                         Text(hotel.regionNames.fullName)
                                     }
                                 }
@@ -66,22 +67,27 @@ struct SearchView: View {
                     }.frame(maxHeight: .infinity)
                 }
             }.onAppear {
-                //adds text depnding on scenarios
-                switch(hotelMain.searchStatus) {
-                case .welcome:
-                    errorText = "Welcome to Hotel Browser"
-                case .noResults:
-                    errorText = "No Results Found"
-                case .offline:
-                    errorText = "You are currently offline."
-                case .unkown:
-                    errorText = "Something went wrong!"
-                default:
-                    errorText = ""
-                }
+                updateText()
             }
         }
     }
+    
+    func updateText() {
+        //adds text depnding on scenarios
+        switch(hotelMain.searchStatus) {
+        case .welcome:
+            errorText = "Welcome to Hotel Browser"
+        case .noResults:
+            errorText = "No Results Found"
+        case .offline:
+            errorText = "You are currently offline."
+        case .unkown:
+            errorText = "Something went wrong!"
+        default:
+            errorText = ""
+        }
+    }
+      
 }
 
 

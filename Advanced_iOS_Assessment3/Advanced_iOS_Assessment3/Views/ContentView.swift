@@ -65,7 +65,6 @@ struct ContentView: View {
     }*/
 }
 
-
 private let itemFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateStyle = .short

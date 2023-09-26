@@ -14,8 +14,6 @@ enum LocationTyoe: String, Decodable {
     case city = "CITY"
 }
 
-
-
 //this is uesed on the whole body of the JSON Response
 struct SearchResponse<T : SearchResult>: Hashable, Decodable {
     var query: String

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreImage
 import CoreData
 
 struct ContentView: View {
@@ -16,10 +17,20 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
+    @State var searchText: String = ""
 
     var body: some View {
+        
         TabView {
+            
             NavigationStack {
+                //this is for the search fields to search for a query including hotels and regions
+                HStack(spacing: 5) {
+                    Image(systemName: "magnifyingglass")
+                    TextField("Search", text: $searchText)
+                }.padding().background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .padding()
                 List {
                     Section("Hotel Suggestions") {
                         ForEach(hotelMain.hotelSearchResults) { hotel in
@@ -58,7 +69,7 @@ struct ContentView: View {
             RegionsView().tabItem {
                 Label("Regions", systemImage: "globe")
             }
-        }
+        }.padding()
         
     }
 

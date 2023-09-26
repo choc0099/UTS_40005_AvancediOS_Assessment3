@@ -230,7 +230,7 @@ struct PropertyImage : Codable {
     let typename : String?
     let alt : String?
     let fallbackImage : String?
-    let image : Image?
+    let image : HotelImage?
     let subjectId : Int?
 
     enum CodingKeys: String, CodingKey {
@@ -247,12 +247,12 @@ struct PropertyImage : Codable {
         typename = try values.decodeIfPresent(String.self, forKey: .typename)
         alt = try values.decodeIfPresent(String.self, forKey: .alt)
         fallbackImage = try values.decodeIfPresent(String.self, forKey: .fallbackImage)
-        image = try values.decodeIfPresent(Image.self, forKey: .image)
+        image = try values.decodeIfPresent(HotelImage.self, forKey: .image)
         subjectId = try values.decodeIfPresent(Int.self, forKey: .subjectId)
     }
 }
 
-struct Image : Codable {
+struct HotelImage : Codable {
     let typename : String?
     let description : String?
     let url : String?

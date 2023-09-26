@@ -41,8 +41,21 @@ class HotelBrowserMainViewModel: ObservableObject {
     
     //loads the metaData when you open the app using an initialiser
     init() {
-        Task {
-            await loadMetaData()
+        
+        //checks if metadata is already stored in userDefaults
+        if let metaDataStored = UserDefaultsManager.readMetadata() {
+            metaData = metaDataStored
+            print("retreiving metadata from user defaults")
+            print("Country Code \(metaDataStored.australia.countryCode)")
+            print("siteId \(metaDataStored.australia.siteId)")
+            print("eapId \(metaDataStored.australia.eapId)")
+        }
+        else {
+            Task {
+                print("fetching data from the API.")
+                await fetchMetaData()
+            }
+            
         }
         
     }
@@ -152,9 +165,9 @@ class HotelBrowserMainViewModel: ObservableObject {
         }
         
     }
-    
+    @MainActor
     //loads the metadata, this is used as a helpter function to initialise the metadata property.
-    func loadMetaData() async {
+    func fetchMetaData() async {
         //generates the URL
         var urlComp: URLComponents = URLComponents(string: apiUrl)!
         urlComp.path = endPoints["metaData"]!
@@ -170,6 +183,8 @@ class HotelBrowserMainViewModel: ObservableObject {
             DispatchQueue.main.async {
                 //adds it to the view
                 self.metaData = response
+                //saves it to userDefaults
+                UserDefaultsManager.setMetaData(metaData: response)
                 
                 //this is used to test if meta data is displayed
                 if let haveMetaData = self.metaData {
@@ -177,6 +192,7 @@ class HotelBrowserMainViewModel: ObservableObject {
                     print("siteId \(haveMetaData.australia.siteId)")
                     print("eapId \(haveMetaData.australia.eapId)")
                 }
+                
             }
            
         
@@ -190,8 +206,6 @@ class HotelBrowserMainViewModel: ObservableObject {
             print(error)
             print(error.localizedDescription)
         }
-      
-        
     }
     
     func initialiseSession(request: URLRequest) -> URLSessionDataTask {

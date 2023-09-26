@@ -12,4 +12,25 @@ class HotelPropertySearchViewModel: ObservableObject {
     @Published var childrens: [Children] = []
     @Published var checkInDate: Date = Date.now
     @Published var checkOutDate: Date = Date.now
+    //determines the numbers of rooms, children and adults
+    @Published var numbersOfRooms: Int = 0
+    @Published var numbersOfAdults: Int = 0
+    @Published var numbersOfChildren: Int = 0
+    
+    func incrementRooms() {
+        
+        self.numbersOfRooms += 1
+        rooms.append(Rooms(index: numbersOfRooms, adults: 0, children: []))
+        
+    }
+    
+    func decrementRooms() {
+        //retricts the range so it will not display negative number.
+        if(numbersOfRooms > 0)
+        {
+            
+            rooms.removeLast()
+            self.numbersOfRooms -= 1
+        }
+    }
 }

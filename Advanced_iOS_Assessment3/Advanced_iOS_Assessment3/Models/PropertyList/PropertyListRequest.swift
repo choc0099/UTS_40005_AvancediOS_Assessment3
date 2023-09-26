@@ -40,9 +40,19 @@ struct PriceRequest: Codable {
     }
 }
 
-struct Rooms: Encodable {
+struct Rooms: Identifiable, Encodable {
+    let id: UUID = UUID()
+    //this is a property to display the index number on the ui
+    let index: Int
     let adults: Int
+    
     let children: [Children]
+    
+    //this will not include the room id when encoding into a JSON format.
+    //The room id is needed to loop through a list of rooms in the views.
+    enum CodingKeys: String, CodingKey {
+        case adults, children
+    }
 }
 
 //this is used to filter the hotel results

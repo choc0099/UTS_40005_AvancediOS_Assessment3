@@ -18,49 +18,62 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<Item>
     @State var searchText: String = ""
+    @State var errorText: String = "" //displays a message to the user.
 
     var body: some View {
         
         TabView {
-            
             NavigationStack {
                 //this is for the search fields to search for a query including hotels and regions
                 HStack(spacing: 5) {
                     Image(systemName: "magnifyingglass")
-                    TextField("Search", text: $searchText)
+                    TextField("Search", text: $searchText).onSubmit {
+                        //sets the search status to loading mode
+                        //hotelMain.searchStatus = .loading
+                        Task {
+                            //loads the list of hotels using the api
+                           await hotelMain.loadRegions(query: searchText)
+                        }
+                      
+                    }
                 }.padding().background(Color(.systemGray6))
                     .cornerRadius(10)
                     .padding()
-                List {
-                    Section("Hotel Suggestions") {
-                        ForEach(hotelMain.hotelSearchResults) { hotel in
-                            if hotel.type == "HOTEL" {
-                                if let haveAddress = hotel.hotelAddress {
-                                    Text(hotel.regionNames.fullName)
+                Group { //the group property is used to add more views based on different conditions.
+                        
+                    //if hotelMain.searchStatus == .active {
+                        List {
+                            Section("Hotel Suggestions") {
+                                ForEach(hotelMain.hotelSearchResults) { hotel in
+                                    if hotel.type == "HOTEL" {
+                                        if let haveAddress = hotel.hotelAddress {
+                                            Text(hotel.regionNames.fullName)
+                                        }
+                                    }
                                 }
                             }
-                        }
-                    }
-                    Section("Regions and Neighbourhoods") {
-                        ForEach(hotelMain.regionSearchResults) {
-                            region in
-                            if region.type != "HOTEL" {
-                                Text(region.regionNames.primaryDisplayName)
+                            Section("Regions and Neighbourhoods") {
+                                ForEach(hotelMain.regionSearchResults) {
+                                    region in
+                                    if region.type != "HOTEL" {
+                                        Text(region.regionNames.primaryDisplayName)
+                                    }
+                                }
+                                
                             }
                         }
-                        
-                    }
-                }
-                .toolbar {
-                    Button {
-                        Task {
-                            //loads the list of hotels using the api
-                           await hotelMain.loadRegions()
+                    //}
+                    /*else {
+                        VStack(spacing: 10) {
+                            if hotelMain.searchStatus == .loading {
+                                ProgressView()
+                            }
+                            else {
+                                //displays messages to the user including error messages.
+                                Text("\(errorText)")
+                            }
                         }
-                        
-                    } label: {
-                        Text("Load List")
-                    }
+                    }*/
                 }
             }.tabItem {
                 Label("Home", systemImage: "house.fill")

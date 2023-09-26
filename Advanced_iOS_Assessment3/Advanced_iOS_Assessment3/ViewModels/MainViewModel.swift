@@ -7,37 +7,75 @@
 
 import Foundation
 
+enum APIErrors: Error {
+    case invalidUrl
+}
+//these are the statuses for the search view where it change the UI stuff based on scenarios such as loading and offline
+enum HotelStatus {
+    case active
+    case loading
+    case offline
+    case noResults
+    case welcome
+    case unkown
+}
+
 class HotelBrowserMainViewModel: ObservableObject {
     @Published var hotelSearchResults = [HotelSearchResult]()
     @Published var regionSearchResults = [NeighborhoodSearchResult]()
+    //@Published var searchStatus: HotelStatus = .welcome //this is used to display a welcome message when the app launches.
     //these are the headers to initialise the API request
     let headers = [
         "X-RapidAPI-Key": "fdc2564bbemshd3b062f571b3b8cp173b6ejsn78fc48e2f6b0",
         "X-RapidAPI-Host": "hotels4.p.rapidapi.com"
     ]
+    //this is a dictonary to store URL path EndPoints.
+    let endPoints = [
+        "search": "/locations/v3/search",
+        "listProperty": "/properties/v2/list"
+        //?q=Surry%20Hills&locale=en_AU&langid=3081&siteid=300000035"
+    ]
+    
+    let apiUrl = "https://hotels4.p.rapidapi.com"
 
 
     
     //this is a function the will return an URL Request
-    func hotelApi(_ path: String) -> URLRequest {
-        
-        let apiUrl = "https://hotels4.p.rapidapi.com"
-        
-        var url = URL(string: apiUrl + path)! as URL
-        
-        var request = URLRequest(url: url as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
-        //puts the header into the url request
-        request.allHTTPHeaderFields = headers
-        request.httpMethod = "GET"
-        return request
+    func hotelApi(urlStuffs urlComp: URLComponents) throws -> URLRequest {
+        if let validURL = urlComp.url {
+            var request = URLRequest(url: validURL as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+            //puts the header into the url request
+            request.allHTTPHeaderFields = headers
+            request.httpMethod = "GET"
+            return request
+        }
+        else {
+            throw APIErrors.invalidUrl
+        }
     }
     
     @MainActor
-    func loadRegions() async {
+    func loadRegions(query q: String) async {
         //gets the request with the location search
-        //i have hard coded the query strings for now.
-        var request = hotelApi("/locations/v3/search?q=Surry%20Hills&locale=en_AU&langid=3081&siteid=300000035")
+        // this is the URL Componemnets that forms a URL
+        var urlComp: URLComponents = URLComponents()
+        urlComp.host = headers["X-RapidAPI-Host"]!
+        urlComp.scheme = "https"
+        urlComp.path = endPoints["search"]!
+        urlComp.queryItems = [
+            URLQueryItem(name: "q", value: q),
+            URLQueryItem(name: "locale", value: "en_AU"),
+            URLQueryItem(name: "langid", value: "3081"),
+            URLQueryItem(name: "siteid", value: "300000035")
+        ]
+        
+        if let haveUrl = urlComp.url {
+            print(haveUrl)
+        }
+        
         do {
+            var request = try hotelApi(urlStuffs: urlComp)
+            
             //sends the url request
             let (data, _) = try await URLSession.shared.data(for: request)
             
@@ -57,13 +95,24 @@ class HotelBrowserMainViewModel: ObservableObject {
                 if let haveRegionResults = regionResponse.searchResults {
                     self.regionSearchResults = haveRegionResults
                 }
-                
-               
             }
         }
+        catch(APIErrors.invalidUrl) {
+            //displays an sn error message that is explainable to the user
+            //searchStatus = .unkown
+            print("Invalid URL")
+        }
+        //catches this error if it is offline
+        catch(URLError.notConnectedToInternet)
+        {
+            //searchStatus = .offline
+            print("You are offline!")
+        }
         catch {
+            //searchStatus = .unkown
             print("\(error.localizedDescription)")
             print(error)
+            print("Error: ", type(of: error))
         }
         
     }

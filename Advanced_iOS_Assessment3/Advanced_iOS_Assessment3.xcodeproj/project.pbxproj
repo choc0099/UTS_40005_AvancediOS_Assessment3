@@ -26,6 +26,8 @@
 		327A587F2AB8FB5200DB11E6 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327A587E2AB8FB5200DB11E6 /* City.swift */; };
 		32B4046F2AC1A9D9009B4F43 /* RegionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B4046E2AC1A9D9009B4F43 /* RegionsView.swift */; };
 		32C7C57D2AC2B22500D5B4AD /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C7C57C2AC2B22500D5B4AD /* SearchView.swift */; };
+		32C7C57F2AC2BCB400D5B4AD /* HotelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C7C57E2AC2BCB400D5B4AD /* HotelList.swift */; };
+		32C7C5812AC2BFC700D5B4AD /* MetaDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C7C5802AC2BFC700D5B4AD /* MetaDataResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		327A587E2AB8FB5200DB11E6 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		32B4046E2AC1A9D9009B4F43 /* RegionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsView.swift; sourceTree = "<group>"; };
 		32C7C57C2AC2B22500D5B4AD /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		32C7C57E2AC2BCB400D5B4AD /* HotelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelList.swift; sourceTree = "<group>"; };
+		32C7C5802AC2BFC700D5B4AD /* MetaDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaDataResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +180,7 @@
 				3256C5D52AB8501E00AC9470 /* ContentView.swift */,
 				32B4046E2AC1A9D9009B4F43 /* RegionsView.swift */,
 				32C7C57C2AC2B22500D5B4AD /* SearchView.swift */,
+				32C7C57E2AC2BCB400D5B4AD /* HotelList.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -185,6 +190,7 @@
 			children = (
 				320A7CC42AC17342008B252B /* PropertyList */,
 				327A587E2AB8FB5200DB11E6 /* City.swift */,
+				32C7C5802AC2BFC700D5B4AD /* MetaDataResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -328,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				320A00E92AC169E900B01392 /* PropertySearch.swift in Sources */,
+				32C7C5812AC2BFC700D5B4AD /* MetaDataResponse.swift in Sources */,
 				320A7CC82AC175D4008B252B /* PropertyItem.swift in Sources */,
 				327A587D2AB859EE00DB11E6 /* MainViewModel.swift in Sources */,
 				320A7CC62AC173B2008B252B /* PropertyPrices.swift in Sources */,
@@ -337,6 +344,7 @@
 				327A587F2AB8FB5200DB11E6 /* City.swift in Sources */,
 				32B4046F2AC1A9D9009B4F43 /* RegionsView.swift in Sources */,
 				3256C5E02AB8501F00AC9470 /* Advanced_iOS_Assessment3.xcdatamodeld in Sources */,
+				32C7C57F2AC2BCB400D5B4AD /* HotelList.swift in Sources */,
 				32C7C57D2AC2B22500D5B4AD /* SearchView.swift in Sources */,
 				3256C5D62AB8501E00AC9470 /* ContentView.swift in Sources */,
 				320A7CCE2AC19721008B252B /* PropertyListRequest.swift in Sources */,

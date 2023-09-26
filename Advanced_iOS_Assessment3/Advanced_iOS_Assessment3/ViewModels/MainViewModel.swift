@@ -23,7 +23,7 @@ enum HotelStatus {
 class HotelBrowserMainViewModel: ObservableObject {
     @Published var hotelSearchResults = [HotelSearchResult]()
     @Published var regionSearchResults = [NeighborhoodSearchResult]()
-    //@Published var searchStatus: HotelStatus = .welcome //this is used to display a welcome message when the app launches.
+    @Published var searchStatus: HotelStatus = .welcome //this is used to display a welcome message when the app launches.
     //these are the headers to initialise the API request
     let headers = [
         "X-RapidAPI-Key": "fdc2564bbemshd3b062f571b3b8cp173b6ejsn78fc48e2f6b0",
@@ -95,21 +95,24 @@ class HotelBrowserMainViewModel: ObservableObject {
                 if let haveRegionResults = regionResponse.searchResults {
                     self.regionSearchResults = haveRegionResults
                 }
+                
+                //tells the view to view the search results
+                self.searchStatus = .active
             }
         }
         catch(APIErrors.invalidUrl) {
             //displays an sn error message that is explainable to the user
-            //searchStatus = .unkown
+            searchStatus = .unkown
             print("Invalid URL")
         }
         //catches this error if it is offline
         catch(URLError.notConnectedToInternet)
         {
-            //searchStatus = .offline
+            searchStatus = .offline
             print("You are offline!")
         }
         catch {
-            //searchStatus = .unkown
+            searchStatus = .unkown
             print("\(error.localizedDescription)")
             print(error)
             print("Error: ", type(of: error))

@@ -29,10 +29,12 @@ struct ContentView: View {
                     Image(systemName: "magnifyingglass")
                     TextField("Search", text: $searchText).onSubmit {
                         //sets the search status to loading mode
-                        //hotelMain.searchStatus = .loading
+                        hotelMain.searchStatus = .loading
                         Task {
                             //loads the list of hotels using the api
                            await hotelMain.loadRegions(query: searchText)
+                            //clears the search field after submission.
+                            searchText = ""
                         }
                       
                     }
@@ -41,7 +43,7 @@ struct ContentView: View {
                     .padding()
                 Group { //the group property is used to add more views based on different conditions.
                         
-                    //if hotelMain.searchStatus == .active {
+                    if hotelMain.searchStatus == .active {
                         List {
                             Section("Hotel Suggestions") {
                                 ForEach(hotelMain.hotelSearchResults) { hotel in
@@ -62,8 +64,8 @@ struct ContentView: View {
                                 
                             }
                         }
-                    //}
-                    /*else {
+                    }
+                    else {
                         VStack(spacing: 10) {
                             if hotelMain.searchStatus == .loading {
                                 ProgressView()
@@ -72,8 +74,22 @@ struct ContentView: View {
                                 //displays messages to the user including error messages.
                                 Text("\(errorText)")
                             }
-                        }
-                    }*/
+                        }.frame(maxHeight: .infinity)
+                    }
+                }.onAppear {
+                    //adds text depnding on scenarios
+                    switch(hotelMain.searchStatus) {
+                    case .welcome:
+                        errorText = "Welcome to Hotel Browser"
+                    case .noResults:
+                        errorText = "No Results Found"
+                    case .offline:
+                        errorText = "You are currently offline."
+                    case .unkown:
+                        errorText = "Something went wrong!"
+                    default:
+                        errorText = ""
+                    }
                 }
             }.tabItem {
                 Label("Home", systemImage: "house.fill")

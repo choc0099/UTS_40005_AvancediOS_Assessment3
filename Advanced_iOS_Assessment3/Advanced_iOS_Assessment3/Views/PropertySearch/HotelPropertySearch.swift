@@ -32,7 +32,7 @@ struct HotelPropertySearch: View {
                     
                     Section("Room \(room.index)")
                     {
-                        Text("Test")
+                        RoomFieldView(roomSearchVM: roomSearchVM)
                     }
                     //counter += 1
                     //Stepper("Numbers of Adults: \(roomSearchVM.numbersOfAdults)", value: $roomSearchVM.numbersOfAdults)

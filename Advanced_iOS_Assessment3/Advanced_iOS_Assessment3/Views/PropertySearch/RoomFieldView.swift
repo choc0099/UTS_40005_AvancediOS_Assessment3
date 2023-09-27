@@ -10,10 +10,13 @@ import SwiftUI
 struct RoomFieldView: View {
     @ObservedObject var roomSearchVM: HotelPropertySearchViewModel
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+            Stepper("Numbers of adults", value: $roomSearchVM.numbersOfAdults)
+            Stepper("Numbers of children", value: $roomSearchVM.numbersOfChildren)
+        
     }
 }
 
 #Preview {
-    RoomFieldView()
+    RoomFieldView(roomSearchVM: HotelPropertySearchViewModel())
 }

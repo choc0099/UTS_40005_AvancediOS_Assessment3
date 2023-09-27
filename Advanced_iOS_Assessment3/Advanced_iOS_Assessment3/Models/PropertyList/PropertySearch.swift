@@ -10,6 +10,10 @@ import Foundation
 
 struct PropertyResponse: Codable {
     let data: PropertyData
+    
+    enum CodingKeys: String, CodingKey {
+        case data = "data"
+    }
 }
 
 

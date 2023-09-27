@@ -113,16 +113,14 @@ class HotelPropertySearchViewModel: ObservableObject {
         //destination object.
         let dest = Destination(regionId: gaiaId, coordinates: nil)
         //builds this response so it can be encoded to JSON.
-        let propertyQuery = PropertyListRequest(currency: "AU", eapid: metaDataAus.eapId, locale: metaDataAus.supportedLocales[0].languageCode!, siteId: metaDataAus.siteId, destination: dest, checkInDate: checkin, checkOutDate: checkout, rooms: rooms, resultsStartingIndex: 0, resultsSize: 100, sort: nil, filters: nil )
+        let propertyQuery = PropertyListRequest(currency: "AU", eapid: metaDataAus.eapId, locale: "en_AU", siteId: metaDataAus.siteId, destination: dest, checkInDate: checkin, checkOutDate: checkout, rooms: rooms, resultsStartingIndex: 0, resultsSize: 100, sort: nil, filters: nil )
         return propertyQuery
     }
     
     //it is a helper function that returns a URLRequestObject with the JSON stuffs.
     func handleRequest(metaData: MetaDataResponse, gaiaId: String) throws -> URLRequest {
         //generates the URL path.
-        var urlComp = URLComponents()
-        urlComp.scheme = "https"
-        urlComp.host = HotelAPIManager.apiUrl
+        var urlComp = URLComponents(string: HotelAPIManager.apiUrl)!
         urlComp.path = HotelAPIManager.endPoints["listProperty"]!
         var request = try HotelAPIManager.hotelApi(urlStuffs: urlComp)
         request.httpMethod = "POST"

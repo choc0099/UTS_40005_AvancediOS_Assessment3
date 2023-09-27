@@ -14,6 +14,7 @@
 		320A7CCC2AC1929C008B252B /* CheckInAndOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320A7CCB2AC1929C008B252B /* CheckInAndOut.swift */; };
 		320A7CCE2AC19721008B252B /* PropertyListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320A7CCD2AC19721008B252B /* PropertyListRequest.swift */; };
 		3254F0502AC4136D00E1A1BA /* HotelRoomsResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3254F04F2AC4136D00E1A1BA /* HotelRoomsResultsView.swift */; };
+		3254F0522AC44B7C00E1A1BA /* PropertyResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3254F0512AC44B7C00E1A1BA /* PropertyResultsView.swift */; };
 		3256C5D42AB8501E00AC9470 /* Advanced_iOS_Assessment3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3256C5D32AB8501E00AC9470 /* Advanced_iOS_Assessment3App.swift */; };
 		3256C5D62AB8501E00AC9470 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3256C5D52AB8501E00AC9470 /* ContentView.swift */; };
 		3256C5D82AB8501F00AC9470 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3256C5D72AB8501F00AC9470 /* Assets.xcassets */; };
@@ -62,6 +63,7 @@
 		320A7CCB2AC1929C008B252B /* CheckInAndOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInAndOut.swift; sourceTree = "<group>"; };
 		320A7CCD2AC19721008B252B /* PropertyListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListRequest.swift; sourceTree = "<group>"; };
 		3254F04F2AC4136D00E1A1BA /* HotelRoomsResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelRoomsResultsView.swift; sourceTree = "<group>"; };
+		3254F0512AC44B7C00E1A1BA /* PropertyResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyResultsView.swift; sourceTree = "<group>"; };
 		3256C5D02AB8501E00AC9470 /* Advanced_iOS_Assessment3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Advanced_iOS_Assessment3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3256C5D32AB8501E00AC9470 /* Advanced_iOS_Assessment3App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advanced_iOS_Assessment3App.swift; sourceTree = "<group>"; };
 		3256C5D52AB8501E00AC9470 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				32C7C5842AC2FED600D5B4AD /* HotelPropertySearchView.swift */,
 				32C7C58D2AC3A64F00D5B4AD /* RoomFieldView.swift */,
 				32C7C58F2AC3EBA800D5B4AD /* ChildrenFieldView.swift */,
+				3254F0512AC44B7C00E1A1BA /* PropertyResultsView.swift */,
 			);
 			path = PropertySearch;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				3256C5D62AB8501E00AC9470 /* ContentView.swift in Sources */,
 				320A7CCE2AC19721008B252B /* PropertyListRequest.swift in Sources */,
 				3254F0502AC4136D00E1A1BA /* HotelRoomsResultsView.swift in Sources */,
+				3254F0522AC44B7C00E1A1BA /* PropertyResultsView.swift in Sources */,
 				3256C5D42AB8501E00AC9470 /* Advanced_iOS_Assessment3App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

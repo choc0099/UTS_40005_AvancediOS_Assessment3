@@ -35,23 +35,30 @@ struct SearchView: View {
             Group { //the group property is used to add more views based on different conditions.
                 if hotelMain.searchStatus == .active {
                     List {
-                        Section("Hotel Suggestions") {
-                            ForEach(hotelMain.hotelSearchResults) { hotel in
-                                if hotel.type == "HOTEL" {
-                                    if hotel.hotelAddress != nil {
-                                        Text(hotel.regionNames.fullName)
-                                    }
-                                }
-                            }
-                        }
+                        
                         Section("Regions and Neighbourhoods") {
                             ForEach(hotelMain.regionSearchResults) {
                                 region in
                                 if region.type != "HOTEL" {
-                                    Text(region.regionNames.primaryDisplayName)
+                                    NavigationLink {
+                                        HotelPropertySearchView(region: region)
+                                    } label: {
+                                        Text("\(region.regionNames.fullName)")
+                                    }
+
                                 }
                             }
-                            
+                        }
+                        
+                        Section("Hotel Suggestions") {
+                            ForEach(hotelMain.hotelSearchResults) { hotel in
+                                if hotel.type == "HOTEL" {
+                                    if hotel.hotelAddress != nil {
+                                        
+                                        Text(hotel.regionNames.fullName)
+                                    }
+                                }
+                            }
                         }
                     }
                 }

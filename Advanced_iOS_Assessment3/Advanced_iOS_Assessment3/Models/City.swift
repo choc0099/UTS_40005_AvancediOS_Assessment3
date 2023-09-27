@@ -75,7 +75,7 @@ struct NeighborhoodSearchResult: SearchResult {
     let id: Int
     let type: String
     let regionNames: RegionNames
-    let gaiaId: Int?
+    let gaiaId: String?
     var coordinates: Coordinates
     let hierarchyInfo: HierarchyInfo?
     
@@ -89,12 +89,7 @@ struct NeighborhoodSearchResult: SearchResult {
         self.id = try Int(container.decode(String.self, forKey: .id))!
         self.type = try container.decode(String.self, forKey: .type)
         self.regionNames = try container.decode(RegionNames.self, forKey: .regionNames)
-        if let haveGId = try container.decodeIfPresent(String.self, forKey: .gaiaId) {
-            self.gaiaId = Int(haveGId)
-        }
-        else {
-            self.gaiaId = nil
-        }
+        self.gaiaId = try container.decodeIfPresent(String.self, forKey: .gaiaId)
         self.coordinates = try container.decode(Coordinates.self, forKey: .coordinates)
         self.hierarchyInfo = try container.decodeIfPresent(HierarchyInfo.self, forKey: .hierarchyInfo)
     }

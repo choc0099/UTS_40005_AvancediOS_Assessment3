@@ -21,7 +21,7 @@ class HotelPropertySearchViewModel: ObservableObject {
     @Published var numbersOfRooms: Int = 0
     @Published var numbersOfAdults: Int = 0
     @Published var numbersOfChildren: Int = 0
-    @Published var propertyResoults = [Properties]()
+    @Published var propertyResoults = [Property]()
     
     func incrementRooms() {
         self.numbersOfRooms += 1
@@ -118,7 +118,7 @@ class HotelPropertySearchViewModel: ObservableObject {
     }
     
     //it is a helper function that returns a URLRequestObject with the JSON stuffs.
-    func handleRequest(metaData: MetaDataResponse, gaidId: String) throws -> URLRequest {
+    func handleRequest(metaData: MetaDataResponse, gaiaId: String) throws -> URLRequest {
         //generates the URL path.
         var urlComp = URLComponents()
         urlComp.scheme = "https"
@@ -127,12 +127,31 @@ class HotelPropertySearchViewModel: ObservableObject {
         var request = try HotelAPIManager.hotelApi(urlStuffs: urlComp)
         request.httpMethod = "POST"
         //decodes the query object into JSON
-        request.httpBody = try JSONEncoder().encode(createPropertyObject(metaData: metaData, gaiaId: gaidId))
+        request.httpBody = try JSONEncoder().encode(createPropertyObject(metaData: metaData, gaiaId: gaiaId))
         return request
     }
     //this will send a POST request with JSON data to the server to get results to view hotels.
-    func fetchResults() async {
-        
+    func fetchResults(metaData: MetaDataResponse, gaiaId: String) async {
+        do {
+            //retrieves the modified request method that is used to post the JSON object.
+            let request = try handleRequest(metaData: metaData, gaiaId: gaiaId)
+            //processes the request
+            let (data, _) = try await URLSession.shared.data(for: request)
+            //decodes the property results from the JSON response.
+            let response = try JSONDecoder().decode(PropertyResponse.self, from: data)
+            DispatchQueue.main.async {
+                //allocates the response stuff to this VM so it can be dispalyed to the user.
+                self.propertyResoults = response.data.propertySearch.properties!
+                //tests via printing output if it works
+                for property in self.propertyResoults
+                {
+                    print("Name: \(property.name) ")
+                }
+            }
+            
+        } catch {
+            print(error)
+        }
     }
     
     

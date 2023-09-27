@@ -12,7 +12,7 @@ struct Price : Codable {
     let typename : String?
     let options : [Options]?
     let priceMessaging : String?
-    let lead : Lead?
+    let lead : Lead
     let strikeOut : String?
     let displayMessages : [DisplayMessages]?
     let strikeOutType : String?
@@ -35,7 +35,7 @@ struct Price : Codable {
         typename = try values.decodeIfPresent(String.self, forKey: .typename)
         options = try values.decodeIfPresent([Options].self, forKey: .options)
         priceMessaging = try values.decodeIfPresent(String.self, forKey: .priceMessaging)
-        lead = try values.decodeIfPresent(Lead.self, forKey: .lead)
+        lead = try values.decode(Lead.self, forKey: .lead)
         strikeOut = try values.decodeIfPresent(String.self, forKey: .strikeOut)
         displayMessages = try values.decodeIfPresent([DisplayMessages].self, forKey: .displayMessages)
         strikeOutType = try values.decodeIfPresent(String.self, forKey: .strikeOutType)
@@ -104,7 +104,7 @@ struct Lead: Codable {
     let typename : String?
     let amount : Double?
     let currencyInfo : CurrencyInfo?
-    let formatted : String?
+    let formatted : String
 
     enum CodingKeys: String, CodingKey {
         case typename = "__typename"
@@ -118,7 +118,7 @@ struct Lead: Codable {
         typename = try values.decodeIfPresent(String.self, forKey: .typename)
         amount = try values.decodeIfPresent(Double.self, forKey: .amount)
         currencyInfo = try values.decodeIfPresent(CurrencyInfo.self, forKey: .currencyInfo)
-        formatted = try values.decodeIfPresent(String.self, forKey: .formatted)
+        formatted = try values.decode(String.self, forKey: .formatted)
     }
 }
 

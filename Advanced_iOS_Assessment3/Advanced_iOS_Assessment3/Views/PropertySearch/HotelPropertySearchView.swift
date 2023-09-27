@@ -13,7 +13,7 @@ struct HotelPropertySearchView: View {
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
     @StateObject var roomSearchVM = HotelPropertySearchViewModel()
     @State var region: NeighborhoodSearchResult?
-    
+    @State var navActive: Bool = false
     var body: some View {
         NavigationStack {
             Form {
@@ -34,19 +34,36 @@ struct HotelPropertySearchView: View {
                 ForEach(roomSearchVM.rooms) {
                     //allows the user to select numbers of rooms
                     room in
-                    NavigationLink(value: room) {
+                    NavigationLink(destination: RoomFieldView(roomSearchVM: roomSearchVM, currentRoomId: room.id)) {
                         Text("Room \(room.index)")
                     }
                 }
-            }.navigationDestination(for: Room.self) {
-                room in
-                RoomFieldView(roomSearchVM: roomSearchVM, currentRoomId: room.id)
+            }.toolbar {
+                Button {
+                    if let haveMetaData = hotelMain.metaData {
+                        if let haveRegion = region {
+                            Task {
+                               //loads the response to the VM
+                                await roomSearchVM.fetchResults(metaData: haveMetaData, gaiaId: haveRegion.gaiaId!)
+                                navActive = true
+                            }
+                        }
+                        else {
+                            print("No region")
+                        }
+                    }
+                    else {
+                        print("No metaData")
+                    }
+                } label: {
+                    Text("Continue")
+                }
+            }.navigationDestination(isPresented: $navActive) {
+                PropertyResultsView(roomSearchVM: roomSearchVM)
             }
         
         }.navigationTitle("Search Property")
     }
-    
-    //a function to initialse rooms array.
 }
 
 #Preview {

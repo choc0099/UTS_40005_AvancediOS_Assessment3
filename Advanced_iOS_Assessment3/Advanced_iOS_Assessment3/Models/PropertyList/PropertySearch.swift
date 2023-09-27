@@ -31,7 +31,7 @@ struct PropertySearch: Codable {
     let typename: String?
     let filterMetadata: FilterMetadata?
     //let sortAndFilter: UniversalSortAndFilter?
-    let properties: [Properties]?
+    let properties: [Property]?
     let propertySearchListings: [PropertySearchListings]?
     let summary: Summary?
     let searchCriteria: SearchCriteria?
@@ -57,7 +57,7 @@ struct PropertySearch: Codable {
         typename = try values.decodeIfPresent(String.self, forKey: .typename)
         filterMetadata = try values.decodeIfPresent(FilterMetadata.self, forKey: .filterMetadata)
         //universalSortAndFilter = try values.decodeIfPresent(UniversalSortAndFilter.self, forKey: .universalSortAndFilter)
-        properties = try values.decodeIfPresent([Properties].self, forKey: .properties)
+        properties = try values.decodeIfPresent([Property].self, forKey: .properties)
         propertySearchListings = try values.decodeIfPresent([PropertySearchListings].self, forKey: .propertySearchListings)
         summary = try values.decodeIfPresent(Summary.self, forKey: .summary)
         searchCriteria = try values.decodeIfPresent(SearchCriteria.self, forKey: .searchCriteria)
@@ -140,11 +140,11 @@ struct Amenities : Codable {
 }
 
 
-struct Properties: Identifiable, Codable {
+struct Property: Identifiable, Codable {
     let typename : String?
     let id: Int
     let featuredMessages : [String]?
-    let name: String?
+    let name: String
     let availability: Availability?
     let propertyImage: PropertyImage?
     let destinationInfo: DestinationInfo?
@@ -155,7 +155,7 @@ struct Properties: Identifiable, Codable {
     //let offerBadge : OfferBadge?
     //let offerSummary : OfferSummary?
     let pinnedDetails : String?
-    let price : Price?
+    let price : Price
     let priceAfterLoyaltyPointsApplied : PriceAfterLoyaltyPointsApplied?
     let propertyFees : [String]?
     let reviews : Reviews?
@@ -199,7 +199,7 @@ struct Properties: Identifiable, Codable {
         typename = try values.decodeIfPresent(String.self, forKey: .typename)
         id = try Int(values.decode(String.self, forKey: .id))!
         featuredMessages = try values.decodeIfPresent([String].self, forKey: .featuredMessages)
-        name = try values.decodeIfPresent(String.self, forKey: .name)
+        name = try values.decode(String.self, forKey: .name)
         availability = try values.decodeIfPresent(Availability.self, forKey: .availability)
         propertyImage = try values.decodeIfPresent(PropertyImage.self, forKey: .propertyImage)
         destinationInfo = try values.decodeIfPresent(DestinationInfo.self, forKey: .destinationInfo)
@@ -210,7 +210,7 @@ struct Properties: Identifiable, Codable {
         //offerBadge = try values.decodeIfPresent(OfferBadge.self, forKey: .offerBadge)
         //offerSummary = try values.decodeIfPresent(OfferSummary.self, forKey: .offerSummary)
         pinnedDetails = try values.decodeIfPresent(String.self, forKey: .pinnedDetails)
-        price = try values.decodeIfPresent(Price.self, forKey: .price)
+        price = try values.decode(Price.self, forKey: .price)
         priceAfterLoyaltyPointsApplied = try values.decodeIfPresent(PriceAfterLoyaltyPointsApplied.self, forKey: .priceAfterLoyaltyPointsApplied)
         propertyFees = try values.decodeIfPresent([String].self, forKey: .propertyFees)
         reviews = try values.decodeIfPresent(Reviews.self, forKey: .reviews)

@@ -9,14 +9,25 @@ import SwiftUI
 
 struct ChildrenFieldView: View {
     @ObservedObject var roomSearchVM: HotelPropertySearchViewModel
-    @State var currentChild: Children
+    @State var currentRoomId: UUID
+    @State var currentChildId: UUID
     @State var ageInput: Int = 0;
     
     var body: some View {
-        Stepper("Age: \(ageInput)", value: $ageInput)
+        Stepper("Age: \(ageInput)", value: $ageInput).onChange(of: ageInput, perform: { childAge in
+            //updates it from the model side
+            roomSearchVM.setChildrenAge(age: childAge, roomId: currentRoomId, childId: currentChildId)
+        }).onAppear(perform: {
+            
+            ageInput = try! roomSearchVM.findChildrenById(roomId: currentRoomId, childrenId: currentChildId).age
+        })
     }
 }
 
-#Preview {
-    ChildrenFieldView(roomSearchVM: HotelPropertySearchViewModel(), currentChild: Children(index: 0, age: 0))
+
+struct ChildrenFieldView_Previews: PreviewProvider {
+    static var previews: some View {
+        let room: Room = Room(index: 0, adults: 1, children: [Children(index: 0, age: 1)])
+        ChildrenFieldView(roomSearchVM: HotelPropertySearchViewModel(), currentRoomId: room.id, currentChildId: room.children[0].id )
+    }
 }

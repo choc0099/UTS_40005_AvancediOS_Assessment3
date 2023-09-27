@@ -38,7 +38,7 @@ struct HotelPropertySearchView: View {
                 }
             }.navigationDestination(for: Room.self) {
                 room in
-                RoomFieldView(roomSearchVM: roomSearchVM, currentRoom: room)
+                RoomFieldView(roomSearchVM: roomSearchVM, currentRoomId: room.id)
             }
         
         }.navigationTitle("Search Property")

@@ -9,14 +9,38 @@ import SwiftUI
 
 struct RoomFieldView: View {
     @ObservedObject var roomSearchVM: HotelPropertySearchViewModel
+    @State var currentRoom: Room
     var body: some View {
-        
-            Stepper("Numbers of adults", value: $roomSearchVM.numbersOfAdults)
-            Stepper("Numbers of children", value: $roomSearchVM.numbersOfChildren)
-        
+        Group {
+            //VStack {
+                Stepper("Numbers of adults \(currentRoom.adults) ", value: $currentRoom.adults)
+                Stepper("Numbers of Children \(currentRoom.children.count)") {
+                roomSearchVM.incrementChildren(currentRoom: &currentRoom)
+                } onDecrement: {
+                    roomSearchVM.decrmentChildren(currentRoom: &currentRoom)
+                }
+                    
+                    
+            Section {
+                ForEach(currentRoom.children)
+                {
+                    child in
+                    ChildrenFieldView(roomSearchVM: roomSearchVM, currentChild: child)
+                }
+            } header: {
+                Text("Children")
+            }
+                
+                
+            //}
+            
+        }
     }
 }
 
-#Preview {
-    RoomFieldView(roomSearchVM: HotelPropertySearchViewModel())
+struct RoomFieldView_Previews: PreviewProvider {
+    static var previews: some View {
+        let room: Room = Room(index: 0, adults: 1, children: [Children(index: 0, age: 1)])
+        RoomFieldView(roomSearchVM: HotelPropertySearchViewModel(), currentRoom: room)
+    }
 }

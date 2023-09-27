@@ -14,15 +14,25 @@ struct PropertyListRequest: Encodable {
     let destination : Destination
     let checkInDate : CheckInDate
     let checkOutDate : CheckOutDate
-    let rooms : [Rooms]
+    let rooms : [Room]
     let resultsStartingIndex : Int?
     let resultsSize: Int?
     let sort: String?
     let filters: Filters?
 }
 
-struct Children: Encodable {
-    let age: Int
+struct Children: Identifiable, Encodable {
+    let id: UUID = UUID()
+    let index: Int
+    var age: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case age
+    }
+    
+    func getAge() -> Int {
+        return self.age
+    }
 }
 
 struct Destination: Encodable {
@@ -40,13 +50,13 @@ struct PriceRequest: Codable {
     }
 }
 
-struct Rooms: Identifiable, Encodable {
+struct Room: Identifiable, Encodable {
     let id: UUID = UUID()
     //this is a property to display the index number on the ui
     let index: Int
-    let adults: Int
+    var adults: Int
     
-    let children: [Children]
+    var children: [Children]
     
     //this will not include the room id when encoding into a JSON format.
     //The room id is needed to loop through a list of rooms in the views.

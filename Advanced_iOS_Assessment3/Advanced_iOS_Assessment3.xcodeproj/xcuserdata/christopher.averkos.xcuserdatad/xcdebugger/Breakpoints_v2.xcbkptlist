@@ -16,8 +16,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "138"
             endingLineNumber = "138"
-            landmarkName = "HotelBrowserMainViewModel"
-            landmarkType = "3">
+            landmarkName = "fetchMetaData()"
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "AF294CB4-08F2-4D20-B4C1-A4C427B88A46 - d2753fd297f55b7a"

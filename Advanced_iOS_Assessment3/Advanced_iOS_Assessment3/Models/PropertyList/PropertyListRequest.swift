@@ -6,7 +6,7 @@
 //
 //this file containts objects that is used to encode into a JSON file for a POST request to search for hotels.
 import Foundation
-struct PropertyListRequest: Encodable {
+struct PropertyListRequest: Encodable, Hashable{
     let currency: String
     let eapid: Int
     let locale : String
@@ -21,7 +21,7 @@ struct PropertyListRequest: Encodable {
     let filters: Filters?
 }
 
-struct Children: Identifiable, Encodable {
+struct Children: Identifiable, Hashable, Encodable {
     let id: UUID = UUID()
     let index: Int
     var age: Int
@@ -35,12 +35,12 @@ struct Children: Identifiable, Encodable {
     }
 }
 
-struct Destination: Encodable {
+struct Destination: Hashable, Encodable {
     let regionId: String
     let coordinates: Coordinates
 }
 
-struct PriceRequest: Codable {
+struct PriceRequest: Hashable, Codable {
     let maximunPrice: Int
     let minimunPrice: Int
 
@@ -50,7 +50,7 @@ struct PriceRequest: Codable {
     }
 }
 
-struct Room: Identifiable, Encodable {
+struct Room: Identifiable, Hashable, Encodable {
     let id: UUID = UUID()
     //this is a property to display the index number on the ui
     let index: Int
@@ -66,10 +66,9 @@ struct Room: Identifiable, Encodable {
 }
 
 //this is used to filter the hotel results
-struct Filters: Encodable {
+struct Filters: Encodable, Hashable {
     let price: PriceRequest
     
-
     enum CodingKeys: String, CodingKey {
         case price = "price"
     }

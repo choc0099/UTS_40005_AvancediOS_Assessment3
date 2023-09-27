@@ -12,28 +12,24 @@ struct RoomFieldView: View {
     @State var currentRoom: Room
     var body: some View {
         Group {
-            //VStack {
+            Form {
                 Stepper("Numbers of adults \(currentRoom.adults) ", value: $currentRoom.adults)
                 Stepper("Numbers of Children \(currentRoom.children.count)") {
-                roomSearchVM.incrementChildren(currentRoom: &currentRoom)
+                    roomSearchVM.incrementChildren(currentRoom: &currentRoom)
                 } onDecrement: {
                     roomSearchVM.decrmentChildren(currentRoom: &currentRoom)
                 }
-                    
-                    
-            Section {
-                ForEach(currentRoom.children)
-                {
-                    child in
-                    ChildrenFieldView(roomSearchVM: roomSearchVM, currentChild: child)
+                
+                
+                Section {
+                    ForEach(currentRoom.children) {
+                        child in
+                        ChildrenFieldView(roomSearchVM: roomSearchVM, currentChild: child)
+                    }
+                } header: {
+                    Text("Children")
                 }
-            } header: {
-                Text("Children")
-            }
-                
-                
-            //}
-            
+            }.navigationTitle("Room \(currentRoom.index)")
         }
     }
 }

@@ -24,7 +24,7 @@ struct SearchCriteria : Codable {
     }
 }
 
-struct ResolvedDateRange : Codable {
+struct ResolvedDateRange: Hashable, Codable {
     let typename : String
     let checkInDate : CheckInDate
     let checkOutDate : CheckOutDate
@@ -36,7 +36,7 @@ struct ResolvedDateRange : Codable {
     }
 }
 
-struct CheckInDate : Codable {
+struct CheckInDate:Hashable, Codable {
     let typename : String?
     let day : Int
     let month : Int
@@ -53,7 +53,7 @@ struct CheckInDate : Codable {
 }
 
 
-struct CheckOutDate : Codable {
+struct CheckOutDate:Hashable, Codable {
     let typename : String?
     let day : Int
     let month : Int

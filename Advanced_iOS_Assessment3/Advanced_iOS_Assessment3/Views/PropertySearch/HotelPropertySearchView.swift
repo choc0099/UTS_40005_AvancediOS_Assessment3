@@ -32,16 +32,13 @@ struct HotelPropertySearchView: View {
                 ForEach(roomSearchVM.rooms) {
                     //allows the user to select numbers of rooms
                     room in
-                    
-                    Section("Room \(room.index)")
-                    {
-                        RoomFieldView(roomSearchVM: roomSearchVM, currentRoom: room)
+                    NavigationLink(value: room) {
+                        Text("Room \(room.index)")
                     }
-                    //Stepper("Numbers of Adults: \(roomSearchVM.numbersOfAdults)", value: $roomSearchVM.numbersOfAdults)
-                    /*Section("Children") {
-                        Stepper("Numbers of Children: \(roomSearchVM.numbersOfChildren)", value: $roomSearchVM.numbersOfChildren)
-                    }*/
-                }                
+                }
+            }.navigationDestination(for: Room.self) {
+                room in
+                RoomFieldView(roomSearchVM: roomSearchVM, currentRoom: room)
             }
         
         }.navigationTitle("Search Property")

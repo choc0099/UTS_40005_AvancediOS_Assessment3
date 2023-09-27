@@ -27,6 +27,9 @@ struct ContentView: View {
             RegionsView().tabItem {
                 Label("Settings", systemImage: "globe")
             }
+            HotelPropertySearchView().tabItem {
+                Label("text", systemImage: "")
+            }
         }
     }
         

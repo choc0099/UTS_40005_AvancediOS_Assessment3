@@ -30,6 +30,9 @@ struct ContentView: View {
             HotelPropertySearchView().tabItem {
                 Label("text", systemImage: "")
             }
+        }.onAppear {
+            //loads the hotel metaData
+            hotelMain.initialiseMetaData()
         }
     }
         

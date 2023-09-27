@@ -25,9 +25,10 @@ class HotelBrowserMainViewModel: ObservableObject {
     //this is the property to store hotel metadata.
     @Published var metaData: MetaDataResponse?
     
-    //loads the metaData when you open the app using an initialiser
-    init() {
-        
+    
+    //initialises the hotel metaData
+    //will not be using it on the init but to call it from the view
+    func initialiseMetaData() {
         //checks if metadata is already stored in userDefaults
         if let metaDataStored = UserDefaultsManager.readMetadata() {
             metaData = metaDataStored
@@ -43,7 +44,6 @@ class HotelBrowserMainViewModel: ObservableObject {
             }
             
         }
-        
     }
     
     @MainActor

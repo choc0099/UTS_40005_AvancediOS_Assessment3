@@ -68,6 +68,14 @@ class HotelPropertySearchViewModel: ObservableObject {
         }
     }
     
+    func setAdults(roomId: UUID, numberOfAdults: Int) {
+        //gets the index that matches the id of the room
+        if let index = self.rooms.firstIndex(where: {$0.id == roomId}) {
+            //sets the numbers of adults onto the vm.
+            self.rooms[index].adults = numberOfAdults
+        }
+    }
+    
     //this will get that specific room based on the id
     func findRoomById(roomId: UUID) throws ->  Room {
         if let haveRoom = self.rooms.first(where: {$0.id == roomId})
@@ -78,7 +86,7 @@ class HotelPropertySearchViewModel: ObservableObject {
             throw QueryError.roomNotFound
         }
     }
-    
+    //this returns the children object based on their id.
     func findChildrenById(roomId: UUID, childrenId: UUID) throws -> Children {
         if let roomIndex = self.rooms.firstIndex(where: {$0.id == roomId}) {
             if let index = self.rooms[roomIndex].children.firstIndex(where: {$0.id == childrenId})

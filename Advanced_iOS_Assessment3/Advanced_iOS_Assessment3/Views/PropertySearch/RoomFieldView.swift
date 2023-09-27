@@ -11,10 +11,16 @@ struct RoomFieldView: View {
     @ObservedObject var roomSearchVM: HotelPropertySearchViewModel
     @State var currentRoomId: UUID //this will be passed based on a room id to reference to the object
     @State var currentRoom: Room = Room(index: 0, adults: 0, children: [])
+    @State var numberOfAdults: Int = 0
     var body: some View {
         Group {
             Form {
-                Stepper("Numbers of adults \(currentRoom.adults) ", value: $currentRoom.adults)
+                Stepper("Numbers of adults \(numberOfAdults) ", value: $numberOfAdults).onChange(of: numberOfAdults, perform: {
+                    adults in
+                    //updates the value on the VM side when it is incremented or decremented.
+                    roomSearchVM.setAdults(roomId: currentRoomId, numberOfAdults: adults)
+                    
+                })
                 Stepper("Numbers of Children \(currentRoom.children.count)") {
                     roomSearchVM.incrementChildren(currentRoomId: currentRoomId)
                     updateRoomValues()
@@ -41,6 +47,7 @@ struct RoomFieldView: View {
     func updateRoomValues() {
         //retrieve room object based on room id so it can be dyanmically be updated without the need of binding.
         currentRoom = try! roomSearchVM.findRoomById(roomId: currentRoomId)
+        numberOfAdults = currentRoom.adults
     }
 }
 

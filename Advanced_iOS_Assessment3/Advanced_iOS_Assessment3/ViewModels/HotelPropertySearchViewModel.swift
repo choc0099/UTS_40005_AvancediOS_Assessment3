@@ -91,4 +91,24 @@ class HotelPropertySearchViewModel: ObservableObject {
             throw QueryError.roomNotFound
         }
     }
+    
+    func createPropertyObject(metaData: MetaDataResponse, gaiaId: String)  -> PropertyListRequest {
+        let metaDataAus = metaData.australia
+        
+        let checkOutDateComp = retrieveDateComp(date: checkOutDate)
+        let checkInDateComp = retrieveDateComp(date: checkInDate)
+        //creates the checkout object
+        let checkin = CheckInDate(typename: nil, day: checkInDateComp.day!, month: checkInDateComp.month!, year: checkInDateComp.year!)
+        let checkout = CheckOutDate(typename: nil, day: checkOutDateComp.day!, month: checkOutDateComp.month!, year: checkOutDateComp.year!)
+        let dest = Destination(regionId: gaiaId, coordinates: nil)
+        let propertyQuery = PropertyListRequest(currency: "AU", eapid: metaDataAus.eapId, locale: metaDataAus.supportedLocales[0].languageCode!, siteId: metaDataAus.siteId, destination: dest, checkInDate: checkin, checkOutDate: checkout, rooms: rooms, resultsStartingIndex: 0, resultsSize: 100, sort: nil, filters: nil )
+        return propertyQuery
+    }
+    
+    
+    
+    func retrieveDateComp(date: Date) -> DateComponents {
+        let calendar = Calendar.current
+        return calendar.dateComponents([.day, .month, .year], from: date)
+    }
 }

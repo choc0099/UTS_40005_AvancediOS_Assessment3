@@ -18,7 +18,7 @@ struct ChildrenFieldView: View {
             //updates it from the model side
             roomSearchVM.setChildrenAge(age: childAge, roomId: currentRoomId, childId: currentChildId)
         }).onAppear(perform: {
-            
+            //this will display the child's age onto the view that has been set previously from the VM
             ageInput = try! roomSearchVM.findChildrenById(roomId: currentRoomId, childrenId: currentChildId).age
         })
     }

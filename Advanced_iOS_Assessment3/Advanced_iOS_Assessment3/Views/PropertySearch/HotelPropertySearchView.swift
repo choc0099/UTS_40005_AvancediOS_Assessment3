@@ -9,6 +9,8 @@ import SwiftUI
 
 //this is a struct that will be used to search for rooms to book with multiple criteria.
 struct HotelPropertySearchView: View {
+    //this is used to retrieve metadata
+    @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
     @StateObject var roomSearchVM = HotelPropertySearchViewModel()
     @State var region: NeighborhoodSearchResult?
     

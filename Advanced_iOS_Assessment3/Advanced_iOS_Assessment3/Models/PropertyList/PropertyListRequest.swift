@@ -37,7 +37,7 @@ struct Children: Identifiable, Hashable, Encodable {
 
 struct Destination: Hashable, Encodable {
     let regionId: String
-    let coordinates: Coordinates
+    let coordinates: Coordinates?
 }
 
 struct PriceRequest: Hashable, Codable {

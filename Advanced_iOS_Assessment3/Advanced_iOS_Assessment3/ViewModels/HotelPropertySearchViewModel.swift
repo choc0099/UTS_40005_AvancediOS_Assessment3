@@ -21,6 +21,7 @@ class HotelPropertySearchViewModel: ObservableObject {
     @Published var numbersOfRooms: Int = 0
     @Published var numbersOfAdults: Int = 0
     @Published var numbersOfChildren: Int = 0
+    @Published var propertyResoults = [Properties]()
     
     func incrementRooms() {
         self.numbersOfRooms += 1
@@ -93,18 +94,38 @@ class HotelPropertySearchViewModel: ObservableObject {
     }
     
     func createPropertyObject(metaData: MetaDataResponse, gaiaId: String)  -> PropertyListRequest {
+        //retreives metaData from the mainVM
         let metaDataAus = metaData.australia
-        
+        //these are date components to convert the date structure to integers as it is used on the JSON structure.
         let checkOutDateComp = retrieveDateComp(date: checkOutDate)
         let checkInDateComp = retrieveDateComp(date: checkInDate)
-        //creates the checkout object
+        //creates the checkout and check in dates object
         let checkin = CheckInDate(typename: nil, day: checkInDateComp.day!, month: checkInDateComp.month!, year: checkInDateComp.year!)
         let checkout = CheckOutDate(typename: nil, day: checkOutDateComp.day!, month: checkOutDateComp.month!, year: checkOutDateComp.year!)
+        //destination object.
         let dest = Destination(regionId: gaiaId, coordinates: nil)
+        //builds this response so it can be encoded to JSON.
         let propertyQuery = PropertyListRequest(currency: "AU", eapid: metaDataAus.eapId, locale: metaDataAus.supportedLocales[0].languageCode!, siteId: metaDataAus.siteId, destination: dest, checkInDate: checkin, checkOutDate: checkout, rooms: rooms, resultsStartingIndex: 0, resultsSize: 100, sort: nil, filters: nil )
         return propertyQuery
     }
     
+    //it is a helper function that returns a URLRequestObject with the JSON stuffs.
+    func handleRequest(metaData: MetaDataResponse, gaidId: String) throws -> URLRequest {
+        //generates the URL path.
+        var urlComp = URLComponents()
+        urlComp.scheme = "https"
+        urlComp.host = HotelAPIManager.apiUrl
+        urlComp.path = HotelAPIManager.endPoints["listProperty"]!
+        var request = try HotelAPIManager.hotelApi(urlStuffs: urlComp)
+        request.httpMethod = "POST"
+        //decodes the query object into JSON
+        request.httpBody = try JSONEncoder().encode(createPropertyObject(metaData: metaData, gaiaId: gaidId))
+        return request
+    }
+    //this will send a POST request with JSON data to the server to get results to view hotels.
+    func fetchResults() async {
+        
+    }
     
     
     func retrieveDateComp(date: Date) -> DateComponents {

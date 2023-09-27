@@ -14,7 +14,7 @@ struct PropertyResponse: Codable {
 
 
 struct PropertyData : Codable {
-    let propertySearch : PropertySearch?
+    let propertySearch : PropertySearch
 
     enum CodingKeys: String, CodingKey {
         case propertySearch = "propertySearch"
@@ -22,7 +22,7 @@ struct PropertyData : Codable {
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        propertySearch = try values.decodeIfPresent(PropertySearch.self, forKey: .propertySearch)
+        propertySearch = try values.decode(PropertySearch.self, forKey: .propertySearch)
     }
 
 }

@@ -10,6 +10,7 @@ import Foundation
 //this is a struct that is used to pinpoint hotels on the map with some details.
 class HotelAnnotation: NSObject, Identifiable, MKAnnotation {
     let id: Int
+    let property: Property
     var coordinate: CLLocationCoordinate2D
     let name: String
     let formattedPrice: String
@@ -20,5 +21,6 @@ class HotelAnnotation: NSObject, Identifiable, MKAnnotation {
         self.coordinate = CLLocationCoordinate2D(latitude: proptertyMapMarkers.latitude, longitude: proptertyMapMarkers.longitude)
         self.name = property.name
         self.formattedPrice = property.price.lead.formatted
+        self.property = property
     }
 }

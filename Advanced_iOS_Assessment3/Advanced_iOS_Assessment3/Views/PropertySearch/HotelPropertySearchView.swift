@@ -85,7 +85,7 @@ struct HotelPropertySearchView: View {
                     Text("Continue")
                 }
             }.navigationDestination(isPresented: $navActive) {
-                PropertyResultsView(roomSearchVM: roomSearchVM, region: region)
+                PropertyResultsProcessingView(roomSearchVM: roomSearchVM, region: region)
             }.alert(isPresented: $showAlert) {
                 Alert(
                     title: Text(alertTitle),

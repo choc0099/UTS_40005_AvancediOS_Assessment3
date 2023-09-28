@@ -20,9 +20,8 @@ struct HotelPropertyResultsMapView: View {
                 MapAnnotation(coordinate: marker.coordinate) {
                     VStack {
                         Image(systemName: "building.fill")
-                        Text(marker.name)
+                        Text(marker.name).font(.caption).background(.background).foregroundColor(.primary).bold().padding(.horizontal, 2)
                     }
-                  
                 }
             }.onAppear {
                 //loads the annotations

@@ -17,6 +17,7 @@ import MapKit
 
 //this is an obserable class to handle hotel rooms search queries.
 class HotelPropertySearchViewModel: ObservableObject {
+    @Published var propertyResultStatus: HotelStatus = .loading
     @Published var rooms: [Room] = []
     @Published var childrens: [Children] = []
     @Published var checkInDate: Date = Date.now
@@ -148,11 +149,15 @@ class HotelPropertySearchViewModel: ObservableObject {
                 //tests via printing output if it works
                 for property in self.propertyResoults
                 {
-                    print("Name: \(property.name) ")
+                    print("Id: \(property.id) Name: \(property.name) ")
                 }
+                //sets the view to display results to the user after it is loaded
+                self.propertyResultStatus = .active
             }
             
+            
         } catch {
+            propertyResultStatus = .unkown
             print(error.localizedDescription)
             print(error)
         }

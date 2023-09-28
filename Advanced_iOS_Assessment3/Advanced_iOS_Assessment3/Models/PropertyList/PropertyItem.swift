@@ -10,7 +10,7 @@ import Foundation
 struct Availability:Hashable, Codable {
     let typeName: String
     let isAvailable: Bool
-    let minRoomsLeft: String
+    let minRoomsLeft: Int?
 
     enum CodingKeys: String, CodingKey {
         case typeName = "__typename"

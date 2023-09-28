@@ -33,7 +33,7 @@ class HotelBrowserMainViewModel: ObservableObject {
         if let metaDataStored = UserDefaultsManager.readMetadata() {
             metaData = metaDataStored
             print("retreiving metadata from user defaults")
-            print("Country Code \(metaDataStored.australia.countryCode)")
+            print("Country Code \(metaDataStored.australia.supportedLocales[0].hotelSiteLocaleIdentifier)")
             print("siteId \(metaDataStored.australia.siteId)")
             print("eapId \(metaDataStored.australia.eapId)")
         }

@@ -14,6 +14,9 @@ struct PropertyResultsView: View {
             ForEach(roomSearchVM.propertyResoults) {
                 property in
                 Text("\(property.name) ")
+                if let havePrice = property.price?.lead {
+                    Text("\(havePrice.formatted)")
+                }
             }
         }
     }

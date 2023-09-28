@@ -8,7 +8,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "3BFBEAF8-DBE5-42C8-9FAC-9617A7C96BD4"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Advanced_iOS_Assessment3/ViewModels/HotelPropertySearchViewModel.swift"

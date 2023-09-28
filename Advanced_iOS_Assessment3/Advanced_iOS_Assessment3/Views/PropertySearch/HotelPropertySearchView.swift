@@ -38,7 +38,12 @@ struct HotelPropertySearchView: View {
                         Text("Room \(room.index)")
                     }
                 }
-            }.toolbar {
+            }.onAppear(perform: {
+                if let haveRegion = region?.gaiaId {
+                    print(haveRegion) //6047790
+                }
+            })
+            .toolbar {
                 Button {
                     if let haveMetaData = hotelMain.metaData {
                         if let haveRegion = region {

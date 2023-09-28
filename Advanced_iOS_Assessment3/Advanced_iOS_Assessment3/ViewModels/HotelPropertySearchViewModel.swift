@@ -113,7 +113,7 @@ class HotelPropertySearchViewModel: ObservableObject {
         //destination object.
         let dest = Destination(regionId: gaiaId, coordinates: nil)
         //builds this response so it can be encoded to JSON.
-        let propertyQuery = PropertyListRequest(currency: "AUD", eapid: metaDataAus.eapId, locale: "en_AU", siteId: metaDataAus.siteId, destination: dest, checkInDate: checkin, checkOutDate: checkout, rooms: rooms, resultsStartingIndex: 0, resultsSize: 100, sort: nil, filters: nil )
+        let propertyQuery = PropertyListRequest(currency: "AUD", eapid: metaDataAus.eapId, locale: metaData.australia.supportedLocales[0].hotelSiteLocaleIdentifier, siteId: metaDataAus.siteId, destination: dest, checkInDate: checkin, checkOutDate: checkout, rooms: rooms, resultsStartingIndex: 0, resultsSize: 100, sort: nil, filters: nil )
         return propertyQuery
     }
     

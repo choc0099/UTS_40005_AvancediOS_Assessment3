@@ -13,6 +13,8 @@ enum QueryError: Error {
 }
 
 import Foundation
+import MapKit
+
 //this is an obserable class to handle hotel rooms search queries.
 class HotelPropertySearchViewModel: ObservableObject {
     @Published var rooms: [Room] = []

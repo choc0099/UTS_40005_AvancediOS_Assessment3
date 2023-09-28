@@ -70,8 +70,7 @@ class HotelBrowserMainViewModel: ObservableObject {
         }
         
         do {
-            var request = try HotelAPIManager.hotelApi(urlStuffs: urlComp)
-            
+            let request = try HotelAPIManager.hotelApi(urlStuffs: urlComp)            
             //sends the url request
             let (data, _) = try await URLSession.shared.data(for: request)
             

@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct HotelPropertyResultsMapView: View {
+    @ObservedObject var roomSearchVM: HotelPropertySearchViewModel
+    @State var region: NeighborhoodSearchResult
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Hello, World!")
     }
 }
 
 #Preview {
-    HotelPropertyResultsMapView()
+    HotelPropertyResultsMapView(roomSearchVM: HotelPropertySearchViewModel(), region: NeighborhoodSearchResult(gaiaId: "."))
 }

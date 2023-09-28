@@ -19,7 +19,7 @@ struct Availability:Hashable, Codable {
     }
 }
 
-struct Reviews : Codable {
+struct Reviews: Codable {
     let typename : String?
     let score : Double?
     let total : Int?
@@ -49,7 +49,6 @@ struct Summary : Codable {
     let resultsSummary : [ResultsSummary]?
 
     enum CodingKeys: String, CodingKey {
-
         case typename = "__typename"
         case matchedPropertiesSize = "matchedPropertiesSize"
         case pricingScheme = "pricingScheme"

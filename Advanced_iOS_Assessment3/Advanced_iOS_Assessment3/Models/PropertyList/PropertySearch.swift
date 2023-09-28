@@ -148,7 +148,6 @@ struct Amenities : Codable {
 
 }
 
-
 struct Property: Identifiable, Hashable, Codable {
     let id: Int
     let typeName: String
@@ -164,7 +163,7 @@ struct Property: Identifiable, Hashable, Codable {
     //let offerBadge: OfferBadge?
     //let offerSummary : OfferSummary?
     //let pinnedDetails : String?
-    let price: Price?
+    let price: Price
     //let priceAfterLoyaltyPointsApplied : PriceAfterLoyaltyPointsApplied?
     //let propertyFees : [String]?
     //let reviews : Reviews?
@@ -219,7 +218,7 @@ struct Property: Identifiable, Hashable, Codable {
         //offerBadge = try values.decodeIfPresent(OfferBadge.self, forKey: .offerBadge)
         //offerSummary = try values.decodeIfPresent(OfferSummary.self, forKey: .offerSummary)
         //pinnedDetails = try values.decodeIfPresent(String.self, forKey: .pinnedDetails)
-        price = try values.decodeIfPresent(Price.self, forKey: .price)
+        price = try values.decode(Price.self, forKey: .price)
         //priceAfterLoyaltyPointsApplied = try values.decodeIfPresent(PriceAfterLoyaltyPointsApplied.self, forKey: .priceAfterLoyaltyPointsApplied)
         //propertyFees = try values.decodeIfPresent([String].self, forKey: .propertyFees)
         //reviews = try values.decodeIfPresent(Reviews.self, forKey: .reviews)
@@ -263,7 +262,6 @@ struct HotelImage: Hashable, Codable {
     let url : String?
 
     enum CodingKeys: String, CodingKey {
-
         case typeName = "__typename"
         case description = "description"
         case url = "url"

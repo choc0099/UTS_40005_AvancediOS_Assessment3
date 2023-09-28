@@ -44,7 +44,14 @@ struct HotelPropertySearchView: View {
                 }
             }.onAppear(perform: {
                 if let haveRegion = region?.gaiaId {
-                    print(haveRegion) //6047790
+                    print(haveRegion)
+                }
+                
+                //this will be used for testing only where this view will be open from the tab
+                if region == nil {
+                    let sampleRgion: NeighborhoodSearchResult = NeighborhoodSearchResult(gaiaId: "6047790")
+                    region = sampleRgion
+                    
                 }
             })
             .toolbar {
@@ -94,9 +101,7 @@ struct HotelPropertySearchView: View {
                     title: Text(alertTitle),
                     message: Text(alertMessage)
                 )
-                
             }
-        
         }.navigationTitle("Search Property")
     }
 }

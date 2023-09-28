@@ -12,7 +12,7 @@ struct Price: Hashable, Codable {
     let typeName : String
     //let options : [Option]?
     //let priceMessaging : String?
-    let lead : Lead?
+    let lead : Lead
     let strikeOut: StrikeOut?
     //let displayMessages : [DisplayMessages]?
     //let strikeOutType : String?

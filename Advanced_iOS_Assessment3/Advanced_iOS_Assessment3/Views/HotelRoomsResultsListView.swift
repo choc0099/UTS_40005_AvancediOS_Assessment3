@@ -9,9 +9,15 @@ import SwiftUI
 
 struct HotelRoomsResultsListView: View {
     @ObservedObject var roomSearchVM: HotelPropertySearchViewModel
+    var region: NeighborhoodSearchResult?
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List{
+            ForEach(roomSearchVM.propertyResoults) {
+                property in
+                HotelPropertyRow(name: property.name, formattedPrice: property.price.lead.formatted, formattedDiscount: property.price.strikeOut?.formatted)
+            }
+        }
     }
 }
 

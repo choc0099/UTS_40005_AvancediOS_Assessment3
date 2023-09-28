@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HotelRoomsResultsView: View {
+struct HotelRoomsResultsListView: View {
     @ObservedObject var roomSearchVM: HotelPropertySearchViewModel
     
     var body: some View {
@@ -16,5 +16,5 @@ struct HotelRoomsResultsView: View {
 }
 
 #Preview {
-    HotelRoomsResultsView(roomSearchVM: HotelPropertySearchViewModel())
+    HotelRoomsResultsListView(roomSearchVM: HotelPropertySearchViewModel())
 }

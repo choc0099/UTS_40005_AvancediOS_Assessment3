@@ -6,47 +6,38 @@
 //
 
 import SwiftUI
+import CoreImage
 import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @StateObject var hotelMain: HotelBrowserMainViewModel = HotelBrowserMainViewModel()
+    @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
-
     var body: some View {
+        
         TabView {
-            NavigationStack {
-                List {
-                    ForEach(hotelMain.hotelSearchResults) { hotel in
-                        Text("\(hotel.regionName.fullName), \(hotel.hotelAddress.street)")
-                        
-                    }
-                }
-                .toolbar {
-                    Button {
-                        Task {
-                            //loads the list of hotels using the api
-                           await hotelMain.loadRegions()
-                        }
-                        
-                    } label: {
-                        Text("Load List")
-                    }
-                    
-                }
-                
-            }.tabItem {
-                Label("Home", systemImage: "house.fill")
+            SearchView().tabItem {
+                Label("Search", systemImage: "magnifyingglass")
             }
+            
+            RegionsView().tabItem {
+                Label("Settings", systemImage: "globe")
+            }
+            HotelPropertySearchView().tabItem {
+                Label("text", systemImage: "")
+            }
+        }.onAppear {
+            //loads the hotel metaData
+            hotelMain.initialiseMetaData()
         }
-        
-        
     }
-
+        
+    
+    /*
     private func addItem() {
         withAnimation {
             let newItem = Item(context: viewContext)
@@ -61,6 +52,7 @@ struct ContentView: View {
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
+        
     }
 
     private func deleteItems(offsets: IndexSet) {
@@ -76,7 +68,7 @@ struct ContentView: View {
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
-    }
+    }*/
 }
 
 private let itemFormatter: DateFormatter = {
@@ -88,6 +80,6 @@ private let itemFormatter: DateFormatter = {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext).environmentObject(HotelBrowserMainViewModel())
     }
 }

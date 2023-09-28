@@ -158,7 +158,7 @@ struct Property: Identifiable, Hashable, Codable {
     //let destinationInfo: DestinationInfo?
     //let legalDisclaimer: String?
     //let listingFooter: String?
-    //let mapMarker: MapMarker?
+    let mapMarker: MapMarker
     //let neighborhood: Neighborhood?
     //let offerBadge: OfferBadge?
     //let offerSummary : OfferSummary?
@@ -185,7 +185,7 @@ struct Property: Identifiable, Hashable, Codable {
         //case destinationInfo = "destinationInfo"
         //case legalDisclaimer = "legalDisclaimer"
         //case listingFooter = "listingFooter"
-        //case mapMarker = "mapMarker"
+        case mapMarker = "mapMarker"
         //case neighborhood = "neighborhood"
         //case offerBadge = "offerBadge"
         //case offerSummary = "offerSummary"
@@ -213,7 +213,7 @@ struct Property: Identifiable, Hashable, Codable {
         //destinationInfo = try values.decodeIfPresent(DestinationInfo.self, forKey: .destinationInfo)
         //legalDisclaimer = try values.decodeIfPresent(String.self, forKey: .legalDisclaimer)
         //listingFooter = try values.decodeIfPresent(String.self, forKey: .listingFooter)
-        //mapMarker = try values.decodeIfPresent(MapMarker.self, forKey: .mapMarker)
+        mapMarker = try values.decode(MapMarker.self, forKey: .mapMarker)
         //neighborhood = try values.decodeIfPresent(Neighborhood.self, forKey: .neighborhood)
         //offerBadge = try values.decodeIfPresent(OfferBadge.self, forKey: .offerBadge)
         //offerSummary = try values.decodeIfPresent(OfferSummary.self, forKey: .offerSummary)
@@ -306,7 +306,7 @@ struct UniversalSortAndFilter: Codable {
 }
 */
 
-struct Map: Hashable, Codable {
+struct MapSearch: Hashable, Codable {
     let typename : String?
     let subtitle : String?
 

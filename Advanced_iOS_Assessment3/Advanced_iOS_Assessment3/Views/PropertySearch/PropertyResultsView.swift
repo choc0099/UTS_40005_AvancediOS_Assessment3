@@ -14,9 +14,10 @@ enum ResultsViewType: String, Identifiable, CaseIterable {
     var id: Self {self}
 }
 
+import MapKit
 struct PropertyResultsView: View {
     @ObservedObject var roomSearchVM: HotelPropertySearchViewModel
-    @State var region: NeighborhoodSearchResult!
+    @State var region: NeighborhoodSearchResult
     // the @app storage is a quick way to save this setting to user defaults.
     @AppStorage("view_type") var viewType: ResultsViewType = .list
     var body: some View {
@@ -32,7 +33,14 @@ struct PropertyResultsView: View {
                         HotelRoomsResultsListView(roomSearchVM: roomSearchVM, region: region)
                     }
                     else if viewType == .map {
-                        HotelPropertyResultsMapView(roomSearchVM: roomSearchVM, region: region)
+                        //this will take you to the map view.
+                        //due to issues earlier with bindings, I had to pass these MKCoordinates code in this view insiead of the class object.
+                        /*VStack {
+                            Text("\(region.coordinates.latitude)")
+                            Text("\(region.coordinates.longitude)")
+                        }*/
+                      
+                        HotelPropertyResultsMapView(roomSearchVM: roomSearchVM, currentCoordinates: MKCoordinateRegion(center: .init(latitude: region.coordinates.latitude, longitude: region.coordinates.longitude), span: .init(latitudeDelta: 0.1, longitudeDelta: 0.1)))
                     }
                 }.frame(maxHeight: .infinity)
                 

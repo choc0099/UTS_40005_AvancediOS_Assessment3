@@ -12,7 +12,7 @@ struct HotelPropertySearchView: View {
     //this is used to retrieve metadata
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
     @StateObject var roomSearchVM = HotelPropertySearchViewModel()
-    @State var region: NeighborhoodSearchResult?
+    @State var region: NeighborhoodSearchResult
     @State var navActive: Bool = false
     //displays an alert to the user.
     @State var showAlert: Bool = false
@@ -43,28 +43,21 @@ struct HotelPropertySearchView: View {
                     }
                 }
             }.onAppear(perform: {
-                if let haveRegion = region?.gaiaId {
+                if let haveRegion = region.gaiaId {
                     print(haveRegion)
-                }
-                
-                //this will be used for testing only where this view will be open from the tab
-                if region == nil {
-                    let sampleRgion: NeighborhoodSearchResult = NeighborhoodSearchResult(gaiaId: "6047790")
-                    region = sampleRgion
-                    
                 }
             })
             .toolbar {
                 Button {
                     if let haveMetaData = hotelMain.metaData {
-                        if let haveRegion = region {
+                        
                             Task {
                                 do {
                                     //loads the response to the VM
                                     try roomSearchVM.validate()
                                     //proceeds to the next view.
                                     navActive = true
-                                    await roomSearchVM.fetchResults(metaData: haveMetaData, gaiaId: haveRegion.gaiaId!)
+                                    await roomSearchVM.fetchResults(metaData: haveMetaData, gaiaId: region.gaiaId!)
                                     
                                 //displays an alert to the user if they did not input the stuffs correctly.
                                 } catch QueryError.numbersOfRoomsNotEntered {
@@ -83,10 +76,7 @@ struct HotelPropertySearchView: View {
                                 }
                                 
                             }
-                        }
-                        else {
-                            print("No region")
-                        }
+                        
                     }
                     else {
                         print("No metaData")
@@ -95,7 +85,7 @@ struct HotelPropertySearchView: View {
                     Text("Continue")
                 }
             }.navigationDestination(isPresented: $navActive) {
-                PropertyResultsView(roomSearchVM: roomSearchVM)
+                PropertyResultsView(roomSearchVM: roomSearchVM, region: region)
             }.alert(isPresented: $showAlert) {
                 Alert(
                     title: Text(alertTitle),
@@ -108,5 +98,5 @@ struct HotelPropertySearchView: View {
 
 #Preview {
     //let emptyRegionResult: NeighborhoodSearchResult = NeighborhoodSearchResult()
-    HotelPropertySearchView()
+    HotelPropertySearchView(region: NeighborhoodSearchResult(gaiaId: "6047790"))
 }

@@ -27,7 +27,7 @@ struct ContentView: View {
             RegionsView().tabItem {
                 Label("Settings", systemImage: "globe")
             }
-            HotelPropertySearchView().tabItem {
+            HotelPropertySearchView(region: NeighborhoodSearchResult(gaiaId: "6047790")).tabItem {
                 Label("text", systemImage: "")
             }
         }.onAppear {

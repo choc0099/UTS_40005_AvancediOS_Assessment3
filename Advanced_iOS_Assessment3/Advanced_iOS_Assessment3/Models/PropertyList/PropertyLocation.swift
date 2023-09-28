@@ -90,10 +90,23 @@ struct DistanceFromDestination: Hashable, Codable {
 //this is used to pinpoint the hotel property onto the map
 struct MapMarker: Hashable, Codable {
     let label: String
-    let coordinates: Coordinates
+    let coordinates: PropertyCoordinates
 
     enum CodingKeys: String, CodingKey {
         case label = "label"
         case coordinates = "latLong"
+    }
+    
+}
+
+struct PropertyCoordinates: Hashable, Codable {
+    let typeName: String
+    let latitude: Double
+    let longitude: Double
+    
+    //used for JSON file decoding.
+    enum CodingKeys: String, CodingKey {
+        case typeName = "__typename"
+        case latitude, longitude
     }
 }

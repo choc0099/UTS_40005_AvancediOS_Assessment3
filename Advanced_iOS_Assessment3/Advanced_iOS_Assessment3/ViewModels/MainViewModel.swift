@@ -85,7 +85,7 @@ class HotelBrowserMainViewModel: ObservableObject {
                     if let haveSearchResults = hotelResponse.searchResults {
                         self.hotelSearchResults = haveSearchResults
                         for result in self.hotelSearchResults {
-                            print("\(result.id), \(result.coordinates.latitude)")
+                            print("\(result.id), \(result.coordinates.latitude), \(result.coordinates.longitude)")
                         }
                     }
                     

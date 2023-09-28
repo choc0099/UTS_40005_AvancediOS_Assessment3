@@ -10,12 +10,15 @@ import MapKit
 
 struct HotelPropertyResultsMapView: View {
     @ObservedObject var roomSearchVM: HotelPropertySearchViewModel
-    @State var region: NeighborhoodSearchResult
+    //this gets the map coordinate information from the object
+    @State var currentCoordinates: MKCoordinateRegion
+    
     var body: some View {
-        Text("Hello, World!")
+        Text("")
+        Map(coordinateRegion: $currentCoordinates)
     }
 }
 
 #Preview {
-    HotelPropertyResultsMapView(roomSearchVM: HotelPropertySearchViewModel(), region: NeighborhoodSearchResult(gaiaId: "."))
+    HotelPropertyResultsMapView(roomSearchVM: HotelPropertySearchViewModel(), currentCoordinates: MKCoordinateRegion())
 }

@@ -23,7 +23,7 @@ struct Price: Hashable, Codable {
         //case options = "options"
         //case priceMessaging = "priceMessaging"
         case lead = "lead"
-        //case strikeOut = "strikeOut"
+        case strikeOut = "strikeOut"
         //case displayMessages = "displayMessages"
         //case strikeOutType = "strikeOutType"
         //case priceMessages = "priceMessages"

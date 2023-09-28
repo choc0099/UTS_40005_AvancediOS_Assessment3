@@ -8,6 +8,8 @@
 enum QueryError: Error {
     case roomNotFound
     case noChildrenFound
+    case numbersOfRoomsNotEntered
+    case numbersOfAdultsNotEntered(room: Room)
 }
 
 import Foundation
@@ -150,6 +152,21 @@ class HotelPropertySearchViewModel: ObservableObject {
         } catch {
             print(error.localizedDescription)
             print(error)
+        }
+    }
+    
+    //this will validate the numbers of rooms and adults are correctly entered
+    func validate() throws {
+        guard !rooms.isEmpty else {
+            throw QueryError.numbersOfRoomsNotEntered
+        }
+        
+        //checks if there are numbers of adults entered in each room
+        for room in rooms {
+            if !(room.adults > 0) {
+                //throws an error
+                throw QueryError.numbersOfAdultsNotEntered(room: room)
+            }
         }
     }
     

@@ -7,24 +7,16 @@
 
 import Foundation
 
-struct Availability : Codable {
-    let typename : String?
-    let available : Bool?
-    let minRoomsLeft : String?
+struct Availability:Hashable, Codable {
+    let typeName: String
+    let isAvailable: Bool
+    let minRoomsLeft: String
 
     enum CodingKeys: String, CodingKey {
-        case typename = "__typename"
-        case available = "available"
+        case typeName = "__typename"
+        case isAvailable = "available"
         case minRoomsLeft = "minRoomsLeft"
     }
-
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        typename = try values.decodeIfPresent(String.self, forKey: .typename)
-        available = try values.decodeIfPresent(Bool.self, forKey: .available)
-        minRoomsLeft = try values.decodeIfPresent(String.self, forKey: .minRoomsLeft)
-    }
-
 }
 
 struct Reviews : Codable {

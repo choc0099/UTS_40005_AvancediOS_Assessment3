@@ -14,6 +14,11 @@ struct PropertyResponse: Codable {
     enum CodingKeys: String, CodingKey {
         case data = "data"
     }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.data = try container.decode(PropertyData.self, forKey: .data)
+    }
 }
 
 
@@ -32,55 +37,55 @@ struct PropertyData : Codable {
 }
 
 struct PropertySearch: Codable {
-    let typename: String?
-    let filterMetadata: FilterMetadata?
+    let typeName: String
+    //let filterMetadata: FilterMetadata?
     //let sortAndFilter: UniversalSortAndFilter?
     let properties: [Property]?
-    let propertySearchListings: [PropertySearchListings]?
-    let summary: Summary?
-    let searchCriteria: SearchCriteria?
-    let shoppingContext: ShoppingContext?
-    let map: Map?
+    //let propertySearchListings: [PropertySearchListings]?
+    //let summary: Summary?
+    //let searchCriteria: SearchCriteria?
+    //let shoppingContext: ShoppingContext?
+    //let map: Map?
     //let clickstream : Clickstream?
     
     enum CodingKeys: String, CodingKey {
-        case typename = "__typename"
-        case filterMetadata = "filterMetadata"
+        case typeName = "__typename"
+        //case filterMetadata = "filterMetadata"
         //case SortAndFilter = "universalSortAndFilter"
         case properties = "properties"
-        case propertySearchListings = "propertySearchListings"
-        case summary = "summary"
-        case searchCriteria = "searchCriteria"
-        case shoppingContext = "shoppingContext"
-        case map = "map"
+        //case propertySearchListings = "propertySearchListings"
+        //case summary = "summary"
+        //case searchCriteria = "searchCriteria"
+        //case shoppingContext = "shoppingContext"
+        //case map = "map"
         //case clickstream = "clickstream"
     }
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        typename = try values.decodeIfPresent(String.self, forKey: .typename)
-        filterMetadata = try values.decodeIfPresent(FilterMetadata.self, forKey: .filterMetadata)
+        typeName = try values.decode(String.self, forKey: .typeName)
+        //filterMetadata = try values.decodeIfPresent(FilterMetadata.self, forKey: .filterMetadata)
         //universalSortAndFilter = try values.decodeIfPresent(UniversalSortAndFilter.self, forKey: .universalSortAndFilter)
         properties = try values.decodeIfPresent([Property].self, forKey: .properties)
-        propertySearchListings = try values.decodeIfPresent([PropertySearchListings].self, forKey: .propertySearchListings)
-        summary = try values.decodeIfPresent(Summary.self, forKey: .summary)
-        searchCriteria = try values.decodeIfPresent(SearchCriteria.self, forKey: .searchCriteria)
-        shoppingContext = try values.decodeIfPresent(ShoppingContext.self, forKey: .shoppingContext)
-        map = try values.decodeIfPresent(Map.self, forKey: .map)
+        //propertySearchListings = try values.decodeIfPresent([PropertySearchListings].self, forKey: .propertySearchListings)
+        //summary = try values.decodeIfPresent(Summary.self, forKey: .summary)
+        //searchCriteria = try values.decodeIfPresent(SearchCriteria.self, forKey: .searchCriteria)
+        //shoppingContext = try values.decodeIfPresent(ShoppingContext.self, forKey: .shoppingContext)
+        //map = try values.decodeIfPresent(Map.self, forKey: .map)
         //clickstream = try values.decodeIfPresent(Clickstream.self, forKey: .clickstream)
     }
 }
 
 struct PropertySearchListings: Codable {
-    let type: String?
+    let typeName: String
 
     enum CodingKeys: String, CodingKey {
-        case type = "__typename"
+        case typeName = "__typename"
     }
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        type = try values.decodeIfPresent(String.self, forKey: .type)
+        typeName = try values.decode(String.self, forKey: .typeName)
     }
 
 }
@@ -88,7 +93,7 @@ struct PropertySearchListings: Codable {
 struct FilterMetadata : Codable {
     let typename : String?
     let amenities : [Amenities]?
-    let neighborhoods : [Neighborhoods]?
+    let neighborhoods : [Neighborhood]?
     let priceRange : PriceRange?
 
     enum CodingKeys: String, CodingKey {
@@ -103,7 +108,7 @@ struct FilterMetadata : Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         typename = try values.decodeIfPresent(String.self, forKey: .typename)
         amenities = try values.decodeIfPresent([Amenities].self, forKey: .amenities)
-        neighborhoods = try values.decodeIfPresent([Neighborhoods].self, forKey: .neighborhoods)
+        neighborhoods = try values.decodeIfPresent([Neighborhood].self, forKey: .neighborhoods)
         priceRange = try values.decodeIfPresent(PriceRange.self, forKey: .priceRange)
     }
 
@@ -144,104 +149,101 @@ struct Amenities : Codable {
 }
 
 
-struct Property: Identifiable, Codable {
-    let typename : String?
+struct Property: Identifiable, Hashable, Codable {
     let id: Int
-    let featuredMessages : [String]?
+    let typeName: String
+    //let featuredMessages: [String]?
     let name: String
-    let availability: Availability?
-    let propertyImage: PropertyImage?
-    let destinationInfo: DestinationInfo?
-    let legalDisclaimer: String?
-    let listingFooter: String?
-    //let mapMarker : MapMarker?
-    let neighborhood : Neighborhood?
-    //let offerBadge : OfferBadge?
+    //let availability: Availability
+    //let propertyImage: PropertyImage?
+    //let destinationInfo: DestinationInfo?
+    //let legalDisclaimer: String?
+    //let listingFooter: String?
+    //let mapMarker: MapMarker?
+    //let neighborhood: Neighborhood?
+    //let offerBadge: OfferBadge?
     //let offerSummary : OfferSummary?
-    let pinnedDetails : String?
-    let price : Price
-    let priceAfterLoyaltyPointsApplied : PriceAfterLoyaltyPointsApplied?
-    let propertyFees : [String]?
-    let reviews : Reviews?
-    let sponsoredListing : String?
-    let star : String?
-    let supportingMessages : String?
-    let regionId : String?
-    let priceMetadata : PriceMetadata?
-    let saveTripItem : String?
+    //let pinnedDetails : String?
+    //let price: Price
+    //let priceAfterLoyaltyPointsApplied : PriceAfterLoyaltyPointsApplied?
+    //let propertyFees : [String]?
+    //let reviews : Reviews?
+    //let sponsoredListing : String?
+    //let star : String?
+    //let supportingMessages : String?
+    let regionId : String
+    //let priceMetadata : PriceMetadata?
+    //let saveTripItem : String?
 
     enum CodingKeys: String, CodingKey {
 
-        case typename = "__typename"
+        case typeName = "__typename"
         case id = "id"
-        case featuredMessages = "featuredMessages"
+        //case featuredMessages = "featuredMessages"
         case name = "name"
-        case availability = "availability"
-        case propertyImage = "propertyImage"
-        case destinationInfo = "destinationInfo"
-        case legalDisclaimer = "legalDisclaimer"
-        case listingFooter = "listingFooter"
+        //case availability = "availability"
+        //case propertyImage = "propertyImage"
+        //case destinationInfo = "destinationInfo"
+        //case legalDisclaimer = "legalDisclaimer"
+        //case listingFooter = "listingFooter"
         //case mapMarker = "mapMarker"
-        case neighborhood = "neighborhood"
+        //case neighborhood = "neighborhood"
         //case offerBadge = "offerBadge"
         //case offerSummary = "offerSummary"
-        case pinnedDetails = "pinnedDetails"
-        case price = "price"
-        case priceAfterLoyaltyPointsApplied = "priceAfterLoyaltyPointsApplied"
-        case propertyFees = "propertyFees"
-        case reviews = "reviews"
-        case sponsoredListing = "sponsoredListing"
-        case star = "star"
-        case supportingMessages = "supportingMessages"
+        //case pinnedDetails = "pinnedDetails"
+        //case price = "price"
+        //case priceAfterLoyaltyPointsApplied = "priceAfterLoyaltyPointsApplied"
+        //case propertyFees = "propertyFees"
+        //case reviews = "reviews"
+        //case sponsoredListing = "sponsoredListing"
+        //case star = "star"
+        //case supportingMessages = "supportingMessages"
         case regionId = "regionId"
-        case priceMetadata = "priceMetadata"
-        case saveTripItem = "saveTripItem"
+        //case priceMetadata = "priceMetadata"
+        //case saveTripItem = "saveTripItem"
     }
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        typename = try values.decodeIfPresent(String.self, forKey: .typename)
+        typeName = try values.decode(String.self, forKey: .typeName)
         id = try Int(values.decode(String.self, forKey: .id))!
-        featuredMessages = try values.decodeIfPresent([String].self, forKey: .featuredMessages)
+        //featuredMessages = try values.decodeIfPresent([String].self, forKey: .featuredMessages)
         name = try values.decode(String.self, forKey: .name)
-        availability = try values.decodeIfPresent(Availability.self, forKey: .availability)
-        propertyImage = try values.decodeIfPresent(PropertyImage.self, forKey: .propertyImage)
-        destinationInfo = try values.decodeIfPresent(DestinationInfo.self, forKey: .destinationInfo)
-        legalDisclaimer = try values.decodeIfPresent(String.self, forKey: .legalDisclaimer)
-        listingFooter = try values.decodeIfPresent(String.self, forKey: .listingFooter)
+        //availability = try values.decode(Availability.self, forKey: .availability)
+        //propertyImage = try values.decodeIfPresent(PropertyImage.self, forKey: .propertyImage)
+        //destinationInfo = try values.decodeIfPresent(DestinationInfo.self, forKey: .destinationInfo)
+        //legalDisclaimer = try values.decodeIfPresent(String.self, forKey: .legalDisclaimer)
+        //listingFooter = try values.decodeIfPresent(String.self, forKey: .listingFooter)
         //mapMarker = try values.decodeIfPresent(MapMarker.self, forKey: .mapMarker)
-        neighborhood = try values.decodeIfPresent(Neighborhood.self, forKey: .neighborhood)
+        //neighborhood = try values.decodeIfPresent(Neighborhood.self, forKey: .neighborhood)
         //offerBadge = try values.decodeIfPresent(OfferBadge.self, forKey: .offerBadge)
         //offerSummary = try values.decodeIfPresent(OfferSummary.self, forKey: .offerSummary)
-        pinnedDetails = try values.decodeIfPresent(String.self, forKey: .pinnedDetails)
-        price = try values.decode(Price.self, forKey: .price)
-        priceAfterLoyaltyPointsApplied = try values.decodeIfPresent(PriceAfterLoyaltyPointsApplied.self, forKey: .priceAfterLoyaltyPointsApplied)
-        propertyFees = try values.decodeIfPresent([String].self, forKey: .propertyFees)
-        reviews = try values.decodeIfPresent(Reviews.self, forKey: .reviews)
-        sponsoredListing = try values.decodeIfPresent(String.self, forKey: .sponsoredListing)
-        star = try values.decodeIfPresent(String.self, forKey: .star)
-        supportingMessages = try values.decodeIfPresent(String.self, forKey: .supportingMessages)
-        regionId = try values.decodeIfPresent(String.self, forKey: .regionId)
-        priceMetadata = try values.decodeIfPresent(PriceMetadata.self, forKey: .priceMetadata)
-        saveTripItem = try values.decodeIfPresent(String.self, forKey: .saveTripItem)
+        //pinnedDetails = try values.decodeIfPresent(String.self, forKey: .pinnedDetails)
+        //price = try values.decode(Price.self, forKey: .price)
+        //priceAfterLoyaltyPointsApplied = try values.decodeIfPresent(PriceAfterLoyaltyPointsApplied.self, forKey: .priceAfterLoyaltyPointsApplied)
+        //propertyFees = try values.decodeIfPresent([String].self, forKey: .propertyFees)
+        //reviews = try values.decodeIfPresent(Reviews.self, forKey: .reviews)
+        //sponsoredListing = try values.decodeIfPresent(String.self, forKey: .sponsoredListing)
+        //star = try values.decodeIfPresent(String.self, forKey: .star)
+        //supportingMessages = try values.decodeIfPresent(String.self, forKey: .supportingMessages)
+        regionId = try values.decode(String.self, forKey: .regionId)
+        //priceMetadata = try values.decodeIfPresent(PriceMetadata.self, forKey: .priceMetadata)
+        //saveTripItem = try values.decodeIfPresent(String.self, forKey: .saveTripItem)
     }
 }
 
 
 
 //these are used to retrieve the hotel images.
-struct PropertyImage : Codable {
+struct PropertyImage: Hashable, Codable {
     let typename : String?
     let alt : String?
-    let fallbackImage : String?
     let image : HotelImage?
     let subjectId : Int?
 
     enum CodingKeys: String, CodingKey {
-
         case typename = "__typename"
         case alt = "alt"
-        case fallbackImage = "fallbackImage"
         case image = "image"
         case subjectId = "subjectId"
     }
@@ -250,27 +252,26 @@ struct PropertyImage : Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         typename = try values.decodeIfPresent(String.self, forKey: .typename)
         alt = try values.decodeIfPresent(String.self, forKey: .alt)
-        fallbackImage = try values.decodeIfPresent(String.self, forKey: .fallbackImage)
         image = try values.decodeIfPresent(HotelImage.self, forKey: .image)
         subjectId = try values.decodeIfPresent(Int.self, forKey: .subjectId)
     }
 }
 
-struct HotelImage : Codable {
-    let typename : String?
+struct HotelImage: Hashable, Codable {
+    let typeName : String
     let description : String?
     let url : String?
 
     enum CodingKeys: String, CodingKey {
 
-        case typename = "__typename"
+        case typeName = "__typename"
         case description = "description"
         case url = "url"
     }
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        typename = try values.decodeIfPresent(String.self, forKey: .typename)
+        typeName = try values.decode(String.self, forKey: .typeName)
         description = try values.decodeIfPresent(String.self, forKey: .description)
         url = try values.decodeIfPresent(String.self, forKey: .url)
     }
@@ -307,7 +308,7 @@ struct UniversalSortAndFilter: Codable {
 }
 */
 
-struct Map: Codable {
+struct Map: Hashable, Codable {
     let typename : String?
     let subtitle : String?
 

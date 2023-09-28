@@ -13,7 +13,7 @@ struct PropertyResultsView: View {
         List{
             ForEach(roomSearchVM.propertyResoults) {
                 property in
-                Text("\(property.name) \(property.price.lead.formatted)")
+                Text("\(property.name) ")
             }
         }
     }

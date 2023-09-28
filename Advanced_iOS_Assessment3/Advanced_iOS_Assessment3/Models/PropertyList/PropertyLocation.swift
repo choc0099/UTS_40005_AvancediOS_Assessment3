@@ -7,49 +7,47 @@
 
 import Foundation
 
-struct Neighborhoods : Codable {
-    let typename : String?
-    let name : String?
-    let regionId : String?
+struct Neighborhoods: Hashable, Codable {
+    let typename : String
+    let neighbourHoodsName: String
+    let regionId: String
 
     enum CodingKeys: String, CodingKey {
-
         case typename = "__typename"
-        case name = "name"
+        case neighbourHoodsName = "name"
         case regionId = "regionId"
     }
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        typename = try values.decodeIfPresent(String.self, forKey: .typename)
-        name = try values.decodeIfPresent(String.self, forKey: .name)
-        regionId = try values.decodeIfPresent(String.self, forKey: .regionId)
+        typename = try values.decode(String.self, forKey: .typename)
+        neighbourHoodsName = try values.decode(String.self, forKey: .neighbourHoodsName)
+        regionId = try values.decode(String.self, forKey: .regionId)
     }
-
 }
 
-struct Neighborhood : Codable {
-    let typename : String?
-    let name : String?
+struct Neighborhood: Hashable, Codable {
+    let typeName: String
+    let name: String
 
     enum CodingKeys: String, CodingKey {
 
-        case typename = "__typename"
+        case typeName = "__typename"
         case name = "name"
     }
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        typename = try values.decodeIfPresent(String.self, forKey: .typename)
-        name = try values.decodeIfPresent(String.self, forKey: .name)
+        typeName = try values.decode(String.self, forKey: .typeName)
+        name = try values.decode(String.self, forKey: .name)
     }
 
 }
 
 
-struct DestinationInfo : Codable {
+struct DestinationInfo: Hashable, Codable {
     let typename : String?
-    let distanceFromDestination : DistanceFromDestination?
+    let distanceFromDestination: DistanceFromDestination?
     let distanceFromMessaging : String?
     let regionId : String?
 
@@ -71,7 +69,7 @@ struct DestinationInfo : Codable {
 }
 
 
-struct DistanceFromDestination : Codable {
+struct DistanceFromDestination: Hashable, Codable {
     let typename : String?
     let unit : String?
     let value : Double?

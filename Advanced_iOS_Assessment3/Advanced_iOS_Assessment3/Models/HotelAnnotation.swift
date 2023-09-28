@@ -18,7 +18,7 @@ class HotelAnnotation: NSObject, Identifiable, MKAnnotation {
         self.id = property.id
         let proptertyMapMarkers = property.mapMarker.coordinates
         self.coordinate = CLLocationCoordinate2D(latitude: proptertyMapMarkers.latitude, longitude: proptertyMapMarkers.longitude)
-        self.name = property.mapMarker.label
+        self.name = property.name
         self.formattedPrice = property.price.lead.formatted
     }
 }

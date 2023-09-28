@@ -26,6 +26,7 @@ class HotelPropertySearchViewModel: ObservableObject {
     @Published var numbersOfAdults: Int = 0
     @Published var numbersOfChildren: Int = 0
     @Published var propertyResoults = [Property]()
+    @Published var hotelResultsAnnotations: [HotelAnnotation] = []
     
     func incrementRooms() {
         self.numbersOfRooms += 1
@@ -172,9 +173,23 @@ class HotelPropertySearchViewModel: ObservableObject {
         }
     }
     
-    
-    func retrieveDateComp(date: Date) -> DateComponents {
+    private func retrieveDateComp(date: Date) -> DateComponents {
         let calendar = Calendar.current
         return calendar.dateComponents([.day, .month, .year], from: date)
+    }
+    
+    //this will convert the properties into map annotations which will be used for map markers.
+    func convertToAnnotations() {
+        //looops through each property in the search results
+        for property in propertyResoults {
+            //converts it to hotelAnnotations
+            let annotation = getAnnotation(property: property)
+            //appends the annotation onto the annotations array
+            hotelResultsAnnotations.append(annotation)
+        }
+    }
+    //helper function to get the indivdiual annotation.
+    private func getAnnotation(property: Property) -> HotelAnnotation {
+        return HotelAnnotation(property:  property)
     }
 }

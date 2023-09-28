@@ -88,7 +88,7 @@ struct DistanceFromDestination: Hashable, Codable {
 }
 
 //this is used to pinpoint the hotel property onto the map
-struct MapMarker: Hashable, Codable {
+struct PropertyMapMarker: Hashable, Codable {
     let label: String
     let coordinates: PropertyCoordinates
 

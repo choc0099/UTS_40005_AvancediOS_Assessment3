@@ -14,8 +14,21 @@ struct HotelPropertyResultsMapView: View {
     @State var currentCoordinates: MKCoordinateRegion
     
     var body: some View {
-        Text("")
-        Map(coordinateRegion: $currentCoordinates)
+        Group {
+            Map(coordinateRegion: $currentCoordinates, annotationItems: roomSearchVM.hotelResultsAnnotations) {
+                marker in
+                MapAnnotation(coordinate: marker.coordinate) {
+                    VStack {
+                        Image(systemName: "building.fill")
+                        Text(marker.name)
+                    }
+                  
+                }
+            }.onAppear {
+                //loads the annotations
+                roomSearchVM.convertToAnnotations()
+            }
+        }
     }
 }
 

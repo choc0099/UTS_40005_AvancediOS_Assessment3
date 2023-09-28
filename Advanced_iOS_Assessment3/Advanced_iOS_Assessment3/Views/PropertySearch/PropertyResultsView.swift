@@ -22,7 +22,7 @@ struct PropertyResultsView: View {
     @AppStorage("view_type") var viewType: ResultsViewType = .list
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack(spacing: 5) {
                 Picker("View type", selection: $viewType) {
                     ForEach(ResultsViewType.allCases) {
                         view in Text(view.rawValue.capitalized)
@@ -35,11 +35,7 @@ struct PropertyResultsView: View {
                     else if viewType == .map {
                         //this will take you to the map view.
                         //due to issues earlier with bindings, I had to pass these MKCoordinates code in this view insiead of the class object.
-                        /*VStack {
-                            Text("\(region.coordinates.latitude)")
-                            Text("\(region.coordinates.longitude)")
-                        }*/
-                      
+                                              
                         HotelPropertyResultsMapView(roomSearchVM: roomSearchVM, currentCoordinates: MKCoordinateRegion(center: .init(latitude: region.coordinates.latitude, longitude: region.coordinates.longitude), span: .init(latitudeDelta: 0.1, longitudeDelta: 0.1)))
                     }
                 }.frame(maxHeight: .infinity)

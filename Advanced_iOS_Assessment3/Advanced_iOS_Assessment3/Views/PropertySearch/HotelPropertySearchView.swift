@@ -45,6 +45,8 @@ struct HotelPropertySearchView: View {
             }.onAppear(perform: {
                 if let haveRegion = region.gaiaId {
                     print(haveRegion)
+                    //saves it to coreData
+                    CoreDataManager.saveNeighbourhoodSearch(neighbourhoodResult: region)
                 }
             })
             .toolbar {
@@ -76,7 +78,6 @@ struct HotelPropertySearchView: View {
                                 }
                                 
                             }
-                        
                     }
                     else {
                         print("No metaData")

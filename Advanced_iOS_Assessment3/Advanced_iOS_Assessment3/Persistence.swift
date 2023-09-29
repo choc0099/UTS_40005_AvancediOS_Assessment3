@@ -56,10 +56,10 @@ struct PersistenceController {
     
     func saveNeighbourhoodSearch(neighbourhoodResult: NeighborhoodSearchResult) {
         let context = container.viewContext
-        let searchHistory = SearchHistory(context: context)
-        searchHistory.regionId = neighbourhoodResult.gaiaId
-        searchHistory.coordinates?.latitude = neighbourhoodResult.coordinates.latitude
-        searchHistory.coordinates?.longitude = neighbourhoodResult.coordinates.longitude
+        //let searchHistory = SearchHistory(context: context)
+        //searchHistory.regionId = neighbourhoodResult.gaiaId
+        //searchHistory.regionCoordinates?.latitude = neighbourhoodResult.coordinates.latitude
+        //searchHistory.regionCoordinates?.longitude = neighbourhoodResult.coordinates.longitude
         
         //saves it to core data
         do {

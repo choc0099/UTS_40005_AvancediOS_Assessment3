@@ -8,11 +8,16 @@
 enum QueryError: Error {
     case roomNotFound
     case noChildrenFound
+    case numbersOfRoomsNotEntered
+    case numbersOfAdultsNotEntered(room: Room)
 }
 
 import Foundation
+import MapKit
+
 //this is an obserable class to handle hotel rooms search queries.
 class HotelPropertySearchViewModel: ObservableObject {
+    @Published var propertyResultStatus: HotelStatus = .loading
     @Published var rooms: [Room] = []
     @Published var childrens: [Children] = []
     @Published var checkInDate: Date = Date.now
@@ -22,6 +27,7 @@ class HotelPropertySearchViewModel: ObservableObject {
     @Published var numbersOfAdults: Int = 0
     @Published var numbersOfChildren: Int = 0
     @Published var propertyResoults = [Property]()
+    @Published var hotelResultsAnnotations: [HotelAnnotation] = []
     
     func incrementRooms() {
         self.numbersOfRooms += 1
@@ -113,7 +119,7 @@ class HotelPropertySearchViewModel: ObservableObject {
         //destination object.
         let dest = Destination(regionId: gaiaId, coordinates: nil)
         //builds this response so it can be encoded to JSON.
-        let propertyQuery = PropertyListRequest(currency: "AUD", eapid: metaDataAus.eapId, locale: "en_AU", siteId: metaDataAus.siteId, destination: dest, checkInDate: checkin, checkOutDate: checkout, rooms: rooms, resultsStartingIndex: 0, resultsSize: 100, sort: nil, filters: nil )
+        let propertyQuery = PropertyListRequest(currency: "AUD", eapid: metaDataAus.eapId, locale: metaData.australia.supportedLocales[0].hotelSiteLocaleIdentifier, siteId: metaDataAus.siteId, destination: dest, checkInDate: checkin, checkOutDate: checkout, rooms: rooms, resultsStartingIndex: 0, resultsSize: 100, sort: nil, filters: nil )
         return propertyQuery
     }
     
@@ -143,19 +149,52 @@ class HotelPropertySearchViewModel: ObservableObject {
                 //tests via printing output if it works
                 for property in self.propertyResoults
                 {
-                    print("Name: \(property.name) ")
+                    print("Id: \(property.id) Name: \(property.name) ")
                 }
+                //sets the view to display results to the user after it is loaded
+                self.propertyResultStatus = .active
             }
             
+            
         } catch {
+            propertyResultStatus = .unkown
             print(error.localizedDescription)
             print(error)
         }
     }
     
+    //this will validate the numbers of rooms and adults are correctly entered
+    func validate() throws {
+        guard !rooms.isEmpty else {
+            throw QueryError.numbersOfRoomsNotEntered
+        }
+        
+        //checks if there are numbers of adults entered in each room
+        for room in rooms {
+            if !(room.adults > 0) {
+                //throws an error
+                throw QueryError.numbersOfAdultsNotEntered(room: room)
+            }
+        }
+    }
     
-    func retrieveDateComp(date: Date) -> DateComponents {
+    private func retrieveDateComp(date: Date) -> DateComponents {
         let calendar = Calendar.current
         return calendar.dateComponents([.day, .month, .year], from: date)
+    }
+    
+    //this will convert the properties into map annotations which will be used for map markers.
+    func convertToAnnotations() {
+        //looops through each property in the search results
+        for property in propertyResoults {
+            //converts it to hotelAnnotations
+            let annotation = getAnnotation(property: property)
+            //appends the annotation onto the annotations array
+            hotelResultsAnnotations.append(annotation)
+        }
+    }
+    //helper function to get the indivdiual annotation.
+    private func getAnnotation(property: Property) -> HotelAnnotation {
+        return HotelAnnotation(property:  property)
     }
 }

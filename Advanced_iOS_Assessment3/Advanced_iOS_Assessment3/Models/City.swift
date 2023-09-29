@@ -83,6 +83,15 @@ struct NeighborhoodSearchResult: SearchResult {
         case id = "index"
         case type, regionNames, gaiaId, coordinates, hierarchyInfo
     }
+    //this init is used for testing without having to call the search api when debugging.
+    init(gaiaId: String) {
+        self.type = ""
+        self.regionNames = RegionNames(fullName: "", shortName: "", displayName: "", primaryDisplayName: "", secondaryDisplayName: "", lastSearchName: "")
+        self.gaiaId = gaiaId
+        self.coordinates = Coordinates(lat: 0.0, long: 0.0)
+        self.hierarchyInfo = nil
+        self.id = 0
+    }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -112,6 +121,11 @@ struct Country: Hashable, Decodable {
 struct Coordinates: Hashable, Codable {
     var latitude: Double
     var longitude: Double
+    //this is used for testing.
+    init(lat: Double, long: Double) {
+        self.latitude = lat
+        self.longitude = long
+    }
     
     //nauelly converts from a string to double
     init(from decoder: Decoder) throws {

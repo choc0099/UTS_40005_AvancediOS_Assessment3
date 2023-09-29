@@ -148,23 +148,22 @@ struct Amenities : Codable {
 
 }
 
-
 struct Property: Identifiable, Hashable, Codable {
     let id: Int
     let typeName: String
     //let featuredMessages: [String]?
     let name: String
-    //let availability: Availability
+    let availability: Availability
     //let propertyImage: PropertyImage?
     //let destinationInfo: DestinationInfo?
     //let legalDisclaimer: String?
     //let listingFooter: String?
-    //let mapMarker: MapMarker?
+    let mapMarker: PropertyMapMarker
     //let neighborhood: Neighborhood?
     //let offerBadge: OfferBadge?
     //let offerSummary : OfferSummary?
     //let pinnedDetails : String?
-    //let price: Price
+    let price: Price
     //let priceAfterLoyaltyPointsApplied : PriceAfterLoyaltyPointsApplied?
     //let propertyFees : [String]?
     //let reviews : Reviews?
@@ -181,17 +180,17 @@ struct Property: Identifiable, Hashable, Codable {
         case id = "id"
         //case featuredMessages = "featuredMessages"
         case name = "name"
-        //case availability = "availability"
+        case availability = "availability"
         //case propertyImage = "propertyImage"
         //case destinationInfo = "destinationInfo"
         //case legalDisclaimer = "legalDisclaimer"
         //case listingFooter = "listingFooter"
-        //case mapMarker = "mapMarker"
+        case mapMarker = "mapMarker"
         //case neighborhood = "neighborhood"
         //case offerBadge = "offerBadge"
         //case offerSummary = "offerSummary"
         //case pinnedDetails = "pinnedDetails"
-        //case price = "price"
+        case price = "price"
         //case priceAfterLoyaltyPointsApplied = "priceAfterLoyaltyPointsApplied"
         //case propertyFees = "propertyFees"
         //case reviews = "reviews"
@@ -209,17 +208,17 @@ struct Property: Identifiable, Hashable, Codable {
         id = try Int(values.decode(String.self, forKey: .id))!
         //featuredMessages = try values.decodeIfPresent([String].self, forKey: .featuredMessages)
         name = try values.decode(String.self, forKey: .name)
-        //availability = try values.decode(Availability.self, forKey: .availability)
+        availability = try values.decode(Availability.self, forKey: .availability)
         //propertyImage = try values.decodeIfPresent(PropertyImage.self, forKey: .propertyImage)
         //destinationInfo = try values.decodeIfPresent(DestinationInfo.self, forKey: .destinationInfo)
         //legalDisclaimer = try values.decodeIfPresent(String.self, forKey: .legalDisclaimer)
         //listingFooter = try values.decodeIfPresent(String.self, forKey: .listingFooter)
-        //mapMarker = try values.decodeIfPresent(MapMarker.self, forKey: .mapMarker)
+        mapMarker = try values.decode(PropertyMapMarker.self, forKey: .mapMarker)
         //neighborhood = try values.decodeIfPresent(Neighborhood.self, forKey: .neighborhood)
         //offerBadge = try values.decodeIfPresent(OfferBadge.self, forKey: .offerBadge)
         //offerSummary = try values.decodeIfPresent(OfferSummary.self, forKey: .offerSummary)
         //pinnedDetails = try values.decodeIfPresent(String.self, forKey: .pinnedDetails)
-        //price = try values.decode(Price.self, forKey: .price)
+        price = try values.decode(Price.self, forKey: .price)
         //priceAfterLoyaltyPointsApplied = try values.decodeIfPresent(PriceAfterLoyaltyPointsApplied.self, forKey: .priceAfterLoyaltyPointsApplied)
         //propertyFees = try values.decodeIfPresent([String].self, forKey: .propertyFees)
         //reviews = try values.decodeIfPresent(Reviews.self, forKey: .reviews)
@@ -263,7 +262,6 @@ struct HotelImage: Hashable, Codable {
     let url : String?
 
     enum CodingKeys: String, CodingKey {
-
         case typeName = "__typename"
         case description = "description"
         case url = "url"
@@ -308,7 +306,7 @@ struct UniversalSortAndFilter: Codable {
 }
 */
 
-struct Map: Hashable, Codable {
+struct MapSearch: Hashable, Codable {
     let typename : String?
     let subtitle : String?
 

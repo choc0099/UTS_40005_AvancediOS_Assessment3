@@ -33,7 +33,7 @@ class HotelBrowserMainViewModel: ObservableObject {
         if let metaDataStored = UserDefaultsManager.readMetadata() {
             metaData = metaDataStored
             print("retreiving metadata from user defaults")
-            print("Country Code \(metaDataStored.australia.countryCode)")
+            print("Country Code \(metaDataStored.australia.supportedLocales[0].hotelSiteLocaleIdentifier)")
             print("siteId \(metaDataStored.australia.siteId)")
             print("eapId \(metaDataStored.australia.eapId)")
         }
@@ -42,7 +42,6 @@ class HotelBrowserMainViewModel: ObservableObject {
                 print("fetching data from the API.")
                 await fetchMetaData()
             }
-            
         }
     }
     
@@ -70,8 +69,7 @@ class HotelBrowserMainViewModel: ObservableObject {
         }
         
         do {
-            var request = try HotelAPIManager.hotelApi(urlStuffs: urlComp)
-            
+            let request = try HotelAPIManager.hotelApi(urlStuffs: urlComp)            
             //sends the url request
             let (data, _) = try await URLSession.shared.data(for: request)
             
@@ -86,7 +84,7 @@ class HotelBrowserMainViewModel: ObservableObject {
                     if let haveSearchResults = hotelResponse.searchResults {
                         self.hotelSearchResults = haveSearchResults
                         for result in self.hotelSearchResults {
-                            print("\(result.id), \(result.coordinates.latitude)")
+                            print("\(result.id), \(result.coordinates.latitude), \(result.coordinates.longitude)")
                         }
                     }
                     
@@ -165,13 +163,13 @@ class HotelBrowserMainViewModel: ObservableObject {
             }
            
         
-        }
-        catch(URLError.notConnectedToInternet) {
+        } catch URLError.notConnectedToInternet {
             //tells the user that they are not connected to the internet.
-            searchStatus = .offline
+            //searchStatus = .offline
+            print("Unable to get metaData due to no internet connectijon")
         }
         catch {
-            searchStatus = .unkown
+            //searchStatus = .unkown
             print(error)
             print(error.localizedDescription)
         }

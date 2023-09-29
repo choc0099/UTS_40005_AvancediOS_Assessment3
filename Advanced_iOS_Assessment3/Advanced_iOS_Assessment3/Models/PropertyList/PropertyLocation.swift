@@ -41,7 +41,6 @@ struct Neighborhood: Hashable, Codable {
         typeName = try values.decode(String.self, forKey: .typeName)
         name = try values.decode(String.self, forKey: .name)
     }
-
 }
 
 
@@ -52,7 +51,6 @@ struct DestinationInfo: Hashable, Codable {
     let regionId : String?
 
     enum CodingKeys: String, CodingKey {
-
         case typename = "__typename"
         case distanceFromDestination = "distanceFromDestination"
         case distanceFromMessaging = "distanceFromMessaging"
@@ -75,7 +73,6 @@ struct DistanceFromDestination: Hashable, Codable {
     let value : Double?
 
     enum CodingKeys: String, CodingKey {
-
         case typename = "__typename"
         case unit = "unit"
         case value = "value"
@@ -88,4 +85,28 @@ struct DistanceFromDestination: Hashable, Codable {
         value = try values.decodeIfPresent(Double.self, forKey: .value)
     }
 
+}
+
+//this is used to pinpoint the hotel property onto the map
+struct PropertyMapMarker: Hashable, Codable {
+    let label: String
+    let coordinates: PropertyCoordinates
+
+    enum CodingKeys: String, CodingKey {
+        case label = "label"
+        case coordinates = "latLong"
+    }
+    
+}
+
+struct PropertyCoordinates: Hashable, Codable {
+    let typeName: String
+    let latitude: Double
+    let longitude: Double
+    
+    //used for JSON file decoding.
+    enum CodingKeys: String, CodingKey {
+        case typeName = "__typename"
+        case latitude, longitude
+    }
 }

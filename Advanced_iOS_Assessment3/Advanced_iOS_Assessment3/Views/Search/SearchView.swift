@@ -11,6 +11,7 @@ struct SearchView: View {
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
     @State var searchText: String = ""
     @State var errorText: String = "" //displays a message to the user.
+   
     var body: some View {
         NavigationStack {
             //this is for the search fields to search for a query including hotels and regions
@@ -34,35 +35,10 @@ struct SearchView: View {
                 .padding()
             Group { //the group property is used to add more views based on different conditions.
                 if hotelMain.searchStatus == .active {
-                    List {
-                        
-                        Section("Regions and Neighbourhoods") {
-                            ForEach(hotelMain.regionSearchResults) {
-                                region in
-                                if region.type != "HOTEL" {
-                                    NavigationLink {
-                                        HotelPropertySearchView(region: region)
-                                    } label: {
-                                        Text("\(region.regionNames.fullName)")
-                                    }
-
-                                }
-                            }
-                        }
-                        
-                        Section("Hotel Suggestions") {
-                            ForEach(hotelMain.hotelSearchResults) { hotel in
-                                if hotel.type == "HOTEL" {
-                                    if hotel.hotelAddress != nil {
-                                        
-                                        Text(hotel.regionNames.fullName)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                else {
+                  SearchResultsView()
+                } else if hotelMain.searchStatus == .welcome {
+                   SearchHistoryView()
+                } else {
                     VStack(spacing: 10) {
                         if hotelMain.searchStatus == .loading {
                             ProgressView()
@@ -94,7 +70,6 @@ struct SearchView: View {
             errorText = ""
         }
     }
-      
 }
 
 

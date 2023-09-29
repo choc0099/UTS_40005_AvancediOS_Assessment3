@@ -163,7 +163,7 @@ class HotelBrowserMainViewModel: ObservableObject {
             }
            
         
-        }catch(URLError.notConnectedToInternet) {
+        } catch URLError.notConnectedToInternet {
             //tells the user that they are not connected to the internet.
             //searchStatus = .offline
             print("Unable to get metaData due to no internet connectijon")

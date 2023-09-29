@@ -42,7 +42,6 @@ class HotelBrowserMainViewModel: ObservableObject {
                 print("fetching data from the API.")
                 await fetchMetaData()
             }
-            
         }
     }
     
@@ -164,13 +163,13 @@ class HotelBrowserMainViewModel: ObservableObject {
             }
            
         
-        }
-        catch(URLError.notConnectedToInternet) {
+        }catch(URLError.notConnectedToInternet) {
             //tells the user that they are not connected to the internet.
-            searchStatus = .offline
+            //searchStatus = .offline
+            print("Unable to get metaData due to no internet connectijon")
         }
         catch {
-            searchStatus = .unkown
+            //searchStatus = .unkown
             print(error)
             print(error.localizedDescription)
         }

@@ -178,5 +178,4 @@ struct AppSupportURLs : Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         ios = try values.decodeIfPresent(String.self, forKey: .ios)
     }
-
 }

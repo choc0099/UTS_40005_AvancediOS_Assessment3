@@ -11,6 +11,13 @@ struct SearchView: View {
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
     @State var searchText: String = ""
     @State var errorText: String = "" //displays a message to the user.
+    
+    //handles stored data persistnace from CoreData to display search history items to the user.
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \SearchHistory.regionName, ascending: true)],
+        animation: .default)
+    private var searchHistory: FetchedResults<SearchHistory>
     var body: some View {
         NavigationStack {
             //this is for the search fields to search for a query including hotels and regions
@@ -35,7 +42,6 @@ struct SearchView: View {
             Group { //the group property is used to add more views based on different conditions.
                 if hotelMain.searchStatus == .active {
                     List {
-                        
                         Section("Regions and Neighbourhoods") {
                             ForEach(hotelMain.regionSearchResults) {
                                 region in
@@ -60,6 +66,14 @@ struct SearchView: View {
                                 }
                             }
                         }
+                    }
+                } else if hotelMain.searchStatus == .welcome {
+                    List{
+                        ForEach(searchHistory) {
+                            historyItem in
+                            Text(historyItem.regionName ?? "")
+                        }.onDelete(perform: deleteItems)
+                        
                     }
                 }
                 else {
@@ -94,7 +108,21 @@ struct SearchView: View {
             errorText = ""
         }
     }
-      
+    
+    private func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { searchHistory[$0] }.forEach(viewContext.delete)
+
+            do {
+                try viewContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
 }
 
 

@@ -15,6 +15,7 @@ class CoreDataManager {
     static func saveNeighbourhoodSearch(neighbourhoodResult: NeighborhoodSearchResult) {
         let context = viewContext
         let searchHistory = SearchHistory(context: context)
+        searchHistory.regionName = neighbourhoodResult.regionNames.fullName
         searchHistory.regionId = neighbourhoodResult.gaiaId
         searchHistory.dateSearched = Date()
         searchHistory.regionCoordinates?.latitude = neighbourhoodResult.coordinates.latitude

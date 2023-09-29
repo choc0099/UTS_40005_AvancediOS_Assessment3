@@ -9,7 +9,8 @@ import SwiftUI
 
 struct HotelRoomsResultsListView: View {
     @ObservedObject var roomSearchVM: HotelPropertySearchViewModel
-    var region: NeighborhoodSearchResult?
+    @State var regionId: String
+    @State var regionCoordinates: Coordinates
     
     var body: some View {
         List{
@@ -22,5 +23,5 @@ struct HotelRoomsResultsListView: View {
 }
 
 #Preview {
-    HotelRoomsResultsListView(roomSearchVM: HotelPropertySearchViewModel())
+    HotelRoomsResultsListView(roomSearchVM: HotelPropertySearchViewModel(), regionId: "", regionCoordinates: Coordinates(lat: -1.12344, long: -1.234905123))
 }

@@ -17,7 +17,7 @@ struct SearchResultsView: View {
                     region in
                     if region.type != "HOTEL" {
                         NavigationLink {
-                            HotelPropertySearchView(region: region)
+                            HotelPropertySearchView(regionId: region.gaiaId!, regionName: region.regionNames.fullName, regionCoordinates: region.coordinates)
                         } label: {
                             Text("\(region.regionNames.fullName)")
                         }

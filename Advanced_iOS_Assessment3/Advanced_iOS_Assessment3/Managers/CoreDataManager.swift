@@ -12,14 +12,14 @@ import CoreData
 class CoreDataManager {
     private static var viewContext: NSManagedObjectContext = PersistenceController.shared.container.viewContext
     
-    static func saveNeighbourhoodSearch(neighbourhoodResult: NeighborhoodSearchResult) {
+    static func saveNeighbourhoodSearch(regionId: String, regionName: String, regionCoordinates: Coordinates) {
         let context = viewContext
         let searchHistory = SearchHistory(context: context)
-        searchHistory.regionName = neighbourhoodResult.regionNames.fullName
-        searchHistory.regionId = neighbourhoodResult.gaiaId
+        searchHistory.regionName = regionName
+        searchHistory.regionId = regionId
         searchHistory.dateSearched = Date()
-        searchHistory.regionCoordinates?.latitude = neighbourhoodResult.coordinates.latitude
-        searchHistory.regionCoordinates?.longitude = neighbourhoodResult.coordinates.longitude
+        searchHistory.regionCoordinates?.latitude = regionCoordinates.latitude
+        searchHistory.regionCoordinates?.longitude = regionCoordinates.longitude
         
         //saves it to core data
         do {

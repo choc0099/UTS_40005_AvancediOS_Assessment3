@@ -12,7 +12,9 @@ struct HotelPropertySearchView: View {
     //this is used to retrieve metadata
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
     @StateObject var roomSearchVM = HotelPropertySearchViewModel()
-    @State var region: NeighborhoodSearchResult
+    @State var regionId: String
+    @State var regionName: String
+    @State var regionCoordinates: Coordinates
     @State var navActive: Bool = false
     //displays an alert to the user.
     @State var showAlert: Bool = false
@@ -43,23 +45,19 @@ struct HotelPropertySearchView: View {
                     }
                 }
             }.onAppear(perform: {
-                if let haveRegion = region.gaiaId {
-                    print(haveRegion)
                     //saves it to coreData
-                    CoreDataManager.saveNeighbourhoodSearch(neighbourhoodResult: region)
-                }
+                CoreDataManager.saveNeighbourhoodSearch(regionId: regionId, regionName: regionName, regionCoordinates: regionCoordinates)
             })
             .toolbar {
                 Button {
                     if let haveMetaData = hotelMain.metaData {
-                        
                             Task {
                                 do {
                                     //loads the response to the VM
                                     try roomSearchVM.validate()
                                     //proceeds to the next view.
                                     navActive = true
-                                    await roomSearchVM.fetchResults(metaData: haveMetaData, gaiaId: region.gaiaId!)
+                                    await roomSearchVM.fetchResults(metaData: haveMetaData, gaiaId: regionId)
                                     
                                 //displays an alert to the user if they did not input the stuffs correctly.
                                 } catch QueryError.numbersOfRoomsNotEntered {
@@ -86,7 +84,7 @@ struct HotelPropertySearchView: View {
                     Text("Continue")
                 }
             }.navigationDestination(isPresented: $navActive) {
-                PropertyResultsProcessingView(roomSearchVM: roomSearchVM, region: region)
+                PropertyResultsProcessingView(roomSearchVM: roomSearchVM, regionId: regionId, regionCoordinates: regionCoordinates)
             }.alert(isPresented: $showAlert) {
                 Alert(
                     title: Text(alertTitle),
@@ -99,5 +97,5 @@ struct HotelPropertySearchView: View {
 
 #Preview {
     //let emptyRegionResult: NeighborhoodSearchResult = NeighborhoodSearchResult()
-    HotelPropertySearchView(region: NeighborhoodSearchResult(gaiaId: "6047790"))
+    HotelPropertySearchView(regionId: "", regionName: "", regionCoordinates: Coordinates(lat: -100, long: -100))
 }

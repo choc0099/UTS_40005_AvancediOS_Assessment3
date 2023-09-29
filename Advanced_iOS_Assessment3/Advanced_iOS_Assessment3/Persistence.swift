@@ -53,7 +53,7 @@ struct PersistenceController {
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
-    
+    /*
     func saveNeighbourhoodSearch(neighbourhoodResult: NeighborhoodSearchResult) {
         let context = container.viewContext
         //let searchHistory = SearchHistory(context: context)
@@ -68,5 +68,5 @@ struct PersistenceController {
         catch {
             print("Error saving context, \(error)")
         }
-    }
+    }*/
 }

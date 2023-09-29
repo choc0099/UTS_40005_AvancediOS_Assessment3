@@ -3,7 +3,7 @@
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
-    <entity name="RegionCoordinates" representedClassName="RegionCoordinates" parentEntity="SearchHistory" syncable="YES" codeGenerationType="class">
+    <entity name="RegionCoordinates" representedClassName="RegionCoordinates" isAbstract="YES" parentEntity="SearchHistory" syncable="YES" codeGenerationType="class">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="searchHistory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SearchHistory" inverseName="regionCoordinates" inverseEntity="SearchHistory"/>

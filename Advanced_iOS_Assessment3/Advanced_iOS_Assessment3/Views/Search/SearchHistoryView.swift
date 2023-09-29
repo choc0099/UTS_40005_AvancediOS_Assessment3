@@ -20,7 +20,11 @@ struct SearchHistoryView: View {
         List{
             ForEach(searchHistory) {
                 historyItem in
-                Text(historyItem.regionName ?? "")
+                NavigationLink(destination: HotelPropertySearchView(isFromHistory: true, regionId: historyItem.regionId ?? "", regionName: historyItem.regionName ?? "", regionCoordinates: Coordinates(lat: historyItem.regionCoordinates?.latitude ?? 0, long: historyItem.regionCoordinates?.longitude ?? 0))){
+                    Text(historyItem.regionName ?? "")
+                    Text("\(historyItem.regionCoordinates?.latitude ?? 0.0)")
+                }
+               
             }.onDelete(perform: deleteItems)
         }
     }

@@ -12,6 +12,7 @@ struct HotelPropertySearchView: View {
     //this is used to retrieve metadata
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
     @StateObject var roomSearchVM = HotelPropertySearchViewModel()
+    @State var isFromHistory: Bool
     @State var regionId: String
     @State var regionName: String
     @State var regionCoordinates: Coordinates
@@ -20,6 +21,8 @@ struct HotelPropertySearchView: View {
     @State var showAlert: Bool = false
     @State var alertTitle: String = ""
     @State var alertMessage: String = ""
+   
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -46,7 +49,7 @@ struct HotelPropertySearchView: View {
                 }
             }.onAppear(perform: {
                     //saves it to coreData
-                CoreDataManager.saveNeighbourhoodSearch(regionId: regionId, regionName: regionName, regionCoordinates: regionCoordinates)
+                CoreDataManager.saveNeighbourhoodSearch(cameFromHistory: isFromHistory, regionId: regionId, regionName: regionName, regionCoordinates: regionCoordinates)
             })
             .toolbar {
                 Button {
@@ -97,5 +100,5 @@ struct HotelPropertySearchView: View {
 
 #Preview {
     //let emptyRegionResult: NeighborhoodSearchResult = NeighborhoodSearchResult()
-    HotelPropertySearchView(regionId: "", regionName: "", regionCoordinates: Coordinates(lat: -100, long: -100))
+    HotelPropertySearchView(isFromHistory: true, regionId: "", regionName: "", regionCoordinates: Coordinates(lat: -100, long: -100))
 }

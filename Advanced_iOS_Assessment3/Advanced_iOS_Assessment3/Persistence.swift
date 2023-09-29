@@ -14,8 +14,8 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            let newSearchHistory = SearchHistory(context: viewContext)
+            newSearchHistory.dateSearched = Date()
         }
         do {
             try viewContext.save()
@@ -52,5 +52,21 @@ struct PersistenceController {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+    }
+    
+    func saveNeighbourhoodSearch(neighbourhoodResult: NeighborhoodSearchResult) {
+        let context = container.viewContext
+        let searchHistory = SearchHistory(context: context)
+        searchHistory.regionId = neighbourhoodResult.gaiaId
+        searchHistory.coordinates?.latitude = neighbourhoodResult.coordinates.latitude
+        searchHistory.coordinates?.longitude = neighbourhoodResult.coordinates.longitude
+        
+        //saves it to core data
+        do {
+            try context.save()
+        }
+        catch {
+            print("Error saving context, \(error)")
+        }
     }
 }

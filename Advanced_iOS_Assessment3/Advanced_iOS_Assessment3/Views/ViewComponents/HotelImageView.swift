@@ -23,10 +23,13 @@ struct HotelImageView: View {
                     image.resizable().aspectRatio(contentMode: .fill).frame(width: imageSize, height: imageSize).clipShape(.circle).overlay(Circle()
                         .stroke(Color.gray, lineWidth: 2)
                     )
-                }  else {
+                } else {
                     image.resizable().aspectRatio(contentMode: .fill).frame(width: imageSize, height: imageSize)
+                        //this will display alt text on an image for vision impaired users.
+                        .accessibilityLabel(
+                        Text(propertyImage?.alt ?? "image")
+                    )
                 }
-                
             } placeholder: {
                 placeHolderImage()
             }
@@ -50,5 +53,5 @@ struct HotelImageView: View {
 }
 
 #Preview {
-    HotelImageView(propertyImage: PropertyImage(typename: "Cigarettes", alt: "Smoke Test", image: HotelImage(typeName: "smoke", description: "I like smokes", url: "https://images.trvl-media.com/lodging/41000000/40470000/40460600/40460567/d4729cbb.jpg?impolicy=resizecrop&rw=455&ra=fit"), subjectId: 1000), imageSize: 150, mapMode: true)
+    HotelImageView(propertyImage: PropertyImage(typename: "Cigarettes", alt: "Smoke Test", image: HotelImage(typeName: "smoke", description: "I like smokes", url: "https://images.trvl-media.com/lodging/41000000/40470000/40460600/40460567/d4729cbb.jpg?impolicy=resizecrop&rw=455&ra=fit"), subjectId: 1000), imageSize: 150, mapMode: false)
 }

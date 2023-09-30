@@ -132,7 +132,7 @@ struct ShoppingContext : Codable {
 
 }
 
-struct Amenities : Codable {
+struct Amenities: Hashable, Codable {
     let typename : String?
     let id: Int?
 

@@ -61,16 +61,24 @@ class CoreDataManager {
     }
     
     static private func updateRegion(regionId: String)  throws {
-        searchHistoryResults.predicate = NSPredicate(format: "regionId == %d", regionId)
         
-        let region = try viewContext.fetch(searchHistoryResults)
-        let updatedRegion = region.first
+        let newFetchRequest: NSFetchRequest<SearchHistory> = SearchHistory.fetchRequest()
+        newFetchRequest.predicate = NSPredicate(format: "regionId == %@", regionId)
+        
+        let region = try viewContext.fetch(newFetchRequest).first
+        
+        guard let foundSearchHistory = region else {
+                print("SearchHistory record with regionId \(regionId) not found")
+                return
+        }
+                
         
         //updates the date
-        updatedRegion?.dateSearched = Date()
+        region?.dateSearched = Date()
         
         //saves the context
         try viewContext.save()
+        print("Aate on existing search history is updated.")
     
         
     }

@@ -23,7 +23,6 @@ struct SearchHistoryView: View {
                 //individual parameters are called here.
                 NavigationLink(destination: HotelPropertySearchView(isFromHistory: true, regionId: historyItem.regionId ?? "", regionName: historyItem.regionName ?? "", regionCoordinates: Coordinates(lat: historyItem.regionCoordinates?.latitude ?? 0, long: historyItem.regionCoordinates?.longitude ?? 0))){
                     Text(historyItem.regionName ?? "")
-                    Text("\(historyItem.regionCoordinates?.latitude ?? 0.0)")
                 }
                
             }.onDelete(perform: deleteItems)
@@ -39,7 +38,7 @@ struct SearchHistoryView: View {
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
+                
                 print("Unable to delete this search history")
             }
         }

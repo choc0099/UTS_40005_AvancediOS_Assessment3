@@ -60,15 +60,16 @@ class CoreDataManager {
         return false
     }
     
+    //this is a helper function specifically used to update the search date so it can show up on from the newests one that has been searched.
     static private func updateRegion(regionId: String)  throws {
-        
+        //creates a new fetch request to find the region id.
         let newFetchRequest: NSFetchRequest<SearchHistory> = SearchHistory.fetchRequest()
         newFetchRequest.predicate = NSPredicate(format: "regionId == %@", regionId)
         
         let region = try viewContext.fetch(newFetchRequest).first
-        
-        guard let foundSearchHistory = region else {
-                print("SearchHistory record with regionId \(regionId) not found")
+        //checks if it is found, this is used for debugging.
+        guard region != nil else {
+                print("Unable to update this region \(regionId).")
                 return
         }
                 

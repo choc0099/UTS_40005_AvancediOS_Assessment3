@@ -154,7 +154,7 @@ struct Property: Identifiable, Hashable, Codable {
     //let featuredMessages: [String]?
     let name: String
     let availability: Availability
-    //let propertyImage: PropertyImage?
+    let propertyImage: PropertyImage?
     //let destinationInfo: DestinationInfo?
     //let legalDisclaimer: String?
     //let listingFooter: String?
@@ -181,7 +181,7 @@ struct Property: Identifiable, Hashable, Codable {
         //case featuredMessages = "featuredMessages"
         case name = "name"
         case availability = "availability"
-        //case propertyImage = "propertyImage"
+        case propertyImage = "propertyImage"
         //case destinationInfo = "destinationInfo"
         //case legalDisclaimer = "legalDisclaimer"
         //case listingFooter = "listingFooter"
@@ -209,7 +209,7 @@ struct Property: Identifiable, Hashable, Codable {
         //featuredMessages = try values.decodeIfPresent([String].self, forKey: .featuredMessages)
         name = try values.decode(String.self, forKey: .name)
         availability = try values.decode(Availability.self, forKey: .availability)
-        //propertyImage = try values.decodeIfPresent(PropertyImage.self, forKey: .propertyImage)
+        propertyImage = try values.decodeIfPresent(PropertyImage.self, forKey: .propertyImage)
         //destinationInfo = try values.decodeIfPresent(DestinationInfo.self, forKey: .destinationInfo)
         //legalDisclaimer = try values.decodeIfPresent(String.self, forKey: .legalDisclaimer)
         //listingFooter = try values.decodeIfPresent(String.self, forKey: .listingFooter)
@@ -235,10 +235,10 @@ struct Property: Identifiable, Hashable, Codable {
 
 //these are used to retrieve the hotel images.
 struct PropertyImage: Hashable, Codable {
-    let typename : String?
-    let alt : String?
-    let image : HotelImage?
-    let subjectId : Int?
+    let typename: String
+    let alt: String?
+    let image: HotelImage?
+    let subjectId: Int
 
     enum CodingKeys: String, CodingKey {
         case typename = "__typename"
@@ -246,20 +246,12 @@ struct PropertyImage: Hashable, Codable {
         case image = "image"
         case subjectId = "subjectId"
     }
-
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        typename = try values.decodeIfPresent(String.self, forKey: .typename)
-        alt = try values.decodeIfPresent(String.self, forKey: .alt)
-        image = try values.decodeIfPresent(HotelImage.self, forKey: .image)
-        subjectId = try values.decodeIfPresent(Int.self, forKey: .subjectId)
-    }
 }
 
 struct HotelImage: Hashable, Codable {
     let typeName : String
     let description : String?
-    let url : String?
+    let url : String
 
     enum CodingKeys: String, CodingKey {
         case typeName = "__typename"
@@ -267,12 +259,6 @@ struct HotelImage: Hashable, Codable {
         case url = "url"
     }
 
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        typeName = try values.decode(String.self, forKey: .typeName)
-        description = try values.decodeIfPresent(String.self, forKey: .description)
-        url = try values.decodeIfPresent(String.self, forKey: .url)
-    }
 }
 /*
 struct UniversalSortAndFilter: Codable {

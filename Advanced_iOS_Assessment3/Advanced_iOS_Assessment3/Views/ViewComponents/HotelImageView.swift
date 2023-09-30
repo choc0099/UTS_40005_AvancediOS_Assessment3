@@ -17,6 +17,8 @@ struct HotelImageView: View {
         //checks if there is an image URL in the hotel propertyImage, if not, it will display a placeholder image.
         if let haveImageURL = propertyImage?.image?.url  {
             AsyncImage(url: URL(string: haveImageURL)) { image in
+                //the image will be in a circle shape if it is viewed in a map view.
+                //if it is not, it will be as a normal rectangle shape.
                 if mapMode {
                     image.resizable().aspectRatio(contentMode: .fill).frame(width: imageSize, height: imageSize).clipShape(.circle).overlay(Circle()
                         .stroke(Color.gray, lineWidth: 2)
@@ -26,11 +28,24 @@ struct HotelImageView: View {
                 }
                 
             } placeholder: {
-                Image(systemName: "building.fill").aspectRatio(contentMode: .fill).frame(width: imageSize, height: imageSize)
+                placeHolderImage()
             }
         } else {
+           placeHolderImage()
+        }
+    }
+    
+    //a helper function that displays a placeholder image whether it is in map mode or not as it will be dispayed in a circle form when viewing it on a map.
+    @ViewBuilder func placeHolderImage() -> some View {
+        if mapMode {
+            Image(systemName: "building.fill").resizable().aspectRatio(contentMode: .fit).frame(width: imageSize, height: imageSize).clipShape(.circle).overlay(Circle()
+                .stroke(Color.gray, lineWidth: 2)
+            )
+        }
+        else {
             Image(systemName: "building.fill").resizable().aspectRatio(contentMode: .fit).frame(width: imageSize, height: imageSize)
         }
+        
     }
 }
 

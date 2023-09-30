@@ -17,7 +17,7 @@ struct PropertyResultsProcessingView: View {
     var body: some View {
         Group {
             if roomSearchVM.propertyResultStatus == .active {
-                PropertyResultsView(roomSearchVM: roomSearchVM,regionId: regionId, regionCoordinates: regionCoordinates)
+                PropertyResultsView(roomSearchVM: roomSearchVM, regionId: regionId, regionCoordinates: regionCoordinates)
             }
             else if roomSearchVM.propertyResultStatus == .loading {
                 ProgressView()

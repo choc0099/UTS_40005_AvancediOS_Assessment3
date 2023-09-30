@@ -12,7 +12,7 @@ struct SearchHistoryView: View {
     //handles stored data persistnace from CoreData to display search history items to the user.
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \SearchHistory.regionName, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \SearchHistory.dateSearched, ascending: false)],
         animation: .default)
     private var searchHistory: FetchedResults<SearchHistory>
     
@@ -23,6 +23,7 @@ struct SearchHistoryView: View {
                 //individual parameters are called here.
                 NavigationLink(destination: HotelPropertySearchView(isFromHistory: true, regionId: historyItem.regionId ?? "", regionName: historyItem.regionName ?? "", regionCoordinates: Coordinates(lat: historyItem.regionCoordinates?.latitude ?? 0, long: historyItem.regionCoordinates?.longitude ?? 0))){
                     Text(historyItem.regionName ?? "")
+                    
                 }
                
             }.onDelete(perform: deleteItems)

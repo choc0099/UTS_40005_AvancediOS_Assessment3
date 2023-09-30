@@ -40,9 +40,7 @@ struct PropertyResultsView: View {
                         HotelPropertyResultsMapView(roomSearchVM: roomSearchVM, currentCoordinates: MKCoordinateRegion(center: .init(latitude: regionCoordinates.latitude, longitude: regionCoordinates.longitude), span: .init(latitudeDelta: 0.1, longitudeDelta: 0.1)))
                     }
                 }.frame(maxHeight: .infinity)
-                
             }
-           
         }
     }
 }

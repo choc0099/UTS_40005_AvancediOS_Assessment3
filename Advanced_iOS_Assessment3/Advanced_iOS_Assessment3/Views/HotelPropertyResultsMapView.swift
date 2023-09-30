@@ -19,13 +19,19 @@ struct HotelPropertyResultsMapView: View {
                 marker in
                 MapAnnotation(coordinate: marker.coordinate) {
                     VStack {
-                        Image(systemName: "building.fill")
-                        Text(marker.name).font(.caption).background(.background).foregroundColor(.primary).bold().padding(.horizontal, 2)
+                        HotelImageView(propertyImage: marker.property.propertyImage, imageSize: 50)
+                        Text(marker.name).font(.caption).background(.background).foregroundColor(.primary).bold().frame(width: 125).padding(.horizontal, 2)
                     }
                 }
             }.onAppear {
                 //loads the annotations
+                //zooms in the map automatically after the view has been tapped.
+                withAnimation(.easeInOut(duration: 1.0)) {
+                    currentCoordinates.span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                }
                 roomSearchVM.convertToAnnotations()
+                
+                
             }
         }
     }

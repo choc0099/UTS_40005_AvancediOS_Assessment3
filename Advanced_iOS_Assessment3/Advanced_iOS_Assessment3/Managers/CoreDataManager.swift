@@ -15,7 +15,7 @@ class CoreDataManager {
     
     static func saveNeighbourhoodSearch(cameFromHistory: Bool, regionId: String, regionName: String, regionCoordinates: Coordinates) {
         //this will prevent it from being saved to CoreData if the user has navigated from the History view but will save if it is from a live search results.
-        if !cameFromHistory && !regionAlreadyExists(regionId: regionId){
+        if !cameFromHistory && !regionAlreadyExists(regionName: regionName){
             let context = viewContext
             let searchHistory = SearchHistory(context: context)
             searchHistory.regionName = regionName
@@ -43,14 +43,14 @@ class CoreDataManager {
        
     }
     //checks if the regionId is already exists on the persistance storage, if it exists, it will only update the date.
-    static private func regionAlreadyExists(regionId: String) -> Bool {
+    static private func regionAlreadyExists(regionName: String) -> Bool {
         do {
             //fetches the region data stored.
             let regions = try viewContext.fetch(searchHistoryResults)
             for region in regions {
-                if region.regionId == regionId {
+                if region.regionName == regionName {
                     //updates the date to get search date.
-                    try updateRegion(regionId: regionId)
+                    try updateRegion(regionName: regionName)
                     return true
                 }
             }
@@ -61,15 +61,15 @@ class CoreDataManager {
     }
     
     //this is a helper function specifically used to update the search date so it can show up on from the newests one that has been searched.
-    static private func updateRegion(regionId: String)  throws {
+    static private func updateRegion(regionName: String)  throws {
         //creates a new fetch request to find the region id.
         let newFetchRequest: NSFetchRequest<SearchHistory> = SearchHistory.fetchRequest()
-        newFetchRequest.predicate = NSPredicate(format: "regionId == %@", regionId)
+        newFetchRequest.predicate = NSPredicate(format: "regionName == %@", regionName)
         
         let region = try viewContext.fetch(newFetchRequest).first
         //checks if it is found, this is used for debugging.
         guard region != nil else {
-                print("Unable to update this region \(regionId).")
+                print("Unable to update this region \(regionName).")
                 return
         }
                 

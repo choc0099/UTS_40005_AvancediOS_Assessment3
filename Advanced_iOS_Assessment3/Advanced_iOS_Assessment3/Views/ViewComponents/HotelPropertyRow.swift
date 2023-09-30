@@ -11,7 +11,7 @@ struct HotelPropertyRow: View {
     @State var hotelProperty: Property
     var body: some View {
         HStack( spacing: 15) {
-            HotelImageView(propertyImage: hotelProperty.propertyImage, imageSize: 50)
+            HotelImageView(propertyImage: hotelProperty.propertyImage, imageSize: 50, mapMode: false)
             VStack(alignment: .leading, spacing: 10) {
                 Text(hotelProperty.name).font(.headline).multilineTextAlignment(.leading)
                 

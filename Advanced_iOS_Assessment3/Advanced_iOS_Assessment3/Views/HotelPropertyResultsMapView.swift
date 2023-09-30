@@ -19,7 +19,7 @@ struct HotelPropertyResultsMapView: View {
                 marker in
                 MapAnnotation(coordinate: marker.coordinate) {
                     VStack {
-                        HotelImageView(propertyImage: marker.property.propertyImage, imageSize: 50)
+                        HotelImageView(propertyImage: marker.property.propertyImage, imageSize: 50, mapMode: true)
                         Text(marker.name).font(.caption).background(.background).foregroundColor(.primary).bold().frame(width: 125).padding(.horizontal, 2)
                     }
                 }

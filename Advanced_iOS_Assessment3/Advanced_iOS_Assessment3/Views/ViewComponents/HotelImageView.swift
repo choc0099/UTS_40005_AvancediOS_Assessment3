@@ -18,10 +18,10 @@ struct HotelImageView: View {
             AsyncImage(url: URL(string: haveImageURL)) { image in
                 image.resizable().aspectRatio(contentMode: .fit).frame(width: imageSize, height: imageSize)
             } placeholder: {
-                Image(systemName: "building.fill")
+                Image(systemName: "building.fill").aspectRatio(contentMode: .fit).frame(width: imageSize, height: imageSize)
             }
         } else {
-            Image(systemName: "building.fill").resizable()
+            Image(systemName: "building.fill").resizable().aspectRatio(contentMode: .fit).frame(width: imageSize, height: imageSize)
         }
     }
 }

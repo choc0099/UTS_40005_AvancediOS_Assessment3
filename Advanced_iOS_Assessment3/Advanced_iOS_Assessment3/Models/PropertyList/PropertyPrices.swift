@@ -89,14 +89,6 @@ struct Lead: Hashable, Codable {
         case currencyInfo = "currencyInfo"
         case formatted = "formatted"
     }
-
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        typeName = try values.decode(String.self, forKey: .typeName)
-        amount = try values.decode(Double.self, forKey: .amount)
-        currencyInfo = try values.decodeIfPresent(CurrencyInfo.self, forKey: .currencyInfo)
-        formatted = try values.decode(String.self, forKey: .formatted)
-    }
 }
 
 

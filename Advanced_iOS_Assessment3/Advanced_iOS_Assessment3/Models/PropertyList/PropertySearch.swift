@@ -173,7 +173,19 @@ struct Property: Identifiable, Hashable, Codable {
     let regionId : String
     //let priceMetadata : PriceMetadata?
     //let saveTripItem : String?
-
+    
+    //this is used for testing and previews
+    init(name: String, formattedPrice: String, formattedDiscount: String, isAvaliable: Bool, roomsAvaliable: Int, propertyImage: PropertyImage?) {
+        self.id = 0
+        self.typeName = ""
+        self.name = name
+        self.price = Price(typeName: "", lead: Lead(typeName: "", amount: 0, currencyInfo: nil, formatted: formattedPrice), strikeOut: StrikeOut(typeName: "", amount: 0, formatted: formattedDiscount))
+        self.availability = Availability(typeName: "", isAvailable: isAvaliable, minRoomsLeft: roomsAvaliable)
+        self.regionId = ""
+        self.mapMarker = PropertyMapMarker(label: "", coordinates: PropertyCoordinates(typeName: "", latitude: 0, longitude: 0))
+        self.propertyImage = propertyImage
+    }
+    
     enum CodingKeys: String, CodingKey {
 
         case typeName = "__typename"

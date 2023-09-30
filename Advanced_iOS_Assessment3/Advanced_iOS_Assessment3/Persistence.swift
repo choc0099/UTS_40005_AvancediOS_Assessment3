@@ -14,8 +14,8 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
-            let newSearchHistory = SearchHistory(context: viewContext)
-            newSearchHistory.dateSearched = Date()
+            //let newSearchHistory = SearchHistory(context: viewContext)
+            //newSearchHistory.dateSearched = Date()
         }
         do {
             try viewContext.save()

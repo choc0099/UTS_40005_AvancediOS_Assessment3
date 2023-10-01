@@ -15,6 +15,14 @@ struct PropertyContentRequest: Hashable, Encodable {
     let currency: String
     let siteId: Int
     
+    enum CodingKeys: String, CodingKey {
+        case propertyId
+        case eapid
+        case locale
+        case currency
+        case siteId
+    }
+    
     init(propertyId: Int, eapid: Int, locale: String, currency: String, siteId: Int) {
         //converts the propertyId to a string that is used for JSON
         self.propertyId = String(propertyId)

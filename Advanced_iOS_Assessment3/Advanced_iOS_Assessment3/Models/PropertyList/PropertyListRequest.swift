@@ -16,9 +16,39 @@ struct PropertyListRequest: Encodable, Hashable{
     let checkOutDate : CheckOutDate
     let rooms : [Room]
     let resultsStartingIndex : Int?
-    let resultsSize: Int?
+    let numbersOfResults: Int?
     let sort: String?
     let filters: Filters?
+    
+    enum CodingKeys: String, CodingKey {
+        case numbersOfResults = "resultsSize"
+        case currency
+        case eapid
+        case locale
+        case siteId
+        case destination
+        case checkInDate
+        case checkOutDate
+        case rooms
+        case resultsStartingIndex
+        case sort
+        case filters
+    }
+    
+    init(currency: String, eapid: Int, locale: String, siteId: Int, destination: Destination, checkInDate: CheckInDate, checkOutDate: CheckOutDate, rooms: [Room], sortAndFilterSettings userPref: PropertyListPreference) {
+        self.currency = currency
+        self.eapid = eapid
+        self.locale = locale
+        self.siteId = siteId
+        self.destination = destination
+        self.checkInDate = checkInDate
+        self.checkOutDate = checkOutDate
+        self.rooms = rooms
+        self.resultsStartingIndex = 0
+        self.numbersOfResults = userPref.numbersOfResults
+        self.sort = userPref.sort
+        self.filters = userPref.filter
+    }
 }
 
 struct Children: Identifiable, Hashable, Encodable {
@@ -67,9 +97,22 @@ struct Room: Identifiable, Hashable, Encodable {
 
 //this is used to filter the hotel results
 struct Filters: Encodable, Hashable {
-    let price: PriceRequest
+    let price: PriceRequest?
+    let accessibility: [String]?
+    let travellerType: [String]?
+    let amenities: [String]?
+    let star: [String]?
     
     enum CodingKeys: String, CodingKey {
         case price = "price"
     }
+}
+
+
+
+//this is a struct that will be used to store property prefences including price filtering and sorting
+struct PropertyListPreference {
+    let numbersOfResults: Int?
+    let sort: String?
+    let filter: Filters?
 }

@@ -28,6 +28,16 @@ class HotelPropertySearchViewModel: ObservableObject {
     @Published var numbersOfChildren: Int = 0
     @Published var propertyResoults = [Property]()
     @Published var hotelResultsAnnotations: [HotelAnnotation] = []
+    //this is used to configure search settings such as sorting and filtering properties.
+    @Published var sort: String?
+    @Published var minPrice: Int = 300
+    @Published var maxPrice: Int = 2000
+    @Published var numbersOfResults: Int = 200
+    
+    var searchPref: PropertyListPreference {
+        let price = PriceRequest(maximunPrice: maxPrice, minimunPrice: minPrice)
+        return PropertyListPreference(numbersOfResults: numbersOfResults, sort: sort, filter: Filters(price: price, accessibility: nil, travellerType: nil, amenities: nil, star: nil))
+    }
     
     func incrementRooms() {
         self.numbersOfRooms += 1
@@ -119,7 +129,7 @@ class HotelPropertySearchViewModel: ObservableObject {
         //destination object.
         let dest = Destination(regionId: gaiaId, coordinates: nil)
         //builds this response so it can be encoded to JSON.
-        let propertyQuery = PropertyListRequest(currency: "AUD", eapid: metaDataAus.eapId, locale: metaData.australia.supportedLocales[0].hotelSiteLocaleIdentifier, siteId: metaDataAus.siteId, destination: dest, checkInDate: checkin, checkOutDate: checkout, rooms: rooms, resultsStartingIndex: 0, resultsSize: 100, sort: nil, filters: nil )
+        let propertyQuery = PropertyListRequest(currency: "AUD", eapid: metaDataAus.eapId, locale: metaData.australia.supportedLocales[0].hotelSiteLocaleIdentifier, siteId: metaDataAus.siteId, destination: dest, checkInDate: checkin, checkOutDate: checkout, rooms: rooms, sortAndFilterSettings: searchPref)
         return propertyQuery
     }
     

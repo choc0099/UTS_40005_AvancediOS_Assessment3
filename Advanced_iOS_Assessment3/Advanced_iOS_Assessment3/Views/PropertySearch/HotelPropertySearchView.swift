@@ -47,6 +47,11 @@ struct HotelPropertySearchView: View {
                         Text("Room \(room.index)")
                     }
                 }
+                
+                Section {
+                    
+                }
+                
             }.onAppear(perform: {
                     //saves it to coreData
                 CoreDataManager.saveNeighbourhoodSearch(cameFromHistory: isFromHistory, regionId: regionId, regionName: regionName, regionCoordinates: regionCoordinates)

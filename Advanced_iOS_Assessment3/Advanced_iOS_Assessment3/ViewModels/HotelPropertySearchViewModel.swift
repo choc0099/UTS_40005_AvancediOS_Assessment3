@@ -9,7 +9,7 @@ enum QueryError: Error {
     case roomNotFound
     case noChildrenFound
     case numbersOfRoomsNotEntered
-    case numbersOfAdultsNotEntered(room: Room)
+    case numbersOfAdultsNotEntered(roomNumber: Int)
 }
 
 import Foundation
@@ -162,8 +162,6 @@ class HotelPropertySearchViewModel: ObservableObject {
                 //sets the view to display results to the user after it is loaded
                 self.propertyResultStatus = .active
             }
-            
-            
         } catch {
             propertyResultStatus = .unkown
             print(error.localizedDescription)
@@ -177,18 +175,33 @@ class HotelPropertySearchViewModel: ObservableObject {
             throw QueryError.numbersOfRoomsNotEntered
         }
         
+        //this is a counter to identify what romm number it is
+        var counter = 1
         //checks if there are numbers of adults entered in each room
         for room in rooms {
             if !(room.adults > 0) {
                 //throws an error
-                throw QueryError.numbersOfAdultsNotEntered(room: room)
+                throw QueryError.numbersOfAdultsNotEntered(roomNumber: counter)
             }
+            counter += 1
         }
     }
     
+    //this will convert the date object to date components to get an integer from day, month and year as a part of the JSON structure.
     private func retrieveDateComp(date: Date) -> DateComponents {
         let calendar = Calendar.current
         return calendar.dateComponents([.day, .month, .year], from: date)
+    }
+    
+    //this will convert the date integer fields back to the Date object
+    private func convertToDateObject(day: Int, month: Int, year: Int) -> Date {
+        var dateComp = DateComponents()
+        dateComp.day = day
+        dateComp.month = month
+        dateComp.year = year
+        
+        let calendar = Calendar(identifier: .gregorian)
+        return calendar.date(from: dateComp)!
     }
     
     //this will convert the properties into map annotations which will be used for map markers.
@@ -204,5 +217,27 @@ class HotelPropertySearchViewModel: ObservableObject {
     //helper function to get the indivdiual annotation.
     private func getAnnotation(property: Property) -> HotelAnnotation {
         return HotelAnnotation(property:  property)
+    }
+    
+    func saveToUserDefaults(regionId: String, metaDat: MetaDataResponse) {
+        UserDefaultsManager.savePropertySearchPrefernces(propertySearchPreferences: createPropertyObject(metaData: metaDat, gaiaId: regionId))
+    }
+    
+    func loadFromUserDefaults() {
+        if let propertyRequest =  UserDefaultsManager.loadPropertySearchData() {
+            //assigns it to the vm properties
+            //decodes the dates.
+            let propertyCheckInDate = propertyRequest.checkInDate
+            checkInDate = convertToDateObject(day: propertyCheckInDate.day, month: propertyCheckInDate.month, year: propertyCheckInDate.year)
+            let propertyCheckOutDate = propertyRequest.checkOutDate
+            checkOutDate = convertToDateObject(day: propertyCheckOutDate.day, month: propertyCheckOutDate.month, year: propertyCheckOutDate.year)
+            rooms = propertyRequest.rooms
+            if let havePrice = propertyRequest.filters?.price {
+                minPrice = havePrice.minimunPrice
+                maxPrice = havePrice.maximunPrice
+            }
+            numbersOfResults = Float(propertyRequest.numbersOfResults)
+        }
+        
     }
 }

@@ -28,64 +28,78 @@ struct HotelPropertySearchView: View {
             Form {
                 Section("Check in and Check out Date Ranges") {
                     DatePicker("Check In Date", selection:  $roomSearchVM.checkInDate, displayedComponents: [.date])
+                        //this will save to user defaults as the user updates the date.
+                        .onChange(of: roomSearchVM.checkInDate, perform: { checkInDate in
+                        saveToUserDefaults()
+                    })
+                    
                     DatePicker("Check Out Date", selection: $roomSearchVM.checkOutDate, displayedComponents: [.date])
+                            //this will save to user defaults as the user updates the date.
+                            .onChange(of: roomSearchVM.checkOutDate, perform: { checkOutDate in
+                            saveToUserDefaults()
+                        })
                 }
                 
                 Section("Rooms") {
                     //allows the user to select numbers of rooms
                     Stepper("Numbers of Rooms: \(roomSearchVM.numbersOfRooms)") {
                         roomSearchVM.incrementRooms()
+                        //saves to userDefaults
+                        saveToUserDefaults()
                     } onDecrement: {
                         roomSearchVM.decrementRooms()
+                        saveToUserDefaults()
                     }
                 }
                 
                 ForEach(roomSearchVM.rooms.indices, id: \.self) {
                     //allows the user to select numbers of rooms
                     roomIndex in
-                    NavigationLink(destination: RoomFieldView(roomSearchVM: roomSearchVM, currentRoomId: roomSearchVM.rooms[roomIndex].id)) {
+                    NavigationLink(destination: RoomFieldView(roomSearchVM: roomSearchVM, currentRoomId: roomSearchVM.rooms[roomIndex].id, regionId: regionId)) {
                         Text("Room \(roomIndex + 1)")
                     }
                 }
                 
                 Section {
-                    NavigationLink(destination: PropertySearchPreferencesView(roomSearchVM: roomSearchVM)) {
+                    NavigationLink(destination: PropertySearchPreferencesView(roomSearchVM: roomSearchVM, regionId: regionId)) {
                         Text("Sort and Filter Results")
                     }
                 }
                 
             }.onAppear(perform: {
-                    //saves it to coreData
+                //loads the search prefernces from userDefaults
+                roomSearchVM.loadFromUserDefaults()
+                //saves it to coreData
                 CoreDataManager.saveNeighbourhoodSearch(cameFromHistory: isFromHistory, regionId: regionId, regionName: regionName, regionCoordinates: regionCoordinates)
             })
             .toolbar {
                 Button {
                     if let haveMetaData = hotelMain.metaData {
-                            Task {
-                                do {
-                                    //loads the response to the VM
-                                    try roomSearchVM.validate()
-                                    //proceeds to the next view.
-                                    navActive = true
-                                    await roomSearchVM.fetchResults(metaData: haveMetaData, gaiaId: regionId)
-                                    
-                                //displays an alert to the user if they did not input the stuffs correctly.
-                                } catch QueryError.numbersOfRoomsNotEntered {
-                                    showAlert = true
-                                    alertTitle = "You have not entered how many rooms you need."
-                                    alertMessage = "You are requried to enter the numbers of room to get the best search results."
-                                } catch QueryError.numbersOfAdultsNotEntered(let roomNeeded) {
-                                    showAlert = true
-                                    alertTitle = "Please Check if there are adults entered in the rooms"
-                                    alertMessage = "You must declare how many adults in each room, you have not entered the numbers of adults in ome of the rooms ."
-                                }
-                                catch {
-                                    showAlert = true
-                                    alertTitle = "Something went wrong"
-                                    alertMessage = "Unable to process your request."
-                                }
+                        Task {
+                            do {
+                                //loads the response to the VM
+                                try roomSearchVM.validate()
+                                //proceeds to the next view.
+                                navActive = true
+                                await roomSearchVM.fetchResults(metaData: haveMetaData, gaiaId: regionId)
                                 
+                            //displays an alert to the user if they did not input the stuffs correctly.
+                            } catch QueryError.numbersOfRoomsNotEntered {
+                                showAlert = true
+                                alertTitle = "You have not entered how many rooms you need."
+                                alertMessage = "You are requried to enter the numbers of room to get the best search results."
+                            } catch QueryError.numbersOfAdultsNotEntered(let roomNumber) {
+                                showAlert = true
+                                alertTitle = "Please Check if there are adults entered in the rooms"
+                                alertMessage = "You must declare how many adults in each room, you have not entered the numbers of adults in Room \(roomNumber)."
                             }
+                            catch {
+                                showAlert = true
+                                alertTitle = "Something went wrong"
+                                alertMessage = "Unable to process your request."
+                            }
+                            
+                        }
                     }
                     else {
                         print("No metaData")
@@ -102,6 +116,12 @@ struct HotelPropertySearchView: View {
                 )
             }
         }.navigationTitle("Search Property")
+    }
+    
+    func saveToUserDefaults() {
+        if let haveMetaData = hotelMain.metaData {
+            roomSearchVM.saveToUserDefaults(regionId: regionId, metaDat: haveMetaData)
+        }
     }
 }
 

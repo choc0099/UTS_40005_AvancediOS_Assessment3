@@ -9,6 +9,9 @@ import SwiftUI
 
 struct PropertySearchPreferencesView: View {
     @ObservedObject var roomSearchVM: HotelPropertySearchViewModel
+    @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
+    @State var regionId: String
+    
     var body: some View {
         NavigationStack {
             Form{
@@ -25,20 +28,24 @@ struct PropertySearchPreferencesView: View {
                 Section("Price Range") {
                     Stepper("Minimum Price: $\(roomSearchVM.minPrice)") {
                         roomSearchVM.minPrice += 50
+                        saveToUserDefaults()
                     } //when the user presses the plus an minus button the price will increase and decrease by $50 respectively
                     onDecrement: {
                         //this will prevent negative numbers.
                         if(roomSearchVM.minPrice > 0) {
                             roomSearchVM.minPrice -= 50
+                            saveToUserDefaults()
                         }
                     }
 
                     Stepper("Maximum Price: $\(roomSearchVM.maxPrice)") {
                         roomSearchVM.maxPrice += 50
+                        saveToUserDefaults()
                     } onDecrement: {
                         //this will prevent negative numbers.
                         if(roomSearchVM.maxPrice > 0) {
                             roomSearchVM.maxPrice -= 50
+                            saveToUserDefaults()
                         }
                         
                     }
@@ -48,8 +55,14 @@ struct PropertySearchPreferencesView: View {
             }
         }
     }
+    
+    func saveToUserDefaults() {
+        if let haveMetaData = hotelMain.metaData {
+            roomSearchVM.saveToUserDefaults(regionId: regionId, metaDat: haveMetaData)
+        }
+    }
 }
 
 #Preview {
-    PropertySearchPreferencesView(roomSearchVM: HotelPropertySearchViewModel())
+    PropertySearchPreferencesView(roomSearchVM: HotelPropertySearchViewModel(), regionId: "")
 }

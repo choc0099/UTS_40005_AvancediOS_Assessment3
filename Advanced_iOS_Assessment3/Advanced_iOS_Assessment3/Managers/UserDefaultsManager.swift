@@ -9,9 +9,9 @@
 import Foundation
 
 class UserDefaultsManager {
-    static let METADATA_KEY = "hotelMetalData"
-    static let PROPERTY_SEARCH_KEY = "hotelPropertySearchAndSettings"
-    static let standard = UserDefaults.standard
+    private static let METADATA_KEY = "hotelMetalData"
+    private static let PROPERTY_SEARCH_KEY = "hotelPropertySearchAndSettings"
+    private static let standard = UserDefaults.standard
     
     //this is a function to save the hotel metadata to user defaults to reduce the numbers of API calls needed.
     static func setMetaData(metaData: MetaDataResponse) {
@@ -42,7 +42,7 @@ class UserDefaultsManager {
     }
     
     //loads it from user defaults
-    private static func loadPropertySearchData() -> PropertyListRequest? {
+    public static func loadPropertySearchData() -> PropertyListRequest? {
         if let haveData = standard.data(forKey: PROPERTY_SEARCH_KEY) {
             let data = try? JSONDecoder().decode(PropertyListRequest.self, from: haveData)
             return data

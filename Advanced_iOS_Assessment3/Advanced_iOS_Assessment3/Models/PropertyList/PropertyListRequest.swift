@@ -16,7 +16,7 @@ struct PropertyListRequest: Codable, Hashable{
     let checkOutDate : CheckOutDate
     let rooms : [Room]
     let resultsStartingIndex : Int?
-    let numbersOfResults: Int?
+    let numbersOfResults: Int
     let sort: String?
     let filters: Filters?
     
@@ -112,7 +112,7 @@ struct Filters: Codable, Hashable {
 
 //this is a struct that will be used to store property prefences including price filtering and sorting
 struct PropertyListPreference: Codable {
-    let numbersOfResults: Int?
+    let numbersOfResults: Int
     let sort: String?
     let filter: Filters?
 }

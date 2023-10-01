@@ -12,6 +12,10 @@ struct RoomFieldView: View {
     @State var currentRoomId: UUID //this will be passed based on a room id to reference to the object
     @State var currentRoom: Room = Room(adults: 0, children: [])
     @State var numberOfAdults: Int = 0
+    //these are only used to update userDefaults settings for searchListProperty
+    @State var regionId: String
+    @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
+    
     var body: some View {
         Group {
             Form {
@@ -24,16 +28,18 @@ struct RoomFieldView: View {
                 Stepper("Numbers of Children \(currentRoom.children.count)") {
                     roomSearchVM.incrementChildren(currentRoomId: currentRoomId)
                     updateRoomValues()
+                    saveToUserDefaults()
                 } onDecrement: {
                     roomSearchVM.decrmentChildren(currentRoomId: currentRoomId)
                     updateRoomValues()
+                    saveToUserDefaults()
                 }
                 
                 
                 Section {
                     ForEach(currentRoom.children) {
                         child in
-                        ChildrenFieldView(roomSearchVM: roomSearchVM, currentRoomId: currentRoomId, currentChildId: child.id)
+                        ChildrenFieldView(roomSearchVM: roomSearchVM, currentRoomId: currentRoomId, currentChildId: child.id, regionId: regionId)
                     }
                 } header: {
                     Text("Children")
@@ -49,11 +55,17 @@ struct RoomFieldView: View {
         currentRoom = try! roomSearchVM.findRoomById(roomId: currentRoomId)
         numberOfAdults = currentRoom.adults
     }
+    
+    func saveToUserDefaults() {
+        if let haveMetaData = hotelMain.metaData {
+            roomSearchVM.saveToUserDefaults(regionId: regionId, metaDat: haveMetaData)
+        }
+    }
 }
 
 struct RoomFieldView_Previews: PreviewProvider {
     static var previews: some View {
         let room: Room = Room(adults: 1, children: [Children(age: 1)])
-        RoomFieldView(roomSearchVM: HotelPropertySearchViewModel(), currentRoomId: room.id)
+        RoomFieldView(roomSearchVM: HotelPropertySearchViewModel(), currentRoomId: room.id, regionId: "")
     }
 }

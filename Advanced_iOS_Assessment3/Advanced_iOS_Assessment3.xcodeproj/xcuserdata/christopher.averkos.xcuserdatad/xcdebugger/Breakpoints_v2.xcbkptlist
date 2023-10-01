@@ -14,8 +14,8 @@
             filePath = "Advanced_iOS_Assessment3/ViewModels/HotelPropertySearchViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "fetchResults(metaData:gaiaId:)"
             landmarkType = "7">
          </BreakpointContent>

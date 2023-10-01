@@ -15,6 +15,20 @@ struct PropertySearchPreferencesView: View {
     var body: some View {
         NavigationStack {
             Form{
+                Section("Sort Results") {
+                    Picker("Sort By", selection: $roomSearchVM.sort) {
+                        ForEach(SortPropertyBy.allCases)  {
+                            sortMethod in
+                            Text(sortMethod.displayName)
+                        }
+                    }
+                    .onChange(of: roomSearchVM.sort) { sortMethod in
+                        //saves to user defaults
+                        print(sortMethod.rawValue)
+                        saveToUserDefaults()
+                    }
+                }
+                
                 Section("Numbers of Results") {
                     VStack {
                         Text("\(Int(roomSearchVM.numbersOfResults))")
@@ -47,11 +61,8 @@ struct PropertySearchPreferencesView: View {
                             roomSearchVM.maxPrice -= 50
                             saveToUserDefaults()
                         }
-                        
                     }
-
                 }
-                
             }
         }
     }

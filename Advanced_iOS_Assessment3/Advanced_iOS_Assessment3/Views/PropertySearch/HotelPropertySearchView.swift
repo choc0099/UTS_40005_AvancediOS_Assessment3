@@ -42,7 +42,7 @@ struct HotelPropertySearchView: View {
                 
                 Section("Rooms") {
                     //allows the user to select numbers of rooms
-                    Stepper("Numbers of Rooms: \(roomSearchVM.numbersOfRooms)") {
+                    Stepper("Numbers of Rooms: \(roomSearchVM.rooms.count)") {
                         roomSearchVM.incrementRooms()
                         //saves to userDefaults
                         saveToUserDefaults()
@@ -79,6 +79,8 @@ struct HotelPropertySearchView: View {
                             do {
                                 //loads the response to the VM
                                 try roomSearchVM.validate()
+                                //saves to user defaults
+                                saveToUserDefaults()
                                 //proceeds to the next view.
                                 navActive = true
                                 await roomSearchVM.fetchResults(metaData: haveMetaData, gaiaId: regionId)

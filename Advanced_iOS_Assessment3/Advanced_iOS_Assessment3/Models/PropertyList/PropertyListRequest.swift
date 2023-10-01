@@ -6,7 +6,36 @@
 //
 //this file containts objects that is used to encode into a JSON file for a POST request to search for hotels.
 import Foundation
-struct PropertyListRequest: Codable, Hashable{
+
+enum SortPropertyBy: String, Identifiable, CaseIterable, Codable {
+    case recommended = "RECOMMENDED"
+    case lowToHighPrice = "PRICE_LOW_TO_HIGH"
+    case highToLowPrice = "PRICE_HIGH_TO_LOW"
+    case propertyClass = "PROPERTY_CLASS"
+    case review = "REVIEW"
+    case distance = "DISTANCE"
+    var id: Self {self}
+    
+    //this will dispaly the names in the views that the user can easily understand
+    var displayName: String  {
+        switch self {
+        case .lowToHighPrice:
+            return "Prices from Low to High"
+        case .highToLowPrice:
+            return "Prices from High to Low"
+        case .propertyClass:
+            return "Stars"
+        case .review:
+            return "Guest Rating"
+        case .recommended:
+            return "Recomended"
+        case .distance:
+            return "Distance from Searched Region"
+        }
+    }
+}
+
+struct PropertyListRequest: Codable, Hashable {
     let currency: String
     let eapid: Int
     let locale : String
@@ -17,7 +46,7 @@ struct PropertyListRequest: Codable, Hashable{
     let rooms : [Room]
     let resultsStartingIndex : Int?
     let numbersOfResults: Int
-    let sort: String?
+    let sort: SortPropertyBy
     let filters: Filters?
     
     enum CodingKeys: String, CodingKey {
@@ -113,6 +142,6 @@ struct Filters: Codable, Hashable {
 //this is a struct that will be used to store property prefences including price filtering and sorting
 struct PropertyListPreference: Codable {
     let numbersOfResults: Int
-    let sort: String?
+    let sort: SortPropertyBy
     let filter: Filters?
 }

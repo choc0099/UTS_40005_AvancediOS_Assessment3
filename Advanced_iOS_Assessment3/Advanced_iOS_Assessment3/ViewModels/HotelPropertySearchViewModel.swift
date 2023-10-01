@@ -23,13 +23,10 @@ class HotelPropertySearchViewModel: ObservableObject {
     @Published var checkInDate: Date = Date.now
     @Published var checkOutDate: Date = Date.now
     //determines the numbers of rooms, children and adults
-    @Published var numbersOfRooms: Int = 0
-    @Published var numbersOfAdults: Int = 0
-    @Published var numbersOfChildren: Int = 0
     @Published var propertyResoults = [Property]()
     @Published var hotelResultsAnnotations: [HotelAnnotation] = []
     //this is used to configure search settings such as sorting and filtering properties.
-    @Published var sort: String?
+    @Published var sort: SortPropertyBy = .recommended
     @Published var minPrice: Int = 300
     @Published var maxPrice: Int = 2000
     @Published var numbersOfResults: Float = 200.0
@@ -40,15 +37,13 @@ class HotelPropertySearchViewModel: ObservableObject {
     }
     
     func incrementRooms() {
-        self.numbersOfRooms += 1
         self.rooms.append(Room(adults: 0, children: []))
     }
     
     func decrementRooms() {
         //retricts the range so it will not display negative number.
-        if(numbersOfRooms > 0) {
+        if !rooms.isEmpty {
             self.rooms.removeLast()
-            self.numbersOfRooms -= 1
         }
     }
     
@@ -92,8 +87,7 @@ class HotelPropertySearchViewModel: ObservableObject {
     
     //this will get that specific room based on the id
     func findRoomById(roomId: UUID) throws ->  Room {
-        if let haveRoom = self.rooms.first(where: {$0.id == roomId})
-        {
+        if let haveRoom = self.rooms.first(where: {$0.id == roomId}) {
             return haveRoom
         }
         else {
@@ -103,8 +97,7 @@ class HotelPropertySearchViewModel: ObservableObject {
     //this returns the children object based on their id.
     func findChildrenById(roomId: UUID, childrenId: UUID) throws -> Children {
         if let roomIndex = self.rooms.firstIndex(where: {$0.id == roomId}) {
-            if let index = self.rooms[roomIndex].children.firstIndex(where: {$0.id == childrenId})
-            {
+            if let index = self.rooms[roomIndex].children.firstIndex(where: {$0.id == childrenId}) {
                 return self.rooms[roomIndex].children[index]
             }
             throw QueryError.noChildrenFound
@@ -155,8 +148,7 @@ class HotelPropertySearchViewModel: ObservableObject {
                 //allocates the response stuff to this VM so it can be dispalyed to the user.
                 self.propertyResoults = response.data.propertySearch.properties!
                 //tests via printing output if it works
-                for property in self.propertyResoults
-                {
+                for property in self.propertyResoults {
                     print("Id: \(property.id) Name: \(property.name) ")
                 }
                 //sets the view to display results to the user after it is loaded
@@ -236,7 +228,12 @@ class HotelPropertySearchViewModel: ObservableObject {
                 minPrice = havePrice.minimunPrice
                 maxPrice = havePrice.maximunPrice
             }
+            sort = propertyRequest.sort
             numbersOfResults = Float(propertyRequest.numbersOfResults)
+            print("Property Search Prefernces loaded from user defaults")
+        }
+        else {
+            print("No data loaded from user defaults.")
         }
         
     }

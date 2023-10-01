@@ -10,23 +10,13 @@ import Foundation
 
 struct Price: Hashable, Codable {
     let typeName : String
-    //let options : [Option]?
-    //let priceMessaging : String?
     let lead : Lead
     let strikeOut: StrikeOut?
-    //let displayMessages : [DisplayMessages]?
-    //let strikeOutType : String?
-    //let priceMessages : [PriceMessages]?
 
     enum CodingKeys: String, CodingKey {
         case typeName = "__typename"
-        //case options = "options"
-        //case priceMessaging = "priceMessaging"
         case lead = "lead"
         case strikeOut = "strikeOut"
-        //case displayMessages = "displayMessages"
-        //case strikeOutType = "strikeOutType"
-        //case priceMessages = "priceMessages"
     }
 }
 

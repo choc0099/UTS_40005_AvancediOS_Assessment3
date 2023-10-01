@@ -149,7 +149,8 @@ struct Amenities: Hashable, Codable {
 }
 
 struct Property: Identifiable, Hashable, Codable {
-    let id: Int
+    let id: UUID = UUID()
+    let hotelId: String
     let typeName: String
     //let featuredMessages: [String]?
     let name: String
@@ -176,7 +177,7 @@ struct Property: Identifiable, Hashable, Codable {
     
     //this is used for testing and previews
     init(name: String, formattedPrice: String, formattedDiscount: String, isAvaliable: Bool, roomsAvaliable: Int, propertyImage: PropertyImage?) {
-        self.id = 0
+        self.hotelId = "0"
         self.typeName = ""
         self.name = name
         self.price = Price(typeName: "", lead: Lead(typeName: "", amount: 0, currencyInfo: nil, formatted: formattedPrice), strikeOut: StrikeOut(typeName: "", amount: 0, formatted: formattedDiscount))
@@ -189,7 +190,7 @@ struct Property: Identifiable, Hashable, Codable {
     enum CodingKeys: String, CodingKey {
 
         case typeName = "__typename"
-        case id = "id"
+        case hotelId = "id"
         //case featuredMessages = "featuredMessages"
         case name = "name"
         case availability = "availability"
@@ -217,7 +218,7 @@ struct Property: Identifiable, Hashable, Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         typeName = try values.decode(String.self, forKey: .typeName)
-        id = try Int(values.decode(String.self, forKey: .id))!
+        hotelId = try values.decode(String.self, forKey: .hotelId)
         //featuredMessages = try values.decodeIfPresent([String].self, forKey: .featuredMessages)
         name = try values.decode(String.self, forKey: .name)
         availability = try values.decode(Availability.self, forKey: .availability)

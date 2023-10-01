@@ -40,16 +40,18 @@ struct HotelPropertySearchView: View {
                     }
                 }
                 
-                ForEach(roomSearchVM.rooms) {
+                ForEach(roomSearchVM.rooms.indices, id: \.self) {
                     //allows the user to select numbers of rooms
-                    room in
-                    NavigationLink(destination: RoomFieldView(roomSearchVM: roomSearchVM, currentRoomId: room.id)) {
-                        Text("Room \(room.index)")
+                    roomIndex in
+                    NavigationLink(destination: RoomFieldView(roomSearchVM: roomSearchVM, currentRoomId: roomSearchVM.rooms[roomIndex].id)) {
+                        Text("Room \(roomIndex + 1)")
                     }
                 }
                 
                 Section {
-                    
+                    NavigationLink(destination: PropertySearchPreferencesView(roomSearchVM: roomSearchVM)) {
+                        Text("Sort and Filter Results")
+                    }
                 }
                 
             }.onAppear(perform: {
@@ -75,7 +77,7 @@ struct HotelPropertySearchView: View {
                                 } catch QueryError.numbersOfAdultsNotEntered(let roomNeeded) {
                                     showAlert = true
                                     alertTitle = "Please Check if there are adults entered in the rooms"
-                                    alertMessage = "You must declare how many adults in each room, you have not entered the numbers of adults in Room \(roomNeeded.index)."
+                                    alertMessage = "You must declare how many adults in each room, you have not entered the numbers of adults in ome of the rooms ."
                                 }
                                 catch {
                                     showAlert = true

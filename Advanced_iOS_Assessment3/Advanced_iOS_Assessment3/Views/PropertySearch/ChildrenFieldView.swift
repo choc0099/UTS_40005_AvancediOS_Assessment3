@@ -27,7 +27,7 @@ struct ChildrenFieldView: View {
 
 struct ChildrenFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        let room: Room = Room(index: 0, adults: 1, children: [Children(index: 0, age: 1)])
+        let room: Room = Room(adults: 1, children: [Children(age: 1)])
         ChildrenFieldView(roomSearchVM: HotelPropertySearchViewModel(), currentRoomId: room.id, currentChildId: room.children[0].id )
     }
 }

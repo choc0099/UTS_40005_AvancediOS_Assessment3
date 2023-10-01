@@ -41,13 +41,12 @@ class HotelPropertySearchViewModel: ObservableObject {
     
     func incrementRooms() {
         self.numbersOfRooms += 1
-        self.rooms.append(Room(index: numbersOfRooms, adults: 0, children: []))
+        self.rooms.append(Room(adults: 0, children: []))
     }
     
     func decrementRooms() {
         //retricts the range so it will not display negative number.
-        if(numbersOfRooms > 0)
-        {
+        if(numbersOfRooms > 0) {
             self.rooms.removeLast()
             self.numbersOfRooms -= 1
         }
@@ -57,7 +56,7 @@ class HotelPropertySearchViewModel: ObservableObject {
     func incrementChildren(currentRoomId: UUID) {
         //gets the actual refernce of the room to add children.
         if let index = self.rooms.firstIndex(where: {$0.id == currentRoomId}) {
-            self.rooms[index].children.append(Children(index: 0, age: 0))
+            self.rooms[index].children.append(Children(age: 0))
         }
         
     }
@@ -65,7 +64,6 @@ class HotelPropertySearchViewModel: ObservableObject {
     func decrmentChildren(currentRoomId: UUID) {
         if let index = self.rooms.firstIndex(where: {$0.id == currentRoomId}) {
             if self.rooms[index].children.isEmpty {
-                
                 //removes a child when decreasing it.
                 self.rooms[index].children.removeLast()
             }

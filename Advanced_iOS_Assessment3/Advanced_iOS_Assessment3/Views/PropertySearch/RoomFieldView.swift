@@ -10,7 +10,7 @@ import SwiftUI
 struct RoomFieldView: View {
     @ObservedObject var roomSearchVM: HotelPropertySearchViewModel
     @State var currentRoomId: UUID //this will be passed based on a room id to reference to the object
-    @State var currentRoom: Room = Room(index: 0, adults: 0, children: [])
+    @State var currentRoom: Room = Room(adults: 0, children: [])
     @State var numberOfAdults: Int = 0
     var body: some View {
         Group {
@@ -38,7 +38,7 @@ struct RoomFieldView: View {
                 } header: {
                     Text("Children")
                 }
-            }.navigationTitle("Room \(currentRoom.index)")
+            }.navigationTitle("Room ")
         }.onAppear {
            updateRoomValues()
         }
@@ -53,7 +53,7 @@ struct RoomFieldView: View {
 
 struct RoomFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        let room: Room = Room(index: 0, adults: 1, children: [Children(index: 0, age: 1)])
+        let room: Room = Room(adults: 1, children: [Children(age: 1)])
         RoomFieldView(roomSearchVM: HotelPropertySearchViewModel(), currentRoomId: room.id)
     }
 }

@@ -6,7 +6,7 @@
 //
 //this file containts objects that is used to encode into a JSON file for a POST request to search for hotels.
 import Foundation
-struct PropertyListRequest: Encodable, Hashable{
+struct PropertyListRequest: Codable, Hashable{
     let currency: String
     let eapid: Int
     let locale : String
@@ -51,21 +51,30 @@ struct PropertyListRequest: Encodable, Hashable{
     }
 }
 
-struct Children: Identifiable, Hashable, Encodable {
+struct Children: Identifiable, Hashable, Codable {
     let id: UUID = UUID()
-    let index: Int
     var age: Int
     
-    enum CodingKeys: String, CodingKey {
+     func encode(to encoder: Encoder) throws {
+         var container = encoder.container(keyedBy: CodingKeys.self)
+         try container.encode(age, forKey: .age)
+     }
+    
+    enum CodingKeys: CodingKey {
         case age
     }
     
-    func getAge() -> Int {
-        return self.age
+    init(age: Int) {
+        self.age = age
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.age = try container.decode(Int.self, forKey: .age)
     }
 }
 
-struct Destination: Hashable, Encodable {
+struct Destination: Hashable, Codable {
     let regionId: String
     let coordinates: Coordinates?
 }
@@ -80,38 +89,29 @@ struct PriceRequest: Hashable, Codable {
     }
 }
 
-struct Room: Identifiable, Hashable, Encodable {
-    let id: UUID = UUID()
-    //this is a property to display the index number on the ui
-    let index: Int
+struct Room: Hashable, Identifiable, Codable {
+    let id = UUID()
     var adults: Int
-    
     var children: [Children]
     
-    //this will not include the room id when encoding into a JSON format.
-    //The room id is needed to loop through a list of rooms in the views.
     enum CodingKeys: String, CodingKey {
         case adults, children
     }
 }
 
 //this is used to filter the hotel results
-struct Filters: Encodable, Hashable {
+struct Filters: Codable, Hashable {
     let price: PriceRequest?
     let accessibility: [String]?
     let travellerType: [String]?
     let amenities: [String]?
     let star: [String]?
-    
-    enum CodingKeys: String, CodingKey {
-        case price = "price"
-    }
 }
 
 
 
 //this is a struct that will be used to store property prefences including price filtering and sorting
-struct PropertyListPreference {
+struct PropertyListPreference: Codable {
     let numbersOfResults: Int?
     let sort: String?
     let filter: Filters?

@@ -10,7 +10,8 @@ import Foundation
 
 class UserDefaultsManager {
     static let METADATA_KEY = "hotelMetalData"
-    static let standrad = UserDefaults.standard
+    static let PROPERTY_SEARCH_KEY = "hotelPropertySearchAndSettings"
+    static let standard = UserDefaults.standard
     
     //this is a function to save the hotel metadata to user defaults to reduce the numbers of API calls needed.
     static func setMetaData(metaData: MetaDataResponse) {
@@ -18,16 +19,33 @@ class UserDefaultsManager {
         let encodedMetaData = try! JSONEncoder().encode(metaData)
         
         //saves it to userDefaults
-        standrad.setValue(encodedMetaData, forKey: METADATA_KEY)
+        standard.setValue(encodedMetaData, forKey: METADATA_KEY)
     }
     
     //retrieves the metadata from user defaults without having to call the API
     //if there is no data in user defaults, it call the api.
     static func readMetadata() -> MetaDataResponse? {
-        if let haveData = standrad.data(forKey: METADATA_KEY) {
+        if let haveData = standard.data(forKey: METADATA_KEY) {
             //decodes the JSON
             let data = try? JSONDecoder().decode(MetaDataResponse.self, from: haveData)
                 return data
+        }
+        return nil
+    }
+    
+    //saves the property search stuff to user defaults
+    public static func savePropertySearchPrefernces(propertySearchPreferences propertyRequest: PropertyListRequest) {
+        //encodes it to JSON
+        let encodedPropertySearch = try! JSONEncoder().encode(propertyRequest)
+        //saves it to user defaults
+        standard.setValue(encodedPropertySearch, forKey: PROPERTY_SEARCH_KEY)
+    }
+    
+    //loads it from user defaults
+    private static func loadPropertySearchData() -> PropertyListRequest? {
+        if let haveData = standard.data(forKey: PROPERTY_SEARCH_KEY) {
+            let data = try? JSONDecoder().decode(PropertyListRequest.self, from: haveData)
+            return data
         }
         return nil
     }

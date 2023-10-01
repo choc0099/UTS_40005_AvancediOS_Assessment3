@@ -32,11 +32,11 @@ class HotelPropertySearchViewModel: ObservableObject {
     @Published var sort: String?
     @Published var minPrice: Int = 300
     @Published var maxPrice: Int = 2000
-    @Published var numbersOfResults: Int = 200
+    @Published var numbersOfResults: Float = 200.0
     
     var searchPref: PropertyListPreference {
         let price = PriceRequest(maximunPrice: maxPrice, minimunPrice: minPrice)
-        return PropertyListPreference(numbersOfResults: numbersOfResults, sort: sort, filter: Filters(price: price, accessibility: nil, travellerType: nil, amenities: nil, star: nil))
+        return PropertyListPreference(numbersOfResults: Int(numbersOfResults), sort: sort, filter: Filters(price: price, accessibility: nil, travellerType: nil, amenities: nil, star: nil))
     }
     
     func incrementRooms() {

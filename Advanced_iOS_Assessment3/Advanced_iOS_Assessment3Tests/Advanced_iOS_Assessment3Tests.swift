@@ -25,6 +25,10 @@ final class Advanced_iOS_Assessment3Tests: XCTestCase {
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
     }
+    
+    func testHotelDetails() throws {
+        
+    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.

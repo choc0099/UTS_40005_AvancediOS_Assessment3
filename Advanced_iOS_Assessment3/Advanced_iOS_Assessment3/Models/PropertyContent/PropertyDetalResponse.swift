@@ -28,9 +28,11 @@ struct PropertyInfo: Hashable, Codable {
     let typeName : String
     let summary: PropertySummary
     let propertyGallery : PropertyGallery?
-
+    let contentSection: PropertyContentSectionGroups?
+    
     enum CodingKeys: String, CodingKey {
         case typeName = "__typename"
+        case contentSection = "propertyContentSectionGroups"
         case summary, propertyGallery
     }
 }

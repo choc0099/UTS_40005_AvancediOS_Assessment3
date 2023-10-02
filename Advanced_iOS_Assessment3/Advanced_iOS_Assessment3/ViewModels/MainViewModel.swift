@@ -64,10 +64,6 @@ class HotelBrowserMainViewModel: ObservableObject {
         }
    
         
-        if let haveUrl = urlComp.url {
-            print(haveUrl)
-        }
-        
         do {
             let request = try HotelAPIManager.hotelApi(urlStuffs: urlComp)            
             //sends the url request

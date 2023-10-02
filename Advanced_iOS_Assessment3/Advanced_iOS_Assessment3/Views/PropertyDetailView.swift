@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct PropertyDetailView: View {
+    @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
+    @StateObject var propertyDetailsVM: HotelPropertyDetailViewModel = HotelPropertyDetailViewModel()
+    @State var propertyId: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Group {
+            Text(propertyDetailsVM.propertyDescription)
+        }.onAppear(perform: {
+            if let haveMetaData = hotelMain.metaData {
+                Task {
+                    //loads the property details from the APIa
+                    await propertyDetailsVM.fetchPropertyDetails(propertyId:propertyId, metaData: haveMetaData)
+                }
+            }
+            
+        })
     }
 }
 
 #Preview {
-    PropertyDetailView()
+    PropertyDetailView(propertyId: "")
 }

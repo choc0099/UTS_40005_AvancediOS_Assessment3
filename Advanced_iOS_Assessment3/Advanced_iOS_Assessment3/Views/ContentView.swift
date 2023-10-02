@@ -20,8 +20,12 @@ struct ContentView: View {
                 Label("Search", systemImage: "magnifyingglass")
             }
             
-            RegionsView().tabItem {
+            /*RegionsView().tabItem {
                 Label("Settings", systemImage: "globe")
+            }*/
+            //this is only used for testing with hardcoded hotelId.
+            PropertyDetailView(propertyId: "5932305").tabItem {
+                Label("Test", systemImage: "")
             }
         }.onAppear {
             //loads the hotel metaData

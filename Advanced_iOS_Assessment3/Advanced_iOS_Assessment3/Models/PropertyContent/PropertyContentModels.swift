@@ -8,20 +8,19 @@
 import Foundation
 
 struct AboutThisProperty: Hashable, Codable {
-    let sectionName : String
-    let sections : [PropertySection]?
+    let sectionName: String?
+    let sections: [PropertySection]?
 }
 
 struct PropertySection: Hashable, Codable {
     let sectionName: String?
-    //let header: Header?
+    let header: Header?
     let bodySubSections: [BodySubSections]?
-    //let action : String?
 }
 
 struct Header: Hashable, Codable {
-    let text : String?
-    let subText : String?
+    let text: String?
+    let subText: String?
 }
 
 
@@ -32,21 +31,20 @@ struct BodySubSections: Hashable, Codable {
 }
 
 struct PropertySectionElement: Hashable, Codable {
-    let header : Header
+    let header : Header?
     let items : [PropertySectionItem]?
 }
 
 struct PropertySectionItem: Hashable, Codable {
-    let typeName: String
-    let content: PropertyContent
-
-    enum CodingKeys: String, CodingKey {
-        case typeName = "__typename"
-        case content = "content"
-    }
+    let content: PropertyContent?
 }
 
 struct PropertyContent: Hashable, Codable {
-    let text : String
+    let text : String?
     let markupType : String?
+    let primary: PrimaryContent?
+}
+
+struct PrimaryContent: Hashable, Codable {
+    let value: String?
 }

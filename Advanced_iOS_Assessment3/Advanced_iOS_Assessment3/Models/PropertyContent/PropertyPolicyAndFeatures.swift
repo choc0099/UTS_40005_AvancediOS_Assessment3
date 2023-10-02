@@ -9,16 +9,39 @@ import Foundation
 
 struct Policy: Hashable, Codable {
     let typeName: String
-    let sectionName: String?
-    let sections: [PropertySection]?
+    let checkInEnd: String?
+    let checkInInstructions: [String]?
+    let childAndBed: ChildAndBed?
+    let needToKnow: NeedToKnow?
 
     enum CodingKeys: String, CodingKey {
-
         case typeName = "__typename"
-        case sectionName = "sectionName"
-        case sections = "sections"
+        case checkInEnd, checkInInstructions, childAndBed, needToKnow
     }
+}
 
+struct ChildAndBed: Hashable, Codable {
+    let typeName: String
+    let childInformation: [String]
+    
+    enum CodingKeys: String, CodingKey {
+        case typeName = "__typename"
+        case childInformation = "body"
+    }
+}
+
+struct NeedToKnow: Hashable, Codable {
+    let typeName : String
+    let body : [String]?
+    let descriptions : [String]?
+    let title : String?
+
+    enum CodingKeys: String, CodingKey {
+        case typeName = "__typename"
+        case body = "body"
+        case descriptions = "descriptions"
+        case title = "title"
+    }
 }
 
 struct SpecialFeatures: Hashable, Codable  {

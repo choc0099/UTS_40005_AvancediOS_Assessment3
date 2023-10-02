@@ -59,7 +59,7 @@ struct HotelPropertyRow: View {
                 }.frame(maxWidth: .infinity, alignment: .trailing)
             }.frame(maxWidth: .infinity)
         }.frame(maxWidth: .infinity)
-    }
+    }   
 }
 
 #Preview {

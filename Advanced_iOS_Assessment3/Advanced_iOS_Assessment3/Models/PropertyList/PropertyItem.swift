@@ -31,57 +31,6 @@ struct Reviews: Hashable, Codable {
     }
 }
 
-struct Summary : Codable {
-    let typename : String?
-    let matchedPropertiesSize : Int?
-    let pricingScheme : PricingScheme?
-    let regionCompression : String?
-    let loyaltyInfo : LoyaltyInfo?
-    let resultsTitleModel : ResultsTitleModel?
-    let resultsSummary : [ResultsSummary]?
-
-    enum CodingKeys: String, CodingKey {
-        case typename = "__typename"
-        case matchedPropertiesSize = "matchedPropertiesSize"
-        case pricingScheme = "pricingScheme"
-        case regionCompression = "regionCompression"
-        case loyaltyInfo = "loyaltyInfo"
-        case resultsTitleModel = "resultsTitleModel"
-        case resultsSummary = "resultsSummary"
-    }
-
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        typename = try values.decodeIfPresent(String.self, forKey: .typename)
-        matchedPropertiesSize = try values.decodeIfPresent(Int.self, forKey: .matchedPropertiesSize)
-        pricingScheme = try values.decodeIfPresent(PricingScheme.self, forKey: .pricingScheme)
-        regionCompression = try values.decodeIfPresent(String.self, forKey: .regionCompression)
-        loyaltyInfo = try values.decodeIfPresent(LoyaltyInfo.self, forKey: .loyaltyInfo)
-        resultsTitleModel = try values.decodeIfPresent(ResultsTitleModel.self, forKey: .resultsTitleModel)
-        resultsSummary = try values.decodeIfPresent([ResultsSummary].self, forKey: .resultsSummary)
-    }
-
-}
-
-struct LoyaltyInfo : Codable {
-    let typename : String?
-    let saveWithPointsMessage : String?
-    let saveWithPointsActionMessage : String?
-
-    enum CodingKeys: String, CodingKey {
-        case typename = "__typename"
-        case saveWithPointsMessage = "saveWithPointsMessage"
-        case saveWithPointsActionMessage = "saveWithPointsActionMessage"
-    }
-
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        typename = try values.decodeIfPresent(String.self, forKey: .typename)
-        saveWithPointsMessage = try values.decodeIfPresent(String.self, forKey: .saveWithPointsMessage)
-        saveWithPointsActionMessage = try values.decodeIfPresent(String.self, forKey: .saveWithPointsActionMessage)
-    }
-
-}
 
 struct ResultsTitleModel : Codable {
     let typename : String?
@@ -101,17 +50,4 @@ struct ResultsTitleModel : Codable {
 
 }
 
-
-struct ResultsSummary : Codable {
-    let typename : String?
-    
-    enum CodingKeys: String, CodingKey {
-        case typename = "__typename"
-    }
-    
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        typename = try values.decodeIfPresent(String.self, forKey: .typename)
-    }
-}
 

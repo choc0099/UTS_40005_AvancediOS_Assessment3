@@ -221,14 +221,17 @@ struct Property: Identifiable, Hashable, Codable {
 struct PropertyImage: Hashable, Codable {
     let typename: String
     let alt: String?
+    let accessibilityText : String?
     let image: HotelImage?
-    let subjectId: Int
-
+    let subjectId: Int?
+    let imageId: String?
+    
     enum CodingKeys: String, CodingKey {
         case typename = "__typename"
         case alt = "alt"
         case image = "image"
         case subjectId = "subjectId"
+        case accessibilityText, imageId
     }
 }
 
@@ -241,6 +244,7 @@ struct HotelImage: Hashable, Codable {
         case typeName = "__typename"
         case description = "description"
         case url = "url"
+        
     }
 
 }

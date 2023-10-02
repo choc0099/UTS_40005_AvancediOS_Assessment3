@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PropertyContentResponse: Hashable, Codable {
+struct propertyDetalResponse: Hashable, Codable {
     let propertyData: PropertyContentData?
     
     enum CodingKeys: String, CodingKey {
@@ -26,11 +26,12 @@ struct PropertyContentData: Hashable, Codable {
 
 struct PropertyInfo: Hashable, Codable {
     let typeName : String
-    let propertyContentSectionGroups : PropertyContentSectionGroups?
+    let policies: Policy?
+    let propertyGallery : PropertyGallery?
 
     enum CodingKeys: String, CodingKey {
         case typeName = "__typename"
-        case propertyContentSectionGroups = "propertyContentSectionGroups"
+        case propertyGallery, policies
     }
 
 }
@@ -54,3 +55,22 @@ struct PropertyContentSectionGroups: Hashable, Codable {
         case specialFeatures = "specialFeatures"
     }
 }
+
+struct PropertyGallery: Hashable, Codable {
+    let typeName : String?
+    let imagesGrouped : String?
+    let images : [PropertyImage]?
+    let accessibilityLabel : String?
+
+    enum CodingKeys: String, CodingKey {
+
+        case typeName = "__typename"
+        case imagesGrouped = "imagesGrouped"
+        case images = "images"
+        case accessibilityLabel = "accessibilityLabel"
+    }
+}
+
+
+
+

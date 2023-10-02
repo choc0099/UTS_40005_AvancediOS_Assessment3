@@ -13,6 +13,8 @@
 		320A7CCA2AC176B8008B252B /* PropertyLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320A7CC92AC176B8008B252B /* PropertyLocation.swift */; };
 		320A7CCC2AC1929C008B252B /* CheckInAndOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320A7CCB2AC1929C008B252B /* CheckInAndOut.swift */; };
 		320A7CCE2AC19721008B252B /* PropertyListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320A7CCD2AC19721008B252B /* PropertyListRequest.swift */; };
+		32151E2F2ACA55840089D488 /* HotelPropertyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32151E2E2ACA55840089D488 /* HotelPropertyDetailViewModel.swift */; };
+		32151E312ACA58FF0089D488 /* PropertyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32151E302ACA58FF0089D488 /* PropertyDetail.swift */; };
 		3254F0502AC4136D00E1A1BA /* HotelRoomsResultsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3254F04F2AC4136D00E1A1BA /* HotelRoomsResultsListView.swift */; };
 		3254F0522AC44B7C00E1A1BA /* PropertyResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3254F0512AC44B7C00E1A1BA /* PropertyResultsView.swift */; };
 		3256C5D42AB8501E00AC9470 /* Advanced_iOS_Assessment3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3256C5D32AB8501E00AC9470 /* Advanced_iOS_Assessment3App.swift */; };
@@ -34,7 +36,7 @@
 		32920DE32AC6EC7C00670ACA /* SearchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32920DE22AC6EC7C00670ACA /* SearchHistoryView.swift */; };
 		32920DED2AC80DC700670ACA /* HotelImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32920DEC2AC80DC700670ACA /* HotelImageView.swift */; };
 		32920DF22AC8D0D700670ACA /* PropertyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32920DF12AC8D0D700670ACA /* PropertyDetailView.swift */; };
-		32920DF42AC8D67500670ACA /* PropertyContentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32920DF32AC8D67500670ACA /* PropertyContentResponse.swift */; };
+		32920DF42AC8D67500670ACA /* propertyDetalResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32920DF32AC8D67500670ACA /* propertyDetalResponse.swift */; };
 		32920DF62AC8D8CA00670ACA /* PropertyContentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32920DF52AC8D8CA00670ACA /* PropertyContentRequest.swift */; };
 		32920DF92AC8DA7E00670ACA /* PropertyContentModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32920DF82AC8DA7E00670ACA /* PropertyContentModels.swift */; };
 		32920DFB2AC8DE3F00670ACA /* PropertyPolicyAndFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32920DFA2AC8DE3F00670ACA /* PropertyPolicyAndFeatures.swift */; };
@@ -75,6 +77,8 @@
 		320A7CC92AC176B8008B252B /* PropertyLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyLocation.swift; sourceTree = "<group>"; };
 		320A7CCB2AC1929C008B252B /* CheckInAndOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInAndOut.swift; sourceTree = "<group>"; };
 		320A7CCD2AC19721008B252B /* PropertyListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListRequest.swift; sourceTree = "<group>"; };
+		32151E2E2ACA55840089D488 /* HotelPropertyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelPropertyDetailViewModel.swift; sourceTree = "<group>"; };
+		32151E302ACA58FF0089D488 /* PropertyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyDetail.swift; sourceTree = "<group>"; };
 		3254F04F2AC4136D00E1A1BA /* HotelRoomsResultsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelRoomsResultsListView.swift; sourceTree = "<group>"; };
 		3254F0512AC44B7C00E1A1BA /* PropertyResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyResultsView.swift; sourceTree = "<group>"; };
 		3256C5D02AB8501E00AC9470 /* Advanced_iOS_Assessment3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Advanced_iOS_Assessment3.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,7 +104,7 @@
 		32920DE22AC6EC7C00670ACA /* SearchHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryView.swift; sourceTree = "<group>"; };
 		32920DEC2AC80DC700670ACA /* HotelImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelImageView.swift; sourceTree = "<group>"; };
 		32920DF12AC8D0D700670ACA /* PropertyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyDetailView.swift; sourceTree = "<group>"; };
-		32920DF32AC8D67500670ACA /* PropertyContentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyContentResponse.swift; sourceTree = "<group>"; };
+		32920DF32AC8D67500670ACA /* propertyDetalResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = propertyDetalResponse.swift; sourceTree = "<group>"; };
 		32920DF52AC8D8CA00670ACA /* PropertyContentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyContentRequest.swift; sourceTree = "<group>"; };
 		32920DF82AC8DA7E00670ACA /* PropertyContentModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyContentModels.swift; sourceTree = "<group>"; };
 		32920DFA2AC8DE3F00670ACA /* PropertyPolicyAndFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyPolicyAndFeatures.swift; sourceTree = "<group>"; };
@@ -247,6 +251,7 @@
 				327A587E2AB8FB5200DB11E6 /* City.swift */,
 				32C7C5802AC2BFC700D5B4AD /* MetaDataResponse.swift */,
 				325FF5BF2AC59B7600E207DB /* HotelAnnotation.swift */,
+				32151E302ACA58FF0089D488 /* PropertyDetail.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 			children = (
 				327A587C2AB859EE00DB11E6 /* MainViewModel.swift */,
 				32C7C5862AC376D800D5B4AD /* HotelPropertySearchViewModel.swift */,
+				32151E2E2ACA55840089D488 /* HotelPropertyDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -284,7 +290,7 @@
 		32920DF72AC8DA0100670ACA /* PropertyContent */ = {
 			isa = PBXGroup;
 			children = (
-				32920DF32AC8D67500670ACA /* PropertyContentResponse.swift */,
+				32920DF32AC8D67500670ACA /* propertyDetalResponse.swift */,
 				32920DF52AC8D8CA00670ACA /* PropertyContentRequest.swift */,
 				32920DFA2AC8DE3F00670ACA /* PropertyPolicyAndFeatures.swift */,
 				32920DF82AC8DA7E00670ACA /* PropertyContentModels.swift */,
@@ -454,9 +460,11 @@
 				32920DF22AC8D0D700670ACA /* PropertyDetailView.swift in Sources */,
 				32C7C5852AC2FED600D5B4AD /* HotelPropertySearchView.swift in Sources */,
 				320A7CC82AC175D4008B252B /* PropertyItem.swift in Sources */,
+				32151E312ACA58FF0089D488 /* PropertyDetail.swift in Sources */,
 				327A587D2AB859EE00DB11E6 /* MainViewModel.swift in Sources */,
 				320A7CC62AC173B2008B252B /* PropertyPrices.swift in Sources */,
 				32920DF92AC8DA7E00670ACA /* PropertyContentModels.swift in Sources */,
+				32151E2F2ACA55840089D488 /* HotelPropertyDetailViewModel.swift in Sources */,
 				320A7CCC2AC1929C008B252B /* CheckInAndOut.swift in Sources */,
 				32C7C5872AC376D800D5B4AD /* HotelPropertySearchViewModel.swift in Sources */,
 				3256C5DD2AB8501F00AC9470 /* Persistence.swift in Sources */,
@@ -469,7 +477,7 @@
 				32920DED2AC80DC700670ACA /* HotelImageView.swift in Sources */,
 				32920DF62AC8D8CA00670ACA /* PropertyContentRequest.swift in Sources */,
 				32B4046F2AC1A9D9009B4F43 /* RegionsView.swift in Sources */,
-				32920DF42AC8D67500670ACA /* PropertyContentResponse.swift in Sources */,
+				32920DF42AC8D67500670ACA /* propertyDetalResponse.swift in Sources */,
 				32C7C58A2AC3776500D5B4AD /* HotelAPIManager.swift in Sources */,
 				3256C5E02AB8501F00AC9470 /* Advanced_iOS_Assessment3.xcdatamodeld in Sources */,
 				32C7C57F2AC2BCB400D5B4AD /* PropertyResultsProcessingView.swift in Sources */,

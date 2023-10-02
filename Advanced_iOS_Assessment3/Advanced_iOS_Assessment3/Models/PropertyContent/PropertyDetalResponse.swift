@@ -25,9 +25,9 @@ struct PropertyContentData: Hashable, Codable {
 }
 
 struct PropertyInfo: Hashable, Codable {
-    let typeName : String
+    let typeName: String
     let summary: PropertySummary
-    let propertyGallery : PropertyGallery?
+    let propertyGallery: PropertyGallery?
     let contentSection: PropertyContentSectionGroups?
     
     enum CodingKeys: String, CodingKey {
@@ -38,7 +38,7 @@ struct PropertyInfo: Hashable, Codable {
 }
 
 struct PropertySummary: Hashable, Codable {
-    let id: Int
+    let id: String
     let name: String
     let policies: PropertyPolicies?
     

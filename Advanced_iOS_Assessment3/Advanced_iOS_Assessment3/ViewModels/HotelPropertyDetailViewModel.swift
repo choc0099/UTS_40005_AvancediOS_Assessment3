@@ -36,6 +36,10 @@ class HotelPropertyDetailViewModel: ObservableObject {
         return ""
     }
     
+    var hotelName: String {
+        return propertyInfo?.summary.name ?? ""
+    }
+    
     //returns the property request object that converts it to JSON.
     func convertToObject(propertyId: String, metaData: MetaDataResponse) -> PropertyContentRequest {
         return PropertyContentRequest(propertyId: propertyId, eapid: Int(metaData.australia.eapId), locale: metaData.australia.supportedLocales[0].hotelSiteLocaleIdentifier, currency: "AUD", siteId: metaData.australia.siteId)

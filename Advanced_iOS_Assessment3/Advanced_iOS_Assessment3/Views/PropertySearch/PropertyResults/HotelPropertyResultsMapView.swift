@@ -18,10 +18,13 @@ struct HotelPropertyResultsMapView: View {
             Map(coordinateRegion: $currentCoordinates, annotationItems: roomSearchVM.hotelResultsAnnotations) {
                 marker in
                 MapAnnotation(coordinate: marker.coordinate) {
-                    VStack {
-                        HotelImageView(propertyImage: marker.property.propertyImage, imageSize: 50, mapMode: true)
-                        Text(marker.name).font(.caption).background(.background).foregroundColor(.primary).bold().frame(width: 125).padding(.horizontal, 2)
+                    NavigationLink(destination: PropertyDetailView(propertyId: marker.name)) {
+                        VStack {
+                            HotelImageView(propertyImage: marker.property.propertyImage, imageSize: 50, mapMode: true)
+                            Text(marker.name).font(.caption).background(.background).foregroundColor(.primary).bold().frame(width: 125).padding(.horizontal, 2)
+                        }
                     }
+                   
                 }
             }.onAppear {
                 //loads the annotations

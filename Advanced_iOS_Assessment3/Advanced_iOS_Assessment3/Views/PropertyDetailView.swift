@@ -14,7 +14,46 @@ struct PropertyDetailView: View {
     
     var body: some View {
         Group {
-            Text(propertyDetailsVM.propertyDescription)
+            ScrollView {
+                VStack(spacing: 20) {
+                    //HotelImageView(propertyImage: propertyDetailsVM.propertyInfo?.propertyGallery?.images[0], imageSize: imageSize: 200, mapMode: false)
+                    Spacer()
+                    Text(propertyDetailsVM.hotelName).font(.title)
+                    Spacer()
+                    Text("About This Property").font(.headline)
+                    Text(propertyDetailsVM.propertyDescription).font(.body)
+                    Group {
+                        if let policies = propertyDetailsVM.propertyInfo?.summary.policies {
+                            Text("Policies").font(.subheadline)
+                            if let checkInInstructions = policies.checkInInstructions {
+                                Text("Check in Instructions").font(.subheadline)
+                                ForEach(checkInInstructions, id: \.self) {
+                                    instruction in Text(instruction).font(.body)
+                                }
+                            }
+                            
+                            if let needToKnow = policies.needToKnow?.body {
+                                Text("Need to know").font(.subheadline)
+                                ForEach(needToKnow, id: \.self) {
+                                    message in Text(message).font(.body)
+                                }
+                            }
+                            
+                            if let pets = policies.pets?.body  {
+                                Text("Pets").font(.subheadline)
+                                ForEach(pets, id: \.self) {
+                                    petMessage in
+                                    Text(petMessage)
+                                }
+                            }
+                        }
+                        
+                    }
+                    
+                    
+                }
+            }
+            
         }.onAppear(perform: {
             if let haveMetaData = hotelMain.metaData {
                 Task {
@@ -22,7 +61,6 @@ struct PropertyDetailView: View {
                     await propertyDetailsVM.fetchPropertyDetails(propertyId:propertyId, metaData: haveMetaData)
                 }
             }
-            
         })
     }
 }

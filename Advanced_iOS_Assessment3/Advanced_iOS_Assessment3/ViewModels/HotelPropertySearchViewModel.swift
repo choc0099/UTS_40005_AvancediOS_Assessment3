@@ -23,7 +23,7 @@ class HotelPropertySearchViewModel: ObservableObject {
     @Published var checkInDate: Date = Date.now
     @Published var checkOutDate: Date = Date.now
     //determines the numbers of rooms, children and adults
-    @Published var propertyResoults = [Property]()
+    @Published var propertyResults = [Property]()
     @Published var hotelResultsAnnotations: [HotelAnnotation] = []
     //this is used to configure search settings such as sorting and filtering properties.
     @Published var sort: SortPropertyBy = .recommended
@@ -146,9 +146,9 @@ class HotelPropertySearchViewModel: ObservableObject {
             let response = try JSONDecoder().decode(PropertyResponse.self, from: data)
             DispatchQueue.main.async {
                 //allocates the response stuff to this VM so it can be dispalyed to the user.
-                self.propertyResoults = response.data.propertySearch.properties!
+                self.propertyResults = response.data.propertySearch.properties!
                 //tests via printing output if it works
-                for property in self.propertyResoults {
+                for property in self.propertyResults {
                     print("Id: \(property.id) Name: \(property.name) ")
                 }
                 //sets the view to display results to the user after it is loaded
@@ -199,7 +199,7 @@ class HotelPropertySearchViewModel: ObservableObject {
     //this will convert the properties into map annotations which will be used for map markers.
     func convertToAnnotations() {
         //looops through each property in the search results
-        for property in propertyResoults {
+        for property in propertyResults {
             //converts it to hotelAnnotations
             let annotation = getAnnotation(property: property)
             //appends the annotation onto the annotations array

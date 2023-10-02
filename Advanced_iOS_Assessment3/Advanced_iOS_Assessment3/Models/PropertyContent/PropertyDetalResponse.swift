@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct propertyDetalResponse: Hashable, Codable {
+struct PropertyDetalResponse: Hashable, Codable {
     let propertyData: PropertyContentData?
     
     enum CodingKeys: String, CodingKey {
@@ -26,49 +26,39 @@ struct PropertyContentData: Hashable, Codable {
 
 struct PropertyInfo: Hashable, Codable {
     let typeName : String
-    let policies: Policy?
+    let summary: PropertySummary
     let propertyGallery : PropertyGallery?
 
     enum CodingKeys: String, CodingKey {
         case typeName = "__typename"
-        case propertyGallery, policies
+        case summary, propertyGallery
     }
+}
 
+struct PropertySummary: Hashable, Codable {
+    let id: Int
+    let name: String
+    let policies: PropertyPolicies?
+    
 }
 
 struct PropertyContentSectionGroups: Hashable, Codable {
-    let typeName: String
     let aboutThisProperty : AboutThisProperty?
-    let aboutThisHost : String?
-    let amenities : PropertyContentAmenities?
     let importantInfo : String?
-    let policies : Policy?
-    let specialFeatures : SpecialFeatures?
-
-    enum CodingKeys: String, CodingKey {
-        case typeName = "__typename"
-        case aboutThisProperty = "aboutThisProperty"
-        case aboutThisHost = "aboutThisHost"
-        case amenities = "amenities"
-        case importantInfo = "importantInfo"
-        case policies = "policies"
-        case specialFeatures = "specialFeatures"
-    }
+    //let policies: Policies?
+    //let specialFeatures : SpecialFeatures?
 }
 
 struct PropertyGallery: Hashable, Codable {
-    let typeName : String?
     let imagesGrouped : String?
     let images : [PropertyImage]?
     let accessibilityLabel : String?
+}
 
-    enum CodingKeys: String, CodingKey {
-
-        case typeName = "__typename"
-        case imagesGrouped = "imagesGrouped"
-        case images = "images"
-        case accessibilityLabel = "accessibilityLabel"
-    }
+//this is a seperate policy struct for the content headers.
+struct Policies: Hashable, Codable {
+    let sectionName : String?
+    let sections : [PropertySection]?
 }
 
 

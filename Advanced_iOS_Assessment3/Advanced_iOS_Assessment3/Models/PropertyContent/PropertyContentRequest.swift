@@ -23,9 +23,9 @@ struct PropertyContentRequest: Hashable, Encodable {
         case siteId
     }
     
-    init(propertyId: Int, eapid: Int, locale: String, currency: String, siteId: Int) {
+    init(propertyId: String, eapid: Int, locale: String, currency: String, siteId: Int) {
         //converts the propertyId to a string that is used for JSON
-        self.propertyId = String(propertyId)
+        self.propertyId = propertyId
         self.locale = locale
         self.eapid = eapid
         self.currency = currency

@@ -7,16 +7,19 @@
 
 import Foundation
 
-struct Policy: Hashable, Codable {
+struct PropertyPolicies: Hashable, Codable {
     let typeName: String
-    let checkInEnd: String?
+    //let checkInEnd: String?
     let checkInInstructions: [String]?
     let childAndBed: ChildAndBed?
     let needToKnow: NeedToKnow?
+    let mentions: Mention?
+    let pets: Pets?
 
     enum CodingKeys: String, CodingKey {
         case typeName = "__typename"
-        case checkInEnd, checkInInstructions, childAndBed, needToKnow
+        case mentions = "shouldMention"
+        case checkInInstructions, childAndBed, needToKnow, pets
     }
 }
 
@@ -44,6 +47,18 @@ struct NeedToKnow: Hashable, Codable {
     }
 }
 
+struct Pets: Hashable, Codable {
+    let body : [String]?
+    let descriptions : [String]?
+    let title : String?
+}
+
+struct Mention: Hashable, Codable {
+    let body : [String]?
+    let descriptions : [String]?
+    let title : String?
+}
+/*
 struct SpecialFeatures: Hashable, Codable  {
     let typeName: String
     let sectionName : String?
@@ -54,9 +69,9 @@ struct SpecialFeatures: Hashable, Codable  {
         case sectionName = "sectionName"
         case sections = "sections"
     }
-}
-
-struct PropertyContentAmenities:Hashable, Codable {
+}*/
+/*
+struct PropertyContentAmenities: Hashable, Codable {
     let typeName : String
     let sectionName : String?
     let sections : [PropertySection]?
@@ -66,5 +81,5 @@ struct PropertyContentAmenities:Hashable, Codable {
         case sectionName = "sectionName"
         case sections = "sections"
     }
-}
+}*/
 

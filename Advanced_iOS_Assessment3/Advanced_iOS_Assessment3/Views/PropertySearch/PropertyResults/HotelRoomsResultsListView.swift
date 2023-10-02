@@ -14,7 +14,7 @@ struct HotelRoomsResultsListView: View {
     
     var body: some View {
         List{
-            ForEach(roomSearchVM.propertyResoults) {
+            ForEach(roomSearchVM.propertyResults) {
                 property in
                 HotelPropertyRow(hotelProperty: property)
             }

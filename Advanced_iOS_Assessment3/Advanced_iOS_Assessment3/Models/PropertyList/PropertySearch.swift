@@ -152,7 +152,6 @@ struct Property: Identifiable, Hashable, Codable {
     let id: UUID = UUID()
     let hotelId: String
     let typeName: String
-    //let featuredMessages: [String]?
     let name: String
     let availability: Availability
     let propertyImage: PropertyImage?
@@ -165,9 +164,7 @@ struct Property: Identifiable, Hashable, Codable {
     //let offerSummary : OfferSummary?
     //let pinnedDetails : String?
     let price: Price
-    //let priceAfterLoyaltyPointsApplied : PriceAfterLoyaltyPointsApplied?
-    //let propertyFees : [String]?
-    //let reviews : Reviews?
+    let reviews: Reviews?
     //let sponsoredListing : String?
     //let star : String?
     //let supportingMessages : String?
@@ -176,7 +173,7 @@ struct Property: Identifiable, Hashable, Codable {
     //let saveTripItem : String?
     
     //this is used for testing and previews
-    init(name: String, formattedPrice: String, formattedDiscount: String, isAvaliable: Bool, roomsAvaliable: Int, propertyImage: PropertyImage?) {
+    init(name: String, formattedPrice: String, formattedDiscount: String, isAvaliable: Bool, roomsAvaliable: Int?, propertyImage: PropertyImage?, review: Double) {
         self.hotelId = "0"
         self.typeName = ""
         self.name = name
@@ -185,6 +182,7 @@ struct Property: Identifiable, Hashable, Codable {
         self.regionId = ""
         self.mapMarker = PropertyMapMarker(label: "", coordinates: PropertyCoordinates(typeName: "", latitude: 0, longitude: 0))
         self.propertyImage = propertyImage
+        self.reviews = Reviews(typeName: "", score: review, total: 10)
     }
     
     enum CodingKeys: String, CodingKey {
@@ -206,7 +204,7 @@ struct Property: Identifiable, Hashable, Codable {
         case price = "price"
         //case priceAfterLoyaltyPointsApplied = "priceAfterLoyaltyPointsApplied"
         //case propertyFees = "propertyFees"
-        //case reviews = "reviews"
+        case reviews = "reviews"
         //case sponsoredListing = "sponsoredListing"
         //case star = "star"
         //case supportingMessages = "supportingMessages"
@@ -215,33 +213,6 @@ struct Property: Identifiable, Hashable, Codable {
         //case saveTripItem = "saveTripItem"
     }
 
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        typeName = try values.decode(String.self, forKey: .typeName)
-        hotelId = try values.decode(String.self, forKey: .hotelId)
-        //featuredMessages = try values.decodeIfPresent([String].self, forKey: .featuredMessages)
-        name = try values.decode(String.self, forKey: .name)
-        availability = try values.decode(Availability.self, forKey: .availability)
-        propertyImage = try values.decodeIfPresent(PropertyImage.self, forKey: .propertyImage)
-        //destinationInfo = try values.decodeIfPresent(DestinationInfo.self, forKey: .destinationInfo)
-        //legalDisclaimer = try values.decodeIfPresent(String.self, forKey: .legalDisclaimer)
-        //listingFooter = try values.decodeIfPresent(String.self, forKey: .listingFooter)
-        mapMarker = try values.decode(PropertyMapMarker.self, forKey: .mapMarker)
-        //neighborhood = try values.decodeIfPresent(Neighborhood.self, forKey: .neighborhood)
-        //offerBadge = try values.decodeIfPresent(OfferBadge.self, forKey: .offerBadge)
-        //offerSummary = try values.decodeIfPresent(OfferSummary.self, forKey: .offerSummary)
-        //pinnedDetails = try values.decodeIfPresent(String.self, forKey: .pinnedDetails)
-        price = try values.decode(Price.self, forKey: .price)
-        //priceAfterLoyaltyPointsApplied = try values.decodeIfPresent(PriceAfterLoyaltyPointsApplied.self, forKey: .priceAfterLoyaltyPointsApplied)
-        //propertyFees = try values.decodeIfPresent([String].self, forKey: .propertyFees)
-        //reviews = try values.decodeIfPresent(Reviews.self, forKey: .reviews)
-        //sponsoredListing = try values.decodeIfPresent(String.self, forKey: .sponsoredListing)
-        //star = try values.decodeIfPresent(String.self, forKey: .star)
-        //supportingMessages = try values.decodeIfPresent(String.self, forKey: .supportingMessages)
-        regionId = try values.decode(String.self, forKey: .regionId)
-        //priceMetadata = try values.decodeIfPresent(PriceMetadata.self, forKey: .priceMetadata)
-        //saveTripItem = try values.decodeIfPresent(String.self, forKey: .saveTripItem)
-    }
 }
 
 

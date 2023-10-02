@@ -19,24 +19,16 @@ struct Availability:Hashable, Codable {
     }
 }
 
-struct Reviews: Codable {
-    let typename : String?
-    let score : Double?
-    let total : Int?
+struct Reviews: Hashable, Codable {
+    let typeName : String
+    let score : Double
+    let total : Int
 
     enum CodingKeys: String, CodingKey {
-        case typename = "__typename"
+        case typeName = "__typename"
         case score = "score"
         case total = "total"
     }
-
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        typename = try values.decodeIfPresent(String.self, forKey: .typename)
-        score = try values.decodeIfPresent(Double.self, forKey: .score)
-        total = try values.decodeIfPresent(Int.self, forKey: .total)
-    }
-
 }
 
 struct Summary : Codable {

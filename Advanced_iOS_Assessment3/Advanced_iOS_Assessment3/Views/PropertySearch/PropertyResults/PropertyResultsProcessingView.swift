@@ -11,25 +11,25 @@ import SwiftUI
 //this includes loading indicators and error messages.
 struct PropertyResultsProcessingView: View {
     @ObservedObject var roomSearchVM: HotelPropertySearchViewModel
-    @State var region: NeighborhoodSearchResult
+    @State var regionId: String
+    @State var regionCoordinates: Coordinates
     
     var body: some View {
         Group {
             if roomSearchVM.propertyResultStatus == .active {
-                PropertyResultsView(roomSearchVM: roomSearchVM, region: region)
+                PropertyResultsView(roomSearchVM: roomSearchVM, regionId: regionId, regionCoordinates: regionCoordinates)
             }
             else if roomSearchVM.propertyResultStatus == .loading {
                 ProgressView()
             }
-            else if roomSearchVM.propertyResultStatus == .unkown {
-                VStack {
-                    Text("Something went wrong!")
-                }
+            else {
+                //displays an error message to the user.
+                ErrorView(errorStatus: roomSearchVM.propertyResultStatus)
             }
         }
     }
 }
-
+/*
 #Preview {
-    PropertyResultsProcessingView(roomSearchVM: HotelPropertySearchViewModel(), region: NeighborhoodSearchResult(gaiaId: ""))
-}
+    PropertyResultsProcessingView(roomSearchVM: HotelPropertySearchViewModel(), regionId: "", regionCoordinates: Coordinates(lat: -100, long: -100))
+}*/

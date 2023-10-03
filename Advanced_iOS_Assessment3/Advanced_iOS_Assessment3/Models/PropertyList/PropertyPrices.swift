@@ -10,23 +10,13 @@ import Foundation
 
 struct Price: Hashable, Codable {
     let typeName : String
-    //let options : [Option]?
-    //let priceMessaging : String?
     let lead : Lead
     let strikeOut: StrikeOut?
-    //let displayMessages : [DisplayMessages]?
-    //let strikeOutType : String?
-    //let priceMessages : [PriceMessages]?
 
     enum CodingKeys: String, CodingKey {
         case typeName = "__typename"
-        //case options = "options"
-        //case priceMessaging = "priceMessaging"
         case lead = "lead"
         case strikeOut = "strikeOut"
-        //case displayMessages = "displayMessages"
-        //case strikeOutType = "strikeOutType"
-        //case priceMessages = "priceMessages"
     }
 }
 
@@ -88,14 +78,6 @@ struct Lead: Hashable, Codable {
         case amount = "amount"
         case currencyInfo = "currencyInfo"
         case formatted = "formatted"
-    }
-
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        typeName = try values.decode(String.self, forKey: .typeName)
-        amount = try values.decode(Double.self, forKey: .amount)
-        currencyInfo = try values.decodeIfPresent(CurrencyInfo.self, forKey: .currencyInfo)
-        formatted = try values.decode(String.self, forKey: .formatted)
     }
 }
 

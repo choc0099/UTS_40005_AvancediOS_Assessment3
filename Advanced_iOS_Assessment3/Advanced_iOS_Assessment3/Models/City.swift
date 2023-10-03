@@ -45,8 +45,8 @@ struct HotelSearchResult: SearchResult, Hashable, Decodable {
     var regionNames: RegionNames
     var coordinates: Coordinates
     var hotelAddress: HotelAddress?
-    var hotelId: Int?
-    var cityId: Int?
+    var hotelId: String?
+    var cityId: String?
     
     //this is used to for JSON Parsing such as decoding it from JSON.
     enum CodingKeys: String, CodingKey {
@@ -62,12 +62,8 @@ struct HotelSearchResult: SearchResult, Hashable, Decodable {
         self.coordinates = try container.decode(Coordinates.self, forKey: .coordinates)
         self.type = try container.decode(String.self, forKey: .type)
         self.hotelAddress = try container.decodeIfPresent(HotelAddress.self, forKey: .hotelAddress)
-        if let haveCityId = try container.decodeIfPresent(String.self, forKey: .cityId) {
-            self.cityId = Int(haveCityId)
-        }
-        if let haveHotelId = try container.decodeIfPresent(String.self, forKey: .hotelId) {
-            self.hotelId = Int(haveHotelId)
-        }
+        self.cityId = try container.decodeIfPresent(String.self, forKey: .cityId)
+        self.hotelId = try container.decodeIfPresent(String.self, forKey: .hotelId)
     }
 }
 
@@ -102,8 +98,6 @@ struct NeighborhoodSearchResult: SearchResult {
         self.coordinates = try container.decode(Coordinates.self, forKey: .coordinates)
         self.hierarchyInfo = try container.decodeIfPresent(HierarchyInfo.self, forKey: .hierarchyInfo)
     }
-    
-    
 }
 
 struct HierarchyInfo: Hashable, Decodable {

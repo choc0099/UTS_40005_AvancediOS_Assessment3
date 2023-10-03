@@ -12,17 +12,27 @@ struct SearchHistoryView: View {
     //handles stored data persistnace from CoreData to display search history items to the user.
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \SearchHistory.regionName, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \SearchHistory.dateSearched, ascending: false)],
         animation: .default)
     private var searchHistory: FetchedResults<SearchHistory>
     
     var body: some View {
-        List{
-            ForEach(searchHistory) {
-                historyItem in
-                Text(historyItem.regionName ?? "")
-            }.onDelete(perform: deleteItems)
+        if !searchHistory.isEmpty {
+            List{
+                ForEach(searchHistory) {
+                    historyItem in
+                    //individual parameters are called here.
+                    NavigationLink(destination: HotelPropertySearchView(isFromHistory: true, regionId: historyItem.regionId ?? "", regionName: historyItem.regionName ?? "", regionCoordinates: Coordinates(lat: historyItem.regionCoordinates?.latitude ?? 0, long: historyItem.regionCoordinates?.longitude ?? 0))){
+                        Text(historyItem.regionName ?? "")
+                        
+                    }
+                   
+                }.onDelete(perform: deleteItems)
+            }
+        } else {
+            ErrorView(errorStatus: .welcome)
         }
+        
     }
     
     private func deleteItems(offsets: IndexSet) {
@@ -34,8 +44,8 @@ struct SearchHistoryView: View {
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                
+                print("Unable to delete this search history")
             }
         }
     }

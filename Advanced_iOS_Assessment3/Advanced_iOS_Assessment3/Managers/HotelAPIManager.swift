@@ -23,7 +23,8 @@ class HotelAPIManager {
     static let endPoints = [
         "search": "/locations/v3/search",
         "listProperty": "/properties/v2/list",
-        "metaData": "/v2/get-meta-data"
+        "metaData": "/v2/get-meta-data",
+        "propertyDetail": "/properties/v2/detail"
     ]
     
     static let apiUrl = "https://hotels4.p.rapidapi.com"
@@ -35,6 +36,9 @@ class HotelAPIManager {
             //puts the header into the url request
             request.allHTTPHeaderFields = headers
             request.httpMethod = "GET"
+            //used for testing and debugging.
+            print(validURL)
+            
             return request
         }
         else {

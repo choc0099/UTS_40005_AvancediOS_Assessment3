@@ -9,7 +9,7 @@ enum QueryError: Error {
     case roomNotFound
     case noChildrenFound
     case numbersOfRoomsNotEntered
-    case numbersOfAdultsNotEntered(room: Room)
+    case numbersOfAdultsNotEntered(roomNumber: Int)
 }
 
 import Foundation
@@ -23,23 +23,27 @@ class HotelPropertySearchViewModel: ObservableObject {
     @Published var checkInDate: Date = Date.now
     @Published var checkOutDate: Date = Date.now
     //determines the numbers of rooms, children and adults
-    @Published var numbersOfRooms: Int = 0
-    @Published var numbersOfAdults: Int = 0
-    @Published var numbersOfChildren: Int = 0
-    @Published var propertyResoults = [Property]()
+    @Published var propertyResults = [Property]()
     @Published var hotelResultsAnnotations: [HotelAnnotation] = []
+    //this is used to configure search settings such as sorting and filtering properties.
+    @Published var sort: SortPropertyBy = .recommended
+    @Published var minPrice: Int = 300
+    @Published var maxPrice: Int = 2000
+    @Published var numbersOfResults: Float = 200.0
+    
+    var searchPref: PropertyListPreference {
+        let price = PriceRequest(maximunPrice: maxPrice, minimunPrice: minPrice)
+        return PropertyListPreference(numbersOfResults: Int(numbersOfResults), sort: sort, filter: Filters(price: price, accessibility: nil, travellerType: nil, amenities: nil, star: nil))
+    }
     
     func incrementRooms() {
-        self.numbersOfRooms += 1
-        self.rooms.append(Room(index: numbersOfRooms, adults: 0, children: []))
+        self.rooms.append(Room(adults: 0, children: []))
     }
     
     func decrementRooms() {
         //retricts the range so it will not display negative number.
-        if(numbersOfRooms > 0)
-        {
+        if !rooms.isEmpty {
             self.rooms.removeLast()
-            self.numbersOfRooms -= 1
         }
     }
     
@@ -47,7 +51,7 @@ class HotelPropertySearchViewModel: ObservableObject {
     func incrementChildren(currentRoomId: UUID) {
         //gets the actual refernce of the room to add children.
         if let index = self.rooms.firstIndex(where: {$0.id == currentRoomId}) {
-            self.rooms[index].children.append(Children(index: 0, age: 0))
+            self.rooms[index].children.append(Children(age: 0))
         }
         
     }
@@ -55,7 +59,6 @@ class HotelPropertySearchViewModel: ObservableObject {
     func decrmentChildren(currentRoomId: UUID) {
         if let index = self.rooms.firstIndex(where: {$0.id == currentRoomId}) {
             if self.rooms[index].children.isEmpty {
-                
                 //removes a child when decreasing it.
                 self.rooms[index].children.removeLast()
             }
@@ -84,8 +87,7 @@ class HotelPropertySearchViewModel: ObservableObject {
     
     //this will get that specific room based on the id
     func findRoomById(roomId: UUID) throws ->  Room {
-        if let haveRoom = self.rooms.first(where: {$0.id == roomId})
-        {
+        if let haveRoom = self.rooms.first(where: {$0.id == roomId}) {
             return haveRoom
         }
         else {
@@ -95,8 +97,7 @@ class HotelPropertySearchViewModel: ObservableObject {
     //this returns the children object based on their id.
     func findChildrenById(roomId: UUID, childrenId: UUID) throws -> Children {
         if let roomIndex = self.rooms.firstIndex(where: {$0.id == roomId}) {
-            if let index = self.rooms[roomIndex].children.firstIndex(where: {$0.id == childrenId})
-            {
+            if let index = self.rooms[roomIndex].children.firstIndex(where: {$0.id == childrenId}) {
                 return self.rooms[roomIndex].children[index]
             }
             throw QueryError.noChildrenFound
@@ -119,7 +120,7 @@ class HotelPropertySearchViewModel: ObservableObject {
         //destination object.
         let dest = Destination(regionId: gaiaId, coordinates: nil)
         //builds this response so it can be encoded to JSON.
-        let propertyQuery = PropertyListRequest(currency: "AUD", eapid: metaDataAus.eapId, locale: metaData.australia.supportedLocales[0].hotelSiteLocaleIdentifier, siteId: metaDataAus.siteId, destination: dest, checkInDate: checkin, checkOutDate: checkout, rooms: rooms, resultsStartingIndex: 0, resultsSize: 100, sort: nil, filters: nil )
+        let propertyQuery = PropertyListRequest(currency: "AUD", eapid: metaDataAus.eapId, locale: metaData.australia.supportedLocales[0].hotelSiteLocaleIdentifier, siteId: metaDataAus.siteId, destination: dest, checkInDate: checkin, checkOutDate: checkout, rooms: rooms, sortAndFilterSettings: searchPref)
         return propertyQuery
     }
     
@@ -144,19 +145,38 @@ class HotelPropertySearchViewModel: ObservableObject {
             //decodes the property results from the JSON response.
             let response = try JSONDecoder().decode(PropertyResponse.self, from: data)
             DispatchQueue.main.async {
-                //allocates the response stuff to this VM so it can be dispalyed to the user.
-                self.propertyResoults = response.data.propertySearch.properties!
-                //tests via printing output if it works
-                for property in self.propertyResoults
-                {
-                    print("Id: \(property.id) Name: \(property.name) ")
+                do {
+                    //allocates the response stuff to this VM so it can be dispalyed to the user.
+                    self.propertyResults = response.data.propertySearch.properties
+                    
+                    //sets the view to display results to the user after it is loaded
+                    self.propertyResultStatus = .active
+                    if self.propertyResults.isEmpty {
+                        throw APIErrors.noSearchResults
+                    }
+                    //tests via printing output if it works
+                    for property in self.propertyResults {
+                        print("Id: \(property.id) Name: \(property.name) ")
+                    }
+                   
+                } catch {
+                    self.propertyResultStatus = .noResults
                 }
-                //sets the view to display results to the user after it is loaded
-                self.propertyResultStatus = .active
             }
-            
-            
-        } catch {
+        }//catches an error if there are no results
+        catch(APIErrors.noSearchResults) {
+            self.propertyResultStatus = .noResults
+        }
+        //catches an error if there is no internet connection
+        catch URLError.timedOut {
+            self.propertyResultStatus = .requestTimeOut
+            print("request timed out")
+        }
+        catch URLError.notConnectedToInternet {
+            self.propertyResultStatus = .offline
+            print("You are offline.")
+        }
+        catch {
             propertyResultStatus = .unkown
             print(error.localizedDescription)
             print(error)
@@ -169,24 +189,39 @@ class HotelPropertySearchViewModel: ObservableObject {
             throw QueryError.numbersOfRoomsNotEntered
         }
         
+        //this is a counter to identify what romm number it is
+        var counter = 1
         //checks if there are numbers of adults entered in each room
         for room in rooms {
             if !(room.adults > 0) {
                 //throws an error
-                throw QueryError.numbersOfAdultsNotEntered(room: room)
+                throw QueryError.numbersOfAdultsNotEntered(roomNumber: counter)
             }
+            counter += 1
         }
     }
     
+    //this will convert the date object to date components to get an integer from day, month and year as a part of the JSON structure.
     private func retrieveDateComp(date: Date) -> DateComponents {
         let calendar = Calendar.current
         return calendar.dateComponents([.day, .month, .year], from: date)
     }
     
+    //this will convert the date integer fields back to the Date object
+    private func convertToDateObject(day: Int, month: Int, year: Int) -> Date {
+        var dateComp = DateComponents()
+        dateComp.day = day
+        dateComp.month = month
+        dateComp.year = year
+        
+        let calendar = Calendar(identifier: .gregorian)
+        return calendar.date(from: dateComp)!
+    }
+    
     //this will convert the properties into map annotations which will be used for map markers.
     func convertToAnnotations() {
         //looops through each property in the search results
-        for property in propertyResoults {
+        for property in propertyResults {
             //converts it to hotelAnnotations
             let annotation = getAnnotation(property: property)
             //appends the annotation onto the annotations array
@@ -196,5 +231,32 @@ class HotelPropertySearchViewModel: ObservableObject {
     //helper function to get the indivdiual annotation.
     private func getAnnotation(property: Property) -> HotelAnnotation {
         return HotelAnnotation(property:  property)
+    }
+    
+    func saveToUserDefaults(regionId: String, metaDat: MetaDataResponse) {
+        UserDefaultsManager.savePropertySearchPrefernces(propertySearchPreferences: createPropertyObject(metaData: metaDat, gaiaId: regionId))
+    }
+    
+    func loadFromUserDefaults() {
+        if let propertyRequest =  UserDefaultsManager.loadPropertySearchData() {
+            //assigns it to the vm properties
+            //decodes the dates.
+            let propertyCheckInDate = propertyRequest.checkInDate
+            checkInDate = convertToDateObject(day: propertyCheckInDate.day, month: propertyCheckInDate.month, year: propertyCheckInDate.year)
+            let propertyCheckOutDate = propertyRequest.checkOutDate
+            checkOutDate = convertToDateObject(day: propertyCheckOutDate.day, month: propertyCheckOutDate.month, year: propertyCheckOutDate.year)
+            rooms = propertyRequest.rooms
+            if let havePrice = propertyRequest.filters?.price {
+                minPrice = havePrice.minimunPrice
+                maxPrice = havePrice.maximunPrice
+            }
+            sort = propertyRequest.sort
+            numbersOfResults = Float(propertyRequest.numbersOfResults)
+            print("Property Search Prefernces loaded from user defaults")
+        }
+        else {
+            print("No data loaded from user defaults.")
+        }
+        
     }
 }

@@ -12,26 +12,27 @@ struct SearchResultsView: View {
     
     var body: some View {
         List {
-            Section("Regions and Neighbourhoods") {
+            Section("Regions and Places") {
                 ForEach(hotelMain.regionSearchResults) {
                     region in
-                    if region.type != "HOTEL" {
+                    if let haveGaiaId = region.gaiaId {
                         NavigationLink {
-                            HotelPropertySearchView(region: region)
+                            HotelPropertySearchView(isFromHistory: false, regionId: haveGaiaId, regionName: region.regionNames.fullName, regionCoordinates: region.coordinates)
                         } label: {
                             Text("\(region.regionNames.fullName)")
                         }
-
                     }
                 }
             }
             
             Section("Hotel Suggestions") {
                 ForEach(hotelMain.hotelSearchResults) { hotel in
-                    if hotel.type == "HOTEL" {
+                    if let haveHotelId = hotel.hotelId {
                         if hotel.hotelAddress != nil {
+                            NavigationLink(destination: HotelPropertySearchView(isFromHistory: false, regionId: hotel.cityId!, regionName: hotel.regionNames.fullName, regionCoordinates: hotel.coordinates)) {
+                                Text(hotel.regionNames.fullName)
+                            }
                             
-                            Text(hotel.regionNames.fullName)
                         }
                     }
                 }

@@ -14,6 +14,7 @@ enum HotelStatus {
     case loading
     case offline
     case noResults
+    case requestTimeOut
     case welcome
     case unkown
 }
@@ -63,10 +64,6 @@ class HotelBrowserMainViewModel: ObservableObject {
             ]
         }
    
-        
-        if let haveUrl = urlComp.url {
-            print(haveUrl)
-        }
         
         do {
             let request = try HotelAPIManager.hotelApi(urlStuffs: urlComp)            
@@ -122,6 +119,10 @@ class HotelBrowserMainViewModel: ObservableObject {
         {
             searchStatus = .offline
             print("You are offline!")
+        }
+        catch(URLError.timedOut) {
+            searchStatus = .requestTimeOut
+            print("Request timed out.")
         }
         catch {
             searchStatus = .unkown

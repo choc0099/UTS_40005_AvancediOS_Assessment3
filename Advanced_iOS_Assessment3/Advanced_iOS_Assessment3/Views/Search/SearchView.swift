@@ -10,7 +10,6 @@ import SwiftUI
 struct SearchView: View {
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
     @State var searchText: String = ""
-    @State var errorText: String = "" //displays a message to the user.
    
     var body: some View {
         NavigationStack {
@@ -25,8 +24,6 @@ struct SearchView: View {
                         await hotelMain.loadRegions(query: searchText)
                         //clears the search field after submission.
                         searchText = ""
-                        //updates the error text if it was to occur
-                        updateText()
                     }
                     
                 }
@@ -45,29 +42,11 @@ struct SearchView: View {
                         }
                         else {
                             //displays messages to the user including error messages.
-                            Text("\(errorText)")
+                            ErrorView(errorStatus: hotelMain.searchStatus)
                         }
                     }.frame(maxHeight: .infinity)
                 }
-            }.onAppear {
-                updateText()
             }
-        }
-    }
-    
-    func updateText() {
-        //adds text depnding on scenarios
-        switch(hotelMain.searchStatus) {
-        case .welcome:
-            errorText = "Welcome to Hotel Browser"
-        case .noResults:
-            errorText = "No Results Found"
-        case .offline:
-            errorText = "You are currently offline."
-        case .unkown:
-            errorText = "Something went wrong!"
-        default:
-            errorText = ""
         }
     }
 }

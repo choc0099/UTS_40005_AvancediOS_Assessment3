@@ -41,6 +41,7 @@ struct PropertySummary: Hashable, Codable {
     let id: String
     let name: String
     let policies: PropertyPolicies?
+    let location: PropertyLocation
     
 }
 

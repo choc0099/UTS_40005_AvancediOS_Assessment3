@@ -16,42 +16,61 @@ struct PropertyDetailView: View {
         Group {
             ScrollView {
                 VStack(spacing: 20) {
-                    //HotelImageView(propertyImage: propertyDetailsVM.propertyInfo?.propertyGallery?.images[0], imageSize: imageSize: 200, mapMode: false)
-                    Spacer()
-                    Text(propertyDetailsVM.hotelName).font(.title)
-                    Spacer()
-                    Text("About This Property").font(.headline)
-                    Text(propertyDetailsVM.propertyDescription).font(.body)
-                    Group {
-                        if let policies = propertyDetailsVM.propertyInfo?.summary.policies {
-                            Text("Policies").font(.subheadline)
-                            if let checkInInstructions = policies.checkInInstructions {
-                                Text("Check in Instructions").font(.subheadline)
-                                ForEach(checkInInstructions, id: \.self) {
-                                    instruction in Text(instruction).font(.body)
-                                }
-                            }
-                            
-                            if let needToKnow = policies.needToKnow?.body {
-                                Text("Need to know").font(.subheadline)
-                                ForEach(needToKnow, id: \.self) {
-                                    message in Text(message).font(.body)
-                                }
-                            }
-                            
-                            if let pets = policies.pets?.body  {
-                                Text("Pets").font(.subheadline)
-                                ForEach(pets, id: \.self) {
-                                    petMessage in
-                                    Text(petMessage)
-                                }
-                            }
+                    if let propertyInfo = propertyDetailsVM.propertyInfo {
+                        //the first image from the image galary will be loaded on the hotel image view.
+                        if let haveImage = propertyInfo.propertyGallery?.images {
+                            HotelImageView(propertyImage: haveImage[0],  imageSize: 200, mapMode: false)
                         }
+                        else {
+                            //this will display a placeHolder image if there are no images in the galery
+                            HotelImageView(imageSize: 200, mapMode: false)
+                        }
+                       
+                        Spacer()
+                        Text(propertyDetailsVM.hotelName).font(.title)
+                        Spacer()
+                        //this will display the hotel location details
                         
+                        Text(propertyInfo.summary.location.address.addressLine).font(.headline)
+                        MapImageView(mapImage: propertyInfo.summary.location.staticImage)
+                        
+                        if let description = propertyDetailsVM.propertyDescription {
+                            Text("About This Property").font(.headline)
+                            Text(description).font(.body)
+                        }
+                       
+                        Spacer()
+                      
+                        Group {
+                            if let policies = propertyInfo.summary.policies {
+                                Text("Policies").font(.subheadline)
+                                if let checkInInstructions = policies.checkInInstructions {
+                                    Text("Check in Instructions").font(.subheadline)
+                                    ForEach(checkInInstructions, id: \.self) {
+                                        instruction in Text(instruction).font(.body)
+                                    }
+                                }
+                                
+                                if let needToKnow = policies.needToKnow?.body {
+                                    Text("Need to know").font(.subheadline)
+                                    ForEach(needToKnow, id: \.self) {
+                                        message in Text(message).font(.body)
+                                    }
+                                }
+                                
+                                if let pets = policies.pets?.body  {
+                                    Text("Pets").font(.subheadline)
+                                    ForEach(pets, id: \.self) {
+                                        petMessage in
+                                        Text(petMessage)
+                                    }
+                                }
+                            }
+                            
+                        }
                     }
                     
-                    
-                }
+                }.padding()
             }
             
         }.onAppear(perform: {

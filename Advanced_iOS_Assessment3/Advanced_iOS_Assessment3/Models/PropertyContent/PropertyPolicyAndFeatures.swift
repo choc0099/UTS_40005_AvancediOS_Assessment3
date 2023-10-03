@@ -54,9 +54,29 @@ struct Pets: Hashable, Codable {
 }
 
 struct Mention: Hashable, Codable {
-    let body : [String]?
-    let descriptions : [String]?
-    let title : String?
+    let body: [String]?
+    let descriptions: [String]?
+    let title: String?
+}
+
+struct PropertyLocation: Hashable, Codable {
+    let address : PropertyAddress
+    let coordinates : PropertyCoordinates
+    let staticImage: PropertyStaticImage
+}
+
+struct PropertyStaticImage: Hashable, Codable {
+    let description : String?
+    let url: String
+}
+
+struct PropertyAddress: Hashable, Codable {
+    let addressLine : String
+    let city : String
+    let province : String
+    let countryCode : String
+    let firstAddressLine : String?
+    let secondAddressLine : String?
 }
 /*
 struct SpecialFeatures: Hashable, Codable  {

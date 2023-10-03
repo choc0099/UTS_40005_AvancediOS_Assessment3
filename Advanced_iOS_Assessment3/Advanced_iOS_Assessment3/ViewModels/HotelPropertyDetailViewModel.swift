@@ -19,7 +19,7 @@ class HotelPropertyDetailViewModel: ObservableObject {
     }*/
     
     //this is a computed property that will return the description of the hotel by unwraping multiple optinal values as not every hotel might contatin this.
-    var propertyDescription: String {
+    var propertyDescription: String? {
         //there will be nested if let loops to safely unwrap each optional values to get the description of the hotel property.
         //i have checked that the description is located on index zero of the section arrays.
         if let sections = propertyInfo?.contentSection?.aboutThisProperty?.sections {
@@ -33,7 +33,7 @@ class HotelPropertyDetailViewModel: ObservableObject {
                 }
             }
         }
-        return ""
+        return nil
     }
     
     var hotelName: String {

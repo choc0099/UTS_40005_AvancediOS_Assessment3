@@ -17,17 +17,22 @@ struct SearchHistoryView: View {
     private var searchHistory: FetchedResults<SearchHistory>
     
     var body: some View {
-        List{
-            ForEach(searchHistory) {
-                historyItem in
-                //individual parameters are called here.
-                NavigationLink(destination: HotelPropertySearchView(isFromHistory: true, regionId: historyItem.regionId ?? "", regionName: historyItem.regionName ?? "", regionCoordinates: Coordinates(lat: historyItem.regionCoordinates?.latitude ?? 0, long: historyItem.regionCoordinates?.longitude ?? 0))){
-                    Text(historyItem.regionName ?? "")
-                    
-                }
-               
-            }.onDelete(perform: deleteItems)
+        if !searchHistory.isEmpty {
+            List{
+                ForEach(searchHistory) {
+                    historyItem in
+                    //individual parameters are called here.
+                    NavigationLink(destination: HotelPropertySearchView(isFromHistory: true, regionId: historyItem.regionId ?? "", regionName: historyItem.regionName ?? "", regionCoordinates: Coordinates(lat: historyItem.regionCoordinates?.latitude ?? 0, long: historyItem.regionCoordinates?.longitude ?? 0))){
+                        Text(historyItem.regionName ?? "")
+                        
+                    }
+                   
+                }.onDelete(perform: deleteItems)
+            }
+        } else {
+            ErrorView(errorStatus: .welcome)
         }
+        
     }
     
     private func deleteItems(offsets: IndexSet) {

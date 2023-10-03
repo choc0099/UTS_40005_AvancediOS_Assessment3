@@ -24,7 +24,7 @@ struct ContentView: View {
                 Label("Settings", systemImage: "globe")
             }*/
             //this is only used for testing with hardcoded hotelId.
-            PropertyDetailView(propertyId: "5932305").tabItem {
+             PropertyDetailsProcessingView(propertyId: "5932305").tabItem {
                 Label("Test", systemImage: "")
             }
         }.onAppear {

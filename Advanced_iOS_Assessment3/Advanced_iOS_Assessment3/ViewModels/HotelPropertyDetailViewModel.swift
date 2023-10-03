@@ -64,10 +64,19 @@ class HotelPropertyDetailViewModel: ObservableObject {
             
             let propertyDetailsResponse = try JSONDecoder().decode(PropertyDetalResponse.self, from: data)
             
-            DispatchQueue.main.async {
-                self.propertyInfo = propertyDetailsResponse.propertyData?.propertyInfo
+            DispatchQueue.main.async  {
+                self.propertyInfo = propertyDetailsResponse.propertyData.propertyInfo
+                self.status = .active
             }
-        } catch {
+        } catch URLError.notConnectedToInternet {
+            self.status = .offline
+            print("You are offline.")
+        } catch URLError.timedOut  {
+            self.status = .requestTimeOut
+            print("Request timed out.")
+        }
+        catch {
+            self.status = .unkown
             print(error.localizedDescription)
             print(error)
         }

@@ -8,7 +8,7 @@
 import Foundation
 
 struct PropertyDetalResponse: Hashable, Codable {
-    let propertyData: PropertyContentData?
+    let propertyData: PropertyContentData
     
     enum CodingKeys: String, CodingKey {
         case propertyData = "data"
@@ -17,7 +17,7 @@ struct PropertyDetalResponse: Hashable, Codable {
 
 
 struct PropertyContentData: Hashable, Codable {
-    let propertyInfo: PropertyInfo?
+    let propertyInfo: PropertyInfo
 
     enum CodingKeys: String, CodingKey {
         case propertyInfo = "propertyInfo"

@@ -14,6 +14,7 @@ enum HotelStatus {
     case loading
     case offline
     case noResults
+    case requestTimeOut
     case welcome
     case unkown
 }
@@ -118,6 +119,10 @@ class HotelBrowserMainViewModel: ObservableObject {
         {
             searchStatus = .offline
             print("You are offline!")
+        }
+        catch(URLError.timedOut) {
+            searchStatus = .requestTimeOut
+            print("Request timed out.")
         }
         catch {
             searchStatus = .unkown

@@ -145,16 +145,38 @@ class HotelPropertySearchViewModel: ObservableObject {
             //decodes the property results from the JSON response.
             let response = try JSONDecoder().decode(PropertyResponse.self, from: data)
             DispatchQueue.main.async {
-                //allocates the response stuff to this VM so it can be dispalyed to the user.
-                self.propertyResults = response.data.propertySearch.properties!
-                //tests via printing output if it works
-                for property in self.propertyResults {
-                    print("Id: \(property.id) Name: \(property.name) ")
+                do {
+                    //allocates the response stuff to this VM so it can be dispalyed to the user.
+                    self.propertyResults = response.data.propertySearch.properties
+                    
+                    //sets the view to display results to the user after it is loaded
+                    self.propertyResultStatus = .active
+                    if self.propertyResults.isEmpty {
+                        throw APIErrors.noSearchResults
+                    }
+                    //tests via printing output if it works
+                    for property in self.propertyResults {
+                        print("Id: \(property.id) Name: \(property.name) ")
+                    }
+                   
+                } catch {
+                    self.propertyResultStatus = .noResults
                 }
-                //sets the view to display results to the user after it is loaded
-                self.propertyResultStatus = .active
             }
-        } catch {
+        }//catches an error if there are no results
+        catch(APIErrors.noSearchResults) {
+            self.propertyResultStatus = .noResults
+        }
+        //catches an error if there is no internet connection
+        catch URLError.timedOut {
+            self.propertyResultStatus = .requestTimeOut
+            print("request timed out")
+        }
+        catch URLError.notConnectedToInternet {
+            self.propertyResultStatus = .offline
+            print("You are offline.")
+        }
+        catch {
             propertyResultStatus = .unkown
             print(error.localizedDescription)
             print(error)

@@ -22,15 +22,14 @@ struct PropertyResultsProcessingView: View {
             else if roomSearchVM.propertyResultStatus == .loading {
                 ProgressView()
             }
-            else if roomSearchVM.propertyResultStatus == .unkown {
-                VStack {
-                    Text("Something went wrong!")
-                }
+            else {
+                //displays an error message to the user.
+                ErrorView(errorStatus: roomSearchVM.propertyResultStatus)
             }
         }
     }
 }
-
+/*
 #Preview {
     PropertyResultsProcessingView(roomSearchVM: HotelPropertySearchViewModel(), regionId: "", regionCoordinates: Coordinates(lat: -100, long: -100))
-}
+}*/

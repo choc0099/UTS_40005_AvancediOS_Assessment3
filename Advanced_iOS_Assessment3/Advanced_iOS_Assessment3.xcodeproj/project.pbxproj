@@ -52,6 +52,7 @@
 		32C7C58A2AC3776500D5B4AD /* HotelAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C7C5892AC3776500D5B4AD /* HotelAPIManager.swift */; };
 		32C7C58E2AC3A64F00D5B4AD /* RoomFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C7C58D2AC3A64F00D5B4AD /* RoomFieldView.swift */; };
 		32C7C5902AC3EBA800D5B4AD /* ChildrenFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C7C58F2AC3EBA800D5B4AD /* ChildrenFieldView.swift */; };
+		32F20C382ACBECFF001DE51B /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F20C372ACBECFF001DE51B /* ErrorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		32C7C5892AC3776500D5B4AD /* HotelAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelAPIManager.swift; sourceTree = "<group>"; };
 		32C7C58D2AC3A64F00D5B4AD /* RoomFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomFieldView.swift; sourceTree = "<group>"; };
 		32C7C58F2AC3EBA800D5B4AD /* ChildrenFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenFieldView.swift; sourceTree = "<group>"; };
+		32F20C372ACBECFF001DE51B /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +231,7 @@
 				325FF5BB2AC56C5400E207DB /* HotelPropertyRow.swift */,
 				32920DEC2AC80DC700670ACA /* HotelImageView.swift */,
 				325B5FA32ACB8A9B00C775D3 /* MapImageView.swift */,
+				32F20C372ACBECFF001DE51B /* ErrorView.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				32920DFD2AC9252500670ACA /* PropertySearchPreferencesView.swift in Sources */,
 				32C7C5902AC3EBA800D5B4AD /* ChildrenFieldView.swift in Sources */,
 				327A587F2AB8FB5200DB11E6 /* City.swift in Sources */,
+				32F20C382ACBECFF001DE51B /* ErrorView.swift in Sources */,
 				325FF5BC2AC56C5400E207DB /* HotelPropertyRow.swift in Sources */,
 				32920DE32AC6EC7C00670ACA /* SearchHistoryView.swift in Sources */,
 				32920DED2AC80DC700670ACA /* HotelImageView.swift in Sources */,

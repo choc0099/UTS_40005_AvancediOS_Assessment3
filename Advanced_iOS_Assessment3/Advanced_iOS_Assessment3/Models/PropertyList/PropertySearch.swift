@@ -40,7 +40,7 @@ struct PropertySearch: Codable {
     let typeName: String
     //let filterMetadata: FilterMetadata?
     //let sortAndFilter: UniversalSortAndFilter?
-    let properties: [Property]?
+    let properties: [Property]
     //let propertySearchListings: [PropertySearchListings]?
     //let summary: Summary?
     //let searchCriteria: SearchCriteria?
@@ -66,7 +66,7 @@ struct PropertySearch: Codable {
         typeName = try values.decode(String.self, forKey: .typeName)
         //filterMetadata = try values.decodeIfPresent(FilterMetadata.self, forKey: .filterMetadata)
         //universalSortAndFilter = try values.decodeIfPresent(UniversalSortAndFilter.self, forKey: .universalSortAndFilter)
-        properties = try values.decodeIfPresent([Property].self, forKey: .properties)
+        properties = try values.decode([Property].self, forKey: .properties)
         //propertySearchListings = try values.decodeIfPresent([PropertySearchListings].self, forKey: .propertySearchListings)
         //summary = try values.decodeIfPresent(Summary.self, forKey: .summary)
         //searchCriteria = try values.decodeIfPresent(SearchCriteria.self, forKey: .searchCriteria)

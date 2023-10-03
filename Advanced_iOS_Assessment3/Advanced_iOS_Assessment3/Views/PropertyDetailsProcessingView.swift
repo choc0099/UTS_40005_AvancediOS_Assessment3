@@ -21,9 +21,8 @@ struct PropertyDetailsProcessingView: View {
                 PropertyDetailView(propertyDetailsVM: propertyDetailsVM)
             }
             else {
-                VStack {
-                    Text("Seomthing went wrong!")
-                }
+              //displays error messages to the user
+                ErrorView(errorStatus: propertyDetailsVM.status)
             }
         }.onAppear(perform: {
             Task {

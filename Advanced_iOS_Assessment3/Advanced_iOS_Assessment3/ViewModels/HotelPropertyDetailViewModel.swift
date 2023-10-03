@@ -11,13 +11,7 @@ class HotelPropertyDetailViewModel: ObservableObject {
     @Published var description: String = ""
     @Published var propertyInfo: PropertyInfo?
     @Published var status: HotelStatus = .loading
-    /*
-    var propertyDetailsText: Dictionary<String, [String]> {
-        if let sections = propertyInfo?.contentSection?.aboutThisProperty?.sections {
-            
-        }
-    }*/
-    
+
     //this is a computed property that will return the description of the hotel by unwraping multiple optinal values as not every hotel might contatin this.
     var propertyDescription: String? {
         //there will be nested if let loops to safely unwrap each optional values to get the description of the hotel property.
@@ -55,6 +49,7 @@ class HotelPropertyDetailViewModel: ObservableObject {
         return request
     }
     
+    @MainActor
     func fetchPropertyDetails(propertyId: String, metaData: MetaDataResponse) async {
         do {
             let request = try processRequest(propertyId: propertyId, metaData: metaData)

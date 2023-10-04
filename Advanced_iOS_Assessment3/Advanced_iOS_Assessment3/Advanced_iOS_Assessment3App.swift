@@ -6,11 +6,26 @@
 //
 
 import SwiftUI
+import FirebaseCore
+import FirebaseFirestore
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    FirebaseApp.configure()
+
+    return true
+  }
+}
+
 
 @main
 struct Advanced_iOS_Assessment3App: App {
+    
+    
     let persistenceController = PersistenceController.shared
     @StateObject var hotelMain: HotelBrowserMainViewModel = HotelBrowserMainViewModel()
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegat
     var body: some Scene {
         WindowGroup {
             ContentView()

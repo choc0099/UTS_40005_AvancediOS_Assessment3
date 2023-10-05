@@ -20,6 +20,12 @@ struct ContentView: View {
                 Label("Search", systemImage: "magnifyingglass")
             }
             
+            Group {
+                Button("Test write") {
+                    FirebaseManager.testWrite()
+                }
+            }.tabItem { Label("Favourites", systemImage: "heart.fill") }
+            
             /*RegionsView().tabItem {
                 Label("Settings", systemImage: "globe")
             }*/

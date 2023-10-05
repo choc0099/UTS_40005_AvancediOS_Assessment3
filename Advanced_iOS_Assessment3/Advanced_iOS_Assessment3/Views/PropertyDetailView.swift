@@ -32,6 +32,14 @@ struct PropertyDetailView: View {
                         //this will display the hotel location details
                         
                         Text(propertyInfo.summary.location.address.addressLine).font(.headline)
+                        Spacer()
+                        Button  {
+                            try! propertyDetailsVM.addToFavourites()
+                        } label: {
+                            Text("Add to favourites")
+                        }
+                            
+                        Spacer()
                         MapImageView(mapImage: propertyInfo.summary.location.staticImage)
                         
                         if let description = propertyDetailsVM.propertyDescription {

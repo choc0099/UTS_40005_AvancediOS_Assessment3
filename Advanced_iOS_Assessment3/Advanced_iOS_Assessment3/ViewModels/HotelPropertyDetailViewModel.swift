@@ -77,6 +77,20 @@ class HotelPropertyDetailViewModel: ObservableObject {
         }
       
     }
+    
+    //this will add the property that the user was viewing to favourites
+    //it will also save it to FireBase database
+    func addToFavourites() throws {
+        if let property = propertyInfo {
+            if let image = propertyInfo?.propertyGallery?.images {
+                let favourite = HotelFavourite(hotelId: property.summary.id, hotelName: property.summary.name, hotelAddress: property.summary.location.address.addressLine, imageUrl: image[0].image?.url ?? "", imageDescription: image[0].image?.description)
+                //saves it to the database
+                try FirebaseManager.saveFavouriteToDB(favourite: favourite)
+            }
+            
+        }
+    }
+    
     /*
     func loadDescriptions() {
         /*if let sections = propertyDetails?.contentSection?.aboutThisProperty?.sections {

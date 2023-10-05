@@ -21,9 +21,16 @@ struct ContentView: View {
             }
             
             Group {
-                Button("Test write") {
-                    FirebaseManager.testWrite()
+                VStack {
+                    Button("Test write") {
+                        FirebaseManager.testWrite()
+                    }
+                    Button("Test reas") {
+                        FirebaseManager.testRead()
+                    }
                 }
+                
+                
             }.tabItem { Label("Favourites", systemImage: "heart.fill") }
             
             /*RegionsView().tabItem {

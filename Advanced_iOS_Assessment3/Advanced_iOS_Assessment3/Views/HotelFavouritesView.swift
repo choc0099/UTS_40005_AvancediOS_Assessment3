@@ -10,7 +10,15 @@ import SwiftUI
 struct HotelFavouritesView: View {
     @StateObject var hotelFavsVM: HotelFavouritesViewModel = HotelFavouritesViewModel()
     var body: some View {
-       Text("Cigarette")
+        List {
+            ForEach(hotelFavsVM.favourites) {
+                favourite in
+                HotelFavouritesRow(favourite: favourite)
+            }
+        }.onAppear(perform: {
+            //loads the favourites from DB
+            hotelFavsVM.fetchFavourites()
+        })
     }
 }
 

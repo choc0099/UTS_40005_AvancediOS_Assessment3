@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct HotelFavouritesRow: View {
-    
+    @State var favourite: HotelFavourite
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            HotelImageView(propertyImage: PropertyImage(typename: "", alt: favourite.imageDescription, accessibilityText: nil, image: HotelImage(typeName: "", description: nil, url: favourite.imageUrl), subjectId: nil, imageId: nil), imageSize: 50, mapMode: false)
+            VStack(spacing: 10, content: {
+                Text(favourite.hotelName)
+                Text(favourite.hotelAddress)
+            })
+        }
     }
 }
 
 #Preview {
-    HotelFavouritesRow()
+    HotelFavouritesRow(favourite: HotelFavourite(hotelId: "8882", hotelName: "The Cigarette Hotel", hotelAddress: "8822 Cigarette Street URLVale", imageUrl: "", imageDescription: nil))
 }

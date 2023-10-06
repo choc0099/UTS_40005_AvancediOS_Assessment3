@@ -35,29 +35,35 @@ class FirebaseManager {
     static func readFavourites() throws -> [HotelFavourite] {
         //this is a boolean to determine if there is an error reading data from the db
         var isError: Bool = false
+        var favouriteObj: HotelFavourite!
         //this is an array of favourites
         var favouritesTemp: [HotelFavourite] = []
         //reads the data from the db and encapsulates into an object, then it stores it on an array
-        ref.child("hotelMain").child("favourites").observeSingleEvent(of: .value, with: { (snapshot) in
-            if let favourites = snapshot.value as? [String: [String: String]] {
+        ref.child("hotelMain").child("hotelFavourites").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let favourites = snapshot.value as? [String: [String: Any]] {
                 //loops through an dictionary
                 for (key, favourite) in favourites {
+                    print(key)
+                    print(favourite["hotelName"]!)
                     //creates an object
-                    let favouriteObj = HotelFavourite(hotelId: key, hotelName: favourite["hotelName"]!, hotelAddress: favourite["hotelAddress"]!, imageUrl: favourite["imageUrl"]!, imageDescription: favourite["imageDescription"]!)
+                    favouriteObj = HotelFavourite(hotelId: key, hotelName: favourite["hotelName"]! as! String, hotelAddress: favourite["hotelAddress"]! as! String, imageUrl: favourite["imageUrl"]! as! String, imageDescription: ".")
                     //adds it to the array
-                    favouritesTemp.append(favouriteObj)
                     
                 }
+                
             }
-        }) { (error) in
-            isError = true
-        }
+            
+        })
+        return favouritesTemp
+        /*{ (error) in
+            //isError = true
+        }*/
         
         if isError {
             throw FireBaseRDError.readFailed
         }
         
-        return favouritesTemp
+        
     }
     
     //this function will print the results into the console.

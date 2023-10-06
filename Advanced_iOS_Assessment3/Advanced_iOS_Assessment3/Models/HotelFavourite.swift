@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct HotelFavourite: Identifiable, Hashable {
+struct HotelFavourite: Identifiable {
     let id: UUID = UUID() //used internally to loop through the lists in swiftUi
-    let hotelId: String
-    let hotelName: String
-    let hotelAddress: String
-    let imageUrl: String
-    let imageDescription: String?
+    var hotelId: String
+    var hotelName: String
+    var hotelAddress: String
+    var imageUrl: String
+    var imageDescription: String?
     
     //converts it to a dictionary object so it can be used to store it in Firebase
     var dictionary: [String: [String:Any]] {

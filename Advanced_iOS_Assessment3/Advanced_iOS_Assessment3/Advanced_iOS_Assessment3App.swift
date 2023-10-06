@@ -13,9 +13,11 @@ import FirebaseDatabase
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-
-    return true
+      
+      FirebaseApp.configure()
+      //allows the database to be used when offline
+      Database.database().isPersistenceEnabled = true
+      return true
   }
 }
 
@@ -23,10 +25,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct Advanced_iOS_Assessment3App: App {
     
-    
     let persistenceController = PersistenceController.shared
     @StateObject var hotelMain: HotelBrowserMainViewModel = HotelBrowserMainViewModel()
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegat
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
             ContentView()

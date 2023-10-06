@@ -46,6 +46,7 @@ class FirebaseManager {
                     let favouriteObj = HotelFavourite(hotelId: key, hotelName: favourite["hotelName"]!, hotelAddress: favourite["hotelAddress"]!, imageUrl: favourite["imageUrl"]!, imageDescription: favourite["imageDescription"]!)
                     //adds it to the array
                     favouritesTemp.append(favouriteObj)
+                    
                 }
             }
         }) { (error) in

@@ -10,7 +10,7 @@ import SwiftUI
 struct HotelFavouritesView: View {
     @StateObject var hotelFavsVM: HotelFavouritesViewModel = HotelFavouritesViewModel()
     var body: some View {
-       Text("Cigi")
+       Text("Cigarette")
     }
 }
 

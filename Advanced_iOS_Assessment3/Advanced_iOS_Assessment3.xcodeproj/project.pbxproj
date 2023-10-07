@@ -29,6 +29,7 @@
 		325FF5BC2AC56C5400E207DB /* HotelPropertyRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325FF5BB2AC56C5400E207DB /* HotelPropertyRow.swift */; };
 		325FF5BE2AC594E500E207DB /* HotelPropertyResultsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325FF5BD2AC594E500E207DB /* HotelPropertyResultsMapView.swift */; };
 		325FF5C02AC59B7600E207DB /* HotelAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325FF5BF2AC59B7600E207DB /* HotelAnnotation.swift */; };
+		3278D1D12AD1331800324436 /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3278D1D02AD1331800324436 /* PromiseKit */; };
 		32795B432AC65CA600B8E670 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32795B422AC65CA600B8E670 /* CoreDataManager.swift */; };
 		327A587D2AB859EE00DB11E6 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327A587C2AB859EE00DB11E6 /* MainViewModel.swift */; };
 		327A587F2AB8FB5200DB11E6 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327A587E2AB8FB5200DB11E6 /* City.swift */; };
@@ -154,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32F74F592ACE2AAD00EF6DB3 /* FirebaseDatabaseSwift in Frameworks */,
+				3278D1D12AD1331800324436 /* PromiseKit in Frameworks */,
 				32F74F4F2ACE2AAD00EF6DB3 /* FirebaseAnalyticsSwift in Frameworks */,
 				32F74F552ACE2AAD00EF6DB3 /* FirebaseAuthCombine-Community in Frameworks */,
 				32F74F5D2ACE2AAD00EF6DB3 /* FirebaseFirestoreCombine-Community in Frameworks */,
@@ -394,6 +396,7 @@
 				32F74F5A2ACE2AAD00EF6DB3 /* FirebaseFirestore */,
 				32F74F5C2ACE2AAD00EF6DB3 /* FirebaseFirestoreCombine-Community */,
 				32F74F5E2ACE2AAD00EF6DB3 /* FirebaseFirestoreSwift */,
+				3278D1D02AD1331800324436 /* PromiseKit */,
 			);
 			productName = Advanced_iOS_Assessment3;
 			productReference = 3256C5D02AB8501E00AC9470 /* Advanced_iOS_Assessment3.app */;
@@ -469,6 +472,7 @@
 			mainGroup = 3256C5C72AB8501E00AC9470;
 			packageReferences = (
 				32F74F492ACE2AAD00EF6DB3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				3278D1CF2AD1331800324436 /* XCRemoteSwiftPackageReference "PromiseKit" */,
 			);
 			productRefGroup = 3256C5D12AB8501E00AC9470 /* Products */;
 			projectDirPath = "";
@@ -885,6 +889,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3278D1CF2AD1331800324436 /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mxcl/PromiseKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.1;
+			};
+		};
 		32F74F492ACE2AAD00EF6DB3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -896,6 +908,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3278D1D02AD1331800324436 /* PromiseKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3278D1CF2AD1331800324436 /* XCRemoteSwiftPackageReference "PromiseKit" */;
+			productName = PromiseKit;
+		};
 		32F74F4A2ACE2AAD00EF6DB3 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 32F74F492ACE2AAD00EF6DB3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

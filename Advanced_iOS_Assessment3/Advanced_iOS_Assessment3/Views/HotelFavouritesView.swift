@@ -18,9 +18,9 @@ struct HotelFavouritesView: View {
             }
         }.onAppear(perform: {
             //loads the favourites from DB
-            Task {
-                await hotelFavsVM.fetchFavourites()
-            }
+            //Task {
+              //  await hotelFavsVM.fetchFavourites()
+            //}
             
             print("Numbers of loaded favourites \(hotelFavsVM.favourites.count)")
         })

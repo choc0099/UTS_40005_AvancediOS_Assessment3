@@ -9,6 +9,9 @@ import Foundation
 import FirebaseCore
 import FirebaseDatabase
 import FirebaseFirestore
+//these are used to handle Firebase async functions that does not have the async modifer.
+
+import PromiseKit
 //this is a class to store and retrieve data from the Firebase server.
 
 enum FireBaseRDError: Error {
@@ -33,41 +36,39 @@ class FirebaseManager {
         //self.ref.setValue("Smokes")
     }
     
-    static func readFavourites(completion: @escaping ([HotelFavourite]?, Error?) -> Void) {
-        //this is a boolean to determine if there is an error reading data from the db
-        var isError: Bool = false
-        var favouriteObj: HotelFavourite!
-        //this is an array of favourites
-        var favouritesTemp: [HotelFavourite] = []
-        //reads the data from the db and encapsulates into an object, then it stores it on an array
-        ref.child("hotelMain").child("hotelFavourites").observeSingleEvent(of: .value, with: { (snapshot) in
-            if let favourites = snapshot.value as? [String: [String: Any]] {
-                //loops through an dictionary
-                for (key, favourite) in favourites {
-                    print(key)
-                    print(favourite["hotelName"]!)
-                    //creates an object
-                    favouriteObj = HotelFavourite(hotelId: key, hotelName: favourite["hotelName"]! as! String, hotelAddress: favourite["hotelAddress"]! as! String, imageUrl: favourite["imageUrl"]! as! String, imageDescription: ".")
-                    //adds it to the array
-                    favouritesTemp.append(favouriteObj)
-                }
-                //handles the completion due to async process
-                completion(favouritesTemp, nil)
-                
-            } else {
-                completion(nil, FireBaseRDError.noResults)
-            }
+    static func readFavourites() -> Promise<[HotelFavourite]> {
+        return Promise {
+            seal in
+            //this is a boolean to determine if there is an error reading data from the db
+            //var isError: Bool = false
             
-        })
-        /*{ (error) in
-            //isError = true
-        }*/
-        
-        /*if isError {
-            throw FireBaseRDError.readFailed
-        }*/
-        
-        
+            //this is an array of favourites
+            
+            //reads the data from the db and encapsulates into an object, then it stores it on an array
+            ref.child("hotelMain").child("hotelFavourites").observeSingleEvent(of: .value) { (snapshot) in
+                
+                if let favourites = snapshot.value as? [String: [String: Any]] {
+                    var favouritesTemp = [HotelFavourite]()
+                    //loops through an dictionary
+                    for (key, favourite) in favourites {
+                        //print(key)
+                        //print(favourite["hotelName"]!)
+                        //creates an object
+                        var favouriteObj: HotelFavourite = HotelFavourite(hotelId: key, hotelName: favourite["hotelName"]! as! String, hotelAddress: favourite["hotelAddress"]! as! String, imageUrl: favourite["imageUrl"]! as! String, imageDescription: ".")
+                        //adds it to the array
+                        favouritesTemp.append(favouriteObj)
+                    }
+                    seal.fulfill(favouritesTemp)
+                    
+                } else {
+                    //print("no data")
+                    seal.fulfill([])
+                }
+                //handles the error
+            } withCancel: { error in
+                seal.reject(error)
+            }
+        }
     }
     
     //this function will print the results into the console.

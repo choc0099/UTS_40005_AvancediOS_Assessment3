@@ -6,41 +6,31 @@
 //
 
 import Foundation
+import PromiseKit
+import FirebaseCore
+import FirebaseDatabase
 
 class HotelFavouritesViewModel: ObservableObject {
-    var favourites = [HotelFavourite]()
-    var status: HotelStatus = .loading
+    @Published var favourites: [HotelFavourite] = []
+    @Published var status: HotelStatus = .loading
     
     init() {
-        //self.favourites = fetchFavourites()
+        fetchFavourites()
+        //readFavourites()
     }
     
     //loads the favourites from the DB
-    func fetchFavourites() async {
+    func fetchFavourites() {
         //var fetchedFavourites: [HotelFavourite] = []
         
-            FirebaseManager.readFavourites { [weak self] (favourites, error) in
-                DispatchQueue.main.async {
-                    guard let self = self else {
-                        return
-                    }
-                    if let error = error {
-                        self.status = .noResults
-                    }
-                    
-                    else {
-                        if let haveFavourites = favourites {
-                            self.favourites = haveFavourites
-                       
-                            self.status = .active
-                            
-                        }
-                    }
-                }
-                //self.favourites = fetchedFavourites
-                //print(self.status)
+        FirebaseManager.readFavourites()
+            .done { favourites in
+                self.favourites = favourites
+                print(self.favourites)
             }
-        
-        
+            .catch { error in
+                self.status = .unkown
+            }
     }
+    
 }

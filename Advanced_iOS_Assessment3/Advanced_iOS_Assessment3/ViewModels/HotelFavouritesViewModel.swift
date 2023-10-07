@@ -9,18 +9,38 @@ import Foundation
 
 class HotelFavouritesViewModel: ObservableObject {
     var favourites = [HotelFavourite]()
-    var status: HotelStatus = .active
+    var status: HotelStatus = .loading
+    
+    init() {
+        //self.favourites = fetchFavourites()
+    }
     
     //loads the favourites from the DB
-    func fetchFavourites() {
-        do {
-            print("Fetch favourites called")
-            self.favourites = try FirebaseManager.readFavourites()
-            print(favourites.count)
-        }
-        catch {
-            status = .noResults
-            print("There is no data.")
-        }
+    func fetchFavourites() async {
+        //var fetchedFavourites: [HotelFavourite] = []
+        
+            FirebaseManager.readFavourites { [weak self] (favourites, error) in
+                DispatchQueue.main.async {
+                    guard let self = self else {
+                        return
+                    }
+                    if let error = error {
+                        self.status = .noResults
+                    }
+                    
+                    else {
+                        if let haveFavourites = favourites {
+                            self.favourites = haveFavourites
+                       
+                            self.status = .active
+                            
+                        }
+                    }
+                }
+                //self.favourites = fetchedFavourites
+                //print(self.status)
+            }
+        
+        
     }
 }

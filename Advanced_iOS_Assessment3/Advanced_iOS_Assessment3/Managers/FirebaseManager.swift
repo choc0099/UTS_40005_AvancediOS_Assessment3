@@ -14,6 +14,7 @@ import FirebaseFirestore
 enum FireBaseRDError: Error {
     case deleteFailed
     case readFailed
+    case noResults
 }
 
 class FirebaseManager {
@@ -32,7 +33,7 @@ class FirebaseManager {
         //self.ref.setValue("Smokes")
     }
     
-    static func readFavourites() throws -> [HotelFavourite] {
+    static func readFavourites(completion: @escaping ([HotelFavourite]?, Error?) -> Void) {
         //this is a boolean to determine if there is an error reading data from the db
         var isError: Bool = false
         var favouriteObj: HotelFavourite!
@@ -48,20 +49,23 @@ class FirebaseManager {
                     //creates an object
                     favouriteObj = HotelFavourite(hotelId: key, hotelName: favourite["hotelName"]! as! String, hotelAddress: favourite["hotelAddress"]! as! String, imageUrl: favourite["imageUrl"]! as! String, imageDescription: ".")
                     //adds it to the array
-                    
+                    favouritesTemp.append(favouriteObj)
                 }
+                //handles the completion due to async process
+                completion(favouritesTemp, nil)
                 
+            } else {
+                completion(nil, FireBaseRDError.noResults)
             }
             
         })
-        return favouritesTemp
         /*{ (error) in
             //isError = true
         }*/
         
-        if isError {
+        /*if isError {
             throw FireBaseRDError.readFailed
-        }
+        }*/
         
         
     }

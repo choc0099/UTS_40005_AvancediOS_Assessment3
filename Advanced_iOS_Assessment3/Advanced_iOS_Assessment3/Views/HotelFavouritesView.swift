@@ -13,11 +13,16 @@ struct HotelFavouritesView: View {
         List {
             ForEach(hotelFavsVM.favourites) {
                 favourite in
+                //Text(favourite.hotelName)
                 HotelFavouritesRow(favourite: favourite)
             }
         }.onAppear(perform: {
             //loads the favourites from DB
-            hotelFavsVM.fetchFavourites()
+            Task {
+                await hotelFavsVM.fetchFavourites()
+            }
+            
+            print("Numbers of loaded favourites \(hotelFavsVM.favourites.count)")
         })
     }
 }

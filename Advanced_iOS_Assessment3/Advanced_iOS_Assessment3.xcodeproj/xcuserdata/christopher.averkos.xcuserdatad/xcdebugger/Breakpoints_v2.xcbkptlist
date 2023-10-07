@@ -23,22 +23,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D8E5C3C1-BC3D-4AB8-BE8F-C712FA5E0B5E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Advanced_iOS_Assessment3/Managers/FirebaseManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "readFavourites(completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "79E5F348-B109-4D4E-8723-71E46D4FE37B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -46,8 +30,8 @@
             filePath = "Advanced_iOS_Assessment3/Managers/FirebaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
             landmarkName = "readFavourites(completion:)"
             landmarkType = "7">
             <Locations>
@@ -110,6 +94,21 @@
                   startingLineNumber = "49"
                   endingLineNumber = "49"
                   offsetFromSymbolStart = "1356">
+               </Location>
+               <Location
+                  uuid = "79E5F348-B109-4D4E-8723-71E46D4FE37B - f0e63b1302d4933d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.FIRDataSnapshot) -&gt; () in static Advanced_iOS_Assessment3.FirebaseManager.readFavourites(completion: (Swift.Array&lt;Advanced_iOS_Assessment3.HotelFavourite&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Advanced_iOS_Assessment3"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/Managers/FirebaseManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "1620">
                </Location>
             </Locations>
          </BreakpointContent>

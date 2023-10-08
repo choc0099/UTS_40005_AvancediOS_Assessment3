@@ -71,6 +71,24 @@ class FirebaseManager {
         }
     }
     
+    //this will get the specific favourite which will be used to check if a favourite already exists to determine if it can be removed.
+    static func getSpecificFavourite(propertyId: String) -> Promise<HotelFavourite?> {
+        return Promise {
+            seal in
+            ref.child("hotelMain").child("hotelFavourite").child(propertyId).observeSingleEvent(of: .value) { (snapshot) in
+                if let value = snapshot.value as? [String: Any] {
+                    let hotelFavourite: HotelFavourite = HotelFavourite(hotelId: snapshot.key, hotelName: value["hotelName"] as! String, hotelAddress: value["hotelAddress"] as! String, imageUrl: value["imageUrl"] as! String)
+                    seal.fulfill(hotelFavourite)
+                }
+                else {
+                    seal.fulfill(nil)
+                }
+            } withCancel: { error in
+                seal.reject(error)
+            }
+        }
+    }
+    
     //this function will print the results into the console.
     static func testRead() {
         ref.child("favourites").observeSingleEvent(of: .value, with: { (snapshot) in

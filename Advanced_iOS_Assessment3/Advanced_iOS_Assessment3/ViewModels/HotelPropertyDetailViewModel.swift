@@ -11,6 +11,7 @@ class HotelPropertyDetailViewModel: ObservableObject {
     @Published var description: String = ""
     @Published var propertyInfo: PropertyInfo?
     @Published var status: HotelStatus = .loading
+    @Published var isFavourite: Bool = false
 
     //this is a computed property that will return the description of the hotel by unwraping multiple optinal values as not every hotel might contatin this.
     var propertyDescription: String? {
@@ -86,8 +87,60 @@ class HotelPropertyDetailViewModel: ObservableObject {
                 let favourite = HotelFavourite(hotelId: property.summary.id, hotelName: property.summary.name, hotelAddress: property.summary.location.address.addressLine, imageUrl: image[0].image?.url ?? "", imageDescription: image[0].image?.description)
                 //saves it to the database
                 try FirebaseManager.saveFavouriteToDB(favourite: favourite)
+                //updates the favourite status
+                self.isFavourite = true
             }
             
+        }
+    }
+    
+    //a function to check if the favourites exists
+    
+    func checkFavourite() -> HotelFavourite? {
+        var hotelFavourite: HotelFavourite?
+        if let propertyId = propertyInfo?.summary.id {
+            FirebaseManager.getSpecificFavourite(propertyId: propertyId)
+            .done { favourite in
+                hotelFavourite = favourite
+            }
+            .catch { error in
+                //sets it to nil when an error occurs so the app does not crash.
+                hotelFavourite = nil
+            }
+        }
+        return hotelFavourite
+       
+    }
+    
+    //managed favourites
+    //this function will be used on the view side whether it should be removed or added to the favourites based if it already exist or not.
+    func manageFavourite() throws {
+        //checks if it is already added onto favourites
+        do {
+            if checkFavourite() != nil {
+                try removeFromFavourites()
+            }
+            else {
+                try addToFavourites()
+            }
+        }
+    }
+    
+    //this helper function will be used on appear to update the favourite button state
+    func updateFavouriteStatus() {
+        if checkFavourite() != nil {
+            self.isFavourite = true
+        }
+        else {
+            self.isFavourite = false
+        }
+    }
+    
+    //this function will remove a hotel from favourites
+    private func removeFromFavourites() throws {
+        if let propertyId = propertyInfo?.summary.id {
+            try FirebaseManager.removeFavouriteFromDB(propertyId: propertyId)
+            self.isFavourite = false
         }
     }
     

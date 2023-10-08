@@ -34,9 +34,13 @@ struct PropertyDetailView: View {
                         Text(propertyInfo.summary.location.address.addressLine).font(.headline)
                         Spacer()
                         Button  {
-                            try! propertyDetailsVM.addToFavourites()
+                            try! propertyDetailsVM.manageFavourite()
                         } label: {
-                            Text("Add to favourites")
+                            HStack(spacing: 10) {
+                                Image(systemName: propertyDetailsVM.isFavourite ? "heart.fill" : "heart")
+                                Text(propertyDetailsVM.isFavourite ? "Add to favourites" : "Remove from Favourites")
+                            }
+                            
                         }
                             
                         Spacer()

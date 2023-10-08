@@ -33,4 +33,8 @@ class HotelFavouritesViewModel: ObservableObject {
             }
     }
     
+    func removeFromFavourites(propertyId: String) throws {
+        try FirebaseManager.removeFavouriteFromDB(propertyId: propertyId)
+    }
+    
 }

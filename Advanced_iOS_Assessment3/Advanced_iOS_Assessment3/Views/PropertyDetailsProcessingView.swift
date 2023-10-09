@@ -28,7 +28,6 @@ struct PropertyDetailsProcessingView: View {
             Task {
                 if let metaData = hotelMain.metaData {
                     await propertyDetailsVM.fetchPropertyDetails(propertyId: propertyId, metaData: metaData)
-                    propertyDetailsVM.updateFavouriteStatus()
                 }
                 else {
                     propertyDetailsVM.status = .unkown

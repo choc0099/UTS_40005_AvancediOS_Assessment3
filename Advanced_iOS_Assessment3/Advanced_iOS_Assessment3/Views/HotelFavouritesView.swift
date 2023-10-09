@@ -10,20 +10,24 @@ import SwiftUI
 struct HotelFavouritesView: View {
     @StateObject var hotelFavsVM: HotelFavouritesViewModel = HotelFavouritesViewModel()
     var body: some View {
-        List {
-            ForEach(hotelFavsVM.favourites) {
-                favourite in
-                //Text(favourite.hotelName)
-                HotelFavouritesRow(favourite: favourite)
+        
+        NavigationStack {
+            List {
+                ForEach(hotelFavsVM.favourites) {
+                    favourite in
+                    NavigationLink {
+                        PropertyDetailsProcessingView(propertyId: favourite.hotelId)
+                    } label: {
+                        HotelFavouritesRow(favourite: favourite)
+                    }.swipeActions {
+                        Button("Delete", role: .destructive) {
+                            try! hotelFavsVM.removeFromFavourites(propertyId: favourite.hotelId)
+                        }
+                    }
+                    
+                }
             }
-        }.onAppear(perform: {
-            //loads the favourites from DB
-            //Task {
-              //  await hotelFavsVM.fetchFavourites()
-            //}
-            
-            print("Numbers of loaded favourites \(hotelFavsVM.favourites.count)")
-        })
+        }
     }
 }
 

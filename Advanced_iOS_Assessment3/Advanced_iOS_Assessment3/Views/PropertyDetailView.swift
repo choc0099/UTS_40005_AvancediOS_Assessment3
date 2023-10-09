@@ -38,7 +38,7 @@ struct PropertyDetailView: View {
                         } label: {
                             HStack(spacing: 10) {
                                 Image(systemName: propertyDetailsVM.isFavourite ? "heart.fill" : "heart")
-                                Text(propertyDetailsVM.isFavourite ? "Add to favourites" : "Remove from Favourites")
+                                Text(propertyDetailsVM.isFavourite ? "Remove from favourites" : "Add to Favourites")
                             }
                             
                         }
@@ -83,7 +83,9 @@ struct PropertyDetailView: View {
                     }
                     
                 }.padding()
-            }
+            }.onAppear(perform: {
+                propertyDetailsVM.checkFavourite()
+            })
             
         }
     }

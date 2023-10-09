@@ -16,7 +16,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
       
       FirebaseApp.configure()
       //allows the database to be used when offline
-      //Database.database().isPersistenceEnabled = true
+      Database.database().isPersistenceEnabled = true
       return true
   }
 }

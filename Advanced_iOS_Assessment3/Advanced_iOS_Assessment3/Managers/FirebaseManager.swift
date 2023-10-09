@@ -75,9 +75,15 @@ class FirebaseManager {
     static func getSpecificFavourite(propertyId: String) -> Promise<HotelFavourite?> {
         return Promise {
             seal in
-            ref.child("hotelMain").child("hotelFavourite").child(propertyId).observeSingleEvent(of: .value) { (snapshot) in
+            ref.child("hotelMain").child("hotelFavourites").child(propertyId).observeSingleEvent(of: .value) { (snapshot) in
+                print("Test")
+                print(snapshot)
+                //print(snapshot.value)
+                print(snapshot.key)
                 if let value = snapshot.value as? [String: Any] {
                     let hotelFavourite: HotelFavourite = HotelFavourite(hotelId: snapshot.key, hotelName: value["hotelName"] as! String, hotelAddress: value["hotelAddress"] as! String, imageUrl: value["imageUrl"] as! String)
+                    print("This is the specific favourite.")
+                    print(hotelFavourite)
                     seal.fulfill(hotelFavourite)
                 }
                 else {
@@ -112,20 +118,18 @@ class FirebaseManager {
         ref.child("hotelMain").child("hotelFavourites").setValue(favourite.dictionary)
     }
     
-    static func removeFavouriteFromDB(propertyId: String) throws {
-        //removes the record from DB
-        //this is a boolean to determine whether an error has occurred.
-        var isError: Bool = false
-        ref.child("hotelMain").child("hotelFavourites").child(propertyId).removeValue {
-            (error, favourite) in
-            if let error = error {
-                isError = true
+    static func removeFavouriteFromDB(propertyId: String) -> Promise<Void> {
+        //using promiseKit to handle asynchronous tasks from Firebase.
+        return Promise {
+            seal in
+            ref.child("hotelMain").child("hotelFavourites").child(propertyId).removeValue {
+                (error, _) in
+                if let error = error {
+                    seal.reject(FireBaseRDError.deleteFailed)
+                }
+                seal.fulfill(())
             }
-        }
-        
-        //throws an error based on the boolean isError status
-        if isError {
-            throw FireBaseRDError.deleteFailed
+            
         }
     }
 }

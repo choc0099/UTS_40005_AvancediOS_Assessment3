@@ -34,7 +34,13 @@ class HotelFavouritesViewModel: ObservableObject {
     }
     
     func removeFromFavourites(propertyId: String) throws {
-        try FirebaseManager.removeFavouriteFromDB(propertyId: propertyId)
+        FirebaseManager.removeFavouriteFromDB(propertyId: propertyId)
+            .done {
+                print("\(propertyId) Removed from favourites")
+            }
+            .catch { error in
+                print("failed to delete")
+            }
     }
     
 }

@@ -96,19 +96,29 @@ class HotelPropertyDetailViewModel: ObservableObject {
     
     //a function to check if the favourites exists
     
-    func checkFavourite() -> HotelFavourite? {
-        var hotelFavourite: HotelFavourite?
+    func checkFavourite()  {
+        
         if let propertyId = propertyInfo?.summary.id {
             FirebaseManager.getSpecificFavourite(propertyId: propertyId)
             .done { favourite in
-                hotelFavourite = favourite
+                if favourite != nil {
+                    self.isFavourite = true
+                    print("This property is already in favourites")
+                }
+                else {
+                    self.isFavourite = false
+                    print("This property is not added in favourites")
+                }
+                
             }
             .catch { error in
                 //sets it to nil when an error occurs so the app does not crash.
-                hotelFavourite = nil
+                self.isFavourite = false
+                print(error)
+                print(error.localizedDescription)
             }
         }
-        return hotelFavourite
+        
        
     }
     
@@ -117,22 +127,12 @@ class HotelPropertyDetailViewModel: ObservableObject {
     func manageFavourite() throws {
         //checks if it is already added onto favourites
         do {
-            if checkFavourite() != nil {
+            if isFavourite {
                 try removeFromFavourites()
             }
             else {
                 try addToFavourites()
             }
-        }
-    }
-    
-    //this helper function will be used on appear to update the favourite button state
-    func updateFavouriteStatus() {
-        if checkFavourite() != nil {
-            self.isFavourite = true
-        }
-        else {
-            self.isFavourite = false
         }
     }
     

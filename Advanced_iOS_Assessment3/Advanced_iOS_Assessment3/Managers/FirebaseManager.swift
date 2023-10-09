@@ -115,7 +115,7 @@ class FirebaseManager {
     }
     
     static func saveFavouriteToDB(favourite: HotelFavourite) throws {
-        ref.child("hotelMain").child("hotelFavourites").setValue(favourite.dictionary)
+        ref.child("hotelMain").child("hotelFavourites").child(favourite.hotelId).setValue(favourite.dictionary)
     }
     
     static func removeFavouriteFromDB(propertyId: String) -> Promise<Void> {

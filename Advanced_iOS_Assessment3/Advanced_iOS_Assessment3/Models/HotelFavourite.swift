@@ -16,10 +16,10 @@ struct HotelFavourite: Identifiable, Codable {
     var imageDescription: String?
     
     //converts it to a dictionary object so it can be used to store it in Firebase
-    var dictionary: [String: [String:Any]] {
-        return [hotelId : ["hotelName": hotelName,
+    var dictionary:  [String:Any] {
+        return ["hotelName": hotelName,
                            "imageUrl": imageUrl,
                            "hotelAddress": hotelAddress,
-                           "imageDescription": imageDescription ?? NSNull()]]
+                           "imageDescription": imageDescription ?? NSNull()]
     }
 }

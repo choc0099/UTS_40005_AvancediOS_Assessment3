@@ -29,6 +29,7 @@
 		325FF5BC2AC56C5400E207DB /* HotelPropertyRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325FF5BB2AC56C5400E207DB /* HotelPropertyRow.swift */; };
 		325FF5BE2AC594E500E207DB /* HotelPropertyResultsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325FF5BD2AC594E500E207DB /* HotelPropertyResultsMapView.swift */; };
 		325FF5C02AC59B7600E207DB /* HotelAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325FF5BF2AC59B7600E207DB /* HotelAnnotation.swift */; };
+		326F6FB92AD55A4900543117 /* PropertyHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326F6FB82AD55A4900543117 /* PropertyHistory.swift */; };
 		3278D1D12AD1331800324436 /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3278D1D02AD1331800324436 /* PromiseKit */; };
 		32795B432AC65CA600B8E670 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32795B422AC65CA600B8E670 /* CoreDataManager.swift */; };
 		327A587D2AB859EE00DB11E6 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327A587C2AB859EE00DB11E6 /* MainViewModel.swift */; };
@@ -117,6 +118,7 @@
 		325FF5BB2AC56C5400E207DB /* HotelPropertyRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelPropertyRow.swift; sourceTree = "<group>"; };
 		325FF5BD2AC594E500E207DB /* HotelPropertyResultsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelPropertyResultsMapView.swift; sourceTree = "<group>"; };
 		325FF5BF2AC59B7600E207DB /* HotelAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelAnnotation.swift; sourceTree = "<group>"; };
+		326F6FB82AD55A4900543117 /* PropertyHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyHistory.swift; sourceTree = "<group>"; };
 		32795B422AC65CA600B8E670 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		327A587C2AB859EE00DB11E6 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		327A587E2AB8FB5200DB11E6 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				32C7C5802AC2BFC700D5B4AD /* MetaDataResponse.swift */,
 				325FF5BF2AC59B7600E207DB /* HotelAnnotation.swift */,
 				32F74F682ACE761B00EF6DB3 /* HotelFavourite.swift */,
+				326F6FB82AD55A4900543117 /* PropertyHistory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				32920DF22AC8D0D700670ACA /* PropertyDetailView.swift in Sources */,
 				32F74F652ACE73A900EF6DB3 /* HotelFavouritesView.swift in Sources */,
 				32C7C5852AC2FED600D5B4AD /* HotelPropertySearchView.swift in Sources */,
+				326F6FB92AD55A4900543117 /* PropertyHistory.swift in Sources */,
 				320A7CC82AC175D4008B252B /* PropertyItem.swift in Sources */,
 				327A587D2AB859EE00DB11E6 /* MainViewModel.swift in Sources */,
 				320A7CC62AC173B2008B252B /* PropertyPrices.swift in Sources */,

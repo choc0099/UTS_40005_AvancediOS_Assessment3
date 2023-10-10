@@ -16,7 +16,7 @@ struct HotelRoomsResultsListView: View {
         List{
             ForEach(roomSearchVM.propertyResults) {
                 property in
-                NavigationLink(destination: PropertyDetailsProcessingView(propertyId: property.hotelId)) {
+                NavigationLink(destination: PropertyDetailsProcessingView(propertyId: property.hotelId, price: property.price.lead.amount, rooms: roomSearchVM.rooms, checkInDate: roomSearchVM.checkInDate, checkOutDate: roomSearchVM.checkOutDate)) {
                     HotelPropertyRow(hotelProperty: property)
                 }
                 

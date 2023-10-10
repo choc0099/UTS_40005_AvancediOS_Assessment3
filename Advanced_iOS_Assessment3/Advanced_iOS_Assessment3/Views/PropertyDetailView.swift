@@ -11,6 +11,11 @@ struct PropertyDetailView: View {
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
     @EnvironmentObject var hotelFavesVM: HotelFavouritesViewModel
     @ObservedObject var propertyDetailsVM: HotelPropertyDetailViewModel
+    //these are optional varibles which will be used to record searched property history into the database.
+    @State var price: Double?
+    @State var rooms: [Room]?
+    @State var checkInDate: Date?
+    @State var checkOutDate: Date?
     
     
     var body: some View {

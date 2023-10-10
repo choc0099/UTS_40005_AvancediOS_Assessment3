@@ -40,11 +40,6 @@ class FirebaseManager {
     static func readFavourites() -> Promise<[HotelFavourite]> {
         return Promise {
             seal in
-            //this is a boolean to determine if there is an error reading data from the db
-            //var isError: Bool = false
-            
-            //this is an array of favourites
-            
             //reads the data from the db and encapsulates into an object, then it stores it on an array
             ref.child("hotelMain").child("hotelFavourites").observeSingleEvent(of: .value) { (snapshot) in
                 
@@ -55,7 +50,7 @@ class FirebaseManager {
                         //print(key)
                         //print(favourite["hotelName"]!)
                         //creates an object
-                        var favouriteObj: HotelFavourite = HotelFavourite(hotelId: key, hotelName: favourite["hotelName"]! as! String, hotelAddress: favourite["hotelAddress"]! as! String, imageUrl: favourite["imageUrl"]! as! String, imageDescription: ".")
+                        var favouriteObj: HotelFavourite = HotelFavourite(hotelId: key, hotelName: favourite["hotelName"]! as! String, hotelAddress: favourite["hotelAddress"]! as! String, imageUrl: favourite["imageUrl"]! as! String, imageDescription: favourite["imageDescription"] as? String)
                         //adds it to the array
                         favouritesTemp.append(favouriteObj)
                     }
@@ -141,6 +136,50 @@ class FirebaseManager {
                 seal.fulfill(())
             }
             
+        }
+    }
+    
+    //adds the recent property search to the database
+    static func addPropertyHistory(history propertyHistory: PropertyHistory) -> Promise<Void> {
+        return Promise {
+            seal in
+            ref.child("hotelMain").child("history").childByAutoId().setValue(propertyHistory) {
+                (error, _) in
+                if let error = error {
+                    seal.reject(error)
+                }
+                seal.fulfill(())
+            }
+        }
+    }
+    
+    static func readPropertyHisttory() -> Promise<[PropertyHistory?]> {
+        return Promise {
+            seal in
+            //reads the data from the db and encapsulates into an object, then it stores it on an array
+            ref.child("hotelMain").child("history").observeSingleEvent(of: .value) { (snapshot) in
+                
+                if let history = snapshot.value as? [String: [String: Any]] {
+                    var historyTemp = [PropertyHistory]()
+                    //loops through an dictionary
+                    for (_, hotel) in history {
+                        //print(key)
+                        //print(favourite["hotelName"]!)
+                        //creates an object
+                        var historyObj: PropertyHistory = PropertyHistory(hotelId: hotel["hotelId"]! as! String, hotelName: hotel["hotelName"]! as! String, hotelAddress: hotel["hotelAddress"]! as! String, imageUrl: hotel["imageUrl"]! as! String, imageDescription: hotel["imageDescription"] as? String, numbersOfNights: hotel["numbersOfNights"] as! Int, numbersOfRooms: hotel["numbersOfRooms"]! as! Int, totalAdults: hotel["totalAdults"]! as! Int, totalChildren: hotel["totalChildren"]! as! Int, price: hotel["price"]! as! Double)
+                        //adds it to the array
+                        historyTemp.append(historyObj)
+                    }
+                    seal.fulfill(historyTemp)
+                    
+                } else {
+                    //print("no data")
+                    seal.fulfill([])
+                }
+                //handles the error
+            } withCancel: { error in
+                seal.reject(error)
+            }
         }
     }
 }

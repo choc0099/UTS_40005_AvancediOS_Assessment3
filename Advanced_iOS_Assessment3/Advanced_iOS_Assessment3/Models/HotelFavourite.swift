@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct HotelFavourite: Identifiable, Codable {
+struct HotelFavourite: SavedHotel, Identifiable, Codable {
     let id: UUID = UUID() //used internally to loop through the lists in swiftUi
     var hotelId: String
     var hotelName: String

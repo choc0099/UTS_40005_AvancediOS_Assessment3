@@ -17,6 +17,7 @@ import PromiseKit
 enum FireBaseRDError: Error {
     case deleteFailed
     case readFailed
+    case addFailed
     case noResults
 }
 
@@ -114,8 +115,18 @@ class FirebaseManager {
             }
     }
     
-    static func saveFavouriteToDB(favourite: HotelFavourite) throws {
-        ref.child("hotelMain").child("hotelFavourites").child(favourite.hotelId).setValue(favourite.dictionary)
+    static func saveFavouriteToDB(favourite: HotelFavourite) -> Promise<Void> {
+        return Promise {
+            seal in
+            ref.child("hotelMain").child("hotelFavourites").child(favourite.hotelId).setValue(favourite.dictionary) {
+                (error, _) in
+                if let error = error {
+                    seal.reject(error)
+                }
+                seal.fulfill(())
+            }
+        }
+        
     }
     
     static func removeFavouriteFromDB(propertyId: String) -> Promise<Void> {
@@ -125,7 +136,7 @@ class FirebaseManager {
             ref.child("hotelMain").child("hotelFavourites").child(propertyId).removeValue {
                 (error, _) in
                 if let error = error {
-                    seal.reject(FireBaseRDError.deleteFailed)
+                    seal.reject(error)
                 }
                 seal.fulfill(())
             }

@@ -27,11 +27,12 @@ struct Advanced_iOS_Assessment3App: App {
     
     let persistenceController = PersistenceController.shared
     @StateObject var hotelMain: HotelBrowserMainViewModel = HotelBrowserMainViewModel()
+    @StateObject var hotelFavsVM: HotelFavouritesViewModel = HotelFavouritesViewModel()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext).environmentObject(hotelMain)
+                .environment(\.managedObjectContext, persistenceController.container.viewContext).environmentObject(hotelMain).environmentObject(hotelFavsVM)
         }
     }
 }

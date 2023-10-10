@@ -8,26 +8,41 @@
 import SwiftUI
 
 struct HotelFavouritesView: View {
-    @StateObject var hotelFavsVM: HotelFavouritesViewModel = HotelFavouritesViewModel()
+    @EnvironmentObject var hotelFavsVM: HotelFavouritesViewModel
     var body: some View {
         
         NavigationStack {
-            List {
-                ForEach(hotelFavsVM.favourites) {
-                    favourite in
-                    NavigationLink {
-                        PropertyDetailsProcessingView(propertyId: favourite.hotelId)
-                    } label: {
-                        HotelFavouritesRow(favourite: favourite)
-                    }.swipeActions {
-                        Button("Delete", role: .destructive) {
-                            try! hotelFavsVM.removeFromFavourites(propertyId: favourite.hotelId)
+            if hotelFavsVM.status == .active {
+                List {
+                    ForEach(hotelFavsVM.favourites) {
+                        favourite in
+                        NavigationLink {
+                            PropertyDetailsProcessingView(propertyId: favourite.hotelId)
+                        } label: {
+                            HotelFavouritesRow(favourite: favourite)
+                        }.swipeActions {
+                            Button("Delete", role: .destructive) {
+                                hotelFavsVM.removeFromFavourites(propertyId: favourite.hotelId)
+                                //refreshes the favourites list
+                                hotelFavsVM.fetchFavourites()
+                            }
                         }
+                        
                     }
-                    
                 }
+                
             }
-        }
+            else {
+                //displays messages to the user.
+                ErrorView(errorStatus: hotelFavsVM.status)
+            }
+            //alert is shown if the favourites failed to delete.
+        }.alert(isPresented: $hotelFavsVM.showAlert, content: {
+            Alert(
+                title: Text(hotelFavsVM.alertTitle),
+                message: Text(hotelFavsVM.alertMessage)
+            )
+        })
     }
 }
 

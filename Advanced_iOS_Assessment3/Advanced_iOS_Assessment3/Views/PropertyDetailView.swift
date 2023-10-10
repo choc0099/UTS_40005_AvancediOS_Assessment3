@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PropertyDetailView: View {
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
+    @EnvironmentObject var hotelFavesVM: HotelFavouritesViewModel
     @ObservedObject var propertyDetailsVM: HotelPropertyDetailViewModel
     
     
@@ -34,7 +35,10 @@ struct PropertyDetailView: View {
                         Text(propertyInfo.summary.location.address.addressLine).font(.headline)
                         Spacer()
                         Button  {
-                            try! propertyDetailsVM.manageFavourite()
+                            //process the favourite task whether to add or remove from favourites.
+                            propertyDetailsVM.manageFavourite()
+                            //refreshes the hotelFavourites VM
+                            hotelFavesVM.fetchFavourites()
                         } label: {
                             HStack(spacing: 10) {
                                 Image(systemName: propertyDetailsVM.isFavourite ? "heart.fill" : "heart")
@@ -85,6 +89,11 @@ struct PropertyDetailView: View {
                 }.padding()
             }.onAppear(perform: {
                 propertyDetailsVM.checkFavourite()
+            }).alert(isPresented: $propertyDetailsVM.showAlert, content: {
+                Alert(
+                    title: Text(propertyDetailsVM.alertTitle),
+                    message: Text(propertyDetailsVM.alertMessage)
+                )
             })
             
         }

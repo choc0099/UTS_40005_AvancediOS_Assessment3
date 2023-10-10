@@ -13,9 +13,11 @@ struct PropertyDetailView: View {
     @ObservedObject var propertyDetailsVM: HotelPropertyDetailViewModel
     //these are optional varibles which will be used to record searched property history into the database.
     @State var price: Double?
-    @State var rooms: [Room]?
-    @State var checkInDate: Date?
-    @State var checkOutDate: Date?
+    @State var totalAdults: Int?
+    @State var totalChildren: Int?
+    @State var numbersOfNights: Int?
+    //@State var checkInDate: Date?
+    //@State var checkOutDate: Date?
     
     
     var body: some View {
@@ -94,6 +96,17 @@ struct PropertyDetailView: View {
                 }.padding()
             }.onAppear(perform: {
                 propertyDetailsVM.checkFavourite()
+                
+                //this will store the property history into the database, using multiple unwrapings.
+                if let numbersOfNights = numbersOfNights {
+                    if let totalAdults = totalAdults {
+                        if let totalChildren = totalChildren {
+                            if let price = price {
+                                propertyDetailsVM.savePropertyHistory(numbersOfNights: numbersOfNights, totalAdults: totalAdults, totalChildren: totalChildren, price: price)
+                            }
+                        }
+                    }
+                }
             }).alert(isPresented: $propertyDetailsVM.showAlert, content: {
                 Alert(
                     title: Text(propertyDetailsVM.alertTitle),

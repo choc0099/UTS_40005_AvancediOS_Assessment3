@@ -161,6 +161,21 @@ class HotelPropertyDetailViewModel: ObservableObject {
         }
     }
     
+    //saves the property history
+    func savePropertyHistory(numbersOfNights: Int, totalAdults: Int, totalChildren: Int, price: Double) {
+        //declares an object
+        if let propertyInfo = propertyInfo {
+            let historyItem = PropertyHistory(hotelId: propertyInfo.summary.id, hotelName: propertyInfo.summary.name, hotelAddress: propertyInfo.summary.location.address.addressLine, imageUrl: "abc", numbersOfNights: numbersOfNights, numbersOfRooms: 0, totalAdults: totalAdults, totalChildren: totalChildren, price: price)
+            //saves it to the DB
+            FirebaseManager.addPropertyHistory(history: historyItem)
+                .catch { error in
+                    print(error)
+                    print(error.localizedDescription)
+                }
+        }
+        
+    }
+    
     /*
     func loadDescriptions() {
         /*if let sections = propertyDetails?.contentSection?.aboutThisProperty?.sections {

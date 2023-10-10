@@ -30,10 +30,35 @@ class HotelPropertySearchViewModel: ObservableObject {
     @Published var minPrice: Int = 300
     @Published var maxPrice: Int = 2000
     @Published var numbersOfResults: Float = 200.0
-    
+    //this is a computed property that stores property search preferences.
     var searchPref: PropertyListPreference {
         let price = PriceRequest(maximunPrice: maxPrice, minimunPrice: minPrice)
         return PropertyListPreference(numbersOfResults: Int(numbersOfResults), sort: sort, filter: Filters(price: price, accessibility: nil, travellerType: nil, amenities: nil, star: nil))
+    }
+    
+    //calculates the total numbers of nights searched
+    var numberOfNights: Int {
+        let calendar = Calendar.current
+        let comp = calendar.dateComponents([.day], from: checkInDate, to: checkOutDate)
+        return comp.day ?? 0
+    }
+    
+    //this will calculate total numbers of adults from all rooms.
+    var totalAdults: Int {
+        var total = 0
+        for room in rooms {
+            total += room.adults
+        }
+        return total
+    }
+    
+    //this will calculate total children
+    var totalChildren: Int {
+        var total = 0
+        for room in rooms {
+            total += room.children.count
+        }
+        return total
     }
     
     func incrementRooms() {

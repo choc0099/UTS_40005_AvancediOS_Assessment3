@@ -143,7 +143,7 @@ class FirebaseManager {
     static func addPropertyHistory(history propertyHistory: PropertyHistory) -> Promise<Void> {
         return Promise {
             seal in
-            ref.child("hotelMain").child("history").childByAutoId().setValue(propertyHistory) {
+            ref.child("hotelMain").child("history").childByAutoId().setValue(propertyHistory.dictionary) {
                 (error, _) in
                 if let error = error {
                     seal.reject(error)

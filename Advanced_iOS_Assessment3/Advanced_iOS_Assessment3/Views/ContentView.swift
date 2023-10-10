@@ -19,10 +19,10 @@ struct ContentView: View {
             SearchView().tabItem {
                 Label("Search", systemImage: "magnifyingglass")
             }
+            HotelFavouritesView().tabItem {
+                Label("Favourites", systemImage: "heart.fill")
+            }
             
-            /*RegionsView().tabItem {
-                Label("Settings", systemImage: "globe")
-            }*/
             //this is only used for testing with hardcoded hotelId.
              PropertyDetailsProcessingView(propertyId: "5932305").tabItem {
                 Label("Test", systemImage: "")

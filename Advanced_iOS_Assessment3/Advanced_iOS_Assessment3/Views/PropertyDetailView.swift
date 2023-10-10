@@ -32,6 +32,18 @@ struct PropertyDetailView: View {
                         //this will display the hotel location details
                         
                         Text(propertyInfo.summary.location.address.addressLine).font(.headline)
+                        Spacer()
+                        Button  {
+                            try! propertyDetailsVM.manageFavourite()
+                        } label: {
+                            HStack(spacing: 10) {
+                                Image(systemName: propertyDetailsVM.isFavourite ? "heart.fill" : "heart")
+                                Text(propertyDetailsVM.isFavourite ? "Remove from favourites" : "Add to Favourites")
+                            }
+                            
+                        }
+                            
+                        Spacer()
                         MapImageView(mapImage: propertyInfo.summary.location.staticImage)
                         
                         if let description = propertyDetailsVM.propertyDescription {
@@ -71,7 +83,9 @@ struct PropertyDetailView: View {
                     }
                     
                 }.padding()
-            }
+            }.onAppear(perform: {
+                propertyDetailsVM.checkFavourite()
+            })
             
         }
     }

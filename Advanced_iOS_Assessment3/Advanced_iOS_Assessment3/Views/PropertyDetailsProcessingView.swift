@@ -16,6 +16,7 @@ struct PropertyDetailsProcessingView: View {
     @State var totalAdults: Int?
     @State var totalChildren: Int?
     @State var numbersOfNights: Int?
+    @State var numbersOfRooms: Int?
     //@State var checkInDate: Date?
     //@State var checkOutDate: Date?
     
@@ -25,7 +26,7 @@ struct PropertyDetailsProcessingView: View {
                 ProgressView()
             }
             else if propertyDetailsVM.status == .active {
-                PropertyDetailView( propertyDetailsVM: propertyDetailsVM, price: price, totalAdults: totalAdults, totalChildren: totalChildren, numbersOfNights: numbersOfNights)
+                PropertyDetailView( propertyDetailsVM: propertyDetailsVM, price: price, totalAdults: totalAdults, totalChildren: totalChildren, numbersOfNights: numbersOfNights,  numbersOfRooms: numbersOfRooms)
             }
             else {
               //displays error messages to the user

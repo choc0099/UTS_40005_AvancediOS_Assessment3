@@ -16,6 +16,7 @@ struct PropertyDetailView: View {
     @State var totalAdults: Int?
     @State var totalChildren: Int?
     @State var numbersOfNights: Int?
+    @State var numbersOfRooms: Int?
     //@State var checkInDate: Date?
     //@State var checkOutDate: Date?
     
@@ -102,10 +103,14 @@ struct PropertyDetailView: View {
                     if let totalAdults = totalAdults {
                         if let totalChildren = totalChildren {
                             if let price = price {
-                                propertyDetailsVM.savePropertyHistory(numbersOfNights: numbersOfNights, totalAdults: totalAdults, totalChildren: totalChildren, price: price)
+                                if let numbersOfRooms = numbersOfRooms {
+                                    propertyDetailsVM.savePropertyHistory(numbersOfNights: numbersOfNights, numbersOfRooms: numbersOfRooms, totalAdults: totalAdults, totalChildren: totalChildren, price: price)
+                                }
+                                
                             }
                         }
                     }
+                    //it will not store to the database if the user viewed the Hotel Details coming from favourites or the history view.
                 }
             }).alert(isPresented: $propertyDetailsVM.showAlert, content: {
                 Alert(

@@ -171,8 +171,7 @@ class HotelPropertyDetailViewModel: ObservableObject {
         //declares an object
         if let propertyInfo = propertyInfo {
             var historyItem: PropertyHistory
-            if let image = propertyInfo.propertyGallery?.images
-            {
+            if let image = propertyInfo.propertyGallery?.images {
                 historyItem = PropertyHistory(hotelId: propertyInfo.summary.id, hotelName: propertyInfo.summary.name, hotelAddress: propertyInfo.summary.location.address.addressLine, imageUrl: image[0].image?.url, numbersOfNights: numbersOfNights, numbersOfRooms: numbersOfRooms, totalAdults: totalAdults, totalChildren: totalChildren, price: price)
             }
             else {

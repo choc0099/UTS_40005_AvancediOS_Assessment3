@@ -19,6 +19,7 @@ enum FireBaseRDError: Error {
     case readFailed
     case addFailed
     case noResults
+    case invalidId
 }
 
 class FirebaseManager {
@@ -50,7 +51,7 @@ class FirebaseManager {
                         //print(key)
                         //print(favourite["hotelName"]!)
                         //creates an object
-                        var favouriteObj: HotelFavourite = HotelFavourite(hotelId: key, hotelName: favourite["hotelName"]! as! String, hotelAddress: favourite["hotelAddress"]! as! String, imageUrl: favourite["imageUrl"]! as! String, imageDescription: favourite["imageDescription"] as? String)
+                        var favouriteObj: HotelFavourite = HotelFavourite(hotelId: key, hotelName: favourite["hotelName"]! as! String, hotelAddress: favourite["hotelAddress"]! as! String, imageUrl: favourite["imageUrl"] as? String , imageDescription: favourite["imageDescription"] as? String)
                         //adds it to the array
                         favouritesTemp.append(favouriteObj)
                     }
@@ -77,7 +78,7 @@ class FirebaseManager {
                 //print(snapshot.value)
                 print(snapshot.key)
                 if let value = snapshot.value as? [String: Any] {
-                    let hotelFavourite: HotelFavourite = HotelFavourite(hotelId: snapshot.key, hotelName: value["hotelName"] as! String, hotelAddress: value["hotelAddress"] as! String, imageUrl: value["imageUrl"] as! String)
+                    let hotelFavourite: HotelFavourite = HotelFavourite(hotelId: snapshot.key, hotelName: value["hotelName"] as! String, hotelAddress: value["hotelAddress"] as! String, imageUrl: value["imageUrl"] as? String)
                     print("This is the specific favourite.")
                     print(hotelFavourite)
                     seal.fulfill(hotelFavourite)
@@ -143,7 +144,7 @@ class FirebaseManager {
     static func addPropertyHistory(history propertyHistory: PropertyHistory) -> Promise<Void> {
         return Promise {
             seal in
-            ref.child("hotelMain").child("history").childByAutoId().setValue(propertyHistory.dictionary) {
+            ref.child("hotelMain").child("history").child(propertyHistory.id.uuidString).setValue(propertyHistory.dictionary) {
                 (error, _) in
                 if let error = error {
                     seal.reject(error)
@@ -156,25 +157,31 @@ class FirebaseManager {
     static func readPropertyHisttory() -> Promise<[PropertyHistory?]> {
         return Promise {
             seal in
+            
             //reads the data from the db and encapsulates into an object, then it stores it on an array
             ref.child("hotelMain").child("history").observeSingleEvent(of: .value) { (snapshot) in
-                
-                if let history = snapshot.value as? [String: [String: Any]] {
-                    var historyTemp = [PropertyHistory]()
-                    //loops through an dictionary
-                    for (_, hotel) in history {
-                        //print(key)
-                        //print(favourite["hotelName"]!)
-                        //creates an object
-                        var historyObj: PropertyHistory = PropertyHistory(hotelId: hotel["hotelId"]! as! String, hotelName: hotel["hotelName"]! as! String, hotelAddress: hotel["hotelAddress"]! as! String, imageUrl: hotel["imageUrl"]! as! String, imageDescription: hotel["imageDescription"] as? String, numbersOfNights: hotel["numbersOfNights"] as! Int, numbersOfRooms: hotel["numbersOfRooms"]! as! Int, totalAdults: hotel["totalAdults"]! as! Int, totalChildren: hotel["totalChildren"]! as! Int, price: hotel["price"]! as! Double)
-                        //adds it to the array
-                        historyTemp.append(historyObj)
+                do {
+                    if let history = snapshot.value as? [String: [String: Any]] {
+                        var historyTemp = [PropertyHistory]()
+                        //loops through an dictionary
+                        for (key, hotel) in history {
+                            //print(key)
+                            //print(favourite["hotelName"]!)
+                            //creates an object
+                            let historyObj: PropertyHistory = try PropertyHistory(id: key, hotelId: hotel["hotelId"]! as! String, hotelName: hotel["hotelName"]! as! String, hotelAddress: hotel["hotelAddress"]! as! String, imageUrl: hotel["imageUrl"]! as! String, imageDescription: hotel["imageDescription"] as? String, numbersOfNights: hotel["numbersOfNights"] as! Int, numbersOfRooms: hotel["numbersOfRooms"]! as! Int, totalAdults: hotel["totalAdults"]! as! Int, totalChildren: hotel["totalChildren"]! as! Int, price: hotel["price"]! as! Double)
+                            //adds it to the array
+                            historyTemp.append(historyObj)
+                        }
+                        seal.fulfill(historyTemp)
+                        
+                    } else {
+                        //print("no data")
+                        seal.fulfill([])
                     }
-                    seal.fulfill(historyTemp)
-                    
-                } else {
-                    //print("no data")
-                    seal.fulfill([])
+                }
+                catch {
+                    //this will catch a specific error relating to if a uuid has failed to convert from a string.
+                    seal.reject(error)
                 }
                 //handles the error
             } withCancel: { error in

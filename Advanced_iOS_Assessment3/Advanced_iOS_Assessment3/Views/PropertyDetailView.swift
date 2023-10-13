@@ -10,6 +10,7 @@ import SwiftUI
 struct PropertyDetailView: View {
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
     @EnvironmentObject var hotelFavesVM: HotelFavouritesViewModel
+    @EnvironmentObject var propertyHistoryVM: PropertyHistoryViewModel
     @ObservedObject var propertyDetailsVM: HotelPropertyDetailViewModel
     //these are optional varibles which will be used to record searched property history into the database.
     @State var price: Double?
@@ -105,6 +106,8 @@ struct PropertyDetailView: View {
                             if let price = price {
                                 if let numbersOfRooms = numbersOfRooms {
                                     propertyDetailsVM.savePropertyHistory(numbersOfNights: numbersOfNights, numbersOfRooms: numbersOfRooms, totalAdults: totalAdults, totalChildren: totalChildren, price: price)
+                                    //refreshes the propertyHistory vm
+                                    propertyHistoryVM.fetchHistory()
                                 }
                                 
                             }

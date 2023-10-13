@@ -11,6 +11,14 @@ struct PropertyDetailsProcessingView: View {
     @StateObject var propertyDetailsVM: HotelPropertyDetailViewModel = HotelPropertyDetailViewModel()
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
     @State var propertyId: String
+    //these are optional variables which will be used to save property search history.
+    @State var price: Double?
+    @State var totalAdults: Int?
+    @State var totalChildren: Int?
+    @State var numbersOfNights: Int?
+    @State var numbersOfRooms: Int?
+    //@State var checkInDate: Date?
+    //@State var checkOutDate: Date?
     
     var body: some View {
         Group {
@@ -18,7 +26,7 @@ struct PropertyDetailsProcessingView: View {
                 ProgressView()
             }
             else if propertyDetailsVM.status == .active {
-                PropertyDetailView(propertyDetailsVM: propertyDetailsVM)
+                PropertyDetailView( propertyDetailsVM: propertyDetailsVM, price: price, totalAdults: totalAdults, totalChildren: totalChildren, numbersOfNights: numbersOfNights,  numbersOfRooms: numbersOfRooms)
             }
             else {
               //displays error messages to the user

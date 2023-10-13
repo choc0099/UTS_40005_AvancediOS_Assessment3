@@ -9,7 +9,17 @@ import SwiftUI
 
 struct PropertyDetailView: View {
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
+    @EnvironmentObject var hotelFavesVM: HotelFavouritesViewModel
+    @EnvironmentObject var propertyHistoryVM: PropertyHistoryViewModel
     @ObservedObject var propertyDetailsVM: HotelPropertyDetailViewModel
+    //these are optional varibles which will be used to record searched property history into the database.
+    @State var price: Double?
+    @State var totalAdults: Int?
+    @State var totalChildren: Int?
+    @State var numbersOfNights: Int?
+    @State var numbersOfRooms: Int?
+    //@State var checkInDate: Date?
+    //@State var checkOutDate: Date?
     
     
     var body: some View {
@@ -34,7 +44,10 @@ struct PropertyDetailView: View {
                         Text(propertyInfo.summary.location.address.addressLine).font(.headline)
                         Spacer()
                         Button  {
-                            try! propertyDetailsVM.manageFavourite()
+                            //process the favourite task whether to add or remove from favourites.
+                            propertyDetailsVM.manageFavourite()
+                            //refreshes the hotelFavourites VM
+                            hotelFavesVM.fetchFavourites()
                         } label: {
                             HStack(spacing: 10) {
                                 Image(systemName: propertyDetailsVM.isFavourite ? "heart.fill" : "heart")
@@ -85,6 +98,28 @@ struct PropertyDetailView: View {
                 }.padding()
             }.onAppear(perform: {
                 propertyDetailsVM.checkFavourite()
+                
+                //this will store the property history into the database, using multiple unwrapings.
+                if let numbersOfNights = numbersOfNights {
+                    if let totalAdults = totalAdults {
+                        if let totalChildren = totalChildren {
+                            if let price = price {
+                                if let numbersOfRooms = numbersOfRooms {
+                                    propertyDetailsVM.savePropertyHistory(numbersOfNights: numbersOfNights, numbersOfRooms: numbersOfRooms, totalAdults: totalAdults, totalChildren: totalChildren, price: price)
+                                    //refreshes the propertyHistory vm
+                                    propertyHistoryVM.fetchHistory()
+                                }
+                                
+                            }
+                        }
+                    }
+                    //it will not store to the database if the user viewed the Hotel Details coming from favourites or the history view.
+                }
+            }).alert(isPresented: $propertyDetailsVM.showAlert, content: {
+                Alert(
+                    title: Text(propertyDetailsVM.alertTitle),
+                    message: Text(propertyDetailsVM.alertMessage)
+                )
             })
             
         }

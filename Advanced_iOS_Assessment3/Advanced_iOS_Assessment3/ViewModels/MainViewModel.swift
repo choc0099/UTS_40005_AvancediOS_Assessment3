@@ -16,6 +16,8 @@ enum HotelStatus {
     case noResults
     case requestTimeOut
     case welcome
+    case noFavourites
+    case noHistory
     case unkown
 }
 

@@ -18,15 +18,13 @@ struct ContentView: View {
         TabView {
             SearchView().tabItem {
                 Label("Search", systemImage: "magnifyingglass")
-            }
+            }.tag(0)
             HotelFavouritesView().tabItem {
                 Label("Favourites", systemImage: "heart.fill")
-            }
-            
-            //this is only used for testing with hardcoded hotelId.
-             PropertyDetailsProcessingView(propertyId: "5932305").tabItem {
-                Label("Test", systemImage: "")
-            }
+            }.tag(1)
+            PropertyHistoryView().tabItem {
+                Label("Recents", systemImage: "clock.fill")
+            }.tag(2)
         }.onAppear {
             //loads the hotel metaData
             hotelMain.initialiseMetaData()

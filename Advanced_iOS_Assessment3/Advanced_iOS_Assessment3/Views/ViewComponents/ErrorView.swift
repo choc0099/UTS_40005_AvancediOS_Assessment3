@@ -12,10 +12,12 @@ struct ErrorView: View {
     @State var errorStatus: HotelStatus
     @State var errorTitle: String = ""
     @State var errorText: String = ""
+    @State var systemImageStr: String = ""
     var body: some View {
-        VStack(spacing: 10) {
-            Text("\(errorTitle)").font(.headline)
-            Text("\(errorText)").font(.subheadline)
+        VStack(spacing: 20) {
+            Image(systemName: systemImageStr).resizable().frame(width: 100, height: 100).foregroundColor(.gray)
+            Text("\(errorTitle)").font(.title2)
+            Text("\(errorText)").font(.headline)
         }.frame(maxHeight: .infinity).onAppear(perform: {
             updateText()
         }) //this will update error messages if the state was to change.
@@ -28,15 +30,30 @@ struct ErrorView: View {
         //adds text depnding on scenarios
         switch(errorStatus) {
         case .welcome:
-            errorText = "Welcome to Hotel Browser"
+            systemImageStr = "building.columns.circle"
+            errorTitle = "Welcome to Hotel Browser"
+            errorText = "Search here to get started"
         case .noResults:
-            errorText = "No Results Found"
+            systemImageStr = "exclamationmark.magnifyingglass"
+            errorTitle = "No Results Found"
         case .offline:
-            errorText = "You are currently offline."
+            systemImageStr = "network.slash"
+            errorTitle = "You are currently offline."
         case .requestTimeOut:
-            errorText = "Request timed out."
+            systemImageStr = "network.slash"
+            errorTitle = "Request timed out."
         case .unkown:
-            errorText = "Something went wrong!"
+            systemImageStr = "exclamationmark.triangle"
+            errorTitle = "Something went wrong!"
+            errorText = "We couldn't process your request."
+        case .noFavourites:
+            systemImageStr = "heart.slash.circle"
+            errorTitle = "No favourites"
+            errorText = "There are no hotel favourites."
+        case .noHistory:
+            systemImageStr = "clock.badge.xmark"
+            errorTitle = "No Recent Property searches."
+            errorText = "There are no property history."
         default:
             errorText = ""
         }
@@ -44,5 +61,5 @@ struct ErrorView: View {
 }
 
 #Preview {
-    ErrorView(errorStatus: .welcome)
+    ErrorView(errorStatus: .noResults)
 }

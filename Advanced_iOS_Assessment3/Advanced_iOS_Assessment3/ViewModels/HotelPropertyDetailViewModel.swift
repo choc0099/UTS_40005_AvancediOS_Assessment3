@@ -12,7 +12,10 @@ class HotelPropertyDetailViewModel: ObservableObject {
     @Published var propertyInfo: PropertyInfo?
     @Published var status: HotelStatus = .loading
     @Published var isFavourite: Bool = false
-
+    @Published var showAlert: Bool = false
+    @Published var alertTitle: String = ""
+    @Published var alertMessage: String = ""
+    
     //this is a computed property that will return the description of the hotel by unwraping multiple optinal values as not every hotel might contatin this.
     var propertyDescription: String? {
         //there will be nested if let loops to safely unwrap each optional values to get the description of the hotel property.
@@ -81,16 +84,29 @@ class HotelPropertyDetailViewModel: ObservableObject {
     
     //this will add the property that the user was viewing to favourites
     //it will also save it to FireBase database
-    func addToFavourites() throws {
+    func addToFavourites() {
+        
         if let property = propertyInfo {
+            var favourite: HotelFavourite
             if let image = propertyInfo?.propertyGallery?.images {
-                let favourite = HotelFavourite(hotelId: property.summary.id, hotelName: property.summary.name, hotelAddress: property.summary.location.address.addressLine, imageUrl: image[0].image?.url ?? "", imageDescription: image[0].image?.description)
-                //saves it to the database
-                try FirebaseManager.saveFavouriteToDB(favourite: favourite)
-                //updates the favourite status
-                self.isFavourite = true
+                favourite = HotelFavourite(hotelId: property.summary.id, hotelName: property.summary.name, hotelAddress: property.summary.location.address.addressLine, imageUrl: image[0].image?.url, imageDescription: image[0].image?.description)
+            } else {
+                //this will add to favourites i there is no image stuffs on from the detail but will be displayed as a placeholder image.
+                favourite = HotelFavourite(hotelId: property.summary.id, hotelName: property.summary.name, hotelAddress: property.summary.location.address.addressLine, imageUrl: nil, imageDescription: nil)
             }
             
+            //saves it to the database
+            FirebaseManager.saveFavouriteToDB(favourite: favourite) .done {
+                //updates the favourite status
+                self.isFavourite = true
+                print("Added to favourites")
+            } .catch { error in
+                self.showAlert = true
+                self.alertTitle = "Unable to add to favourites"
+                self.alertMessage = "Something went wrong when trying to add to favourites"
+                print(error)
+                print(error.localizedDescription)
+            }
         }
     }
     
@@ -124,24 +140,52 @@ class HotelPropertyDetailViewModel: ObservableObject {
     
     //managed favourites
     //this function will be used on the view side whether it should be removed or added to the favourites based if it already exist or not.
-    func manageFavourite() throws {
-        //checks if it is already added onto favourites
-        do {
+    func manageFavourite()  {
+        //checks if it is already added onto favourite
             if isFavourite {
-                try removeFromFavourites()
+                removeFromFavourites()
             }
             else {
-                try addToFavourites()
+                addToFavourites()
             }
-        }
     }
     
     //this function will remove a hotel from favourites
-    private func removeFromFavourites() throws {
+    private func removeFromFavourites() {
         if let propertyId = propertyInfo?.summary.id {
-            try FirebaseManager.removeFavouriteFromDB(propertyId: propertyId)
-            self.isFavourite = false
+            FirebaseManager.removeFavouriteFromDB(propertyId: propertyId) .done {
+                self.isFavourite = false
+            } .catch { error in
+                self.showAlert = true
+                self.alertTitle = "Unable to remove from favourites."
+                self.alertMessage = "Something went wrong when removing from favourites"
+                print(error)
+                print(error.localizedDescription)
+            }
+            
         }
+    }
+    
+    //saves the property history
+    func savePropertyHistory(numbersOfNights: Int, numbersOfRooms: Int, totalAdults: Int, totalChildren: Int, price: Double) {
+        //declares an object
+        if let propertyInfo = propertyInfo {
+            var historyItem: PropertyHistory
+            if let image = propertyInfo.propertyGallery?.images {
+                historyItem = PropertyHistory(hotelId: propertyInfo.summary.id, hotelName: propertyInfo.summary.name, hotelAddress: propertyInfo.summary.location.address.addressLine, imageUrl: image[0].image?.url, numbersOfNights: numbersOfNights, numbersOfRooms: numbersOfRooms, totalAdults: totalAdults, totalChildren: totalChildren, price: price)
+            }
+            else {
+                historyItem = PropertyHistory(hotelId: propertyInfo.summary.id, hotelName: propertyInfo.summary.name, hotelAddress: propertyInfo.summary.location.address.addressLine, imageUrl: nil, numbersOfNights: numbersOfNights, numbersOfRooms: numbersOfRooms, totalAdults: totalAdults, totalChildren: totalChildren, price: price)
+            }
+            
+            //saves it to the DB
+            FirebaseManager.addPropertyHistory(history: historyItem)
+                .catch { error in
+                    print(error)
+                    print(error.localizedDescription)
+                }
+        }
+        
     }
     
     /*

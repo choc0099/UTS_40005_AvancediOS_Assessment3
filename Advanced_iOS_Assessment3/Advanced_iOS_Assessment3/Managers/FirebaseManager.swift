@@ -154,7 +154,7 @@ class FirebaseManager {
         }
     }
     
-    static func readPropertyHisttory() -> Promise<[PropertyHistory?]> {
+    static func readPropertyHisttory() -> Promise<[PropertyHistory]> {
         return Promise {
             seal in
             

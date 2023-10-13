@@ -14,6 +14,8 @@
 		320A7CCC2AC1929C008B252B /* CheckInAndOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320A7CCB2AC1929C008B252B /* CheckInAndOut.swift */; };
 		320A7CCE2AC19721008B252B /* PropertyListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320A7CCD2AC19721008B252B /* PropertyListRequest.swift */; };
 		32151E2F2ACA55840089D488 /* HotelPropertyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32151E2E2ACA55840089D488 /* HotelPropertyDetailViewModel.swift */; };
+		32322C202AD908FA004E3BAA /* HotelPropertyHistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32322C1F2AD908FA004E3BAA /* HotelPropertyHistoryRow.swift */; };
+		32322C222AD90D71004E3BAA /* AmmenitiesRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32322C212AD90D71004E3BAA /* AmmenitiesRow.swift */; };
 		3254F0502AC4136D00E1A1BA /* HotelRoomsResultsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3254F04F2AC4136D00E1A1BA /* HotelRoomsResultsListView.swift */; };
 		3254F0522AC44B7C00E1A1BA /* PropertyResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3254F0512AC44B7C00E1A1BA /* PropertyResultsView.swift */; };
 		3256C5D42AB8501E00AC9470 /* Advanced_iOS_Assessment3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3256C5D32AB8501E00AC9470 /* Advanced_iOS_Assessment3App.swift */; };
@@ -99,6 +101,8 @@
 		320A7CCB2AC1929C008B252B /* CheckInAndOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInAndOut.swift; sourceTree = "<group>"; };
 		320A7CCD2AC19721008B252B /* PropertyListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListRequest.swift; sourceTree = "<group>"; };
 		32151E2E2ACA55840089D488 /* HotelPropertyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelPropertyDetailViewModel.swift; sourceTree = "<group>"; };
+		32322C1F2AD908FA004E3BAA /* HotelPropertyHistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelPropertyHistoryRow.swift; sourceTree = "<group>"; };
+		32322C212AD90D71004E3BAA /* AmmenitiesRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmmenitiesRow.swift; sourceTree = "<group>"; };
 		3254F04F2AC4136D00E1A1BA /* HotelRoomsResultsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelRoomsResultsListView.swift; sourceTree = "<group>"; };
 		3254F0512AC44B7C00E1A1BA /* PropertyResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyResultsView.swift; sourceTree = "<group>"; };
 		3256C5D02AB8501E00AC9470 /* Advanced_iOS_Assessment3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Advanced_iOS_Assessment3.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -272,6 +276,8 @@
 				325B5FA32ACB8A9B00C775D3 /* MapImageView.swift */,
 				32F20C372ACBECFF001DE51B /* ErrorView.swift */,
 				32F74F662ACE746D00EF6DB3 /* HotelFavouritesRow.swift */,
+				32322C1F2AD908FA004E3BAA /* HotelPropertyHistoryRow.swift */,
+				32322C212AD90D71004E3BAA /* AmmenitiesRow.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -523,6 +529,7 @@
 				32C7C58E2AC3A64F00D5B4AD /* RoomFieldView.swift in Sources */,
 				320A00E92AC169E900B01392 /* PropertySearch.swift in Sources */,
 				325FF5C02AC59B7600E207DB /* HotelAnnotation.swift in Sources */,
+				32322C202AD908FA004E3BAA /* HotelPropertyHistoryRow.swift in Sources */,
 				32F74F672ACE746D00EF6DB3 /* HotelFavouritesRow.swift in Sources */,
 				32C7C5812AC2BFC700D5B4AD /* MetaDataResponse.swift in Sources */,
 				32C7C5832AC2F0F100D5B4AD /* UserDefaultsManager.swift in Sources */,
@@ -547,6 +554,7 @@
 				32F74F6B2ACE7DCA00EF6DB3 /* HotelFavouritesViewModel.swift in Sources */,
 				327A587F2AB8FB5200DB11E6 /* City.swift in Sources */,
 				32F20C382ACBECFF001DE51B /* ErrorView.swift in Sources */,
+				32322C222AD90D71004E3BAA /* AmmenitiesRow.swift in Sources */,
 				325FF5BC2AC56C5400E207DB /* HotelPropertyRow.swift in Sources */,
 				32920DE32AC6EC7C00670ACA /* SearchHistoryView.swift in Sources */,
 				32920DED2AC80DC700670ACA /* HotelImageView.swift in Sources */,

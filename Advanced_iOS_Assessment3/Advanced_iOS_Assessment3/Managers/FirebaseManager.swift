@@ -140,6 +140,22 @@ class FirebaseManager {
         }
     }
     
+    static func removePropertyHistoryItemFromDB(id: UUID) -> Promise<Void> {
+        return Promise {
+            seal in
+            ref.child("hotelMain").child("history").child(id.uuidString).removeValue() {
+                (error, _) in
+                //if there is an error deleting
+                if let error = error {
+                    seal.reject(error)
+                }
+                seal.fulfill(())
+                
+            }
+          
+        }
+    }
+    
     //adds the recent property search to the database
     static func addPropertyHistory(history propertyHistory: PropertyHistory) -> Promise<Void> {
         return Promise {

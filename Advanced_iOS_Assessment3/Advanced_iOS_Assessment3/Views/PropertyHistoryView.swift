@@ -11,14 +11,26 @@ struct PropertyHistoryView: View {
     @EnvironmentObject var propertyHistoryVM: PropertyHistoryViewModel
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(propertyHistoryVM.propertyHistory) {
-                    historyItem in
-                    NavigationLink(destination: PropertyDetailsProcessingView(propertyId: historyItem.hotelId)) {
-                        HotelPropertyHistoryRow(propertyHistory: historyItem)
+            Group {
+                if(propertyHistoryVM.status == .active) {
+                    List {
+                        ForEach(propertyHistoryVM.sortedHistory) {
+                            historyItem in
+                            NavigationLink(destination: PropertyDetailsProcessingView(propertyId: historyItem.hotelId)) {
+                                HotelPropertyHistoryRow(propertyHistory: historyItem)
+                            }.swipeActions {
+                                Button("Delete", role: .destructive) {
+                                    //removes the item from the database
+                                    propertyHistoryVM.removeHistoryItem(uuId: historyItem.id)
+                                }
+                            }
+                        }
                     }
-                    
+                } else {
+                    //displays a error message to the user.
+                    ErrorView(errorStatus: propertyHistoryVM.status)
                 }
+               
             }
         }
     }

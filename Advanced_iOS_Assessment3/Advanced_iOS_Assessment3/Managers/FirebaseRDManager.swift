@@ -140,13 +140,13 @@ class FirebaseRDManager {
         }
         
     }
-    
+    //this will remove a hotel favourite from the database.
     static func removeFavouriteFromDB(propertyId: String) -> Promise<Void> {
         //using promiseKit to handle asynchronous tasks from Firebase.
         return Promise {
             seal in
             if let user = FirebaseAuthManager.authRef.currentUser {
-                ref.child("users").child(user.uid).child(propertyId).removeValue {
+                ref.child("users").child(user.uid).child("hotelFavourites").child(propertyId).removeValue {
                     (error, _) in
                     if let error = error {
                         seal.reject(error)
@@ -158,7 +158,7 @@ class FirebaseRDManager {
             
         }
     }
-    
+    // same sa above but for property history item.
     static func removePropertyHistoryItemFromDB(id: UUID) -> Promise<Void> {
         return Promise {
             seal in
@@ -232,6 +232,40 @@ class FirebaseRDManager {
                 }
             } else {
                 seal.reject(FireBaseRDError.userNotLoggedIn)
+            }
+        }
+    }
+    
+    //this will clear all favourites that is allocated by the current user.
+    static func removeAllFavouritesFromDB() -> Promise<Void> {
+        //using promiseKit to handle asynchronous tasks from Firebase.
+        return Promise {
+            seal in
+            if let user = FirebaseAuthManager.authRef.currentUser {
+                ref.child("users").child(user.uid).child("hotelFavourites").removeValue {
+                    (error, _) in
+                    if let error = error {
+                        seal.reject(error)
+                    }
+                    seal.fulfill(())
+                }
+            }
+        }
+    }
+    
+    //this will clear all propertyHistory that is allocated by the current user.
+    static func removeAllPropertyHistoryFromDB() -> Promise<Void> {
+        //using promiseKit to handle asynchronous tasks from Firebase.
+        return Promise {
+            seal in
+            if let user = FirebaseAuthManager.authRef.currentUser {
+                ref.child("users").child(user.uid).child("history").removeValue {
+                    (error, _) in
+                    if let error = error {
+                        seal.reject(error)
+                    }
+                    seal.fulfill(())
+                }
             }
         }
     }

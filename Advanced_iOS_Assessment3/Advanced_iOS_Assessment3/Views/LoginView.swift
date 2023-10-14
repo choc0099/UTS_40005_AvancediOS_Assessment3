@@ -22,13 +22,7 @@ struct LoginView: View {
                 SecureField("Password", text: $password)
                 
                 Button {
-                    FirebaseAuthManager.login(email: email, password: password)
-                        .done { authData in
-                            hotelMain.initaliseUser(user: authData.user)
-                        }
-                        .catch { error in
-                            print("Log in failed.")
-                        }
+                    hotelMain.processLogin(email: email, password: password)
                 } label: {
                     Text("Log in")
                 }

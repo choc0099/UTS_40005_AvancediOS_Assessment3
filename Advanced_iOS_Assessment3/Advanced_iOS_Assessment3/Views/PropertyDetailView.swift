@@ -44,10 +44,14 @@ struct PropertyDetailView: View {
                         Text(propertyInfo.summary.location.address.addressLine).font(.headline)
                         Spacer()
                         Button  {
-                            //process the favourite task whether to add or remove from favourites.
-                            propertyDetailsVM.manageFavourite()
-                            //refreshes the hotelFavourites VM
-                            hotelFavesVM.fetchFavourites()
+                            //checks if the user is authenticated
+                            if let authenticatedUser = hotelMain.loggedInUser {
+                                //process the favourite task whether to add or remove from favourites.
+                                propertyDetailsVM.manageFavourite(authenticatedUser.uid)
+                                //refreshes the hotelFavourites VM
+                                hotelFavesVM.fetchFavourites(authenticatedUser.uid)
+                            }
+                            
                         } label: {
                             HStack(spacing: 10) {
                                 Image(systemName: propertyDetailsVM.isFavourite ? "heart.fill" : "heart")
@@ -97,24 +101,28 @@ struct PropertyDetailView: View {
                     
                 }.padding()
             }.onAppear(perform: {
-                propertyDetailsVM.checkFavourite()
-                
-                //this will store the property history into the database, using multiple unwrapings.
-                if let numbersOfNights = numbersOfNights {
-                    if let totalAdults = totalAdults {
-                        if let totalChildren = totalChildren {
-                            if let price = price {
-                                if let numbersOfRooms = numbersOfRooms {
-                                    propertyDetailsVM.savePropertyHistory(numbersOfNights: numbersOfNights, numbersOfRooms: numbersOfRooms, totalAdults: totalAdults, totalChildren: totalChildren, price: price)
-                                    //refreshes the propertyHistory vm
-                                    propertyHistoryVM.fetchHistory()
+                //checks if there is authenticated user
+                if let authenticatedUser = hotelMain.loggedInUser {
+                    propertyDetailsVM.checkFavourite(userId: authenticatedUser.uid)
+                    
+                    //this will store the property history into the database, using multiple unwrapings.
+                    if let numbersOfNights = numbersOfNights {
+                        if let totalAdults = totalAdults {
+                            if let totalChildren = totalChildren {
+                                if let price = price {
+                                    if let numbersOfRooms = numbersOfRooms {
+                                        propertyDetailsVM.savePropertyHistory(authenticatedUser.uid, numbersOfNights: numbersOfNights, numbersOfRooms: numbersOfRooms, totalAdults: totalAdults, totalChildren: totalChildren, price: price)
+                                        //refreshes the propertyHistory vm
+                                        propertyHistoryVM.fetchHistory(authenticatedUser.uid)
+                                    }
+                                    
                                 }
-                                
                             }
                         }
+                        //it will not store to the database if the user viewed the Hotel Details coming from favourites or the history view.
                     }
-                    //it will not store to the database if the user viewed the Hotel Details coming from favourites or the history view.
                 }
+                
             }).alert(isPresented: $propertyDetailsVM.showAlert, content: {
                 Alert(
                     title: Text(propertyDetailsVM.alertTitle),

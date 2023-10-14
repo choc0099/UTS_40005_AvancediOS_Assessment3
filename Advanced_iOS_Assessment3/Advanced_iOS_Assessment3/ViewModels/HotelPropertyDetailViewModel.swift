@@ -84,7 +84,7 @@ class HotelPropertyDetailViewModel: ObservableObject {
     
     //this will add the property that the user was viewing to favourites
     //it will also save it to FireBase database
-    func addToFavourites() {
+    func addToFavourites(_ userId: String) {
         
         if let property = propertyInfo {
             var favourite: HotelFavourite
@@ -96,7 +96,7 @@ class HotelPropertyDetailViewModel: ObservableObject {
             }
             
             //saves it to the database
-            FirebaseManager.saveFavouriteToDB(favourite: favourite) .done {
+            FirebaseRDManager.saveFavouriteToDB(userId: userId, favourite: favourite) .done {
                 //updates the favourite status
                 self.isFavourite = true
                 print("Added to favourites")
@@ -112,10 +112,10 @@ class HotelPropertyDetailViewModel: ObservableObject {
     
     //a function to check if the favourites exists
     
-    func checkFavourite()  {
+    func checkFavourite(userId: String)  {
         
         if let propertyId = propertyInfo?.summary.id {
-            FirebaseManager.getSpecificFavourite(propertyId: propertyId)
+            FirebaseRDManager.getSpecificFavourite(userId: userId, propertyId: propertyId)
             .done { favourite in
                 if favourite != nil {
                     self.isFavourite = true
@@ -140,20 +140,20 @@ class HotelPropertyDetailViewModel: ObservableObject {
     
     //managed favourites
     //this function will be used on the view side whether it should be removed or added to the favourites based if it already exist or not.
-    func manageFavourite()  {
+    func manageFavourite(_ userId: String)  {
         //checks if it is already added onto favourite
             if isFavourite {
-                removeFromFavourites()
+                removeFromFavourites(userId)
             }
             else {
-                addToFavourites()
+                addToFavourites(userId)
             }
     }
     
     //this function will remove a hotel from favourites
-    private func removeFromFavourites() {
+    private func removeFromFavourites(_ userId: String) {
         if let propertyId = propertyInfo?.summary.id {
-            FirebaseManager.removeFavouriteFromDB(propertyId: propertyId) .done {
+            FirebaseRDManager.removeFavouriteFromDB(userId: userId, propertyId: propertyId) .done {
                 self.isFavourite = false
             } .catch { error in
                 self.showAlert = true
@@ -167,7 +167,7 @@ class HotelPropertyDetailViewModel: ObservableObject {
     }
     
     //saves the property history
-    func savePropertyHistory(numbersOfNights: Int, numbersOfRooms: Int, totalAdults: Int, totalChildren: Int, price: Double) {
+    func savePropertyHistory(_ userId: String, numbersOfNights: Int, numbersOfRooms: Int, totalAdults: Int, totalChildren: Int, price: Double) {
         //declares an object
         if let propertyInfo = propertyInfo {
             var historyItem: PropertyHistory
@@ -179,7 +179,7 @@ class HotelPropertyDetailViewModel: ObservableObject {
             }
             
             //saves it to the DB
-            FirebaseManager.addPropertyHistory(history: historyItem)
+            FirebaseRDManager.addPropertyHistory(userId: userId, history: historyItem)
                 .catch { error in
                     print(error)
                     print(error.localizedDescription)
@@ -188,14 +188,4 @@ class HotelPropertyDetailViewModel: ObservableObject {
         
     }
     
-    /*
-    func loadDescriptions() {
-        /*if let sections = propertyDetails?.contentSection?.aboutThisProperty?.sections {
-            for section in sections {
-                
-            }
-        }*/
-        
-        //description = propertyDetails?.contentSection?.aboutThisProperty?.sections[0]?.bodySubSections[0]?.elements[0]?.items[0]?.content?.text
-    }*/
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HotelFavouritesView: View {
     @EnvironmentObject var hotelFavsVM: HotelFavouritesViewModel
+    @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
     var body: some View {
         
         NavigationStack {
@@ -22,9 +23,13 @@ struct HotelFavouritesView: View {
                             HotelFavouritesRow(favourite: favourite)
                         }.swipeActions {
                             Button("Delete", role: .destructive) {
-                                hotelFavsVM.removeFromFavourites(propertyId: favourite.hotelId)
-                                //refreshes the favourites list
-                                hotelFavsVM.fetchFavourites()
+                                if let user = hotelMain.loggedInUser {
+                                    //checks if there is a user logged in.
+                                    hotelFavsVM.removeFromFavourites(user.uid, propertyId: favourite.hotelId)
+                                    //refreshes the favourites list
+                                    hotelFavsVM.fetchFavourites(user.uid)
+                                }
+                                
                             }
                         }
                         

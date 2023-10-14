@@ -20,12 +20,16 @@ class PropertyHistoryViewModel: ObservableObject {
     }
     
     init() {
-        fetchHistory()
+        //checks if there is authenticated user
+        if let currentUser = FirebaseAuthManager.authRef.currentUser {
+            fetchHistory(currentUser.uid)
+        }
+        
     }
     
     //retrieves the property history from the database
-    func fetchHistory() {
-        FirebaseManager.readPropertyHisttory()
+    func fetchHistory(_ userId: String) {
+        FirebaseRDManager.readPropertyHisttory(userId: userId)
             .done { historyList in
                 //adds it to the view model array
                 self.propertyHistory = historyList
@@ -38,8 +42,8 @@ class PropertyHistoryViewModel: ObservableObject {
             }
     }
     
-    func removeHistoryItem(uuId: UUID) {
-        FirebaseManager.removePropertyHistoryItemFromDB(id: uuId)
+    func removeHistoryItem(_ userId: String, uuId: UUID) {
+        FirebaseRDManager.removePropertyHistoryItemFromDB(userId: userId, id: uuId)
             .done {
                 print("\(uuId) Removed from history")
             }

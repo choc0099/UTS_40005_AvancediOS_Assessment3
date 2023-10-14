@@ -45,6 +45,7 @@ class HotelBrowserMainViewModel: ObservableObject {
                 if let user = user {
                     self.isLoggedIn = true
                     self.loggedInUser = user
+                    print("authenticated user id \(user.uid)")
                 }
                 else {
                     self.loggedInUser = nil

@@ -22,7 +22,7 @@ enum FireBaseRDError: Error {
     case invalidId
 }
 
-class FirebaseManager {
+class FirebaseRDManager {
     private static let ref: DatabaseReference = Database.database().reference(fromURL: "https://hotel-browser-default-rtdb.firebaseio.com/")
     
     //tests writing data to database
@@ -38,11 +38,11 @@ class FirebaseManager {
         //self.ref.setValue("Smokes")
     }
     
-    static func readFavourites() -> Promise<[HotelFavourite]> {
+    static func readFavourites(_ userId: String) -> Promise<[HotelFavourite]> {
         return Promise {
             seal in
             //reads the data from the db and encapsulates into an object, then it stores it on an array
-            ref.child("hotelMain").child("hotelFavourites").observeSingleEvent(of: .value) { (snapshot) in
+            ref.child("users").child(userId).child("hotelFavourites").observeSingleEvent(of: .value) { (snapshot) in
                 
                 if let favourites = snapshot.value as? [String: [String: Any]] {
                     var favouritesTemp = [HotelFavourite]()
@@ -69,10 +69,10 @@ class FirebaseManager {
     }
     
     //this will get the specific favourite which will be used to check if a favourite already exists to determine if it can be removed.
-    static func getSpecificFavourite(propertyId: String) -> Promise<HotelFavourite?> {
+    static func getSpecificFavourite(userId: String, propertyId: String) -> Promise<HotelFavourite?> {
         return Promise {
             seal in
-            ref.child("hotelMain").child("hotelFavourites").child(propertyId).observeSingleEvent(of: .value) { (snapshot) in
+            ref.child("users").child(userId).child("hotelFavourites").child(propertyId).observeSingleEvent(of: .value) { (snapshot) in
                 print("Test")
                 print(snapshot)
                 //print(snapshot.value)
@@ -111,10 +111,10 @@ class FirebaseManager {
             }
     }
     
-    static func saveFavouriteToDB(favourite: HotelFavourite) -> Promise<Void> {
+    static func saveFavouriteToDB(userId: String, favourite: HotelFavourite) -> Promise<Void> {
         return Promise {
             seal in
-            ref.child("hotelMain").child("hotelFavourites").child(favourite.hotelId).setValue(favourite.dictionary) {
+            ref.child("users").child(userId).child("hotelFavourites").child(favourite.hotelId).setValue(favourite.dictionary) {
                 (error, _) in
                 if let error = error {
                     seal.reject(error)
@@ -125,11 +125,11 @@ class FirebaseManager {
         
     }
     
-    static func removeFavouriteFromDB(propertyId: String) -> Promise<Void> {
+    static func removeFavouriteFromDB(userId: String, propertyId: String) -> Promise<Void> {
         //using promiseKit to handle asynchronous tasks from Firebase.
         return Promise {
             seal in
-            ref.child("hotelMain").child("hotelFavourites").child(propertyId).removeValue {
+            ref.child("users").child(userId).child(propertyId).removeValue {
                 (error, _) in
                 if let error = error {
                     seal.reject(error)
@@ -140,10 +140,10 @@ class FirebaseManager {
         }
     }
     
-    static func removePropertyHistoryItemFromDB(id: UUID) -> Promise<Void> {
+    static func removePropertyHistoryItemFromDB(userId: String, id: UUID) -> Promise<Void> {
         return Promise {
             seal in
-            ref.child("hotelMain").child("history").child(id.uuidString).removeValue() {
+            ref.child("users").child(userId).child("history").child(id.uuidString).removeValue() {
                 (error, _) in
                 //if there is an error deleting
                 if let error = error {
@@ -157,10 +157,10 @@ class FirebaseManager {
     }
     
     //adds the recent property search to the database
-    static func addPropertyHistory(history propertyHistory: PropertyHistory) -> Promise<Void> {
+    static func addPropertyHistory(userId: String, history propertyHistory: PropertyHistory) -> Promise<Void> {
         return Promise {
             seal in
-            ref.child("hotelMain").child("history").child(propertyHistory.id.uuidString).setValue(propertyHistory.dictionary) {
+            ref.child("users").child(userId).child("history").child(propertyHistory.id.uuidString).setValue(propertyHistory.dictionary) {
                 (error, _) in
                 if let error = error {
                     seal.reject(error)
@@ -170,12 +170,12 @@ class FirebaseManager {
         }
     }
     
-    static func readPropertyHisttory() -> Promise<[PropertyHistory]> {
+    static func readPropertyHisttory(userId: String) -> Promise<[PropertyHistory]> {
         return Promise {
             seal in
             
             //reads the data from the db and encapsulates into an object, then it stores it on an array
-            ref.child("hotelMain").child("history").observeSingleEvent(of: .value) { (snapshot) in
+            ref.child("users").child(userId).child("history").observeSingleEvent(of: .value) { (snapshot) in
                 do {
                     if let history = snapshot.value as? [String: [String: Any]] {
                         var historyTemp = [PropertyHistory]()

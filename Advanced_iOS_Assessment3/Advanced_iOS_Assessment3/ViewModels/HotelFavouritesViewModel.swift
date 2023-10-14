@@ -9,8 +9,10 @@ import Foundation
 import PromiseKit
 import FirebaseCore
 import FirebaseDatabase
+import FirebaseAuth
 
 class HotelFavouritesViewModel: ObservableObject {
+    
     @Published var favourites: [HotelFavourite] = []
     @Published var status: HotelStatus = .loading
     @Published var showAlert: Bool = false
@@ -18,14 +20,17 @@ class HotelFavouritesViewModel: ObservableObject {
     @Published var alertMessage: String = ""
     
     init() {
-        fetchFavourites()
+        if let currentUser = FirebaseAuthManager.authRef.currentUser {
+            fetchFavourites(currentUser.uid)
+        }
+      
     }
     
     //loads the favourites from the DB
-    func fetchFavourites() {
+    func fetchFavourites(_ userId: String) {
         //var fetchedFavourites: [HotelFavourite] = []
         
-        FirebaseManager.readFavourites()
+        FirebaseRDManager.readFavourites(userId)
             .done { favourites in
                 self.favourites = favourites
                 print(self.favourites) //this is used for debugging purposes.
@@ -45,8 +50,8 @@ class HotelFavouritesViewModel: ObservableObject {
             }
     }
     
-    func removeFromFavourites(propertyId: String) {
-        FirebaseManager.removeFavouriteFromDB(propertyId: propertyId)
+    func removeFromFavourites(_ uid: String, propertyId: String) {
+        FirebaseRDManager.removeFavouriteFromDB(userId: uid, propertyId: propertyId)
             .done {
                 print("\(propertyId) Removed from favourites")
             }

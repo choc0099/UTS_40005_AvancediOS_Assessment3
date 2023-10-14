@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PropertyHistoryView: View {
     @EnvironmentObject var propertyHistoryVM: PropertyHistoryViewModel
+    @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
     var body: some View {
         NavigationStack {
             Group {
@@ -20,8 +21,11 @@ struct PropertyHistoryView: View {
                                 HotelPropertyHistoryRow(propertyHistory: historyItem)
                             }.swipeActions {
                                 Button("Delete", role: .destructive) {
-                                    //removes the item from the database
-                                    propertyHistoryVM.removeHistoryItem(uuId: historyItem.id)
+                                    if let user = hotelMain.loggedInUser {
+                                        //removes the item from the database
+                                        propertyHistoryVM.removeHistoryItem(user.uid, uuId: historyItem.id)
+                                    }
+                                  
                                 }
                             }
                         }

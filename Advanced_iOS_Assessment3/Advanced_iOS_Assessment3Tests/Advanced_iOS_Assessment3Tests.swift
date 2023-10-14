@@ -46,7 +46,7 @@ final class Advanced_iOS_Assessment3Tests: XCTestCase {
     func testLogin() throws {
         let expectation = XCTestExpectation(description: "log in expectation")
         var testedEmail: String = ""
-        var isError: Bool = false
+       
         FirebaseAuthManager.login(email: "choclate00@live.com", password: "abc123") .done { account in
             var accountEmail = account.user.email
             print("running login test")
@@ -57,7 +57,7 @@ final class Advanced_iOS_Assessment3Tests: XCTestCase {
         }
         .catch { error in
             switch error {
-            case AuthStatus.invalidCredentials:
+            case AuthError.invalidCredentials:
                 print("invalid username or password")
             default:
                 print(error)
@@ -67,6 +67,34 @@ final class Advanced_iOS_Assessment3Tests: XCTestCase {
         
         wait(for: [expectation], timeout: 10)
         XCTAssertEqual(testedEmail, "choclate00@live.com")
+    }
+    
+    //tests the register feature
+    func testRegister() {
+        //this is used for asynchronous tasks.
+        var retrievedEmail: String = ""
+        let expectation = XCTestExpectation(description: "Register new user")
+        FirebaseAuthManager.registerAccount(email: "pieface012@gmail.com", password: "abc123", confirmPassword: "abc123")
+            .done { authResult in
+                if let loggedInEmail = authResult.user.email {
+                    print("Registration and login sucessful")
+                    retrievedEmail = loggedInEmail
+                    expectation.fulfill()
+                }
+            } .catch { error in
+                switch error {
+                case AuthError.passwordNotMatch:
+                    print("password not match.")
+                case AuthError.unknown:
+                    print("An unkown error occurred.")
+                default:
+                    print(error)
+                }
+                expectation.fulfill()
+            }
+        //waits for the proccess to be complete over the network.
+        wait(for: [expectation])
+        XCTAssertEqual(retrievedEmail, "pieface012@gmail.com")
     }
 
 }

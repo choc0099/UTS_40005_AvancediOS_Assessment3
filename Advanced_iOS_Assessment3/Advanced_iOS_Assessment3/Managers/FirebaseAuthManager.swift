@@ -13,19 +13,22 @@ import PromiseKit
 
 //this is a class for handling authentication
 
-enum AuthStatus: Error {
-    case success
+enum AuthError: Error {
+    case passwordNotMatch
     case invalidCredentials
     case unknown
 }
 
 class FirebaseAuthManager {
     
+    //this is an refernce to the authentication stuff that is shared throughout views and viewmodels.
+    static var authRef = Auth.auth()
+    
     //logins to the user account
     static func login(email: String, password: String) -> Promise<AuthDataResult> {
         return Promise {
             seal in
-            Auth.auth().signIn(withEmail: email, password: password) {
+            authRef.signIn(withEmail: email, password: password) {
                 (authResult, error) in
                 print("logging in")
                 //prints a result for testing pruposes
@@ -35,7 +38,7 @@ class FirebaseAuthManager {
                 }
                 else {
                     //print("Invalid credentials")
-                    seal.reject(AuthStatus.invalidCredentials)
+                    seal.reject(AuthError.invalidCredentials)
                     
                 }
                 
@@ -47,4 +50,38 @@ class FirebaseAuthManager {
             }
         }
     }
+    
+    //creates a new account onto the system
+    static func registerAccount(email: String, password: String, confirmPassword: String) -> Promise<AuthDataResult>  {
+        return Promise {
+            seal in
+            //checks if both password field matches.
+            if password == confirmPassword {
+                //processes the registration process
+                self.authRef.createUser(withEmail: email, password: password) {
+                    (authResult, error) in
+                    if let authResult = authResult {
+                        //allows it to fulfil, then it will automatically log in to the system.
+                        seal.fulfill(authResult)
+                    }
+                    else {
+                        if let error = error {
+                            seal.reject(error)
+                        } else {
+                            seal.reject(AuthError.unknown)
+                        } //throws an undifened error if no errors are thrown.
+                        
+                    }
+                    
+                }
+            }
+            else {
+                //throws an error
+                seal.reject(AuthError.passwordNotMatch)
+            }
+        }
+        
+    }
+    
+ 
 }

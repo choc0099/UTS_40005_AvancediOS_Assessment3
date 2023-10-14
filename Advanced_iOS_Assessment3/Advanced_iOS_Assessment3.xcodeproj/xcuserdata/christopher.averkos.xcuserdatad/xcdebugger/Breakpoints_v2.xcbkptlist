@@ -342,8 +342,8 @@
             filePath = "Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "login(email:password:)"
             landmarkType = "7">
             <Locations>
@@ -390,8 +390,8 @@
             filePath = "Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "login(email:password:)"
             landmarkType = "7">
             <Locations>
@@ -438,8 +438,8 @@
             filePath = "Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "login(email:password:)"
             landmarkType = "7">
             <Locations>
@@ -486,8 +486,8 @@
             filePath = "Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "login(email:password:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -502,8 +502,8 @@
             filePath = "Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "login(email:password:)"
             landmarkType = "7">
             <Locations>
@@ -565,8 +565,8 @@
             filePath = "Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "login(email:password:)"
             landmarkType = "7">
             <Locations>
@@ -691,8 +691,8 @@
             filePath = "Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "login(email:password:)"
             landmarkType = "7">
             <Locations>
@@ -754,8 +754,8 @@
             filePath = "Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "login(email:password:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import FirebaseCore
+import FirebaseAuth
 
 
 //these are the statuses for the search view where it change the UI stuff based on scenarios such as loading and offline
@@ -27,6 +29,27 @@ class HotelBrowserMainViewModel: ObservableObject {
     @Published var searchStatus: HotelStatus = .welcome //this is used to display a welcome message when the app launches.
     //this is the property to store hotel metadata.
     @Published var metaData: MetaDataResponse?
+    //this is used to gather information about the user when logged in
+    @Published var isLoggedIn: Bool = false
+    @Published var loggedInUser: User?
+    
+    //this will check the authentication status
+    init() {
+        //adds a state listeneer to determine if the user is logged in or not. This will also be useful when the app is closed when authentication persistance is enabled.
+        FirebaseAuthManager.authRef.addStateDidChangeListener { (auth, user) in
+            DispatchQueue.main.async {
+                if let user = user {
+                    self.isLoggedIn = true
+                    self.loggedInUser = user
+                }
+                else {
+                    self.loggedInUser = nil
+                    self.isLoggedIn = false
+                }
+            }
+         
+        }
+    }
     
     
     //initialises the hotel metaData
@@ -178,10 +201,29 @@ class HotelBrowserMainViewModel: ObservableObject {
         }
     }
     
-    func initialiseSession(request: URLRequest) -> URLSessionDataTask {
-        let session = URLSession.shared
-        
-        let datatask = session.dataTask(with: request)
-        return datatask
+    //this is a function to add the user to the view model when logged in
+    func initaliseUser(user: User) {
+        self.loggedInUser = user
+    }
+    
+    //this is a function that will unallocate the user when logged out.
+    func destructUser() {
+        self.loggedInUser = nil
+    }
+    
+    //this is a function when the user taps the login button.
+    func processLogin(email: String, password: String) {
+        FirebaseAuthManager.login(email: email, password: password)
+            .done { authDataResult in
+                self.isLoggedIn = true
+                self.loggedInUser = authDataResult.user
+            } .catch { error in
+                switch error {
+                case AuthError.invalidCredentials:
+                    print("Invalid Username or password")
+                default:
+                    print(error)
+                }
+            }
     }
 }

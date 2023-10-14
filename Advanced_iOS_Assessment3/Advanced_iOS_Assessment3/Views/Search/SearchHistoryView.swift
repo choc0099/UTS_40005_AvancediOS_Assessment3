@@ -11,8 +11,10 @@ struct SearchHistoryView: View {
     
     //handles stored data persistnace from CoreData to display search history items to the user.
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \SearchHistory.dateSearched, ascending: false)],
+        predicate: NSPredicate(format: "userId == %@", FirebaseAuthManager.authRef.currentUser?.uid ?? ""),
         animation: .default)
     private var searchHistory: FetchedResults<SearchHistory>
     

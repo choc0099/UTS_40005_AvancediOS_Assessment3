@@ -9,6 +9,8 @@
         <attribute name="dateSearched" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="regionId" optional="YES" attributeType="String"/>
         <attribute name="regionName" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="String"/>
         <relationship name="regionCoordinates" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RegionCoordinates" inverseName="searchHistory" inverseEntity="RegionCoordinates"/>
     </entity>
 </model>

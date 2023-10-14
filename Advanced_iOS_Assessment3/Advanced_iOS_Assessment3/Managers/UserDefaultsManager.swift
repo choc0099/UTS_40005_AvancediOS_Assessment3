@@ -49,4 +49,9 @@ class UserDefaultsManager {
         }
         return nil
     }
+    
+    //this is a function to remove the preferences from user default and resets it to the default one.
+    static func removePreferences() {
+        standard.removeObject(forKey: PROPERTY_SEARCH_KEY)
+    }
 }

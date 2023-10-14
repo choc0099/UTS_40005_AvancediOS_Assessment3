@@ -70,7 +70,7 @@ struct HotelPropertySearchView: View {
                 //loads the search prefernces from userDefaults
                 roomSearchVM.loadFromUserDefaults()
                 //saves it to coreData
-                CoreDataManager.saveNeighbourhoodSearch(cameFromHistory: isFromHistory, regionId: regionId, regionName: regionName, regionCoordinates: regionCoordinates)
+                CoreDataManager.saveNeighbourhoodSearch(searchType: .region, cameFromHistory: isFromHistory, regionId: regionId, regionName: regionName, regionCoordinates: regionCoordinates)
             })
             .toolbar {
                 Button {

@@ -11,7 +11,7 @@ import FirebaseDatabase
 import FirebaseAuth
 import FirebaseFirestore
 //these are used to handle Firebase async functions that does not have the async modifer.
-
+//it is also one of the external tools used.
 import PromiseKit
 //this is a class to store and retrieve data from the Firebase server.
 
@@ -40,6 +40,8 @@ class FirebaseRDManager {
         //self.ref.setValue("Smokes")
     }
     
+    //returns the favourites array that is stored from the dictionary lists in the database by returning a promise.
+    //promise kit is used to simplify code in an async situaiton where functijons do not have the async modifer.
     static func readFavourites() -> Promise<[HotelFavourite]> {
         return Promise {
             seal in

@@ -89,7 +89,22 @@ class CoreDataManager {
         //saves the context
         try viewContext.save()
         print("Aate on existing search history is updated.")
+    }
     
+    //this will clear all search history that is allocated to the user
+    static func clearAllSearchHistory() throws {
+        let newFetchRequest: NSFetchRequest<SearchHistory> = SearchHistory.fetchRequest()
+        //queries the predicate to delete all search history only allocated to that specific user.
+        newFetchRequest.predicate = NSPredicate(format: "userId == %@", FirebaseAuthManager.authRef.currentUser?.uid ?? "")
+        
+        let searchHistorys = try viewContext.fetch(newFetchRequest)
+        for historyItem in searchHistorys {
+            //deletes the history item.
+            viewContext.delete(historyItem)
+        }
+        
+        //saves it to the context
+        try viewContext.save()
         
     }
 }

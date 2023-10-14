@@ -42,6 +42,12 @@ struct SettingsView: View {
                 //renders the prompt message
                 renderPromptMessage()
             }
+            //this will clear data that is stored locally on the search view
+            Button("Clear Search History") {
+                showPrompt = true
+                settingAction = .clearSearchHistory
+                renderPromptMessage()
+            }
             //this will clear stored search preferneces including price filtering and numbers of rooms.
             Button("Clear Search Preferences") {
                 showPrompt = true
@@ -92,9 +98,9 @@ struct SettingsView: View {
         case .clearPropertyHistory:
             alertTitle = "Are you sure you want to clear all your recents?"
             alertMessage = "Your recents that have the hotel details including the name of the hotel, how many nights you want to stay in, the calculated price, how many rooms you want and the number of people will no longer be stored on the database, these can't be undone."
-        default:
-            alertTitle = ""
-            alertMessage = ""
+        case .clearSearchHistory:
+            alertTitle = "Are you sure you want to clear all your search history from the search view?"
+            alertMessage = "This will clear your recent searches that is stored locally on this device."
         }
     }
     
@@ -111,8 +117,9 @@ struct SettingsView: View {
         case .clearPropertyHistory:
             print("Pressed (clear all recents)")
             clearRecents()
-        default:
-            return
+        case .clearSearchHistory:
+            print("Pressed (clear search history)")
+            clearSearchHistory()
         }
         
     }
@@ -140,6 +147,16 @@ struct SettingsView: View {
             print(error.localizedDescription)
             showAlert = true
             alertTitle = "Unable to clear all property recents."
+        }
+    }
+    //helper function to clear search history from CoreData
+    func clearSearchHistory() {
+        do {
+            try CoreDataManager.clearAllSearchHistory()
+        } catch {
+            print(error.localizedDescription)
+            showAlert = true
+            alertTitle = "Unable to clear search history"
         }
     }
 }

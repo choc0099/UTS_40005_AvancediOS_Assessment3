@@ -83,5 +83,10 @@ class FirebaseAuthManager {
         
     }
     
+    //this is a function to log out of the system
+    static func logOut() throws {
+        try authRef.signOut()
+    }
+    
  
 }

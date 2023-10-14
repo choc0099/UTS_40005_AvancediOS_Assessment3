@@ -21,6 +21,9 @@ struct InSessionView: View {
             PropertyHistoryView().tabItem {
                 Label("Recents", systemImage: "clock.fill")
             }.tag(2)
+            SettingsView().tabItem {
+                Label("Settings", systemImage: "gearshape.fill")
+            }
         }.onAppear {
             //loads the hotel metaData
             hotelMain.initialiseMetaData()

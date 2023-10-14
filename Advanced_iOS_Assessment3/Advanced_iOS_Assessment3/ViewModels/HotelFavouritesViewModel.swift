@@ -19,18 +19,13 @@ class HotelFavouritesViewModel: ObservableObject {
     @Published var alertTitle: String = ""
     @Published var alertMessage: String = ""
     
-    init() {
-        if let currentUser = FirebaseAuthManager.authRef.currentUser {
-            fetchFavourites(currentUser.uid)
-        }
-      
-    }
+  
     
     //loads the favourites from the DB
-    func fetchFavourites(_ userId: String) {
+    func fetchFavourites() {
         //var fetchedFavourites: [HotelFavourite] = []
         
-        FirebaseRDManager.readFavourites(userId)
+        FirebaseRDManager.readFavourites()
             .done { favourites in
                 self.favourites = favourites
                 print(self.favourites) //this is used for debugging purposes.
@@ -50,8 +45,8 @@ class HotelFavouritesViewModel: ObservableObject {
             }
     }
     
-    func removeFromFavourites(_ uid: String, propertyId: String) {
-        FirebaseRDManager.removeFavouriteFromDB(userId: uid, propertyId: propertyId)
+    func removeFromFavourites(propertyId: String) {
+        FirebaseRDManager.removeFavouriteFromDB(propertyId: propertyId)
             .done {
                 print("\(propertyId) Removed from favourites")
             }

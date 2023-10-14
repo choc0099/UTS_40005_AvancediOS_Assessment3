@@ -214,6 +214,7 @@ class HotelBrowserMainViewModel: ObservableObject {
     //this is a function that will unallocate the user when logged out.
     func destructUser() {
         self.loggedInUser = nil
+        self.isLoggedIn = false
     }
     
     //this is a function when the user taps the login button.

@@ -10,6 +10,9 @@ import SwiftUI
 //like on my previous assignment SoulDates, this is a session view when the user is logged in to the app.
 struct InSessionView: View {
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
+    @EnvironmentObject var hotelFavesVM: HotelFavouritesViewModel
+    @EnvironmentObject var propertyHistoryVM: PropertyHistoryViewModel
+    
     var body: some View {
         TabView {
             SearchView().tabItem {
@@ -25,8 +28,17 @@ struct InSessionView: View {
                 Label("Settings", systemImage: "gearshape.fill")
             }
         }.onAppear {
-            //loads the hotel metaData
-            hotelMain.initialiseMetaData()
+            DispatchQueue.main.async {
+                Task {
+                    //loads the hotel metaData
+                    hotelMain.initialiseMetaData()
+                    //refreshes the view models for favourites and history data
+                    propertyHistoryVM.fetchHistory()
+                    hotelFavesVM.fetchFavourites()
+                }
+                
+            }
+            
         }
     }
 }

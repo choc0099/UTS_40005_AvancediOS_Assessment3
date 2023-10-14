@@ -12,6 +12,9 @@ struct LoginView: View {
     @State var email: String = ""
     @State var password: String = ""
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
+    //these other environment objects will be used to refresh the favourites and property history when logged in.
+    @EnvironmentObject var hotelFavesVM: HotelFavouritesViewModel
+    @EnvironmentObject var propertyHistoryVM: PropertyHistoryViewModel
     
     var body: some View {
         NavigationStack {
@@ -23,6 +26,8 @@ struct LoginView: View {
                 
                 Button {
                     hotelMain.processLogin(email: email, password: password)
+
+                    
                 } label: {
                     Text("Log In")
                 }

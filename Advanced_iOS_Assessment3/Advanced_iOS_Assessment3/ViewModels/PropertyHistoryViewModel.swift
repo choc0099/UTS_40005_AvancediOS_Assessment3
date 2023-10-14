@@ -19,20 +19,20 @@ class PropertyHistoryViewModel: ObservableObject {
         return propertyHistory.reversed()
     }
     
-    init() {
-        //checks if there is authenticated user
-        if let currentUser = FirebaseAuthManager.authRef.currentUser {
-            fetchHistory(currentUser.uid)
-        }
-        
-    }
     
     //retrieves the property history from the database
-    func fetchHistory(_ userId: String) {
-        FirebaseRDManager.readPropertyHisttory(userId: userId)
+    func fetchHistory() {
+        FirebaseRDManager.readPropertyHisttory()
             .done { historyList in
                 //adds it to the view model array
                 self.propertyHistory = historyList
+                
+                //this will display a no favourites message to the user if there are no favourites fouond from the database.
+                if self.propertyHistory.isEmpty {
+                    self.status = .noHistory
+                } else {
+                    self.status = .active
+                }
             }
             .catch { error in
                 //changes the status to no history
@@ -40,10 +40,11 @@ class PropertyHistoryViewModel: ObservableObject {
                 print(error)
                 print(error.localizedDescription)
             }
+        
     }
     
-    func removeHistoryItem(_ userId: String, uuId: UUID) {
-        FirebaseRDManager.removePropertyHistoryItemFromDB(userId: userId, id: uuId)
+    func removeHistoryItem(uuId: UUID) {
+        FirebaseRDManager.removePropertyHistoryItemFromDB(id: uuId)
             .done {
                 print("\(uuId) Removed from history")
             }

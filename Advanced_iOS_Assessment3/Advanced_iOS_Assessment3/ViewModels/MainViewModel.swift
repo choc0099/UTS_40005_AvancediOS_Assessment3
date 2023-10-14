@@ -33,6 +33,10 @@ class HotelBrowserMainViewModel: ObservableObject {
     @Published var isLoggedIn: Bool = false
     @Published var loggedInUser: User?
     
+    //these are alerts displayed to the user
+    @Published var showAlert: Bool = false
+    @Published var alertTitle: String = ""
+    @Published var alertMessage: String = ""
     //this will check the authentication status
     init() {
         //adds a state listeneer to determine if the user is logged in or not. This will also be useful when the app is closed when authentication persistance is enabled.
@@ -218,11 +222,44 @@ class HotelBrowserMainViewModel: ObservableObject {
                 self.isLoggedIn = true
                 self.loggedInUser = authDataResult.user
             } .catch { error in
+                //shows an alert to the user regardless what error it is.
+                self.showAlert = true
+                //a switch statement to handle errors from the promise response.
                 switch error {
                 case AuthError.invalidCredentials:
-                    print("Invalid Username or password")
+                    self.alertTitle = "Incorrect email or password"
+                    self.alertMessage = "Please check your email and password and try again"
+                    print("Incorrect email or password")
+                case URLError.notConnectedToInternet:
+                    self.alertTitle = "You are currently offline"
+                    self.alertMessage = "Please check your network connection and try again."
                 default:
+                    self.alertTitle = "Something went wrong"
+                    self.alertMessage = "We are unable to process your request."
                     print(error)
+                }
+            }
+    }
+    
+    func processRegister(email: String, password: String, confirmPassword: String) {
+        FirebaseAuthManager.registerAccount(email: email, password: password, confirmPassword:  confirmPassword)
+            .done { authResult in
+                //automattically logs in to this new account after registration.
+                self.isLoggedIn = true
+                self.loggedInUser = authResult.user
+            }
+            .catch { error in
+                self.showAlert = true
+                switch error {
+                case AuthError.passwordNotMatch:
+                    self.alertTitle = "Passwords do not match"
+                    self.alertMessage = "Your passwords do not match, please renter your password"
+                case URLError.notConnectedToInternet:
+                    self.alertTitle = "You are currently offline."
+                    self.alertMessage = "Unable to register you to the system, please check your network connection and try again."
+                default:
+                    self.alertTitle = "Something went wrong"
+                    self.alertMessage = "We are unable to process your request."
                 }
             }
     }

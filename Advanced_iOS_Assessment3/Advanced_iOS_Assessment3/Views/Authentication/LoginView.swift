@@ -18,15 +18,29 @@ struct LoginView: View {
             VStack(spacing: 20) {
                 Text("Welcome to Hotel Browser").font(.title)
                 
-                TextField("Email Address", text: $email)
+                TextField("Email Address", text: $email).autocapitalization(.none)
                 SecureField("Password", text: $password)
                 
                 Button {
                     hotelMain.processLogin(email: email, password: password)
                 } label: {
-                    Text("Log in")
+                    Text("Log In")
+                }
+                
+                //navigation link to the register view
+                NavigationLink {
+                    RegisterView()
+                } label: {
+                    Text("Register Now")
                 }
             }.padding()
+                .alert(isPresented: $hotelMain.showAlert, content: {
+                    Alert(
+                        title: Text(hotelMain.alertTitle),
+                        message: Text(hotelMain.alertMessage)
+                    
+                    )
+                })
         }
     }
 }

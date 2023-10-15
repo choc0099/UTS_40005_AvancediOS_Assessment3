@@ -8,3 +8,6 @@
  You can either register for a new account or you can login using my credentials whcih is
  Email Address: "choclate00@live.com"
  Password: "abc123".
+
+ # Swift Packages Used
+ I have used the Firebase SDK and PromiseKit in the swift package manager to handle Cloud databases.

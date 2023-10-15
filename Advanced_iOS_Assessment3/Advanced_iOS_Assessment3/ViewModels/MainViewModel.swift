@@ -70,6 +70,7 @@ class HotelBrowserMainViewModel: ObservableObject {
         }
         else {
             Task {
+                //fetches the metadata from the api.
                 print("fetching data from the API.")
                 await fetchMetaData()
             }
@@ -91,6 +92,11 @@ class HotelBrowserMainViewModel: ObservableObject {
                 URLQueryItem(name: "locale", value: haveMetaData.australia.supportedLocales[0].hotelSiteLocaleIdentifier),
                 URLQueryItem(name: "langid", value: "\(haveMetaData.australia.supportedLocales[0].languageIdentifier)"),
                 URLQueryItem(name: "siteid", value: "\(haveMetaData.australia.siteId)")
+            ]
+        }
+        else {
+            urlComp.queryItems = [
+                URLQueryItem(name: "q", value: q)
             ]
         }
    

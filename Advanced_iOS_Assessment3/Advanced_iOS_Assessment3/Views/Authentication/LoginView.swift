@@ -15,6 +15,15 @@ struct LoginView: View {
     //these other environment objects will be used to refresh the favourites and property history when logged in.
     @EnvironmentObject var hotelFavesVM: HotelFavouritesViewModel
     @EnvironmentObject var propertyHistoryVM: PropertyHistoryViewModel
+    //this will determine if the button needs to be disabled, it will be disabled if there is no user inputs
+    var buttonDisabled: Bool {
+        if !email.isEmpty && !password.isEmpty {
+            //this will enable the button.
+            return false
+        } else {
+            return true
+        }
+    }
     
     var body: some View {
         NavigationStack {
@@ -26,24 +35,22 @@ struct LoginView: View {
                 
                 Button {
                     hotelMain.processLogin(email: email, password: password)
-
-                    
                 } label: {
                     Text("Log In")
-                }
+                }.disabled(buttonDisabled)
                 
                 //navigation link to the register view
                 NavigationLink {
                     RegisterView()
                 } label: {
-                    Text("Register Now")
+                    Text("Register New Account")
                 }
             }.padding()
                 .alert(isPresented: $hotelMain.showAlert, content: {
                     Alert(
                         title: Text(hotelMain.alertTitle),
                         message: Text(hotelMain.alertMessage)
-                    
+                        
                     )
                 })
         }

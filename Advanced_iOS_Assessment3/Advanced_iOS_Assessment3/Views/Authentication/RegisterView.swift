@@ -11,6 +11,15 @@ struct RegisterView: View {
     @State var email: String = ""
     @State var password: String = ""
     @State var confirmPassword: String = ""
+    //this will disable the button if not all text fields are entered.
+    var buttonDisabled: Bool {
+        if !email.isEmpty && !password.isEmpty && !confirmPassword.isEmpty {
+            return false
+        } else {
+            return true
+        }
+    }
+    
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
     var body: some View {
         NavigationStack {
@@ -28,8 +37,8 @@ struct RegisterView: View {
                         confirmPassword = ""
                     }
                 } label: {
-                    Text("Submit")
-                }
+                    Text("Continue")
+                }.disabled(buttonDisabled)
             }
         
         }.padding().navigationTitle("Register")

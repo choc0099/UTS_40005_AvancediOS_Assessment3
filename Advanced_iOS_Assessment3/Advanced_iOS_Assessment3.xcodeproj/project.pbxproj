@@ -18,6 +18,12 @@
 		32322C222AD90D71004E3BAA /* AmmenitiesRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32322C212AD90D71004E3BAA /* AmmenitiesRow.swift */; };
 		32322C242AD915A1004E3BAA /* PropertyHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32322C232AD915A1004E3BAA /* PropertyHistoryView.swift */; };
 		32322C262AD915E1004E3BAA /* PropertyHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32322C252AD915E1004E3BAA /* PropertyHistoryViewModel.swift */; };
+		32322C282ADA0618004E3BAA /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32322C272ADA0618004E3BAA /* FirebaseAuthManager.swift */; };
+		32322C2A2ADA3796004E3BAA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32322C292ADA3796004E3BAA /* LoginView.swift */; };
+		32322C2C2ADA6D0C004E3BAA /* InSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32322C2B2ADA6D0C004E3BAA /* InSessionView.swift */; };
+		32322C2E2ADA7063004E3BAA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32322C2D2ADA7063004E3BAA /* SettingsView.swift */; };
+		32322C312ADA76F5004E3BAA /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32322C302ADA76F5004E3BAA /* RegisterView.swift */; };
+		32479C302ADB77B9008CBE53 /* PropertyDetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32479C2F2ADB77B9008CBE53 /* PropertyDetailMapView.swift */; };
 		3254F0502AC4136D00E1A1BA /* HotelRoomsResultsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3254F04F2AC4136D00E1A1BA /* HotelRoomsResultsListView.swift */; };
 		3254F0522AC44B7C00E1A1BA /* PropertyResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3254F0512AC44B7C00E1A1BA /* PropertyResultsView.swift */; };
 		3256C5D42AB8501E00AC9470 /* Advanced_iOS_Assessment3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3256C5D32AB8501E00AC9470 /* Advanced_iOS_Assessment3App.swift */; };
@@ -48,7 +54,6 @@
 		32920DF92AC8DA7E00670ACA /* PropertyContentModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32920DF82AC8DA7E00670ACA /* PropertyContentModels.swift */; };
 		32920DFB2AC8DE3F00670ACA /* PropertyPolicyAndFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32920DFA2AC8DE3F00670ACA /* PropertyPolicyAndFeatures.swift */; };
 		32920DFD2AC9252500670ACA /* PropertySearchPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32920DFC2AC9252500670ACA /* PropertySearchPreferencesView.swift */; };
-		32B4046F2AC1A9D9009B4F43 /* RegionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B4046E2AC1A9D9009B4F43 /* RegionsView.swift */; };
 		32C7C57D2AC2B22500D5B4AD /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C7C57C2AC2B22500D5B4AD /* SearchView.swift */; };
 		32C7C57F2AC2BCB400D5B4AD /* PropertyResultsProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C7C57E2AC2BCB400D5B4AD /* PropertyResultsProcessingView.swift */; };
 		32C7C5812AC2BFC700D5B4AD /* MetaDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C7C5802AC2BFC700D5B4AD /* MetaDataResponse.swift */; };
@@ -71,7 +76,7 @@
 		32F74F5D2ACE2AAD00EF6DB3 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 32F74F5C2ACE2AAD00EF6DB3 /* FirebaseFirestoreCombine-Community */; };
 		32F74F5F2ACE2AAD00EF6DB3 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 32F74F5E2ACE2AAD00EF6DB3 /* FirebaseFirestoreSwift */; };
 		32F74F612ACE2BED00EF6DB3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32F74F602ACE2BED00EF6DB3 /* GoogleService-Info.plist */; };
-		32F74F632ACE2F8900EF6DB3 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F74F622ACE2F8900EF6DB3 /* FirebaseManager.swift */; };
+		32F74F632ACE2F8900EF6DB3 /* FirebaseRDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F74F622ACE2F8900EF6DB3 /* FirebaseRDManager.swift */; };
 		32F74F652ACE73A900EF6DB3 /* HotelFavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F74F642ACE73A900EF6DB3 /* HotelFavouritesView.swift */; };
 		32F74F672ACE746D00EF6DB3 /* HotelFavouritesRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F74F662ACE746D00EF6DB3 /* HotelFavouritesRow.swift */; };
 		32F74F692ACE761B00EF6DB3 /* HotelFavourite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F74F682ACE761B00EF6DB3 /* HotelFavourite.swift */; };
@@ -107,6 +112,12 @@
 		32322C212AD90D71004E3BAA /* AmmenitiesRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmmenitiesRow.swift; sourceTree = "<group>"; };
 		32322C232AD915A1004E3BAA /* PropertyHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyHistoryView.swift; sourceTree = "<group>"; };
 		32322C252AD915E1004E3BAA /* PropertyHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyHistoryViewModel.swift; sourceTree = "<group>"; };
+		32322C272ADA0618004E3BAA /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
+		32322C292ADA3796004E3BAA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		32322C2B2ADA6D0C004E3BAA /* InSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InSessionView.swift; sourceTree = "<group>"; };
+		32322C2D2ADA7063004E3BAA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		32322C302ADA76F5004E3BAA /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		32479C2F2ADB77B9008CBE53 /* PropertyDetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyDetailMapView.swift; sourceTree = "<group>"; };
 		3254F04F2AC4136D00E1A1BA /* HotelRoomsResultsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelRoomsResultsListView.swift; sourceTree = "<group>"; };
 		3254F0512AC44B7C00E1A1BA /* PropertyResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyResultsView.swift; sourceTree = "<group>"; };
 		3256C5D02AB8501E00AC9470 /* Advanced_iOS_Assessment3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Advanced_iOS_Assessment3.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,7 +151,6 @@
 		32920DF82AC8DA7E00670ACA /* PropertyContentModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyContentModels.swift; sourceTree = "<group>"; };
 		32920DFA2AC8DE3F00670ACA /* PropertyPolicyAndFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyPolicyAndFeatures.swift; sourceTree = "<group>"; };
 		32920DFC2AC9252500670ACA /* PropertySearchPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertySearchPreferencesView.swift; sourceTree = "<group>"; };
-		32B4046E2AC1A9D9009B4F43 /* RegionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsView.swift; sourceTree = "<group>"; };
 		32C7C57C2AC2B22500D5B4AD /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		32C7C57E2AC2BCB400D5B4AD /* PropertyResultsProcessingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyResultsProcessingView.swift; sourceTree = "<group>"; };
 		32C7C5802AC2BFC700D5B4AD /* MetaDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaDataResponse.swift; sourceTree = "<group>"; };
@@ -152,7 +162,7 @@
 		32C7C58F2AC3EBA800D5B4AD /* ChildrenFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenFieldView.swift; sourceTree = "<group>"; };
 		32F20C372ACBECFF001DE51B /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		32F74F602ACE2BED00EF6DB3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		32F74F622ACE2F8900EF6DB3 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		32F74F622ACE2F8900EF6DB3 /* FirebaseRDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRDManager.swift; sourceTree = "<group>"; };
 		32F74F642ACE73A900EF6DB3 /* HotelFavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelFavouritesView.swift; sourceTree = "<group>"; };
 		32F74F662ACE746D00EF6DB3 /* HotelFavouritesRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelFavouritesRow.swift; sourceTree = "<group>"; };
 		32F74F682ACE761B00EF6DB3 /* HotelFavourite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelFavourite.swift; sourceTree = "<group>"; };
@@ -207,6 +217,15 @@
 				320A7CCD2AC19721008B252B /* PropertyListRequest.swift */,
 			);
 			path = PropertyList;
+			sourceTree = "<group>";
+		};
+		32322C2F2ADA76DA004E3BAA /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				32322C292ADA3796004E3BAA /* LoginView.swift */,
+				32322C302ADA76F5004E3BAA /* RegisterView.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		3256C5C72AB8501E00AC9470 = {
@@ -289,15 +308,18 @@
 		327A58792AB8519B00DB11E6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				32322C2F2ADA76DA004E3BAA /* Authentication */,
 				325FF5BA2AC56C3900E207DB /* ViewComponents */,
 				32C7C58C2AC3A62200D5B4AD /* PropertySearch */,
 				32920DE12AC6EC1B00670ACA /* Search */,
 				3256C5D52AB8501E00AC9470 /* ContentView.swift */,
-				32B4046E2AC1A9D9009B4F43 /* RegionsView.swift */,
 				32920DF12AC8D0D700670ACA /* PropertyDetailView.swift */,
 				328E654C2ACBD27300E4903A /* PropertyDetailsProcessingView.swift */,
 				32F74F642ACE73A900EF6DB3 /* HotelFavouritesView.swift */,
 				32322C232AD915A1004E3BAA /* PropertyHistoryView.swift */,
+				32322C2B2ADA6D0C004E3BAA /* InSessionView.swift */,
+				32322C2D2ADA7063004E3BAA /* SettingsView.swift */,
+				32479C2F2ADB77B9008CBE53 /* PropertyDetailMapView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -366,7 +388,8 @@
 				32C7C5822AC2F0F100D5B4AD /* UserDefaultsManager.swift */,
 				32C7C5892AC3776500D5B4AD /* HotelAPIManager.swift */,
 				32795B422AC65CA600B8E670 /* CoreDataManager.swift */,
-				32F74F622ACE2F8900EF6DB3 /* FirebaseManager.swift */,
+				32F74F622ACE2F8900EF6DB3 /* FirebaseRDManager.swift */,
+				32322C272ADA0618004E3BAA /* FirebaseAuthManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -542,6 +565,8 @@
 				32920DFB2AC8DE3F00670ACA /* PropertyPolicyAndFeatures.swift in Sources */,
 				325FF5BE2AC594E500E207DB /* HotelPropertyResultsMapView.swift in Sources */,
 				32322C262AD915E1004E3BAA /* PropertyHistoryViewModel.swift in Sources */,
+				32322C2E2ADA7063004E3BAA /* SettingsView.swift in Sources */,
+				32322C282ADA0618004E3BAA /* FirebaseAuthManager.swift in Sources */,
 				32920DF22AC8D0D700670ACA /* PropertyDetailView.swift in Sources */,
 				32F74F652ACE73A900EF6DB3 /* HotelFavouritesView.swift in Sources */,
 				32C7C5852AC2FED600D5B4AD /* HotelPropertySearchView.swift in Sources */,
@@ -566,14 +591,16 @@
 				32920DE32AC6EC7C00670ACA /* SearchHistoryView.swift in Sources */,
 				32920DED2AC80DC700670ACA /* HotelImageView.swift in Sources */,
 				32920DF62AC8D8CA00670ACA /* PropertyContentRequest.swift in Sources */,
-				32B4046F2AC1A9D9009B4F43 /* RegionsView.swift in Sources */,
+				32479C302ADB77B9008CBE53 /* PropertyDetailMapView.swift in Sources */,
 				32322C242AD915A1004E3BAA /* PropertyHistoryView.swift in Sources */,
 				32920DF42AC8D67500670ACA /* PropertyDetalResponse.swift in Sources */,
 				32C7C58A2AC3776500D5B4AD /* HotelAPIManager.swift in Sources */,
-				32F74F632ACE2F8900EF6DB3 /* FirebaseManager.swift in Sources */,
+				32F74F632ACE2F8900EF6DB3 /* FirebaseRDManager.swift in Sources */,
+				32322C2C2ADA6D0C004E3BAA /* InSessionView.swift in Sources */,
 				3256C5E02AB8501F00AC9470 /* Advanced_iOS_Assessment3.xcdatamodeld in Sources */,
 				32C7C57F2AC2BCB400D5B4AD /* PropertyResultsProcessingView.swift in Sources */,
 				32F74F692ACE761B00EF6DB3 /* HotelFavourite.swift in Sources */,
+				32322C312ADA76F5004E3BAA /* RegisterView.swift in Sources */,
 				32C7C57D2AC2B22500D5B4AD /* SearchView.swift in Sources */,
 				3256C5D62AB8501E00AC9470 /* ContentView.swift in Sources */,
 				320A7CCE2AC19721008B252B /* PropertyListRequest.swift in Sources */,
@@ -581,6 +608,7 @@
 				32795B432AC65CA600B8E670 /* CoreDataManager.swift in Sources */,
 				3254F0502AC4136D00E1A1BA /* HotelRoomsResultsListView.swift in Sources */,
 				3254F0522AC44B7C00E1A1BA /* PropertyResultsView.swift in Sources */,
+				32322C2A2ADA3796004E3BAA /* LoginView.swift in Sources */,
 				32920DDF2AC6EAC300670ACA /* SearchResultsView.swift in Sources */,
 				3256C5D42AB8501E00AC9470 /* Advanced_iOS_Assessment3App.swift in Sources */,
 			);

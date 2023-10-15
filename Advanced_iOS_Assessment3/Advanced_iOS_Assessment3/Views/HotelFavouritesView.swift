@@ -12,31 +12,34 @@ struct HotelFavouritesView: View {
     var body: some View {
         
         NavigationStack {
-            if hotelFavsVM.status == .active {
-                List {
-                    ForEach(hotelFavsVM.favourites) {
-                        favourite in
-                        NavigationLink {
-                            PropertyDetailsProcessingView(propertyId: favourite.hotelId)
-                        } label: {
-                            HotelFavouritesRow(favourite: favourite)
-                        }.swipeActions {
-                            Button("Delete", role: .destructive) {
-                                hotelFavsVM.removeFromFavourites(propertyId: favourite.hotelId)
-                                //refreshes the favourites list
-                                hotelFavsVM.fetchFavourites()
+            Group {
+                if hotelFavsVM.status == .active {
+                    List {
+                        ForEach(hotelFavsVM.favourites) {
+                            favourite in
+                            NavigationLink {
+                                PropertyDetailsProcessingView(propertyId: favourite.hotelId, fromPrevious: true)
+                            } label: {
+                                HotelFavouritesRow(favourite: favourite)
+                            }.swipeActions {
+                                Button("Delete", role: .destructive) {
+                                    //checks if there is a user logged in.
+                                    hotelFavsVM.removeFromFavourites(propertyId: favourite.hotelId)
+                                    //refreshes the favourites list
+                                    hotelFavsVM.fetchFavourites()
+                                }
                             }
+                            
                         }
-                        
                     }
+                    
                 }
-                
-            }
-            else {
-                //displays messages to the user.
-                ErrorView(errorStatus: hotelFavsVM.status)
-            }
-            //alert is shown if the favourites failed to delete.
+                else {
+                    //displays messages to the user.
+                    ErrorView(errorStatus: hotelFavsVM.status)
+                }
+                //alert is shown if the favourites failed to delete.
+            }.navigationTitle("Favourites")
         }.alert(isPresented: $hotelFavsVM.showAlert, content: {
             Alert(
                 title: Text(hotelFavsVM.alertTitle),

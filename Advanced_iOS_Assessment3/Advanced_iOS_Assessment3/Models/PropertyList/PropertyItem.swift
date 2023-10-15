@@ -6,8 +6,8 @@
 //
 
 import Foundation
-
-struct Availability:Hashable, Codable {
+//determines how many rooms are avaliable.
+struct Availability: Hashable, Codable {
     let typeName: String
     let isAvailable: Bool
     let minRoomsLeft: Int?
@@ -19,6 +19,7 @@ struct Availability:Hashable, Codable {
     }
 }
 
+//this is used to display the score of the hotel
 struct Reviews: Hashable, Codable {
     let typeName : String
     let score : Double
@@ -37,7 +38,6 @@ struct ResultsTitleModel : Codable {
     let header : String?
 
     enum CodingKeys: String, CodingKey {
-
         case typename = "__typename"
         case header = "header"
     }

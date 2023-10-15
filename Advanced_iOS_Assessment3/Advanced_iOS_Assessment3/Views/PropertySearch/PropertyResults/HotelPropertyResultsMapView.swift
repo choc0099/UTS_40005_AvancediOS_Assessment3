@@ -18,7 +18,7 @@ struct HotelPropertyResultsMapView: View {
             Map(coordinateRegion: $currentCoordinates, annotationItems: roomSearchVM.hotelResultsAnnotations) {
                 marker in
                 MapAnnotation(coordinate: marker.coordinate) {
-                    NavigationLink(destination: PropertyDetailsProcessingView( propertyId: marker.property.hotelId, price: marker.property.price.lead.amount, totalAdults: roomSearchVM.totalAdults, totalChildren: roomSearchVM.totalChildren, numbersOfNights: roomSearchVM.numberOfNights, numbersOfRooms: roomSearchVM.rooms.count)) {
+                    NavigationLink(destination: PropertyDetailsProcessingView( propertyId: marker.property.hotelId, price: marker.property.price.lead.amount, totalAdults: roomSearchVM.totalAdults, totalChildren: roomSearchVM.totalChildren, numbersOfNights: roomSearchVM.numberOfNights, numbersOfRooms: roomSearchVM.rooms.count, fromPrevious: true)) {
                         VStack {
                             HotelImageView(propertyImage: marker.property.propertyImage, imageSize: 50, mapMode: true)
                             Text(marker.name).font(.caption).background(.background).foregroundColor(.primary).bold().frame(width: 125).padding(.horizontal, 2)

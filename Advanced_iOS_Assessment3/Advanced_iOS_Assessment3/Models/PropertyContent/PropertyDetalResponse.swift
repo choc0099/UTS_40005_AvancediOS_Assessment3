@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+//this is the property detail response from the JSON.
 struct PropertyDetalResponse: Hashable, Codable {
     let propertyData: PropertyContentData
     
@@ -14,7 +14,6 @@ struct PropertyDetalResponse: Hashable, Codable {
         case propertyData = "data"
     }
 }
-
 
 struct PropertyContentData: Hashable, Codable {
     let propertyInfo: PropertyInfo
@@ -24,6 +23,7 @@ struct PropertyContentData: Hashable, Codable {
     }
 }
 
+//this displays main details about the hotel property.
 struct PropertyInfo: Hashable, Codable {
     let typeName: String
     let summary: PropertySummary
@@ -36,7 +36,7 @@ struct PropertyInfo: Hashable, Codable {
         case summary, propertyGallery
     }
 }
-
+//this is more than just a basic summary containing more details such as their policies and location data.
 struct PropertySummary: Hashable, Codable {
     let id: String
     let name: String
@@ -48,10 +48,8 @@ struct PropertySummary: Hashable, Codable {
 struct PropertyContentSectionGroups: Hashable, Codable {
     let aboutThisProperty : AboutThisProperty?
     let importantInfo : String?
-    //let policies: Policies?
-    //let specialFeatures : SpecialFeatures?
 }
-
+//this is where a group of images are availible to view.
 struct PropertyGallery: Hashable, Codable {
     let imagesGrouped : String?
     let images : [PropertyImage]?

@@ -46,7 +46,7 @@ struct SearchView: View {
                         }
                     }.frame(maxHeight: .infinity)
                 }
-            }
+            }.navigationTitle("Search").navigationBarTitleDisplayMode(.inline)
         }
     }
 }

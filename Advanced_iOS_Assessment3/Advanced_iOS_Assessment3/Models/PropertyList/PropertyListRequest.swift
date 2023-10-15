@@ -37,9 +37,9 @@ enum SortPropertyBy: String, Identifiable, CaseIterable, Codable {
 
 struct PropertyListRequest: Codable, Hashable {
     let currency: String
-    let eapid: Int
-    let locale : String
-    let siteId : Int
+    let eapid: Int?
+    let locale : String?
+    let siteId : Int?
     let destination : Destination
     let checkInDate : CheckInDate
     let checkOutDate : CheckOutDate
@@ -64,7 +64,7 @@ struct PropertyListRequest: Codable, Hashable {
         case filters
     }
     
-    init(currency: String, eapid: Int, locale: String, siteId: Int, destination: Destination, checkInDate: CheckInDate, checkOutDate: CheckOutDate, rooms: [Room], sortAndFilterSettings userPref: PropertyListPreference) {
+    init(currency: String, eapid: Int?, locale: String?, siteId: Int?, destination: Destination, checkInDate: CheckInDate, checkOutDate: CheckOutDate, rooms: [Room], sortAndFilterSettings userPref: PropertyListPreference) {
         self.currency = currency
         self.eapid = eapid
         self.locale = locale

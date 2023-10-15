@@ -14,21 +14,12 @@ struct ContentView: View {
     
     //private var items: FetchedResults<Item>
     var body: some View {
-        
-        TabView {
-            SearchView().tabItem {
-                Label("Search", systemImage: "magnifyingglass")
-            }.tag(0)
-            HotelFavouritesView().tabItem {
-                Label("Favourites", systemImage: "heart.fill")
-            }.tag(1)
-            PropertyHistoryView().tabItem {
-                Label("Recents", systemImage: "clock.fill")
-            }.tag(2)
-        }.onAppear {
-            //loads the hotel metaData
-            hotelMain.initialiseMetaData()
+        if !hotelMain.isLoggedIn {
+            LoginView()
+        } else {
+            InSessionView()
         }
+        
     }
 }
 

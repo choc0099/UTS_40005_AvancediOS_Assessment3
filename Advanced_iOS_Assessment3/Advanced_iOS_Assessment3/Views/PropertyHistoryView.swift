@@ -16,7 +16,7 @@ struct PropertyHistoryView: View {
                     List {
                         ForEach(propertyHistoryVM.sortedHistory) {
                             historyItem in
-                            NavigationLink(destination: PropertyDetailsProcessingView(propertyId: historyItem.hotelId)) {
+                            NavigationLink(destination: PropertyDetailsProcessingView(propertyId: historyItem.hotelId, fromPrevious: true)) {
                                 HotelPropertyHistoryRow(propertyHistory: historyItem)
                             }.swipeActions {
                                 Button("Delete", role: .destructive) {
@@ -31,7 +31,7 @@ struct PropertyHistoryView: View {
                     ErrorView(errorStatus: propertyHistoryVM.status)
                 }
                
-            }
+            }.navigationTitle("Recents")
         }
     }
 }

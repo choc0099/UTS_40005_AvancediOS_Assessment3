@@ -9,7 +9,6 @@ import Foundation
 
 struct PropertyPolicies: Hashable, Codable {
     let typeName: String
-    //let checkInEnd: String?
     let checkInInstructions: [String]?
     let childAndBed: ChildAndBed?
     let needToKnow: NeedToKnow?
@@ -52,54 +51,32 @@ struct Pets: Hashable, Codable {
     let descriptions : [String]?
     let title : String?
 }
-
+//this is property related details.
 struct Mention: Hashable, Codable {
     let body: [String]?
     let descriptions: [String]?
     let title: String?
 }
 
+//this is used to get the location details including region coordinates.
 struct PropertyLocation: Hashable, Codable {
     let address : PropertyAddress
     let coordinates : PropertyCoordinates
     let staticImage: PropertyStaticImage
 }
 
+//displays a snapshot of a Google Map image.
 struct PropertyStaticImage: Hashable, Codable {
     let description : String?
     let url: String
 }
-
+//gets the property address information
 struct PropertyAddress: Hashable, Codable {
-    let addressLine : String
-    let city : String
+    let addressLine: String
+    let city: String
     let province : String
-    let countryCode : String
-    let firstAddressLine : String?
-    let secondAddressLine : String?
+    let countryCode: String
+    let firstAddressLine: String?
+    let secondAddressLine: String?
 }
-/*
-struct SpecialFeatures: Hashable, Codable  {
-    let typeName: String
-    let sectionName : String?
-    let sections : [PropertySection]?
-
-    enum CodingKeys: String, CodingKey {
-        case typeName = "typename"
-        case sectionName = "sectionName"
-        case sections = "sections"
-    }
-}*/
-/*
-struct PropertyContentAmenities: Hashable, Codable {
-    let typeName : String
-    let sectionName : String?
-    let sections : [PropertySection]?
-
-    enum CodingKeys: String, CodingKey {
-        case typeName = "__typename"
-        case sectionName = "sectionName"
-        case sections = "sections"
-    }
-}*/
 

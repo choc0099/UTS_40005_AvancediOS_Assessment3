@@ -4,7 +4,8 @@
 //
 //  Created by Christopher Averkos on 27/9/2023.
 //
-
+//this is an enum that is used to handle errors based on user input
+//it also is used to handle errors in rare cases where the room or children are not found.
 enum QueryError: Error {
     case roomNotFound
     case noChildrenFound
@@ -61,10 +62,11 @@ class HotelPropertySearchViewModel: ObservableObject {
         return total
     }
     
+    //these functions will add or remove rooms from the array.
     func incrementRooms() {
         self.rooms.append(Room(adults: 0, children: []))
     }
-    
+
     func decrementRooms() {
         //retricts the range so it will not display negative number.
         if !rooms.isEmpty {
@@ -72,7 +74,7 @@ class HotelPropertySearchViewModel: ObservableObject {
         }
     }
     
-    //increments the number of children inside the room
+    //appends the array of children inside the selected room
     func incrementChildren(currentRoomId: UUID) {
         //gets the actual refernce of the room to add children.
         if let index = self.rooms.firstIndex(where: {$0.id == currentRoomId}) {
@@ -81,17 +83,17 @@ class HotelPropertySearchViewModel: ObservableObject {
         
     }
     
+    //this function removes the children from the array in a selected room that the user is in.
     func decrmentChildren(currentRoomId: UUID) {
         if let index = self.rooms.firstIndex(where: {$0.id == currentRoomId}) {
-            if self.rooms[index].children.isEmpty {
+            if !self.rooms[index].children.isEmpty {
                 //removes a child when decreasing it.
                 self.rooms[index].children.removeLast()
             }
         }
     }
     //this updates the children age on the VM side
-    func setChildrenAge(age: Int, roomId: UUID, childId: UUID)
-    {
+    func setChildrenAge(age: Int, roomId: UUID, childId: UUID) {
         //gets the allocated room from the array
         if let roomIndex = self.rooms.firstIndex(where: {$0.id == roomId}) {
             //gets the allocated child object from the array
@@ -102,6 +104,7 @@ class HotelPropertySearchViewModel: ObservableObject {
         }
     }
     
+    //this function sets the value of numbers of adults in the selected room the user is in.
     func setAdults(roomId: UUID, numberOfAdults: Int) {
         //gets the index that matches the id of the room
         if let index = self.rooms.firstIndex(where: {$0.id == roomId}) {
@@ -119,6 +122,7 @@ class HotelPropertySearchViewModel: ObservableObject {
             throw QueryError.roomNotFound
         }
     }
+    
     //this returns the children object based on their id.
     func findChildrenById(roomId: UUID, childrenId: UUID) throws -> Children {
         if let roomIndex = self.rooms.firstIndex(where: {$0.id == roomId}) {
@@ -133,9 +137,10 @@ class HotelPropertySearchViewModel: ObservableObject {
         }
     }
     
-    func createPropertyObject(metaData: MetaDataResponse, gaiaId: String)  -> PropertyListRequest {
+    //this function returns a property object to make it easier to encode it into JSON.
+    func createPropertyObject(metaData: MetaDataResponse?, gaiaId: String)  -> PropertyListRequest {
         //retreives metaData from the mainVM
-        let metaDataAus = metaData.australia
+        let metaDataAus = metaData?.australia
         //these are date components to convert the date structure to integers as it is used on the JSON structure.
         let checkOutDateComp = retrieveDateComp(date: checkOutDate)
         let checkInDateComp = retrieveDateComp(date: checkInDate)
@@ -145,12 +150,12 @@ class HotelPropertySearchViewModel: ObservableObject {
         //destination object.
         let dest = Destination(regionId: gaiaId, coordinates: nil)
         //builds this response so it can be encoded to JSON.
-        let propertyQuery = PropertyListRequest(currency: "AUD", eapid: metaDataAus.eapId, locale: metaData.australia.supportedLocales[0].hotelSiteLocaleIdentifier, siteId: metaDataAus.siteId, destination: dest, checkInDate: checkin, checkOutDate: checkout, rooms: rooms, sortAndFilterSettings: searchPref)
+        let propertyQuery = PropertyListRequest(currency: "AUD", eapid: metaDataAus?.eapId, locale: metaData?.australia.supportedLocales[0].hotelSiteLocaleIdentifier, siteId: metaDataAus?.siteId, destination: dest, checkInDate: checkin, checkOutDate: checkout, rooms: rooms, sortAndFilterSettings: searchPref)
         return propertyQuery
     }
     
     //it is a helper function that returns a URLRequestObject with the JSON stuffs.
-    func handleRequest(metaData: MetaDataResponse, gaiaId: String) throws -> URLRequest {
+    func handleRequest(metaData: MetaDataResponse?, gaiaId: String) throws -> URLRequest {
         //generates the URL path.
         var urlComp = URLComponents(string: HotelAPIManager.apiUrl)!
         urlComp.path = HotelAPIManager.endPoints["listProperty"]!
@@ -160,8 +165,9 @@ class HotelPropertySearchViewModel: ObservableObject {
         request.httpBody = try JSONEncoder().encode(createPropertyObject(metaData: metaData, gaiaId: gaiaId))
         return request
     }
+    
     //this will send a POST request with JSON data to the server to get results to view hotels.
-    func fetchResults(metaData: MetaDataResponse, gaiaId: String) async {
+    func fetchResults(metaData: MetaDataResponse?, gaiaId: String) async {
         do {
             //retrieves the modified request method that is used to post the JSON object.
             let request = try handleRequest(metaData: metaData, gaiaId: gaiaId)
@@ -258,10 +264,12 @@ class HotelPropertySearchViewModel: ObservableObject {
         return HotelAnnotation(property:  property)
     }
     
-    func saveToUserDefaults(regionId: String, metaDat: MetaDataResponse) {
-        UserDefaultsManager.savePropertySearchPrefernces(propertySearchPreferences: createPropertyObject(metaData: metaDat, gaiaId: regionId))
+    //this function will save search prefernces including sort and filter settings, numbers of rooms, numbers of adults and children in each room, check in dates and check out dates to user defaults.
+    func saveToUserDefaults(regionId: String, metaData: MetaDataResponse?) {
+        UserDefaultsManager.savePropertySearchPrefernces(propertySearchPreferences: createPropertyObject(metaData: metaData, gaiaId: regionId))
     }
     
+    //this function will load from user defaults and allocated to the VM so the user can access their saved prferences after reopening the app.
     func loadFromUserDefaults() {
         if let propertyRequest =  UserDefaultsManager.loadPropertySearchData() {
             //assigns it to the vm properties

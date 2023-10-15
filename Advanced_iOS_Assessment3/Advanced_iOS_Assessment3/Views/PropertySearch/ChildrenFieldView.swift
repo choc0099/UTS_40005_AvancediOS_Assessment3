@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ChildrenFieldView: View {
     @ObservedObject var roomSearchVM: HotelPropertySearchViewModel
+    //passes the UUID's from the rooms and child instead of using Bindings but interacting with the VM.
     @State var currentRoomId: UUID
     @State var currentChildId: UUID
     @State var ageInput: Int = 0;
@@ -29,9 +30,8 @@ struct ChildrenFieldView: View {
     
     //this is a helper function to save to user defaults to the roomSearchVM on editing events.
     func saveToUserDefaults() {
-        if let haveMetaData = hotelMain.metaData {
-            roomSearchVM.saveToUserDefaults(regionId: regionId, metaDat: haveMetaData)
-        }
+        roomSearchVM.saveToUserDefaults(regionId: regionId, metaData: hotelMain.metaData)
+        
     }
 }
 

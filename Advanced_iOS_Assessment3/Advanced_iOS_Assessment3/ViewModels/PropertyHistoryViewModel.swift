@@ -19,16 +19,21 @@ class PropertyHistoryViewModel: ObservableObject {
         return propertyHistory.reversed()
     }
     
-    init() {
-        fetchHistory()
-    }
     
     //retrieves the property history from the database
+    //promiseKit is used to handle errors
     func fetchHistory() {
-        FirebaseManager.readPropertyHisttory()
+        FirebaseRDManager.readPropertyHisttory()
             .done { historyList in
                 //adds it to the view model array
                 self.propertyHistory = historyList
+                
+                //this will display a no favourites message to the user if there are no favourites fouond from the database.
+                if self.propertyHistory.isEmpty {
+                    self.status = .noHistory
+                } else {
+                    self.status = .active
+                }
             }
             .catch { error in
                 //changes the status to no history
@@ -36,10 +41,12 @@ class PropertyHistoryViewModel: ObservableObject {
                 print(error)
                 print(error.localizedDescription)
             }
+        
     }
-    
+    //removes the property history item from the view and database
+    //promiseKit is used to handle errors.
     func removeHistoryItem(uuId: UUID) {
-        FirebaseManager.removePropertyHistoryItemFromDB(id: uuId)
+        FirebaseRDManager.removePropertyHistoryItemFromDB(id: uuId)
             .done {
                 print("\(uuId) Removed from history")
             }

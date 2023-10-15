@@ -7,12 +7,13 @@
 
 //this is a manager class that will handle hotel API requests and endpoints accross different view models.
 import Foundation
-
+//custom errorHandling for invalid urls.
 enum APIErrors: Error {
     case invalidUrl
     case noSearchResults
 }
 
+//this is a manager class with static properties and methods that stores the Core of the API data including api keys and endpoints so it can be used accress different view models.
 class HotelAPIManager {
     //these are the headers to initialise the API request
     static let headers = [

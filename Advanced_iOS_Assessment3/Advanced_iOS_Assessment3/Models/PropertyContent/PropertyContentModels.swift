@@ -5,6 +5,7 @@
 //  Created by Christopher Averkos on 1/10/2023.
 //
 
+//all of these structs are related to property content infomraiton retrieve via JSON.
 import Foundation
 
 struct AboutThisProperty: Hashable, Codable {

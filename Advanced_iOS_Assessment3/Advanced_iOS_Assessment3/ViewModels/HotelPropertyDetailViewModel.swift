@@ -34,17 +34,23 @@ class HotelPropertyDetailViewModel: ObservableObject {
         return nil
     }
     
+    //computed property to return the hotel name.
     var hotelName: String {
         return propertyInfo?.summary.name ?? ""
     }
     
     //returns the property request object that converts it to JSON.
-    func convertToObject(propertyId: String, metaData: MetaDataResponse) -> PropertyContentRequest {
-        return PropertyContentRequest(propertyId: propertyId, eapid: Int(metaData.australia.eapId), locale: metaData.australia.supportedLocales[0].hotelSiteLocaleIdentifier, currency: "AUD", siteId: metaData.australia.siteId)
+    func convertToObject(propertyId: String, metaData: MetaDataResponse?) -> PropertyContentRequest {
+        let metaDataInScope = metaData?.australia
+        var eapId: Int?
+        if let haveEapId = metaDataInScope?.eapId {
+            eapId = haveEapId
+        }
+        return PropertyContentRequest(propertyId: propertyId, eapid: eapId, locale: metaDataInScope?.supportedLocales[0].hotelSiteLocaleIdentifier, currency: "AUD", siteId: metaDataInScope?.siteId)
     }
     
     //handles the request
-    func processRequest(propertyId: String, metaData: MetaDataResponse) throws -> URLRequest {
+    func processRequest(propertyId: String, metaData: MetaDataResponse?) throws -> URLRequest {
         var urlComp = URLComponents(string: HotelAPIManager.apiUrl)!
         urlComp.path = HotelAPIManager.endPoints["propertyDetail"]!
         var request = try HotelAPIManager.hotelApi(urlStuffs:  urlComp )
@@ -53,8 +59,9 @@ class HotelPropertyDetailViewModel: ObservableObject {
         return request
     }
     
+    //fetches the hotel details from the api.
     @MainActor
-    func fetchPropertyDetails(propertyId: String, metaData: MetaDataResponse) async {
+    func fetchPropertyDetails(propertyId: String, metaData: MetaDataResponse?) async {
         do {
             let request = try processRequest(propertyId: propertyId, metaData: metaData)
             
@@ -96,7 +103,7 @@ class HotelPropertyDetailViewModel: ObservableObject {
             }
             
             //saves it to the database
-            FirebaseManager.saveFavouriteToDB(favourite: favourite) .done {
+            FirebaseRDManager.saveFavouriteToDB(favourite: favourite) .done {
                 //updates the favourite status
                 self.isFavourite = true
                 print("Added to favourites")
@@ -111,11 +118,9 @@ class HotelPropertyDetailViewModel: ObservableObject {
     }
     
     //a function to check if the favourites exists
-    
     func checkFavourite()  {
-        
         if let propertyId = propertyInfo?.summary.id {
-            FirebaseManager.getSpecificFavourite(propertyId: propertyId)
+            FirebaseRDManager.getSpecificFavourite(propertyId: propertyId)
             .done { favourite in
                 if favourite != nil {
                     self.isFavourite = true
@@ -125,7 +130,6 @@ class HotelPropertyDetailViewModel: ObservableObject {
                     self.isFavourite = false
                     print("This property is not added in favourites")
                 }
-                
             }
             .catch { error in
                 //sets it to nil when an error occurs so the app does not crash.
@@ -134,8 +138,6 @@ class HotelPropertyDetailViewModel: ObservableObject {
                 print(error.localizedDescription)
             }
         }
-        
-       
     }
     
     //managed favourites
@@ -153,7 +155,7 @@ class HotelPropertyDetailViewModel: ObservableObject {
     //this function will remove a hotel from favourites
     private func removeFromFavourites() {
         if let propertyId = propertyInfo?.summary.id {
-            FirebaseManager.removeFavouriteFromDB(propertyId: propertyId) .done {
+            FirebaseRDManager.removeFavouriteFromDB(propertyId: propertyId) .done {
                 self.isFavourite = false
             } .catch { error in
                 self.showAlert = true
@@ -162,11 +164,11 @@ class HotelPropertyDetailViewModel: ObservableObject {
                 print(error)
                 print(error.localizedDescription)
             }
-            
         }
     }
     
     //saves the property history
+    //promiseKit is used for error handling.
     func savePropertyHistory(numbersOfNights: Int, numbersOfRooms: Int, totalAdults: Int, totalChildren: Int, price: Double) {
         //declares an object
         if let propertyInfo = propertyInfo {
@@ -179,23 +181,11 @@ class HotelPropertyDetailViewModel: ObservableObject {
             }
             
             //saves it to the DB
-            FirebaseManager.addPropertyHistory(history: historyItem)
+            FirebaseRDManager.addPropertyHistory(history: historyItem)
                 .catch { error in
                     print(error)
                     print(error.localizedDescription)
                 }
         }
-        
     }
-    
-    /*
-    func loadDescriptions() {
-        /*if let sections = propertyDetails?.contentSection?.aboutThisProperty?.sections {
-            for section in sections {
-                
-            }
-        }*/
-        
-        //description = propertyDetails?.contentSection?.aboutThisProperty?.sections[0]?.bodySubSections[0]?.elements[0]?.items[0]?.content?.text
-    }*/
 }

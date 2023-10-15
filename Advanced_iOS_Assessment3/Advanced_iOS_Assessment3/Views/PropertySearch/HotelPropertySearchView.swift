@@ -115,10 +115,9 @@ struct HotelPropertySearchView: View {
         }.navigationTitle("Search Property")
     }
     
+    //helper function to save to user defaults.
     func saveToUserDefaults() {
-        if let haveMetaData = hotelMain.metaData {
-            roomSearchVM.saveToUserDefaults(regionId: regionId, metaDat: haveMetaData)
-        }
+        roomSearchVM.saveToUserDefaults(regionId: regionId, metaData: hotelMain.metaData)
     }
 }
 

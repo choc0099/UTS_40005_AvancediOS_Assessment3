@@ -16,11 +16,10 @@ struct PropertyHistoryView: View {
                     List {
                         ForEach(propertyHistoryVM.sortedHistory) {
                             historyItem in
-                            NavigationLink(destination: PropertyDetailsProcessingView(propertyId: historyItem.hotelId)) {
+                            NavigationLink(destination: PropertyDetailsProcessingView(propertyId: historyItem.hotelId, fromPrevious: true)) {
                                 HotelPropertyHistoryRow(propertyHistory: historyItem)
                             }.swipeActions {
                                 Button("Delete", role: .destructive) {
-                                    
                                     //removes the item from the database
                                     propertyHistoryVM.removeHistoryItem(uuId: historyItem.id)
                                 }

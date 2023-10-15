@@ -41,17 +41,17 @@ struct HotelImageView: View {
     //a helper function that displays a placeholder image whether it is in map mode or not as it will be dispayed in a circle form when viewing it on a map.
     @ViewBuilder func placeHolderImage() -> some View {
         if mapMode {
-            Image(systemName: "building.fill").resizable().aspectRatio(contentMode: .fit).frame(width: imageSize, height: imageSize).clipShape(.circle).overlay(Circle()
+            Image(systemName: "building.fill").resizable().aspectRatio(contentMode: .fit).frame(width: imageSize, height: imageSize).foregroundColor(.gray).clipShape(.circle).overlay(Circle()
                 .stroke(Color.gray, lineWidth: 2)
             )
         }
         else {
-            Image(systemName: "building.fill").resizable().aspectRatio(contentMode: .fit).frame(width: imageSize, height: imageSize)
+            Image(systemName: "building.fill").resizable().aspectRatio(contentMode: .fit).frame(width: imageSize, height: imageSize).foregroundColor(.gray)
         }
         
     }
 }
 
 #Preview {
-    HotelImageView(propertyImage: PropertyImage( typename: "Cigarettes", alt: "Smoke Test", accessibilityText: nil, image: HotelImage(typeName: "smoke", description: "I like smokes", url: "https://images.trvl-media.com/lodging/41000000/40470000/40460600/40460567/d4729cbb.jpg?impolicy=resizecrop&rw=455&ra=fit"), subjectId: 1000, imageId: nil), imageSize: 150, mapMode: false)
+    HotelImageView(propertyImage: PropertyImage( typename: "Cigarettes", alt: "Smoke Test", accessibilityText: nil, image: HotelImage(typeName: "smoke", description: "I like smokes", url: "https://images.trvl-media.com/lodging/41000000/40470000/40460600/40460567/d4729cbb.jpg?impolicy=resizecrop&rw=455&ra=fit"), subjectId: 1000, imageId: nil), imageSize: 150, mapMode: true)
 }

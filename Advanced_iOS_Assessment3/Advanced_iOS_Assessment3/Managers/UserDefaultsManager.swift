@@ -9,6 +9,7 @@
 import Foundation
 
 class UserDefaultsManager {
+    //these are the user default keys.
     private static let METADATA_KEY = "hotelMetalData"
     private static let PROPERTY_SEARCH_KEY = "hotelPropertySearchAndSettings"
     private static let standard = UserDefaults.standard

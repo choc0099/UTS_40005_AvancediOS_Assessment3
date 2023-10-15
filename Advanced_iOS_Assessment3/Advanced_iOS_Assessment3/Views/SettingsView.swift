@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//this enum is used to control the flow of what setting action the user decides to do.
 enum SettingAction {
     case clearUserDefaults
     case clearSearchHistory
@@ -14,14 +15,16 @@ enum SettingAction {
     case clearPropertyHistory
 }
 
+//this is the settings view that allows the user to log out of their accounts and clear data that is stored within their account.
 struct SettingsView: View {
+    //these are state variables relating to displaying alerts and prompts to the user when a setting action has been triggered.
     @State var showAlert: Bool = false
     @State var showPrompt: Bool = false
     @State var alertTitle: String = ""
     @State var alertErrorTitle: String = ""
     @State var alertMessage: String = ""
     @State var settingAction: SettingAction = .clearUserDefaults
-    //these are the enviromental object
+    //these are the enviromental objects that is used to handle certain actions.
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
     @EnvironmentObject var hotelFavesVM: HotelFavouritesViewModel
     @EnvironmentObject var propertyHistoryVM: PropertyHistoryViewModel
@@ -112,7 +115,6 @@ struct SettingsView: View {
     
     //this will prefrom specific actions based on what button has been pressed.
     func preformAction() {
-        
         switch settingAction {
         case .clearUserDefaults:
             print("Pressed (clear from user defaults)")
@@ -129,7 +131,7 @@ struct SettingsView: View {
         }
         
     }
-    
+    //helper function to clear all favourites from the database.
     func clearFavourites() {
         FirebaseRDManager.removeAllFavouritesFromDB()
             .done {
@@ -143,6 +145,7 @@ struct SettingsView: View {
         }
     }
     
+    //helper function to clear all recents from the database.
     func clearRecents() {
         FirebaseRDManager.removeAllPropertyHistoryFromDB()
             .done {

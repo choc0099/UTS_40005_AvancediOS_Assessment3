@@ -13,10 +13,12 @@ enum searchType: String {
 }
 
 //this is a struct to manage CoreData accross multiple ViewModels
+//for this assessment, I only used CoreData to store query search history for the search view.
 class CoreDataManager {
     private static var viewContext: NSManagedObjectContext = PersistenceController.shared.container.viewContext
     private static var searchHistoryResults: NSFetchRequest<SearchHistory>  = SearchHistory.fetchRequest()
     
+    //this saves the search query to CoreData so that when the next time they open the app, they can access the search history. It also reduces one api calls to save costs.
     static func saveNeighbourhoodSearch(searchType: searchType, cameFromHistory: Bool, regionId: String, regionName: String, regionCoordinates: Coordinates) {
         //this will prevent it from being saved to CoreData if the user has navigated from the History view but will save if it is from a live search results.
         if !cameFromHistory && !regionAlreadyExists(regionName: regionName){
@@ -105,6 +107,5 @@ class CoreDataManager {
         
         //saves it to the context
         try viewContext.save()
-        
     }
 }

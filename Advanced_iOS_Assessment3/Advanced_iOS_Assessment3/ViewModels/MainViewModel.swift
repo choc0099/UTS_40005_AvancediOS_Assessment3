@@ -77,6 +77,7 @@ class HotelBrowserMainViewModel: ObservableObject {
         }
     }
     
+    //fetches search results from the api and displays it to the user.
     @MainActor
     func loadRegions(query q: String) async {
         //gets the request with the location search
@@ -100,7 +101,7 @@ class HotelBrowserMainViewModel: ObservableObject {
             ]
         }
    
-        
+        //processes the request and decodes the JSON response.
         do {
             let request = try HotelAPIManager.hotelApi(urlStuffs: urlComp)            
             //sends the url request
@@ -138,7 +139,6 @@ class HotelBrowserMainViewModel: ObservableObject {
                     self.searchStatus = .noResults
                 }
             }
-            
         }
         catch(APIErrors.noSearchResults)
         {
@@ -196,17 +196,12 @@ class HotelBrowserMainViewModel: ObservableObject {
                     print("siteId \(haveMetaData.australia.siteId)")
                     print("eapId \(haveMetaData.australia.eapId)")
                 }
-                
             }
-           
-        
         } catch URLError.notConnectedToInternet {
             //tells the user that they are not connected to the internet.
-            //searchStatus = .offline
             print("Unable to get metaData due to no internet connectijon")
         }
         catch {
-            //searchStatus = .unkown
             print(error)
             print(error.localizedDescription)
         }
@@ -249,6 +244,7 @@ class HotelBrowserMainViewModel: ObservableObject {
             }
     }
     
+    //handles the registeration process to add the new user to the Firebase servers.
     func processRegister(email: String, password: String, confirmPassword: String) {
         FirebaseAuthManager.registerAccount(email: email, password: password, confirmPassword:  confirmPassword)
             .done { authResult in

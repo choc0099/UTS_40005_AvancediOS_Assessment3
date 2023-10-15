@@ -34,6 +34,7 @@ class HotelPropertyDetailViewModel: ObservableObject {
         return nil
     }
     
+    //computed property to return the hotel name.
     var hotelName: String {
         return propertyInfo?.summary.name ?? ""
     }
@@ -58,6 +59,7 @@ class HotelPropertyDetailViewModel: ObservableObject {
         return request
     }
     
+    //fetches the hotel details from the api.
     @MainActor
     func fetchPropertyDetails(propertyId: String, metaData: MetaDataResponse?) async {
         do {
@@ -116,7 +118,6 @@ class HotelPropertyDetailViewModel: ObservableObject {
     }
     
     //a function to check if the favourites exists
-    
     func checkFavourite()  {
         if let propertyId = propertyInfo?.summary.id {
             FirebaseRDManager.getSpecificFavourite(propertyId: propertyId)
@@ -137,8 +138,6 @@ class HotelPropertyDetailViewModel: ObservableObject {
                 print(error.localizedDescription)
             }
         }
-        
-       
     }
     
     //managed favourites
@@ -165,11 +164,11 @@ class HotelPropertyDetailViewModel: ObservableObject {
                 print(error)
                 print(error.localizedDescription)
             }
-            
         }
     }
     
     //saves the property history
+    //promiseKit is used for error handling.
     func savePropertyHistory(numbersOfNights: Int, numbersOfRooms: Int, totalAdults: Int, totalChildren: Int, price: Double) {
         //declares an object
         if let propertyInfo = propertyInfo {
@@ -188,7 +187,5 @@ class HotelPropertyDetailViewModel: ObservableObject {
                     print(error.localizedDescription)
                 }
         }
-        
     }
-    
 }

@@ -21,6 +21,7 @@ class PropertyHistoryViewModel: ObservableObject {
     
     
     //retrieves the property history from the database
+    //promiseKit is used to handle errors
     func fetchHistory() {
         FirebaseRDManager.readPropertyHisttory()
             .done { historyList in
@@ -42,7 +43,8 @@ class PropertyHistoryViewModel: ObservableObject {
             }
         
     }
-    
+    //removes the property history item from the view and database
+    //promiseKit is used to handle errors.
     func removeHistoryItem(uuId: UUID) {
         FirebaseRDManager.removePropertyHistoryItemFromDB(id: uuId)
             .done {

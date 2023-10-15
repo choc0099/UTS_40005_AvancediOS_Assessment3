@@ -13,8 +13,8 @@ import FirebaseFirestore
 //these are used to handle Firebase async functions that does not have the async modifer.
 //it is also one of the external tools used.
 import PromiseKit
-//this is a class to store and retrieve data from the Firebase server.
 
+//this is a custom error declared if there was an error during CRUD operations.
 enum FireBaseRDError: Error {
     case deleteFailed
     case readFailed
@@ -24,10 +24,12 @@ enum FireBaseRDError: Error {
     case userNotLoggedIn
 }
 
+//this is a class with static methods and properties that handles the CRUD operations of Firebase Realtime database.
 class FirebaseRDManager {
     private static let ref: DatabaseReference = Database.database().reference(fromURL: "https://hotel-browser-default-rtdb.firebaseio.com/")
     
     //tests writing data to database
+    //this was used for inital testing to see if the real time database was working.
     static func testWrite() {
         //creates a dictionary
         let hotelFavourite  = [
@@ -37,7 +39,6 @@ class FirebaseRDManager {
         ]
         
         self.ref.child("favourites").childByAutoId().setValue(hotelFavourite)
-        //self.ref.setValue("Smokes")
     }
     
     //returns the favourites array that is stored from the dictionary lists in the database by returning a promise.
@@ -106,6 +107,7 @@ class FirebaseRDManager {
     }
     
     //this function will print the results into the console.
+    //it was used for inital testing to see if the realtime database was working.
     static func testRead() {
         ref.child("favourites").observeSingleEvent(of: .value, with: { (snapshot) in
                 if let value = snapshot.value as? [String: [String: String]] {
@@ -124,6 +126,7 @@ class FirebaseRDManager {
             }
     }
     
+    //saves the hotel favourite onto the realtime database.
     static func saveFavouriteToDB(favourite: HotelFavourite) -> Promise<Void> {
         return Promise {
             seal in

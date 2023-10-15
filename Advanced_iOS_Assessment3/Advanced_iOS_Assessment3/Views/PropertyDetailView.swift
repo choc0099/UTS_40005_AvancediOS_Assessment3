@@ -18,9 +18,6 @@ struct PropertyDetailView: View {
     @State var totalChildren: Int?
     @State var numbersOfNights: Int?
     @State var numbersOfRooms: Int?
-    //@State var checkInDate: Date?
-    //@State var checkOutDate: Date?
-    
     
     var body: some View {
         NavigationStack {
@@ -44,26 +41,20 @@ struct PropertyDetailView: View {
                             
                             Text(propertyInfo.summary.location.address.addressLine).font(.headline)
                             Spacer()
-                            Button  {
-                                //checks if the user is authenticated
-                          
+                            Button {
                                 //process the favourite task whether to add or remove from favourites.
                                 propertyDetailsVM.manageFavourite()
                                 //refreshes the hotelFavourites VM
                                 hotelFavesVM.fetchFavourites()
-                                
-                                
                             } label: {
                                 HStack(spacing: 10) {
                                     Image(systemName: propertyDetailsVM.isFavourite ? "heart.fill" : "heart")
                                     Text(propertyDetailsVM.isFavourite ? "Remove from favourites" : "Add to Favourites")
                                 }
-                                
                             }
-                                
                             Spacer()
                             NavigationLink {
-                                PropertyDetailMapView(coordinates: .init(center: .init(latitude: propertyInfo.summary.location.coordinates.latitude, longitude: propertyInfo.summary.location.coordinates.longitude), latitudinalMeters: 0.1, longitudinalMeters: 0.1))
+                                PropertyDetailMapView(coordinates: .init(center: .init(latitude: propertyInfo.summary.location.coordinates.latitude, longitude: propertyInfo.summary.location.coordinates.longitude), latitudinalMeters: 0.20, longitudinalMeters: 0.20))
                             } label: {
                                 MapImageView(mapImage: propertyInfo.summary.location.staticImage)
                             }
@@ -127,7 +118,7 @@ struct PropertyDetailView: View {
                         //it will not store to the database if the user viewed the Hotel Details coming from favourites or the history view.
                     }
                     
-                    
+                    //an alert will be displayed if there is an error managing favourites
                 }).alert(isPresented: $propertyDetailsVM.showAlert, content: {
                     Alert(
                         title: Text(propertyDetailsVM.alertTitle),

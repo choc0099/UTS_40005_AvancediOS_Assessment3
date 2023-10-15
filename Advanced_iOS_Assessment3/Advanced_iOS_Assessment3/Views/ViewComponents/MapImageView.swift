@@ -17,7 +17,6 @@ struct MapImageView: View {
             //a rectangle shape will be used as a placeholder
             Rectangle().fill(.red).frame(width: 120, height: 60)
         }
-
     }
 }
 

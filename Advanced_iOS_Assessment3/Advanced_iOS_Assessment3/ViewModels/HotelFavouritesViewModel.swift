@@ -12,14 +12,12 @@ import FirebaseDatabase
 import FirebaseAuth
 
 class HotelFavouritesViewModel: ObservableObject {
-    
     @Published var favourites: [HotelFavourite] = []
     @Published var status: HotelStatus = .loading
     @Published var showAlert: Bool = false
     @Published var alertTitle: String = ""
     @Published var alertMessage: String = ""
     
-  
     
     //loads the favourites from the DB
     func fetchFavourites() {
@@ -44,7 +42,8 @@ class HotelFavouritesViewModel: ObservableObject {
                 print(error.localizedDescription)
             }
     }
-    
+    //this is a helper function that removes a favoruite from the view
+    //instead of using do - catch blocks, promiseKit is used to handle errors.
     func removeFromFavourites(propertyId: String) {
         FirebaseRDManager.removeFavouriteFromDB(propertyId: propertyId)
             .done {

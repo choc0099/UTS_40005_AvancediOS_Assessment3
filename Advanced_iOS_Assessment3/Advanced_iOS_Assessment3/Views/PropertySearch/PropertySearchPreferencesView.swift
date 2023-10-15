@@ -28,7 +28,7 @@ struct PropertySearchPreferencesView: View {
                         saveToUserDefaults()
                     }
                 }
-                
+                //allows to chose maximum numbers of hotel results upon search.
                 Section("Numbers of Results") {
                     VStack {
                         Text("\(Int(roomSearchVM.numbersOfResults))")
@@ -38,7 +38,7 @@ struct PropertySearchPreferencesView: View {
                         )
                     }
                 }
-                
+                //minimum and maximum price ranges for budgeting.
                 Section("Price Range") {
                     Stepper("Minimum Price: $\(roomSearchVM.minPrice)") {
                         roomSearchVM.minPrice += 50
@@ -67,10 +67,9 @@ struct PropertySearchPreferencesView: View {
         }
     }
     
+    //helper function to save to user defaults.
     func saveToUserDefaults() {
-        if let haveMetaData = hotelMain.metaData {
-            roomSearchVM.saveToUserDefaults(regionId: regionId, metaDat: haveMetaData)
-        }
+        roomSearchVM.saveToUserDefaults(regionId: regionId, metaData: hotelMain.metaData)
     }
 }
 

@@ -17,6 +17,7 @@ struct PropertyDetailsProcessingView: View {
     @State var totalChildren: Int?
     @State var numbersOfNights: Int?
     @State var numbersOfRooms: Int?
+    @State var fromPrevious: Bool
     
     var body: some View {
         Group {
@@ -31,9 +32,15 @@ struct PropertyDetailsProcessingView: View {
                 ErrorView(errorStatus: propertyDetailsVM.status)
             }
         }.onAppear(perform: {
-            Task {
-                await propertyDetailsVM.fetchPropertyDetails(propertyId: propertyId, metaData: hotelMain.metaData)
+            //this will prevent the app from fetching data when you press back after viewing a map.
+            if fromPrevious {
+                Task {
+                    await propertyDetailsVM.fetchPropertyDetails(propertyId: propertyId, metaData: hotelMain.metaData)
+                    //changes it back to false
+                    fromPrevious = false
+                }
             }
+           
         })
     }
 }

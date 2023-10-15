@@ -11,14 +11,15 @@ import FirebaseAuth
 import FirebaseDatabase
 import PromiseKit
 
-//this is a class for handling authentication
 
+//this is used to catch errors based on user input during the register and login process.
 enum AuthError: Error {
-    case passwordNotMatch
+    case passwordNotMatch //it is requried to enter the password twice before registering.
     case invalidCredentials
     case unknown
 }
 
+//this is a class for handling authentication by using Firebase Auth
 class FirebaseAuthManager {
     
     //this is an refernce to the authentication stuff that is shared throughout views and viewmodels.
@@ -87,6 +88,4 @@ class FirebaseAuthManager {
     static func logOut() throws {
         try authRef.signOut()
     }
-    
- 
 }

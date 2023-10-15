@@ -18,7 +18,7 @@ struct HotelFavouritesView: View {
                         ForEach(hotelFavsVM.favourites) {
                             favourite in
                             NavigationLink {
-                                PropertyDetailsProcessingView(propertyId: favourite.hotelId)
+                                PropertyDetailsProcessingView(propertyId: favourite.hotelId, fromPrevious: true)
                             } label: {
                                 HotelFavouritesRow(favourite: favourite)
                             }.swipeActions {

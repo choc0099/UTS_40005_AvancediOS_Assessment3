@@ -43,7 +43,9 @@ final class Advanced_iOS_Assessment3Tests: XCTestCase {
         }
     }*/
     
+    //this is a unit test to test the login functionality of Firebase Authentication.
     func testLogin() throws {
+        //this is used to handle async tests.
         let expectation = XCTestExpectation(description: "log in expectation")
         var testedEmail: String = ""
        
@@ -52,6 +54,7 @@ final class Advanced_iOS_Assessment3Tests: XCTestCase {
             print("running login test")
             if let haveEmail = accountEmail{
                testedEmail = haveEmail
+                //tells the unit test that the login expectation was reached.
                 expectation.fulfill()
             }
         }
@@ -62,23 +65,26 @@ final class Advanced_iOS_Assessment3Tests: XCTestCase {
             default:
                 print(error)
             }
+            //also tells the unit test of the login expectation been reached.
             expectation.fulfill()
         }
-        
+        //tells the unit test to wait for the network to process the request so that the unit test is accurate.
         wait(for: [expectation], timeout: 10)
+        //the unit test will pass fomr the AuthDataResult.user.email if it matches the one that was provided.
         XCTAssertEqual(testedEmail, "choclate00@live.com")
     }
     
-    //tests the register feature
+    //tests the register feature to see if it works correctly.
     func testRegister() {
-        //this is used for asynchronous tasks.
         var retrievedEmail: String = ""
+        //this is used for asynchronous tasks.
         let expectation = XCTestExpectation(description: "Register new user")
         FirebaseAuthManager.registerAccount(email: "pieface012@gmail.com", password: "abc123", confirmPassword: "abc123")
             .done { authResult in
                 if let loggedInEmail = authResult.user.email {
                     print("Registration and login sucessful")
                     retrievedEmail = loggedInEmail
+                    //tells the expectiation to fulfil during asyncronous test so that the unit tests reads this code block.
                     expectation.fulfill()
                 }
             } .catch { error in
@@ -92,9 +98,9 @@ final class Advanced_iOS_Assessment3Tests: XCTestCase {
                 }
                 expectation.fulfill()
             }
-        //waits for the proccess to be complete over the network.
+        //waits for the proccess to be complete over the network due to async operations so the unit test is accurate.
         wait(for: [expectation])
+        //the unit test will pass from the auth result if the email matches the one that was provided.
         XCTAssertEqual(retrievedEmail, "pieface012@gmail.com")
     }
-
 }

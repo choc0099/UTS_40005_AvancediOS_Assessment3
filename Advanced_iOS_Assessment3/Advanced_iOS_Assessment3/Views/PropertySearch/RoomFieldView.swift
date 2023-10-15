@@ -52,16 +52,16 @@ struct RoomFieldView: View {
         }
     }
     
+    //refreshes the UI when a value is changed.
     func updateRoomValues() {
         //retrieve room object based on room id so it can be dyanmically be updated without the need of binding.
         currentRoom = try! roomSearchVM.findRoomById(roomId: currentRoomId)
         numberOfAdults = currentRoom.adults
     }
     
+    //helper function to save to user defaults.
     func saveToUserDefaults() {
-        if let haveMetaData = hotelMain.metaData {
-            roomSearchVM.saveToUserDefaults(regionId: regionId, metaDat: haveMetaData)
-        }
+        roomSearchVM.saveToUserDefaults(regionId: regionId, metaData: hotelMain.metaData)
     }
 }
 

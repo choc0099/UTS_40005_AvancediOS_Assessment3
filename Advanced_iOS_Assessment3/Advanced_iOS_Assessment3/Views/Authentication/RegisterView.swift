@@ -24,7 +24,7 @@ struct RegisterView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
-                TextField("Email Address", text: $email).autocapitalization(.none)
+                TextField("Email Address", text: $email).autocorrectionDisabled(true).autocapitalization(.none)
                 SecureField("Password", text: $password)
                 SecureField("Confirm Password", text: $confirmPassword)
                 Button {

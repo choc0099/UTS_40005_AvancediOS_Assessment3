@@ -29,7 +29,7 @@ struct LoginView: View {
         NavigationStack {
             VStack(spacing: 20) {
                 Text("Welcome to Hotel Browser").font(.title)
-                TextField("Email Address", text: $email).autocapitalization(.none)
+                TextField("Email Address", text: $email).autocorrectionDisabled(true).autocapitalization(.none)
                 SecureField("Password", text: $password)
                 
                 Button {

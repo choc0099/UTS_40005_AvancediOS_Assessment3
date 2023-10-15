@@ -229,6 +229,9 @@ class HotelBrowserMainViewModel: ObservableObject {
                 self.showAlert = true
                 //a switch statement to handle errors from the promise response.
                 switch error {
+                case AuthErrorCode.invalidEmail:
+                    self.alertTitle = "Email Address not valid"
+                    self.alertMessage = "Your email address is not a valid one, please enter a valid email address."
                 case AuthError.invalidCredentials:
                     self.alertTitle = "Incorrect email or password"
                     self.alertMessage = "Please check your email and password and try again"
@@ -255,6 +258,9 @@ class HotelBrowserMainViewModel: ObservableObject {
             .catch { error in
                 self.showAlert = true
                 switch error {
+                case AuthErrorCode.invalidEmail:
+                    self.alertTitle = "Email Address not valid"
+                    self.alertMessage = "Your email address is not a valid one, please enter a valid email address."
                 case AuthError.passwordNotMatch:
                     self.alertTitle = "Passwords do not match"
                     self.alertMessage = "Your passwords do not match, please renter your password"

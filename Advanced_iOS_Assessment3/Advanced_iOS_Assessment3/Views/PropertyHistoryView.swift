@@ -32,7 +32,7 @@ struct PropertyHistoryView: View {
                     ErrorView(errorStatus: propertyHistoryVM.status)
                 }
                
-            }
+            }.navigationTitle("Recents")
         }
     }
 }

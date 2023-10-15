@@ -29,7 +29,6 @@ struct LoginView: View {
         NavigationStack {
             VStack(spacing: 20) {
                 Text("Welcome to Hotel Browser").font(.title)
-                
                 TextField("Email Address", text: $email).autocapitalization(.none)
                 SecureField("Password", text: $password)
                 
@@ -46,6 +45,7 @@ struct LoginView: View {
                     Text("Register New Account")
                 }
             }.padding()
+                .navigationTitle("Log in").navigationBarTitleDisplayMode(.inline)
                 .alert(isPresented: $hotelMain.showAlert, content: {
                     Alert(
                         title: Text(hotelMain.alertTitle),

@@ -19,8 +19,8 @@ struct RegisterView: View {
             return true
         }
     }
-    
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {

@@ -27,62 +27,68 @@ struct SettingsView: View {
     @EnvironmentObject var propertyHistoryVM: PropertyHistoryViewModel
     
     var body: some View {
-        Form {
-            //this will clear all your favourites
-            Button("Clear All Favourites") {
-                showPrompt = true
-                settingAction = .clearFavourites
-                //renders the prompt message
-                renderPromptMessage()
-            }
-            //this will clear all your property search history.
-            Button("Clear All Recents") {
-                showPrompt = true
-                settingAction = .clearPropertyHistory
-                //renders the prompt message
-                renderPromptMessage()
-            }
-            //this will clear data that is stored locally on the search view
-            Button("Clear Search History") {
-                showPrompt = true
-                settingAction = .clearSearchHistory
-                renderPromptMessage()
-            }
-            //this will clear stored search preferneces including price filtering and numbers of rooms.
-            Button("Clear Search Preferences") {
-                showPrompt = true
-                settingAction = .clearUserDefaults
-                //renders the alert message
-                renderPromptMessage()
-            }
-            Button("Log Out") {
-                do {
-                    //brings the search status back to welcom so the search history is displayed when the user logs back on.
-                    hotelMain.searchStatus = .welcome
-                    try FirebaseAuthManager.logOut()
-                    //clears the user from the main vm
-                    hotelMain.destructUser()
+        NavigationStack {
+            Group {
+                Form {
+                    //this will clear all your favourites
+                    Button("Clear All Favourites") {
+                        showPrompt = true
+                        settingAction = .clearFavourites
+                        //renders the prompt message
+                        renderPromptMessage()
+                    }
+                    //this will clear all your property search history.
+                    Button("Clear All Recents") {
+                        showPrompt = true
+                        settingAction = .clearPropertyHistory
+                        //renders the prompt message
+                        renderPromptMessage()
+                    }
+                    //this will clear data that is stored locally on the search view
+                    Button("Clear Search History") {
+                        showPrompt = true
+                        settingAction = .clearSearchHistory
+                        renderPromptMessage()
+                    }
+                    //this will clear stored search preferneces including price filtering and numbers of rooms.
+                    Button("Clear Search Preferences") {
+                        showPrompt = true
+                        settingAction = .clearUserDefaults
+                        //renders the alert message
+                        renderPromptMessage()
+                    }
+                    Button("Log Out") {
+                        do {
+                            //brings the search status back to welcom so the search history is displayed when the user logs back on.
+                            hotelMain.searchStatus = .welcome
+                            try FirebaseAuthManager.logOut()
+                            //clears the user from the main vm
+                            hotelMain.destructUser()
+                        }
+                        catch {
+                            showAlert = true
+                            alertErrorTitle = "Unable to log out."
+                            
+                        }
+                        
+                    }
                 }
-                catch {
-                    showAlert = true
-                    alertErrorTitle = "Unable to log out."
-                    
-                }
-                
+                .navigationTitle("Settings")
+                .alert(isPresented: $showAlert, content: {
+                    Alert(title: Text(alertTitle))
+                })
+                .alert(isPresented: $showPrompt, content: {
+                    Alert(
+                        title:  Text(alertTitle),
+                        message: Text(alertMessage),
+                          primaryButton: .destructive(
+                            Text("Clear"), action: {
+                                preformAction()
+                            }), secondaryButton: .cancel()
+                    )
+                })
             }
-        }.alert(isPresented: $showAlert, content: {
-            Alert(title: Text(alertTitle))
-        })
-        .alert(isPresented: $showPrompt, content: {
-            Alert(
-                title:  Text(alertTitle),
-                message: Text(alertMessage),
-                  primaryButton: .destructive(
-                    Text("Clear"), action: {
-                        preformAction()
-                    }), secondaryButton: .cancel()
-            )
-        })
+        }
     }
     
     

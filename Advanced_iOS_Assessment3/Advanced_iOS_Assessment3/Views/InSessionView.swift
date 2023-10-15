@@ -12,14 +12,16 @@ struct InSessionView: View {
     @EnvironmentObject var hotelMain: HotelBrowserMainViewModel
     @EnvironmentObject var hotelFavesVM: HotelFavouritesViewModel
     @EnvironmentObject var propertyHistoryVM: PropertyHistoryViewModel
-    
+    //this is used to track selected tab.
+    @State var selectedTab: Int = 0
     var body: some View {
-        TabView {
+        
+        TabView(selection: $selectedTab) {
             SearchView().tabItem {
                 Label("Search", systemImage: "magnifyingglass")
             }.tag(0)
             HotelFavouritesView().tabItem {
-                Label("Favourites", systemImage: "heart.fill")
+                Label("Favourites", systemImage: "heart" )
             }.tag(1)
             PropertyHistoryView().tabItem {
                 Label("Recents", systemImage: "clock.fill")
@@ -27,7 +29,8 @@ struct InSessionView: View {
             SettingsView().tabItem {
                 Label("Settings", systemImage: "gearshape.fill")
             }
-        }.onAppear {
+        }.accentColor(Color(UIColor.systemBlue))
+        .onAppear {
             DispatchQueue.main.async {
                 Task {
                     //loads the hotel metaData

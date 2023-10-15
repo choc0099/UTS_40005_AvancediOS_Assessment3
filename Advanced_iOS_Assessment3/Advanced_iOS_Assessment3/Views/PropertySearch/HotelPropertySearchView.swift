@@ -74,37 +74,32 @@ struct HotelPropertySearchView: View {
             })
             .toolbar {
                 Button {
-                    if let haveMetaData = hotelMain.metaData {
-                        Task {
-                            do {
-                                //loads the response to the VM
-                                try roomSearchVM.validate()
-                                //saves to user defaults
-                                saveToUserDefaults()
-                                //proceeds to the next view.
-                                navActive = true
-                                await roomSearchVM.fetchResults(metaData: haveMetaData, gaiaId: regionId)
-                                
-                            //displays an alert to the user if they did not input the stuffs correctly.
-                            } catch QueryError.numbersOfRoomsNotEntered {
-                                showAlert = true
-                                alertTitle = "You have not entered how many rooms you need."
-                                alertMessage = "You are requried to enter the numbers of room to get the best search results."
-                            } catch QueryError.numbersOfAdultsNotEntered(let roomNumber) {
-                                showAlert = true
-                                alertTitle = "Please Check if there are adults entered in the rooms"
-                                alertMessage = "You must declare how many adults in each room, you have not entered the numbers of adults in Room \(roomNumber)."
-                            }
-                            catch {
-                                showAlert = true
-                                alertTitle = "Something went wrong"
-                                alertMessage = "Unable to process your request."
-                            }
+                    Task {
+                        do {
+                            //loads the response to the VM
+                            try roomSearchVM.validate()
+                            //saves to user defaults
+                            saveToUserDefaults()
+                            //proceeds to the next view.
+                            navActive = true
+                            await roomSearchVM.fetchResults(metaData: hotelMain.metaData, gaiaId: regionId)
                             
+                        //displays an alert to the user if they did not input the stuffs correctly.
+                        } catch QueryError.numbersOfRoomsNotEntered {
+                            showAlert = true
+                            alertTitle = "You have not entered how many rooms you need."
+                            alertMessage = "You are requried to enter the numbers of room to get the best search results."
+                        } catch QueryError.numbersOfAdultsNotEntered(let roomNumber) {
+                            showAlert = true
+                            alertTitle = "Please Check if there are adults entered in the rooms"
+                            alertMessage = "You must declare how many adults in each room, you have not entered the numbers of adults in Room \(roomNumber)."
                         }
-                    }
-                    else {
-                        print("No metaData")
+                        catch {
+                            showAlert = true
+                            alertTitle = "Something went wrong"
+                            alertMessage = "Unable to process your request."
+                        }
+                        
                     }
                 } label: {
                     Text("Continue")

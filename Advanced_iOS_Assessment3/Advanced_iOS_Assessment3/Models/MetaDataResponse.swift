@@ -170,7 +170,6 @@ struct AppSupportURLs : Codable {
     let ios : String?
 
     enum CodingKeys: String, CodingKey {
-
         case ios = "ios"
     }
 

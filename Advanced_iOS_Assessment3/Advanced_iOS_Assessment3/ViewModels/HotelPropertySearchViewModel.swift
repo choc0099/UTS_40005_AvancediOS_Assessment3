@@ -90,8 +90,7 @@ class HotelPropertySearchViewModel: ObservableObject {
         }
     }
     //this updates the children age on the VM side
-    func setChildrenAge(age: Int, roomId: UUID, childId: UUID)
-    {
+    func setChildrenAge(age: Int, roomId: UUID, childId: UUID) {
         //gets the allocated room from the array
         if let roomIndex = self.rooms.firstIndex(where: {$0.id == roomId}) {
             //gets the allocated child object from the array
@@ -133,9 +132,9 @@ class HotelPropertySearchViewModel: ObservableObject {
         }
     }
     
-    func createPropertyObject(metaData: MetaDataResponse, gaiaId: String)  -> PropertyListRequest {
+    func createPropertyObject(metaData: MetaDataResponse?, gaiaId: String)  -> PropertyListRequest {
         //retreives metaData from the mainVM
-        let metaDataAus = metaData.australia
+        let metaDataAus = metaData?.australia
         //these are date components to convert the date structure to integers as it is used on the JSON structure.
         let checkOutDateComp = retrieveDateComp(date: checkOutDate)
         let checkInDateComp = retrieveDateComp(date: checkInDate)
@@ -145,12 +144,12 @@ class HotelPropertySearchViewModel: ObservableObject {
         //destination object.
         let dest = Destination(regionId: gaiaId, coordinates: nil)
         //builds this response so it can be encoded to JSON.
-        let propertyQuery = PropertyListRequest(currency: "AUD", eapid: metaDataAus.eapId, locale: metaData.australia.supportedLocales[0].hotelSiteLocaleIdentifier, siteId: metaDataAus.siteId, destination: dest, checkInDate: checkin, checkOutDate: checkout, rooms: rooms, sortAndFilterSettings: searchPref)
+        let propertyQuery = PropertyListRequest(currency: "AUD", eapid: metaDataAus?.eapId, locale: metaData?.australia.supportedLocales[0].hotelSiteLocaleIdentifier, siteId: metaDataAus?.siteId, destination: dest, checkInDate: checkin, checkOutDate: checkout, rooms: rooms, sortAndFilterSettings: searchPref)
         return propertyQuery
     }
     
     //it is a helper function that returns a URLRequestObject with the JSON stuffs.
-    func handleRequest(metaData: MetaDataResponse, gaiaId: String) throws -> URLRequest {
+    func handleRequest(metaData: MetaDataResponse?, gaiaId: String) throws -> URLRequest {
         //generates the URL path.
         var urlComp = URLComponents(string: HotelAPIManager.apiUrl)!
         urlComp.path = HotelAPIManager.endPoints["listProperty"]!
@@ -161,7 +160,7 @@ class HotelPropertySearchViewModel: ObservableObject {
         return request
     }
     //this will send a POST request with JSON data to the server to get results to view hotels.
-    func fetchResults(metaData: MetaDataResponse, gaiaId: String) async {
+    func fetchResults(metaData: MetaDataResponse?, gaiaId: String) async {
         do {
             //retrieves the modified request method that is used to post the JSON object.
             let request = try handleRequest(metaData: metaData, gaiaId: gaiaId)

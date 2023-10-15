@@ -10,10 +10,10 @@ import Foundation
 //this is used for encoding to JSON for a POST request.
 struct PropertyContentRequest: Hashable, Encodable {
     let propertyId: String
-    let eapid: Int
-    let locale: String
+    let eapid: Int?
+    let locale: String?
     let currency: String
-    let siteId: Int
+    let siteId: Int?
     
     enum CodingKeys: String, CodingKey {
         case propertyId
@@ -23,7 +23,7 @@ struct PropertyContentRequest: Hashable, Encodable {
         case siteId
     }
     
-    init(propertyId: String, eapid: Int, locale: String, currency: String, siteId: Int) {
+    init(propertyId: String, eapid: Int?, locale: String?, currency: String, siteId: Int?) {
         //converts the propertyId to a string that is used for JSON
         self.propertyId = propertyId
         self.locale = locale

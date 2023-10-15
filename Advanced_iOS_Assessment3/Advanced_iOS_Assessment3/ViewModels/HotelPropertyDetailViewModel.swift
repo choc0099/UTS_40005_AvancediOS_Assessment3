@@ -39,12 +39,17 @@ class HotelPropertyDetailViewModel: ObservableObject {
     }
     
     //returns the property request object that converts it to JSON.
-    func convertToObject(propertyId: String, metaData: MetaDataResponse) -> PropertyContentRequest {
-        return PropertyContentRequest(propertyId: propertyId, eapid: Int(metaData.australia.eapId), locale: metaData.australia.supportedLocales[0].hotelSiteLocaleIdentifier, currency: "AUD", siteId: metaData.australia.siteId)
+    func convertToObject(propertyId: String, metaData: MetaDataResponse?) -> PropertyContentRequest {
+        let metaDataInScope = metaData?.australia
+        var eapId: Int?
+        if let haveEapId = metaDataInScope?.eapId {
+            eapId = haveEapId
+        }
+        return PropertyContentRequest(propertyId: propertyId, eapid: eapId, locale: metaDataInScope?.supportedLocales[0].hotelSiteLocaleIdentifier, currency: "AUD", siteId: metaDataInScope?.siteId)
     }
     
     //handles the request
-    func processRequest(propertyId: String, metaData: MetaDataResponse) throws -> URLRequest {
+    func processRequest(propertyId: String, metaData: MetaDataResponse?) throws -> URLRequest {
         var urlComp = URLComponents(string: HotelAPIManager.apiUrl)!
         urlComp.path = HotelAPIManager.endPoints["propertyDetail"]!
         var request = try HotelAPIManager.hotelApi(urlStuffs:  urlComp )
@@ -54,7 +59,7 @@ class HotelPropertyDetailViewModel: ObservableObject {
     }
     
     @MainActor
-    func fetchPropertyDetails(propertyId: String, metaData: MetaDataResponse) async {
+    func fetchPropertyDetails(propertyId: String, metaData: MetaDataResponse?) async {
         do {
             let request = try processRequest(propertyId: propertyId, metaData: metaData)
             
@@ -113,7 +118,6 @@ class HotelPropertyDetailViewModel: ObservableObject {
     //a function to check if the favourites exists
     
     func checkFavourite()  {
-        
         if let propertyId = propertyInfo?.summary.id {
             FirebaseRDManager.getSpecificFavourite(propertyId: propertyId)
             .done { favourite in
@@ -125,7 +129,6 @@ class HotelPropertyDetailViewModel: ObservableObject {
                     self.isFavourite = false
                     print("This property is not added in favourites")
                 }
-                
             }
             .catch { error in
                 //sets it to nil when an error occurs so the app does not crash.

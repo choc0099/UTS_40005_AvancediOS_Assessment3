@@ -17,8 +17,6 @@ struct PropertyDetailsProcessingView: View {
     @State var totalChildren: Int?
     @State var numbersOfNights: Int?
     @State var numbersOfRooms: Int?
-    //@State var checkInDate: Date?
-    //@State var checkOutDate: Date?
     
     var body: some View {
         Group {
@@ -34,12 +32,7 @@ struct PropertyDetailsProcessingView: View {
             }
         }.onAppear(perform: {
             Task {
-                if let metaData = hotelMain.metaData {
-                    await propertyDetailsVM.fetchPropertyDetails(propertyId: propertyId, metaData: metaData)
-                }
-                else {
-                    propertyDetailsVM.status = .unkown
-                }
+                await propertyDetailsVM.fetchPropertyDetails(propertyId: propertyId, metaData: hotelMain.metaData)
             }
         })
     }

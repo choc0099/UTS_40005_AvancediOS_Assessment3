@@ -83,7 +83,6 @@ struct Property: Identifiable, Hashable, Codable {
     enum CodingKeys: String, CodingKey {
         case typeName = "__typename"
         case hotelId = "id"
-        //case featuredMessages = "featuredMessages"
         case name = "name"
         case availability = "availability"
         case propertyImage = "propertyImage"

@@ -23,6 +23,8 @@ struct RoomFieldView: View {
                     adults in
                     //updates the value on the VM side when it is incremented or decremented.
                     roomSearchVM.setAdults(roomId: currentRoomId, numberOfAdults: adults)
+                    updateRoomValues()
+                    saveToUserDefaults()
                     
                 })
                 Stepper("Numbers of Children \(currentRoom.children.count)") {

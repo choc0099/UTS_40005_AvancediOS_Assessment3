@@ -8,7 +8,7 @@
 import Foundation
 
 //this is a struct that will be usded to store propertySearches History
-struct PropertyHistory: SavedHotel, Identifiable, Codable {
+struct PropertyHistory: SavedHotel, Identifiable {
     let id: UUID
     var hotelId: String
     var hotelName: String

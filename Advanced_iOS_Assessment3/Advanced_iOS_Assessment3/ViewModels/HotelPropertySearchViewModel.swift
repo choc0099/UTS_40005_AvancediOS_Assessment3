@@ -83,7 +83,7 @@ class HotelPropertySearchViewModel: ObservableObject {
     
     func decrmentChildren(currentRoomId: UUID) {
         if let index = self.rooms.firstIndex(where: {$0.id == currentRoomId}) {
-            if self.rooms[index].children.isEmpty {
+            if !self.rooms[index].children.isEmpty {
                 //removes a child when decreasing it.
                 self.rooms[index].children.removeLast()
             }

@@ -14,7 +14,8 @@ struct MapImageView: View {
         AsyncImage(url: URL(string: mapImage.url)!) { image in
             image.resizable().aspectRatio(contentMode: .fit)
         } placeholder: {
-            Text("Image area")
+            //a rectangle shape will be used as a placeholder
+            Rectangle().fill(.red).frame(width: 120, height: 60)
         }
 
     }

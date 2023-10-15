@@ -8,6 +8,7 @@
 
 import Foundation
 
+//the price struct displays different types of prices.
 struct Price: Hashable, Codable {
     let typeName : String
     let lead : Lead
@@ -31,42 +32,7 @@ struct StrikeOut: Hashable, Codable {
     }
 }
 
-struct DisplayMessages: Hashable, Codable {
-    let typeName: String
-    let lineItems : [LineItem]?
-
-    enum CodingKeys: String, CodingKey {
-        case typeName = "__typename"
-        case lineItems = "lineItems"
-    }
-}
-
-
-struct PriceMessages: Hashable, Codable {
-    let typeName : String
-    let value: String?
-
-    enum CodingKeys: String, CodingKey {
-        case typeName = "__typename"
-        case value = "value"
-    }
-}
-
-struct Option: Hashable, Codable {
-    let typeName : String
-    let strikeOut : String?
-    let disclaimer : String?
-    let formattedDisplayPrice : String
-
-    enum CodingKeys: String, CodingKey {
-        case typeName = "__typename"
-        case strikeOut = "strikeOut"
-        case disclaimer = "disclaimer"
-        case formattedDisplayPrice = "formattedDisplayPrice"
-    }
-}
-
-
+//this is a struct that is retrieved from the JSON to view hotel prices based on numbers of nights
 struct Lead: Hashable, Codable {
     let typeName: String
     let amount: Double
@@ -114,62 +80,17 @@ struct LineItem: Hashable, Codable {
         case price = "price"
         case role = "role"
     }
-
 }
 
-struct PriceRange:Hashable, Codable {
+struct PriceRange: Hashable, Codable {
     let typeName: String
-    let max : Double
-    let min : Double
+    let max: Double
+    let min: Double
 
     enum CodingKeys: String, CodingKey {
         case typeName = "__typename"
         case max = "max"
         case min = "min"
-    }
-}
-
-
-struct PriceMetadata: Hashable, Codable {
-    let typeName: String
-    let discountType : String?
-    let rateDiscount : String?
-    let totalDiscountPercentage : String?
-
-    enum CodingKeys: String, CodingKey {
-        case typeName = "__typename"
-        case discountType = "discountType"
-        case rateDiscount = "rateDiscount"
-        case totalDiscountPercentage = "totalDiscountPercentage"
-    }
-}
-
-struct PriceAfterLoyaltyPointsApplied : Codable {
-    let typename : String?
-    let options : [Option]?
-    let lead : Lead?
-
-    enum CodingKeys: String, CodingKey {
-        case typename = "__typename"
-        case options = "options"
-        case lead = "lead"
-    }
-
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        typename = try values.decodeIfPresent(String.self, forKey: .typename)
-        options = try values.decodeIfPresent([Option].self, forKey: .options)
-        lead = try values.decodeIfPresent(Lead.self, forKey: .lead)
-    }
-}
-
-struct PricingScheme:Hashable, Codable {
-    let typeName: String
-    let type: String
-
-    enum CodingKeys: String, CodingKey {
-        case typeName = "__typename"
-        case type = "type"
     }
 }
 

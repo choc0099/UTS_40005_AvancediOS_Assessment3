@@ -14,12 +14,23 @@ struct HotelFavourite: SavedHotel, Identifiable, Codable {
     var hotelAddress: String
     var imageUrl: String?
     var imageDescription: String?
+        
+    enum CodingKeys: CodingKey {
+        case id
+        case hotelId
+        case hotelName
+        case hotelAddress
+        case imageUrl
+        case imageDescription
+    }
     
     //converts it to a dictionary object so it can be used to store it in Firebase
     var dictionary:  [String:Any] {
-        return ["hotelName": hotelName,
-                           "imageUrl": imageUrl ?? NSNull(),
-                           "hotelAddress": hotelAddress,
-                           "imageDescription": imageDescription ?? NSNull()]
+        return [
+            "hotelName": hotelName,
+            "imageUrl": imageUrl ?? NSNull(),
+            "hotelAddress": hotelAddress,
+            "imageDescription": imageDescription ?? NSNull()
+        ]
     }
 }

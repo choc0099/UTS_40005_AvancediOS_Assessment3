@@ -27,7 +27,7 @@ struct SearchResultsView: View {
             
             Section("Hotel Suggestions") {
                 ForEach(hotelMain.hotelSearchResults) { hotel in
-                    if let haveHotelId = hotel.hotelId {
+                    if hotel.hotelId != nil {
                         if hotel.hotelAddress != nil {
                             NavigationLink(destination: HotelPropertySearchView(isFromHistory: false, regionId: hotel.cityId!, regionName: hotel.regionNames.fullName, regionCoordinates: hotel.coordinates)) {
                                 Text(hotel.regionNames.fullName)

@@ -51,7 +51,7 @@ struct PropertyContentSectionGroups: Hashable, Codable {
 }
 //this is where a group of images are availible to view.
 struct PropertyGallery: Hashable, Codable {
-    let imagesGrouped : String?
+    //let imagesGrouped : String?
     let images : [PropertyImage]?
     let accessibilityLabel : String?
 }

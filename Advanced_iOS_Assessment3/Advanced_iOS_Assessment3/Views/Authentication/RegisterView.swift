@@ -27,6 +27,7 @@ struct RegisterView: View {
                 TextField("Email Address", text: $email).autocorrectionDisabled(true).autocapitalization(.none)
                 SecureField("Password", text: $password)
                 SecureField("Confirm Password", text: $confirmPassword)
+                Spacer()
                 Button {
                     //processes the registration process
                     Task {
@@ -38,9 +39,8 @@ struct RegisterView: View {
                     }
                 } label: {
                     Text("Continue")
-                }.disabled(buttonDisabled)
+                }.disabled(buttonDisabled).buttonStyle(.bordered)
             }
-        
         }.padding().navigationTitle("Register")
     }
 }

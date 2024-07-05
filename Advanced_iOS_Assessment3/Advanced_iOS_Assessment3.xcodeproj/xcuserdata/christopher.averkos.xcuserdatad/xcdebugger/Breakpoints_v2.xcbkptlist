@@ -66,143 +66,6 @@
             endingLineNumber = "49"
             landmarkName = "testLogin()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "0069ED54-AA78-48A1-8CE9-7A29DA4EB92A - ef70edaedcb46158"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "41"
-                  endingLineNumber = "41"
-                  offsetFromSymbolStart = "96">
-               </Location>
-               <Location
-                  uuid = "0069ED54-AA78-48A1-8CE9-7A29DA4EB92A - 10253d379113177e"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.FIRAuthDataResult) -&gt; () in Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "41"
-                  endingLineNumber = "41"
-                  offsetFromSymbolStart = "104">
-               </Location>
-               <Location
-                  uuid = "0069ED54-AA78-48A1-8CE9-7A29DA4EB92A - 1d12a29524e5c140"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() throws -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "0069ED54-AA78-48A1-8CE9-7A29DA4EB92A - e5c165a0836d14ed"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.FIRAuthDataResult) -&gt; () in Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() throws -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  uuid = "0069ED54-AA78-48A1-8CE9-7A29DA4EB92A - 1d12a29524e5c140"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() throws -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "192">
-               </Location>
-               <Location
-                  uuid = "0069ED54-AA78-48A1-8CE9-7A29DA4EB92A - e5c165a0836d14ed"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.FIRAuthDataResult) -&gt; () in Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() throws -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "80">
-               </Location>
-               <Location
-                  uuid = "0069ED54-AA78-48A1-8CE9-7A29DA4EB92A - 1d12a29524e5c140"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() throws -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "184">
-               </Location>
-               <Location
-                  uuid = "0069ED54-AA78-48A1-8CE9-7A29DA4EB92A - 1d12a29524e5c140"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() throws -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "128">
-               </Location>
-               <Location
-                  uuid = "0069ED54-AA78-48A1-8CE9-7A29DA4EB92A - 1d12a29524e5c140"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() throws -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "144">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -251,53 +114,6 @@
             endingLineNumber = "55"
             landmarkName = "testLogin()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "0A531B11-8708-4A2E-9CE5-89DED37017AE - e5c165a0836d1448"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.FIRAuthDataResult) -&gt; () in Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() throws -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "524">
-               </Location>
-               <Location
-                  uuid = "0A531B11-8708-4A2E-9CE5-89DED37017AE - e5c165a0836d1436"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.FIRAuthDataResult) -&gt; () in Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() throws -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "52"
-                  endingLineNumber = "52"
-                  offsetFromSymbolStart = "536">
-               </Location>
-               <Location
-                  uuid = "0A531B11-8708-4A2E-9CE5-89DED37017AE - e5c165a0836d15d7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.FIRAuthDataResult) -&gt; () in Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() throws -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "53"
-                  endingLineNumber = "53"
-                  offsetFromSymbolStart = "548">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -346,38 +162,6 @@
             endingLineNumber = "31"
             landmarkName = "login(email:password:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "F5E9CA74-9006-43AD-9853-F1D0EC69F951 - 6ffdc7950fd0d816"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (PromiseKit.Resolver&lt;__C.FIRAuthDataResult&gt;) -&gt; () in static Advanced_iOS_Assessment3.FirebaseAuthManager.login(email: Swift.String, password: Swift.String) -&gt; PromiseKit.Promise&lt;__C.FIRAuthDataResult&gt;"
-                  moduleName = "Advanced_iOS_Assessment3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "96">
-               </Location>
-               <Location
-                  uuid = "F5E9CA74-9006-43AD-9853-F1D0EC69F951 - fcb6d3821e28e73b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (PromiseKit.Resolver&lt;__C.FIRAuthDataResult&gt;) -&gt; () in static Advanced_iOS_Assessment3.FirebaseAuthManager.login(email: Swift.String, password: Swift.String) -&gt; PromiseKit.Promise&lt;__C.FIRAuthDataResult&gt;"
-                  moduleName = "Advanced_iOS_Assessment3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "176">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -394,38 +178,6 @@
             endingLineNumber = "32"
             landmarkName = "login(email:password:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "CDB5CE83-D30A-4E3F-B89A-A824A70DCB98 - 6ffdc7950fd0d816"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (PromiseKit.Resolver&lt;__C.FIRAuthDataResult&gt;) -&gt; () in static Advanced_iOS_Assessment3.FirebaseAuthManager.login(email: Swift.String, password: Swift.String) -&gt; PromiseKit.Promise&lt;__C.FIRAuthDataResult&gt;"
-                  moduleName = "Advanced_iOS_Assessment3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "96">
-               </Location>
-               <Location
-                  uuid = "CDB5CE83-D30A-4E3F-B89A-A824A70DCB98 - fcb6d3821e28e73b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (PromiseKit.Resolver&lt;__C.FIRAuthDataResult&gt;) -&gt; () in static Advanced_iOS_Assessment3.FirebaseAuthManager.login(email: Swift.String, password: Swift.String) -&gt; PromiseKit.Promise&lt;__C.FIRAuthDataResult&gt;"
-                  moduleName = "Advanced_iOS_Assessment3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "176">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -442,38 +194,6 @@
             endingLineNumber = "36"
             landmarkName = "login(email:password:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "5A32F210-C5A8-4952-ADD5-799F1B6FF286 - fcb6d3821e28e7b7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (PromiseKit.Resolver&lt;__C.FIRAuthDataResult&gt;) -&gt; () in static Advanced_iOS_Assessment3.FirebaseAuthManager.login(email: Swift.String, password: Swift.String) -&gt; PromiseKit.Promise&lt;__C.FIRAuthDataResult&gt;"
-                  moduleName = "Advanced_iOS_Assessment3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "32"
-                  endingLineNumber = "32"
-                  offsetFromSymbolStart = "352">
-               </Location>
-               <Location
-                  uuid = "5A32F210-C5A8-4952-ADD5-799F1B6FF286 - fcb6d3821e28e7b7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (PromiseKit.Resolver&lt;__C.FIRAuthDataResult&gt;) -&gt; () in static Advanced_iOS_Assessment3.FirebaseAuthManager.login(email: Swift.String, password: Swift.String) -&gt; PromiseKit.Promise&lt;__C.FIRAuthDataResult&gt;"
-                  moduleName = "Advanced_iOS_Assessment3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "32"
-                  endingLineNumber = "32"
-                  offsetFromSymbolStart = "736">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -506,53 +226,6 @@
             endingLineNumber = "40"
             landmarkName = "login(email:password:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1565D53A-C2D5-4D8B-9D05-E899B19E5F1B - fcb6d3821e28e4d0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (PromiseKit.Resolver&lt;__C.FIRAuthDataResult&gt;) -&gt; () in static Advanced_iOS_Assessment3.FirebaseAuthManager.login(email: Swift.String, password: Swift.String) -&gt; PromiseKit.Promise&lt;__C.FIRAuthDataResult&gt;"
-                  moduleName = "Advanced_iOS_Assessment3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "400">
-               </Location>
-               <Location
-                  uuid = "1565D53A-C2D5-4D8B-9D05-E899B19E5F1B - fcb6d3821e28e4d0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (PromiseKit.Resolver&lt;__C.FIRAuthDataResult&gt;) -&gt; () in static Advanced_iOS_Assessment3.FirebaseAuthManager.login(email: Swift.String, password: Swift.String) -&gt; PromiseKit.Promise&lt;__C.FIRAuthDataResult&gt;"
-                  moduleName = "Advanced_iOS_Assessment3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "352">
-               </Location>
-               <Location
-                  uuid = "1565D53A-C2D5-4D8B-9D05-E899B19E5F1B - fcb6d3821e28e4f1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (PromiseKit.Resolver&lt;__C.FIRAuthDataResult&gt;) -&gt; () in static Advanced_iOS_Assessment3.FirebaseAuthManager.login(email: Swift.String, password: Swift.String) -&gt; PromiseKit.Promise&lt;__C.FIRAuthDataResult&gt;"
-                  moduleName = "Advanced_iOS_Assessment3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
-                  offsetFromSymbolStart = "360">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -569,53 +242,6 @@
             endingLineNumber = "41"
             landmarkName = "login(email:password:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "02ADBB68-BCCE-430A-AFCD-FEA6C55055F4 - fcb6d3821e28e4d0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (PromiseKit.Resolver&lt;__C.FIRAuthDataResult&gt;) -&gt; () in static Advanced_iOS_Assessment3.FirebaseAuthManager.login(email: Swift.String, password: Swift.String) -&gt; PromiseKit.Promise&lt;__C.FIRAuthDataResult&gt;"
-                  moduleName = "Advanced_iOS_Assessment3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "400">
-               </Location>
-               <Location
-                  uuid = "02ADBB68-BCCE-430A-AFCD-FEA6C55055F4 - fcb6d3821e28e4d0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (PromiseKit.Resolver&lt;__C.FIRAuthDataResult&gt;) -&gt; () in static Advanced_iOS_Assessment3.FirebaseAuthManager.login(email: Swift.String, password: Swift.String) -&gt; PromiseKit.Promise&lt;__C.FIRAuthDataResult&gt;"
-                  moduleName = "Advanced_iOS_Assessment3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "352">
-               </Location>
-               <Location
-                  uuid = "02ADBB68-BCCE-430A-AFCD-FEA6C55055F4 - fcb6d3821e28e4f1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (PromiseKit.Resolver&lt;__C.FIRAuthDataResult&gt;) -&gt; () in static Advanced_iOS_Assessment3.FirebaseAuthManager.login(email: Swift.String, password: Swift.String) -&gt; PromiseKit.Promise&lt;__C.FIRAuthDataResult&gt;"
-                  moduleName = "Advanced_iOS_Assessment3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
-                  offsetFromSymbolStart = "360">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -632,53 +258,6 @@
             endingLineNumber = "47"
             landmarkName = "testLogin()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "912DF446-01F6-4A3B-A137-AC3A5779C1CF - 1d12a29524e5c161"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() throws -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "46"
-                  endingLineNumber = "46"
-                  offsetFromSymbolStart = "100">
-               </Location>
-               <Location
-                  uuid = "912DF446-01F6-4A3B-A137-AC3A5779C1CF - 1d12a29524e5c161"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() throws -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "46"
-                  endingLineNumber = "46"
-                  offsetFromSymbolStart = "104">
-               </Location>
-               <Location
-                  uuid = "912DF446-01F6-4A3B-A137-AC3A5779C1CF - 1d12a29524e5c161"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() throws -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "46"
-                  endingLineNumber = "46"
-                  offsetFromSymbolStart = "108">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -695,53 +274,6 @@
             endingLineNumber = "37"
             landmarkName = "login(email:password:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1D67544F-9FDD-424B-8D90-A1727095D450 - fcb6d3821e28e454"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (PromiseKit.Resolver&lt;__C.FIRAuthDataResult&gt;) -&gt; () in static Advanced_iOS_Assessment3.FirebaseAuthManager.login(email: Swift.String, password: Swift.String) -&gt; PromiseKit.Promise&lt;__C.FIRAuthDataResult&gt;"
-                  moduleName = "Advanced_iOS_Assessment3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "768">
-               </Location>
-               <Location
-                  uuid = "1D67544F-9FDD-424B-8D90-A1727095D450 - fcb6d3821e28e454"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (PromiseKit.Resolver&lt;__C.FIRAuthDataResult&gt;) -&gt; () in static Advanced_iOS_Assessment3.FirebaseAuthManager.login(email: Swift.String, password: Swift.String) -&gt; PromiseKit.Promise&lt;__C.FIRAuthDataResult&gt;"
-                  moduleName = "Advanced_iOS_Assessment3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "636">
-               </Location>
-               <Location
-                  uuid = "1D67544F-9FDD-424B-8D90-A1727095D450 - fcb6d3821e28e454"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (PromiseKit.Resolver&lt;__C.FIRAuthDataResult&gt;) -&gt; () in static Advanced_iOS_Assessment3.FirebaseAuthManager.login(email: Swift.String, password: Swift.String) -&gt; PromiseKit.Promise&lt;__C.FIRAuthDataResult&gt;"
-                  moduleName = "Advanced_iOS_Assessment3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3/Managers/FirebaseAuthManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "472">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -774,53 +306,6 @@
             endingLineNumber = "61"
             landmarkName = "testLogin()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "8B12843C-D553-477C-8373-8A803DB7E9F1 - 1d12a29524e5c0dd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() throws -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "972">
-               </Location>
-               <Location
-                  uuid = "8B12843C-D553-477C-8373-8A803DB7E9F1 - ea1cad1ecc12abc7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Error) -&gt; () in Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() throws -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "60">
-               </Location>
-               <Location
-                  uuid = "8B12843C-D553-477C-8373-8A803DB7E9F1 - ea1cad1ecc12abc7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Error) -&gt; () in Advanced_iOS_Assessment3Tests.Advanced_iOS_Assessment3Tests.testLogin() throws -&gt; ()"
-                  moduleName = "Advanced_iOS_Assessment3Tests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/christopher.averkos/GitHub/UTS_40005_AvancediOS_Assessment3/Advanced_iOS_Assessment3/Advanced_iOS_Assessment3Tests/Advanced_iOS_Assessment3Tests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "72">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

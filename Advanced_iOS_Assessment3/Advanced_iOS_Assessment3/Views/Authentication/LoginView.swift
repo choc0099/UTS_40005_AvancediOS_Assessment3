@@ -36,14 +36,14 @@ struct LoginView: View {
                     hotelMain.processLogin(email: email, password: password)
                 } label: {
                     Text("Log In")
-                }.disabled(buttonDisabled)
+                }.disabled(buttonDisabled).buttonStyle(.bordered)
                 
                 //navigation link to the register view
                 NavigationLink {
                     RegisterView()
                 } label: {
                     Text("Register New Account")
-                }
+                }.buttonStyle(.bordered)
             }.padding()
                 .navigationTitle("Log in").navigationBarTitleDisplayMode(.inline)
                 .alert(isPresented: $hotelMain.showAlert, content: {
